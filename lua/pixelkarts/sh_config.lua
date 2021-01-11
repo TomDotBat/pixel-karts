@@ -1,5 +1,7 @@
 
 PIXEL.Karts.Config = {
+    AbilitiesInOtherKarts = false,
+
     KartPrice = {
         1500000, --Non VIP
         1000000, --VIP
@@ -39,7 +41,8 @@ PIXEL.Karts.Config = {
                 200000,
                 150000,
                 125000
-            }
+            },
+            BoostPower = 100
         },
         Glider = {
             Type = "boolean",
