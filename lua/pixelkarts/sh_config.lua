@@ -1,4 +1,4 @@
-print(type(true))
+
 PIXEL.Karts.Config = {
     KartPrice = {
         1500000, --Non VIP
