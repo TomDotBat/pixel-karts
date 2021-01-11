@@ -1,0 +1,34 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/freeman/gokart_tyres_diffuse"	
+	"$bumpmap" "models/freeman/gokart_tyres_norm"
+	 "$phongexponenttexture" "models/freeman/gokart_tyres_exponent"
+
+
+	"$model" "1"
+
+	"$phong" "1"
+	"$halflambert" "0"
+	"$phongboost" "0.4"
+	"$phongtint" "[1 1 1.1]"
+	"$phongalbedotint" "0"
+	"$phongfresnelranges" "[1 1 1]"
+
+	"$rimlight" "1"
+	"$rimlightexponent" "1"
+	"$rimlightboost" "0.5"
+	"$rimmask" "1"
+
+	"$normalmapalphaenvmapmask" "1"
+
+
+// Tinting
+
+	"$blendtintbybasealpha" "1" 
+ 	"$blendtintcoloroverbase" "0"
+
+
+
+
+
+}

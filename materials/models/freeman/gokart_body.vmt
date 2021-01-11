@@ -1,0 +1,44 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/freeman/gokart_body_diffuse"	
+	"$bumpmap" "models/freeman/gokart_body_norm"
+	 "$phongexponenttexture" "models/freeman/gokart_body_exponent"
+
+
+	"$model" "1"
+
+	"$envmap" "env_cubemap"
+	"$envmaptint" "[0.4 0.4 0.47]"
+
+	"$phong" "1"
+	"$halflambert" "0"
+	"$phongboost" "1.2"
+	"$phongtint" "[1 1 1.1]"
+	"$phongalbedotint" "0"
+	"$phongfresnelranges" "[1 1 1]"
+
+	"$rimlight" "1"
+	"$rimlightexponent" "1"
+	"$rimlightboost" "2"
+	"$rimmask" "1"
+
+	"$normalmapalphaenvmapmask" "1"
+
+
+	"$nocull" "1"
+
+// Tinting
+
+	"$blendtintbybasealpha" "1" 
+ 	"$blendtintcoloroverbase" "0"
+
+
+
+	"$detail" "models/freeman/gokart_body_brakelight"
+	"$detailscale" "1"
+	"$detailblendmode" "5"	
+	"$detailblendfactor" "1"
+
+
+
+}

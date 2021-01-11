@@ -1,0 +1,27 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/freeman/gokart_rope_diffuse"	
+	"$bumpmap" "models/freeman/gokart_rope_norm"
+
+
+
+	"$model" "1"
+
+	"$phong" "1"
+	"$halflambert" "0"
+	"$phongboost" "0.33"
+	"$phongtint" "[1 1 1.1]"
+	"$phongalbedotint" "0"
+	"$phongfresnelranges" "[1 1 1]"
+
+	"$rimlight" "1"
+	"$rimlightexponent" "1"
+	"$rimlightboost" "1"
+	"$rimmask" "1"
+
+	"$normalmapalphaenvmapmask" "1"
+
+
+
+
+}
