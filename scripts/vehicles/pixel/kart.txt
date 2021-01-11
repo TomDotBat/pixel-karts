@@ -1,0 +1,286 @@
+"Vehicle"
+{
+    "WheelsPerAxle" "2"
+    "Body"
+    {
+        "CounterTorqueFactor" "0.9"
+        "MassCenterOverride" "0 -4 4"
+        "MassOverride" "1200"
+        "AddGravity" "0.6"
+        "MaxAngularVelocity" "720"
+    }
+    "Engine"
+    {
+        "HorsePower" "100"
+        "MaxRPM" "4700"
+        "MaxSpeed" "40"
+        "MaxReverseSpeed" "5"
+        "AutobrakeSpeedGain" "1.1"
+        "AutobrakeSpeedFactor" "3"
+        "Autotransmission" "0"
+        "AxleRatio" "4.56"
+        "Gear" "3.4"
+        "Gear" "2.4"
+        "Gear" "1.5"
+        "Gear" "1"
+        "Gear" "0.84"
+
+        "ShiftUpRPM" "3800"
+        "ShiftDownRPM" "1600"
+    }
+    "Steering"
+    {
+        "DegreesSlow" "40"
+        "DegreesFast" "9"
+        "DegreesBoost" "11"
+        "FastDampen" "80"
+        "SteeringExponent" "0"
+        "SlowCarSpeed" "2"
+        "FastCarSpeed" "40"
+        "SlowSteeringRate" "2.5"
+        "FastSteeringRate" "2"
+        "SteeringRestRateSlow" "2.5"
+        "SteeringRestRateFast" "2"
+        "TurnThrottleReduceSlow" "0.01"
+        "TurnThrottleReduceFast" "0.6"
+        "BrakeSteeringRateFactor" "2.5"
+        "ThrottleSteeringRestRateFactor" "2"
+        "BoostSteeringRestRateFactor" "1.7"
+        "BoostSteeringRateFactor" "1.7"
+
+        "PowerSlideAccel" "180"
+
+        "SkidAllowed" "1"
+        "DustCloud" "1"
+    }
+    "Axle"
+    {
+        "Wheel"
+        {
+            "Radius" "8"
+            "Mass" "180"
+            "Inertia" "0.9"
+            "Damping" "0"
+            "RotDamping" "1"
+            "Material" "jeeptire"
+            "SkidMaterial" "slidingrubbertire"
+            "BrakeMaterial" "brakingrubbertire"
+        }
+
+        "Suspension"
+        {
+            "SpringConstant" "43"
+            "SpringDamping" "0.5"
+            "StabilizerConstant" "0"
+            "SpringDampingCompression" "5"
+            "MaxBodyForce" "28"
+        }
+
+        "TorqueFactor" "0.9"
+        "BrakeFactor" "0.5"
+    }
+    "Axle"
+    {
+        "Wheel"
+        {
+            "Radius" "12"
+            "Mass" "180"
+            "Inertia" "0.9"
+            "Damping" "0"
+            "RotDamping" "1"
+            "Material" "jeeptire"
+            "SkidMaterial" "slidingrubbertire"
+            "BrakeMaterial" "brakingrubbertire"
+        }
+
+        "Suspension"
+        {
+            "SpringConstant" "80"
+            "SpringDamping" "0.5"
+            "StabilizerConstant" "0"
+            "SpringDampingCompression" "5"
+            "MaxBodyForce" "36"
+        }
+
+        "TorqueFactor" "0.9"
+        "BrakeFactor" "0.5"
+    }
+}
+
+"Vehicle_Sounds"
+{
+    "Gear"
+    {
+        "Max_Speed" "0.27"
+        "Speed_Approach_Factor" "1"
+    }
+
+    "Gear"
+    {
+        "Max_Speed" "0.5"
+        "Speed_Approach_Factor" "0.05"
+    }
+
+    "Gear"
+    {
+        "Max_Speed" "0.75"
+        "Speed_Approach_Factor" "0.052"
+    }
+
+    "Gear"
+    {
+        "Max_Speed" "0.95"
+        "Speed_Approach_Factor" "0.034"
+    }
+
+    "Gear"
+    {
+        "Max_Speed" "1.5"
+        "Speed_Approach_Factor" "0.033"
+    }
+
+    "Gear"
+    {
+        "Max_Speed" "2"
+        "Speed_Approach_Factor" "0.03"
+    }
+
+    "State"
+    {
+        "Name" "SS_GEAR_2_RESUME"
+        "Sound" "gokart_secondgear_noshift"
+        "Min_Time" "0.5"
+    }
+
+    "State"
+    {
+        "Name" "SS_GEAR_3_RESUME"
+        "Sound" "gokart_thirdgear_noshift"
+        "Min_Time" "0.5"
+    }
+
+    "State"
+    {
+        "Name" "SS_REVERSE"
+        "Sound" "gokart_reverse"
+        "Min_Time" "0.5"
+    }
+
+    "State"
+    {
+        "Name" "SS_IDLE"
+        "Sound" "gokart_engine_idle"
+        "Min_Time" "0"
+    }
+
+    "State"
+    {
+        "Name" "SS_GEAR_1_RESUME"
+        "Sound" "gokart_firstgear_noshift"
+        "Min_Time" "0.5"
+    }
+
+    "State"
+    {
+        "Name" "SS_GEAR_4"
+        "Sound" "gokart_fourthgear"
+        "Min_Time" "0.5"
+    }
+
+    "State"
+    {
+        "Name" "SS_GEAR_1"
+        "Sound" "gokart_firstgear"
+        "Min_Time" "0.5"
+    }
+
+    "State"
+    {
+        "Name" "SS_SLOWDOWN_HIGHSPEED"
+        "Sound" "gokart_throttleoff_fastspeed"
+        "Min_Time" "2"
+    }
+
+    "State"
+    {
+        "Name" "SS_TURBO"
+        "Sound" "gokart_turbo_on"
+        "Min_Time" "2.5"
+    }
+
+    "State"
+    {
+        "Name" "SS_SHUTDOWN"
+        "Sound" "gokart_engine_stop"
+        "Min_Time" "0"
+    }
+
+    "State"
+    {
+        "Name" "SS_START_IDLE"
+        "Sound" "gokart_engine_start"
+        "Min_Time" "4"
+    }
+
+    "State"
+    {
+        "Name" "SS_GEAR_4_RESUME"
+        "Sound" "gokart_fourthgear_noshift"
+        "Min_Time" "0.5"
+    }
+
+    "State"
+    {
+        "Name" "SS_GEAR_3"
+        "Sound" "gokart_thirdgear"
+        "Min_Time" "0.5"
+    }
+
+    "State"
+    {
+        "Name" "SS_GEAR_0_RESUME"
+        "Sound" "gokart_engine_idle"
+        "Min_Time" "0.75"
+    }
+
+    "State"
+    {
+        "Name" "SS_GEAR_0"
+        "Sound" "gokart_engine_rev"
+        "Min_Time" "0.5"
+    }
+
+    "State"
+    {
+        "Name" "SS_GEAR_2"
+        "Sound" "gokart_secondgear"
+        "Min_Time" "0.5"
+    }
+
+    "State"
+    {
+        "Name" "SS_SLOWDOWN"
+        "Sound" "gokart_throttleoff_slowspeed"
+        "Min_Time" "2"
+    }
+
+    "CrashSound"
+    {
+        "Min_Speed" "350"
+        "Min_Speed_Change" "250"
+        "Sound" "gokart_impact_medium"
+        "Gear_Limit" "1"
+    }
+
+    "CrashSound"
+    {
+        "Min_Speed" "450"
+        "Min_Speed_Change" "350"
+        "Sound" "gokart_impact_heavy"
+        "Gear_Limit" "0"
+    }
+
+    "Skid_LowFriction" "gokart_skid_lowfriction"
+    "Skid_NormalFriction" "gokart_skid_normalfriction"
+    "Skid_HighFriction" "gokart_skid_highfriction"
+}
