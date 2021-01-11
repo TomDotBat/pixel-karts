@@ -35,6 +35,23 @@ function PIXEL.Karts.SetupNWVars(kart)
                 kart:SetNWInt("PIXEL.Karts." .. upgradeName .. ".B", col.b)
                 kart:SetNWInt("PIXEL.Karts." .. upgradeName .. ".A", col.a)
             end
+        elseif upgrade.Type == "number" then
+            kart["Get" .. upgradeName .. "Enabled"] = function(s)
+                return kart:GetNWFloat("PIXEL.Karts." .. upgradeName, 0) == -1
+            end
+
+            kart["Get" .. upgradeName] = function(s)
+                return kart:GetNWFloat("PIXEL.Karts." .. upgradeName, 0)
+            end
+
+            if CLIENT then continue end
+            kart["Set" .. upgradeName .. "Enabled"] = function(s)
+                return kart:SetNWFloat("PIXEL.Karts." .. upgradeName, -1)
+            end
+
+            kart["Set" .. upgradeName] = function(s, num)
+                return kart:SetNWFloat("PIXEL.Karts." .. upgradeName, num)
+            end
         end
     end
 end
