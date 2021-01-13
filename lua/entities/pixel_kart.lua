@@ -40,6 +40,8 @@ if CLIENT then
         elseif IsValid(self.RocketBooster) then
             self.RocketBooster:Remove()
         end
+
+        self:SetBodygroup(4, self:GetNWBool("PIXEL.Karts.IsGliding", false) and 1 or 0)
     end
 
     function kart:OnRemove()
@@ -47,6 +49,7 @@ if CLIENT then
     end
 --else
 --    function kart:Think()
+            --autoflip logic
 --    end
 end
 
