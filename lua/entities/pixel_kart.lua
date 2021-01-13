@@ -12,20 +12,38 @@ function kart:Initialize()
         return "pixel_kart"
     end
 
-    if CLIENT then
-        print(self:GetRainbowMode())
-        return
-    end
-    print(self:SetRainbowMode(true))
+    if CLIENT then return end
+
+    self:SetRocketBoost(true)
+    self:SetGlider(true)
+    self:SetRainbowMode(true)
 end
+
+local boosterPos, boosterAng = Vector(0, -42, 14), Angle(90, -90, 0)
 
 if CLIENT then
     local hsv, time = HSVToColor, CurTime
     function kart:Think()
         if self:GetRainbowMode() then
             self:SetColor(hsv((time() * 20) % 360, 1, 1))
-            return
         end
+
+        if self:GetRocketBoost() then
+            if not IsValid(self.RocketBooster) then
+                self.RocketBooster = ClientsideModel("models/maxofs2d/thruster_projector.mdl")
+                self.RocketBooster:SetParent(self)
+                self.RocketBooster:SetModelScale(.6)
+            end
+
+            self.RocketBooster:SetPos(self:LocalToWorld(boosterPos))
+            self.RocketBooster:SetAngles(self:LocalToWorldAngles(boosterAng))
+        elseif IsValid(self.RocketBooster) then
+            self.RocketBooster:Remove()
+        end
+    end
+
+    function kart:OnRemove()
+        if IsValid(self.RocketBooster) then self.RocketBooster:Remove() end
     end
 --else
 --    function kart:Think()
