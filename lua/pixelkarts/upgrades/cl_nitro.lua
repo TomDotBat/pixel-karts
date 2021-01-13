@@ -75,10 +75,10 @@ hook.Add("PIXEL.Karts.EnteredKart", "PIXEL.Karts.NitroBoostHUD", function(kart)
 
     hook.Add("HUDPaint", "PIXEL.Karts.NitroBoostHUD", function()
         if not IsValid(kart) then return end
-        --if not kart:GetNitro() then
-        --    hook.Remove("HUDPaint", "PIXEL.Karts.NitroBoostHUD")
-        --    return
-        --end
+        if not kart:GetNitro() then
+            hook.Remove("HUDPaint", "PIXEL.Karts.NitroBoostHUD")
+            return
+        end
 
         local pad = PIXEL.Scale(3)
         local dblPad = pad * 2
@@ -93,7 +93,7 @@ hook.Add("PIXEL.Karts.EnteredKart", "PIXEL.Karts.NitroBoostHUD", function(kart)
         )
 
         PIXEL.DrawSimpleText("Nitro Boost (" .. keyName .. ")", "PIXEL.Karts.NitroBoost", progX + progW * .5, progY + progH * .5, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-    end)    
+    end)
 end)
 
 hook.Add("PIXEL.Karts.LeftKart", "PIXEL.Karts.NitroBoostHUD", function()
