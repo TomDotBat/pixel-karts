@@ -59,8 +59,8 @@ PIXEL.Karts.Config = {
                 400000
             },
             RequiredLevel = 2,
-            UpwardsThrust = 35000,
-            ForwardThrust = 4000,
+            UpwardsThrust = 28000,
+            ForwardThrust = 2000,
             ThrustInterval = 0.03,
             GroundCheckInterval = 2.5,
             GroundCheckMinDist = 20 ^ 2,
@@ -70,7 +70,7 @@ PIXEL.Karts.Config = {
             AirControlSpeed = 40,
             DeployKeyName = "Reload",
             DeployKey = IN_RELOAD,
-            DeployCooldown = 30,
+            DeployCooldown = 1,
             --DeploySoundVolume = 1.2,
             --DeploySoundURL = "http://content.pixelnetwork.co/sounds/kart_boost.mp3"
         },
