@@ -73,7 +73,6 @@ function PIXEL.Karts.DeployGlider(ply, veh)
         end
 
         local fwSpeed, sideSpeed = mv:GetForwardSpeed(), mv:GetSideSpeed()
-        print(fwSpeed, sideSpeed)
         if fwSpeed > 0 then --fw
             phys:AddAngleVelocity(pitchAng * controlSpeed)
         elseif fwSpeed ~= 0 then --bw
