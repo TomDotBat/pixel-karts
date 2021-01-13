@@ -85,7 +85,7 @@ hook.Add("PIXEL.Karts.EnteredKart", "PIXEL.Karts.RocketBoostHUD", function(kart)
         local progW, progH = PIXEL.Scale(300), PIXEL.Scale(30)
         local progX, progY = ScrW() * .5 - progW * .5, ScrH() * .9
 
-        local cooldownProg = math.Clamp(1 - ((kart:GetNWFloat("PIXEL.Karts.RocketCooldown", 0) - CurTime()) / cooldown), 0, 1)
+        local cooldownProg = math.Clamp(1 - ((kart:GetNWFloat("PIXEL.Karts.RocketBoostCooldown", 0) - CurTime()) / cooldown), 0, 1)
 
         PIXEL.DrawRoundedBox(PIXEL.Scale(6), progX, progY, progW, progH, PIXEL.Colors.Background)
         PIXEL.DrawRoundedBox(PIXEL.Scale(4), progX + pad, progY + pad, (progW - dblPad) * cooldownProg, progH - dblPad,
