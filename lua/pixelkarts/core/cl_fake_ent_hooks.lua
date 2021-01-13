@@ -39,6 +39,7 @@ hook.Add("Think", "PIXEL.Karts.KartThink", function()
         end
 
         veh:Think()
+        hook.Run("PIXEL.Karts.Think", veh)
     end
 end)
 
