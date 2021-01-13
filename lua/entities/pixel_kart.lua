@@ -23,7 +23,7 @@ if CLIENT then
     local hsv, time = HSVToColor, CurTime
     function kart:Think()
         if self:GetRainbowMode() then
-            self:SetColor(hsv((time() * 10) % 360, 1, 1))
+            self:SetColor(hsv((time() * 20) % 360, 1, 1))
             return
         end
     end
@@ -57,6 +57,7 @@ function ENT:Initialize()
     local owner = self:CPPIGetOwner()
     local ownerId = owner:SteamID64()
     if PIXEL.Karts.Vehicles[ownerId] then
+        PIXEL.Karts.Notify(owner, "Ayy wassup bro i think u got too many karts there.", 1)
         SafeRemoveEntityDelayed(self, .1)
         return
     end
