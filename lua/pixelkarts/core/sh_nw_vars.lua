@@ -17,10 +17,10 @@ function PIXEL.Karts.SetupNWVars(kart)
 
             kart["Get" .. upgradeName] = function(s)
                 return Color(
-                    kart:GetNWInt("PIXEL.Karts." .. upgradeName .. ".R", 0),
-                    kart:GetNWInt("PIXEL.Karts." .. upgradeName .. ".G", 0),
-                    kart:GetNWInt("PIXEL.Karts." .. upgradeName .. ".B", 0),
-                    kart:GetNWInt("PIXEL.Karts." .. upgradeName .. ".A", 0)
+                    kart:GetNWInt("PIXEL.Karts." .. upgradeName .. ".R", 255),
+                    kart:GetNWInt("PIXEL.Karts." .. upgradeName .. ".G", 255),
+                    kart:GetNWInt("PIXEL.Karts." .. upgradeName .. ".B", 255),
+                    kart:GetNWInt("PIXEL.Karts." .. upgradeName .. ".A", 255)
                 )
             end
 
