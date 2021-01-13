@@ -8,24 +8,28 @@ local kart = {
 function kart:Initialize()
     PIXEL.Karts.SetupNWVars(self)
 
-    function self:GetClass()
-        return "pixel_kart"
-    end
-
     if CLIENT then return end
+
+    self:SetNWInt("PIXEL.Karts.Health", 100)
 
     self:SetRocketBoost(true)
     self:SetGlider(true)
     self:SetRainbowMode(true)
+    self:SetBuiltInRadio(true)
 end
 
-local boosterPos, boosterAng = Vector(0, -42, 14), Angle(90, -90, 0)
+function kart:GetClass()
+    return "pixel_kart"
+end
 
 if CLIENT then
     local hsv, time = HSVToColor, CurTime
+    local boosterPos, boosterAng = Vector(0, -42, 14), Angle(90, -90, 0)
     function kart:Think()
         if self:GetRainbowMode() then
             self:SetColor(hsv((time() * 20) % 360, 1, 1))
+        else
+            self:GetCustomColor()
         end
 
         if self:GetRocketBoost() then
@@ -44,13 +48,30 @@ if CLIENT then
         self:SetBodygroup(4, self:GetNWBool("PIXEL.Karts.IsGliding", false) and 1 or 0)
     end
 
+    function kart:RadioStop()
+        if not self.RadioPlayer then return end
+
+        PIXEL.Karts.Radio.StopMedia(self.RadioPlayer)
+        self.RadioPlayer = nil
+        self.RadioPlayerCreated = nil
+    end
+
     function kart:OnRemove()
         if IsValid(self.RocketBooster) then self.RocketBooster:Remove() end
+        self:RadioStop()
     end
---else
+else
 --    function kart:Think()
             --autoflip logic
 --    end
+
+    function kart:RadioSetChannel(chan)
+        self:SetNW2Int("PIXEL.Karts.RadioChannel", chan)
+    end
+end
+
+function kart:RadioGetChannel()
+    return self:GetNW2Int("PIXEL.Karts.RadioChannel")
 end
 
 PIXEL.Karts.KartTable = kart
