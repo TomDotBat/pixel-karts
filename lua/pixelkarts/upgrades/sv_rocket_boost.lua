@@ -25,7 +25,7 @@ function PIXEL.Karts.RocketBoost(ply, veh)
     local boostUpgrade = PIXEL.Karts.Config.Upgrades.RocketBoost
 
     if not ply:PIXELKartsIsLevel(boostUpgrade.RequiredLevel) then
-        PIXEL.Karts.Notify(ply, "You don't have the required rank for rock boosters.", 1)
+        PIXEL.Karts.Notify(ply, "You don't have the required rank for rocket boosters.", 1)
         return
     end
 
