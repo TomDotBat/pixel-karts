@@ -42,7 +42,14 @@ PIXEL.Karts.Config = {
                 150000,
                 125000
             },
-            BoostPower = 100
+            BoostKeyName = "Shift",
+            BoostKey = IN_SPEED,
+            BoostPower = 50000,
+            BoostTime = .5,
+            BoostInterval = 0.025,
+            BoostCooldown = 5,
+            BoostSoundVolume = 1.2,
+            BoostSoundURL = "http://content.pixelnetwork.co/sounds/kart_boost.mp3"
         },
         Glider = {
             Type = "boolean",
