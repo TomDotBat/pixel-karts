@@ -59,11 +59,20 @@ PIXEL.Karts.Config = {
                 400000
             },
             RequiredLevel = 2,
-            DeployKeyName = "Shift",
-            DeployKey = IN_SPEED,
-            DeployCooldown = 5,
-            DeploySoundVolume = 1.2,
-            DeploySoundURL = "http://content.pixelnetwork.co/sounds/kart_boost.mp3"
+            UpwardsThrust = 35000,
+            ForwardThrust = 4000,
+            ThrustInterval = 0.03,
+            GroundCheckInterval = 2.5,
+            GroundCheckMinDist = 20 ^ 2,
+            MaxGlideTime = 10,
+            LinearDamping = 0,
+            AngularDamping = 20,
+            AirControlSpeed = 40,
+            DeployKeyName = "Reload",
+            DeployKey = IN_RELOAD,
+            DeployCooldown = 30,
+            --DeploySoundVolume = 1.2,
+            --DeploySoundURL = "http://content.pixelnetwork.co/sounds/kart_boost.mp3"
         },
         BuiltInRadio = {
             Type = "boolean",
