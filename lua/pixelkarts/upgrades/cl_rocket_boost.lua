@@ -1,10 +1,10 @@
 
-local flamePos = Vector(0, -40, 0)
+local flameOrigin, flamePos = Vector(1, 0, 15), Vector(1, -42, 15)
 local flameSpeed = -10
 local matHeatWave = Material("sprites/heatwave")
 local matFire = Material("effects/fire_cloud1")
 
-net.Receive("PIXEL.Karts.Nitro", function()
+net.Receive("PIXEL.Karts.RocketBoost", function()
     local kart = net.ReadEntity()
     if not IsValid(kart) then return end
 
@@ -14,7 +14,7 @@ net.Receive("PIXEL.Karts.Nitro", function()
         if skybox then return end
 
         local pos = self:LocalToWorld(flamePos)
-        local normal = (pos - self:GetPos()):GetNormalized()
+        local normal = (pos - self:LocalToWorld(flameOrigin)):GetNormalized()
 
         local scroll = time() * flameSpeed
 
@@ -48,10 +48,10 @@ net.Receive("PIXEL.Karts.Nitro", function()
         render.EndBeam()
     end)
 
-    sound.PlayURL(PIXEL.Karts.Config.Upgrades.Nitro.BoostSoundURL, "3d", function(station)
+    sound.PlayURL(PIXEL.Karts.Config.Upgrades.RocketBoost.BoostSoundURL, "3d", function(station)
         if not IsValid(station) then return end
 
-        station:SetVolume(PIXEL.Karts.Config.Upgrades.Nitro.BoostSoundVolume)
+        station:SetVolume(PIXEL.Karts.Config.Upgrades.RocketBoost.BoostSoundVolume)
         station:SetPos(kart:GetPos())
         station:Play()
 
@@ -67,16 +67,16 @@ net.Receive("PIXEL.Karts.Nitro", function()
     end)
 end)
 
-PIXEL.RegisterFont("Karts.NitroBoost", "Open Sans SemiBold", 18)
+PIXEL.RegisterFont("Karts.RocketBoost", "Open Sans SemiBold", 18)
 
-hook.Add("PIXEL.Karts.EnteredKart", "PIXEL.Karts.NitroBoostHUD", function(kart)
-    local keyName = PIXEL.Karts.Config.Upgrades.Nitro.BoostKeyName
-    local cooldown = PIXEL.Karts.Config.Upgrades.Nitro.BoostCooldown
+hook.Add("PIXEL.Karts.EnteredKart", "PIXEL.Karts.RocketBoostHUD", function(kart)
+    local keyName = PIXEL.Karts.Config.Upgrades.RocketBoost.BoostKeyName
+    local cooldown = PIXEL.Karts.Config.Upgrades.RocketBoost.BoostCooldown
 
-    hook.Add("HUDPaint", "PIXEL.Karts.NitroBoostHUD", function()
+    hook.Add("HUDPaint", "PIXEL.Karts.RocketBoostHUD", function()
         if not IsValid(kart) then return end
-        if not kart:GetNitro() then
-            hook.Remove("HUDPaint", "PIXEL.Karts.NitroBoostHUD")
+        if not kart:GetRocketBoost() then
+            hook.Remove("HUDPaint", "PIXEL.Karts.RocketBoostHUD")
             return
         end
 
@@ -85,17 +85,17 @@ hook.Add("PIXEL.Karts.EnteredKart", "PIXEL.Karts.NitroBoostHUD", function(kart)
         local progW, progH = PIXEL.Scale(300), PIXEL.Scale(30)
         local progX, progY = ScrW() * .5 - progW * .5, ScrH() * .9
 
-        local cooldownProg = math.Clamp(1 - ((kart:GetNWFloat("PIXEL.Karts.NitroCooldown", 0) - CurTime()) / cooldown), 0, 1)
+        local cooldownProg = math.Clamp(1 - ((kart:GetNWFloat("PIXEL.Karts.RocketCooldown", 0) - CurTime()) / cooldown), 0, 1)
 
         PIXEL.DrawRoundedBox(PIXEL.Scale(6), progX, progY, progW, progH, PIXEL.Colors.Background)
         PIXEL.DrawRoundedBox(PIXEL.Scale(4), progX + pad, progY + pad, (progW - dblPad) * cooldownProg, progH - dblPad,
             PIXEL.LerpColor(cooldownProg, PIXEL.Colors.Negative, PIXEL.Colors.Primary)
         )
 
-        PIXEL.DrawSimpleText("Nitro Boost (" .. keyName .. ")", "PIXEL.Karts.NitroBoost", progX + progW * .5, progY + progH * .5, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        PIXEL.DrawSimpleText("Rocket Boost (" .. keyName .. ")", "PIXEL.Karts.RocketBoost", progX + progW * .5, progY + progH * .5, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     end)
 end)
 
-hook.Add("PIXEL.Karts.LeftKart", "PIXEL.Karts.NitroBoostHUD", function()
-    hook.Remove("HUDPaint", "PIXEL.Karts.NitroBoostHUD")
+hook.Add("PIXEL.Karts.LeftKart", "PIXEL.Karts.RocketBoostHUD", function()
+    hook.Remove("HUDPaint", "PIXEL.Karts.RocketBoostHUD")
 end)

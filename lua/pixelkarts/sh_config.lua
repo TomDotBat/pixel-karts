@@ -35,7 +35,7 @@ PIXEL.Karts.Config = {
             },
             RequiredLevel = 3
         },
-        Nitro = {
+        RocketBoost = {
             Type = "boolean",
             Price = {
                 200000,
@@ -58,7 +58,12 @@ PIXEL.Karts.Config = {
                 500000,
                 400000
             },
-            RequiredLevel = 2
+            RequiredLevel = 2,
+            DeployKeyName = "Shift",
+            DeployKey = IN_SPEED,
+            DeployCooldown = 5,
+            DeploySoundVolume = 1.2,
+            DeploySoundURL = "http://content.pixelnetwork.co/sounds/kart_boost.mp3"
         },
         BuiltInRadio = {
             Type = "boolean",
