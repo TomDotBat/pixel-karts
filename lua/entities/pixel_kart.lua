@@ -16,6 +16,7 @@ function kart:Initialize()
     self:SetGlider(true)
     self:SetRainbowMode(true)
     self:SetBuiltInRadio(true)
+    self:SetUnderGlow(Color(255, 0, 0))
 end
 
 function kart:GetClass()
@@ -61,9 +62,11 @@ if CLIENT then
         self:RadioStop()
     end
 else
---    function kart:Think()
-            --autoflip logic
---    end
+    function kart:Think()
+        if self:IsVehicleBodyInWater() then
+            self:SetNWInt("PIXEL.Karts.Health", 0)
+        end
+    end
 
     function kart:RadioSetChannel(chan)
         self:SetNW2Int("PIXEL.Karts.RadioChannel", chan)
