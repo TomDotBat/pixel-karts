@@ -22,6 +22,16 @@ function PIXEL.Karts.RocketBoost(ply, veh)
         return
     end
 
+    if veh:IsVehicleBodyInWater() then
+        PIXEL.Karts.Notify(ply, "Your kart is underwater.", 1)
+        return
+    end
+
+    if veh:GetNWInt("PIXEL.Karts.Health", 0) < 1 then
+        PIXEL.Karts.Notify(ply, "Your kart has no health, its abilities have been disabled until repair.", 1)
+        return
+    end
+
     local boostUpgrade = PIXEL.Karts.Config.Upgrades.RocketBoost
 
     if not ply:PIXELKartsIsLevel(boostUpgrade.RequiredLevel) then

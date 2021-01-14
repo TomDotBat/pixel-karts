@@ -5,6 +5,9 @@ net.Receive("PIXEL.Karts.Radio", function(len, ply)
     local veh = ply:GetVehicle()
     if not (IsValid(veh) and veh.IsPIXELKart) then return end
 
+    if veh:IsVehicleBodyInWater() then return end
+    if veh:GetNWInt("PIXEL.Karts.Health", 0) < 1 then return end
+
     if veh.RadioLastChange and veh.RadioLastChange > CurTime() - 0.2 then return end
     veh.RadioLastChange = CurTime()
 

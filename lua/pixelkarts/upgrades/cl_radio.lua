@@ -297,7 +297,9 @@ hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.DrawRadios", function(sk
 
     if not IsValid(localPly) then localPly = LocalPlayer() end
     if not IsValid(localKart) then return end
+
     local kart = localKart
+    if kart:GetNWInt("PIXEL.Karts.Health", 0) < 1 then return end
 
     if not ui.startDraw(kart:LocalToWorld(uiPos), kart:LocalToWorldAngles(uiAng), 0.02, kart) then return end
 
