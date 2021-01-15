@@ -47,5 +47,6 @@ hook.Add("EntityRemoved", "PIXEL.Karts.OnRemove", function(ent)
     if not ent.IsPIXELKart then return end
     PIXEL.Karts.Vehicles[ent:GetNWString("PIXEL.Karts.KartID", "")] = nil
 
+    hook.Run("PIXEL.Karts.OnRemove", ent)
     ent:OnRemove()
 end)
