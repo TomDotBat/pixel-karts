@@ -47,7 +47,7 @@ PIXEL.Karts.Config = {
             BoostPower = 50000,
             BoostTime = .5,
             BoostInterval = 0.025,
-            BoostCooldown = 5,
+            BoostCooldown = 15,
             BoostSoundVolume = 1.2,
             BoostSoundURL = "http://content.pixelnetwork.co/sounds/kart_boost.mp3"
         },
@@ -70,7 +70,7 @@ PIXEL.Karts.Config = {
             AirControlSpeed = 40,
             DeployKeyName = "Reload",
             DeployKey = IN_RELOAD,
-            DeployCooldown = 1,
+            DeployCooldown = 30,
             --DeploySoundVolume = 1.2,
             --DeploySoundURL = "http://content.pixelnetwork.co/sounds/kart_boost.mp3"
         },
