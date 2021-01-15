@@ -221,9 +221,6 @@ function PIXEL.Karts.Radio.OpenSettingsMenu()
 end
 concommand.Add("pixel_karts_radio_settings", PIXEL.Karts.Radio.OpenSettingsMenu)
 
-
---kart = LocalPlayer():GetVehicle()
-
 local ui = ui3d2d
 local function startCutOut(drawMask)
     render.ClearStencil()
@@ -334,9 +331,6 @@ hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.DrawRadios", function(sk
     imgurButton("IXSuV4w", .75, x + w - 28, y + 6, 22, 22, function()
         PIXEL.Karts.Radio.OpenSettingsMenu()
     end, 1) --Settings
-
-    --surface.SetDrawColor(255, 0, 0) debug dot
-    --surface.DrawRect(-5, -5, 10, 10)
 
     if isOn then
         local font = "PIXEL.Karts.Radio.Station"
