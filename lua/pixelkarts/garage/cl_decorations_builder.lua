@@ -50,3 +50,28 @@ position = Vector(%f, %f, %f),
 angles = Angle(%f, %f, %f)
 },]], ent:GetModel(), pos.x, pos.y, pos.z, ang.p, ang.y, ang.r))
 end)
+
+concommand.Add("pixel_karts_print_bone_manipulations", function()
+    local tr = LocalPlayer():GetEyeTrace()
+    local ent = tr.Entity
+    if not IsValid(ent) then return end
+
+    local entPos = ent:GetPos()
+
+    for i = 0, ent:GetBoneCount() - 1 do
+        local pos, ang = ent:GetBonePosition(i)
+        if pos == entPos then
+            local matrix = ent:GetBoneMatrix(i)
+            pos = matrix:GetTranslation()
+            ang = matrix:GetAngles()
+        end
+
+        pos = ent:WorldToLocal(pos)
+        ang = ent:WorldToLocalAngles(ang)
+
+        print(string.format([[[%i] = {
+    position = Vector(%f, %f, %f),
+    angles = Angle(%f, %f, %f)
+},]], i, pos.x, pos.y, pos.z, ang.p, ang.y, ang.r))
+    end
+end)
