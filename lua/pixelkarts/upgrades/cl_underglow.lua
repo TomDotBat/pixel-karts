@@ -3,7 +3,6 @@ local underglowCvar = CreateClientConVar("pixel_karts_underglow_enabled", "1", t
 
 function PIXEL.Karts.SetupUnderglowDrawing()
     local colorCache = {}
-    local lightingOffset = Vector(0, 0, -4)
 
     hook.Add("PIXEL.Karts.Think", "PIXEL.Karts.Underglow", function(kart)
         if not kart:GetUnderGlowEnabled() then return end
@@ -23,17 +22,52 @@ function PIXEL.Karts.SetupUnderglowDrawing()
             end)
         end
 
-        local light = DynamicLight(kart:EntIndex())
-        if not light then return end
+        if not kart.UnderglowData then
+            local up = kart:GetUp()
+            local center = kart:OBBCenter()
+            local mins = kart:OBBMins()
+            local maxs = kart:OBBMaxs()
 
-        light.pos = kart:LocalToWorld(lightingOffset)
-        light.r = col.r
-        light.g = col.g
-        light.b = col.b
-        light.brightness = 5
-        light.Decay = 1000
-        light.Size = 50
-        light.DieTime = CurTime() + 1
+            kart.UnderglowData = {
+                center = center,
+                sizeCenter = maxs.x,
+                distToFront = center:Distance(Vector(mins.x, mins.y, center.z) / 2),
+                distToBack = center:Distance(Vector(maxs.x, maxs.y, center.z) / 2),
+                distToUnder = center:Distance(Vector(0, 0, mins.z)) / 2,
+            }
+
+            kart.UnderglowPosFuncTable = {
+                function()
+                    return kart:LocalToWorld(kart.UnderglowData.center) + up * -kart.UnderglowData.distToUnder
+                end,
+                function()
+                    return kart:LocalToWorld(kart.UnderglowData.center) + kart:GetRight() * -(kart.UnderglowData.distToFront - 10) + kart:GetUp() * -kart.UnderglowData.distToUnder
+                end,
+                function()
+                    return kart:LocalToWorld(kart.UnderglowData.center) + kart:GetRight() * -(kart.UnderglowData.distToFront - 15) + kart:GetUp() * -kart.UnderglowData.distToUnder
+                end,
+                function()
+                    return kart:LocalToWorld(kart.UnderglowData.center) + kart:GetRight() * (kart.UnderglowData.distToBack + 10) + kart:GetUp() * kart.UnderglowData.distToUnder
+                end,
+                function()
+                    return kart:LocalToWorld(kart.UnderglowData.center) + kart:GetRight() * (kart.UnderglowData.distToBack + 15) + kart:GetUp() * -kart.UnderglowData.distToUnder
+                end
+            }
+        end
+
+        local dieTime = CurTime() + FrameTime() * 4
+        for i, posGetter in ipairs(kart.UnderglowPosFuncTable) do
+            local light = DynamicLight(kart:EntIndex() + i)
+            if not light then continue end
+
+            light.pos = posGetter()
+            --light.nomodel = true
+            light.brightness = 6
+            light.Decay = 1000
+            light.Size = 60
+            light.DieTime = dieTime
+            light.r, light.g, light.b = col.r, col.g, col.b
+        end
     end)
 
     hook.Add("PIXEL.Karts.OnRemove", "PIXEL.Karts.CacheCleanup", function(kart)
