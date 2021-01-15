@@ -14,9 +14,10 @@ function kart:Initialize()
 
     self:SetRocketBoost(true)
     self:SetGlider(true)
-    self:SetRainbowMode(true)
+    self:SetRainbowMode(false)
     self:SetBuiltInRadio(true)
-    self:SetUnderGlow(Color(255, 0, 0))
+    self:SetUnderGlowEnabled(true)
+    self:SetUnderGlow(Color(0, 140, 255))
 end
 
 function kart:GetClass()
