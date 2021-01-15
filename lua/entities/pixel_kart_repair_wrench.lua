@@ -12,7 +12,7 @@ ENT.AdminOnly = false
 
 if SERVER then
     function ENT:Initialize()
-        self:SetModel("models/props_c17/tools_wrench01a.mdl")
+        self:SetModel("models/mark2580/gtav/garage_stuff/span_02.mdl")
         self:PhysicsInit(SOLID_VPHYSICS)
         self:SetMoveType(MOVETYPE_VPHYSICS)
         self:SetSolid(SOLID_VPHYSICS)
