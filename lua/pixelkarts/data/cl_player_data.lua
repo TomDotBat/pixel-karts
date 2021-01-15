@@ -10,7 +10,7 @@ function PIXEL.Karts.GetLatestPlayerData(callback)
 
     net.Receive("PIXEL.Karts.UpdatePlayerData", function()
         local len = net.ReadUInt(16)
-        local data = net.ReadData(len)
+        local data = util.Decompress(net.ReadData(len))
 
         PIXEL.Karts.LocalPlayerDataCache = data
         timer.Simple(300, function()
