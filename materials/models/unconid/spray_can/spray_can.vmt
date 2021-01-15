@@ -1,0 +1,24 @@
+"vertexlitgeneric"
+{
+	"$basetexture"	 "models\unconid\spray_can\spray_can"
+	"$bumpmap"	 "models\unconid\spray_can\spray_can_normal"
+	"$detail" 		 "models\unconid\1shared\metal_dt"
+
+
+	"$translucent"	 	"0"
+	"$AmbientOcclusion"	"1"
+	"$nocull"			"0"
+
+	"$detailscale"	 	"12"
+	"$detailblendfactor" 	"0.1"	
+
+	"$phong" 		"1"
+	"$phongboost"		"0.07"
+	"$phongexponent"		"38"
+	"$phongfresnelranges"	"[5 3 7]"
+
+	"$rimlight" 		"1"												
+	"$rimlightexponent" 		"1"				
+	"$rimlightboost" 		"0.3"
+
+}

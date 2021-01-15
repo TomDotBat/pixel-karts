@@ -1,0 +1,13 @@
+"VertexLitGeneric"
+{
+   "$basetexture"         "models/mark2580/gtav/garage_stuff/gz_v_cs_oilbottle"
+   "$bumpmap"             "models/mark2580/gtav/garage_stuff/gz_v_cs_oilbottle_n" 
+   
+   "$phongexponenttexture" "models/mark2580/gtav/garage_stuff/green" 
+	
+	$phong "1"
+	$phongboost "10"
+	$phongfresnelranges "[0.3 0.75 1.00]"
+	$phongalbedotint "1"
+	$phongexponent       50     
+}

@@ -1,0 +1,19 @@
+"VertexLitGeneric"
+{
+	"$basetexture"        "models/mark2580/gtav/garage_stuff/v_mp_p_mi_hndtrk_n2_aa_dm"
+    "$bumpmap"            "models/mark2580/gtav/garage_stuff/v_mp_p_mi_hndtrk_n2_aa_nm"
+
+   "$phongexponenttexture" "models/mark2580/gtav/garage_stuff/green" 
+	
+	$phong "1"
+	$phongboost "10"
+	$phongfresnelranges "[0.3 0.75 1.00]"
+	$phongalbedotint "1"
+	$phongexponent       50
+	
+	"$detail"                   "models/mark2580/gtav/garage_stuff/Detail_Metal7"
+	"$detailblendfactor"        "1"
+	"$detailscale"              "5"
+	"$detailblendmode"          "0"
+}
+

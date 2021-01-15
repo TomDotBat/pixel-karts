@@ -1,0 +1,24 @@
+"VertexLitGeneric"
+{
+   "$basetexture"         "models/mark2580/gtav/bikerclubhouse/garage/gz_v_cs_grid"
+   "$bumpmap"             "models/mark2580/gtav/bikerclubhouse/garage/gz_v_cs_grid_n"
+
+   "$phongexponenttexture" "mark2580/gtav/AfterHoursClub/shared/green"    
+   
+$phong               1
+$phongfresnelranges "[0.3 0.75 1.00]"
+$phongalbedotint     1
+$phongexponent       50
+$phongboost          2.5
+$nocull              1
+
+	$rimlight               1
+	$rimlightexponent       2
+	$rimlightboost          5
+	
+		
+		"$detail"                   "mark2580/gtav/AfterHoursClub/shared/Detail_metal7"
+	    "$detailblendfactor"        "1.4"
+	    "$detailscale"              "1"
+		"$detailblendmode"          "0"	
+}

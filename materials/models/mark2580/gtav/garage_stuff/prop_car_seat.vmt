@@ -1,0 +1,25 @@
+"VertexLitGeneric"
+{
+   "$basetexture"         "models/mark2580/gtav/garage_stuff/prop_car_seat"
+   "$bumpmap"             "models/mark2580/gtav/garage_stuff/prop_car_seat_n"
+
+   "$phongexponenttexture" "models/mark2580/gtav/garage_stuff/green" 
+	
+	$phong "1"
+	$phongboost "2"
+	$phongfresnelranges "[0.3 0.75 1.00]"
+	$phongalbedotint "1"
+	$phongexponent       0
+	
+	$nocull 1
+	
+	$envmap "env_cubemap"
+	$envmaptint "[0.1 0.1 0.1]"
+	$normalmapalphaenvmapmask 1
+	$envmapfresnel 1
+	
+	"$detail"                   "detail/noise_detail_01"
+	"$detailblendfactor"        "0.3"
+	"$detailscale"              "6"
+	"$detailblendmode"          "0"	
+}

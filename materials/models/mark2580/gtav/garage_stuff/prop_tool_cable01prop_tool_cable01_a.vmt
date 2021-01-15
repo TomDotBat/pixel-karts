@@ -1,0 +1,17 @@
+"VertexLitGeneric"
+{
+   "$basetexture"         "models/mark2580/gtav/garage_stuff/prop_tool_cable01prop_tool_cable01_a"
+   "$bumpmap"             "models/mark2580/gtav/garage_stuff/prop_tool_cable01prop_tool_cable01_a_n" 
+   
+   "$phongexponenttexture" "models/mark2580/gtav/garage_stuff/green" 
+	
+	$phong "1"
+	$phongboost "10"
+	$phongfresnelranges "[0.3 0.75 1.00]"
+	$phongalbedotint "1"
+	$phongexponent       50
+	
+   $nocull              0 
+
+   $alphatest           1   
+}

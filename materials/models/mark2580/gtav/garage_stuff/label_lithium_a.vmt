@@ -1,0 +1,14 @@
+"VertexLitGeneric"
+{
+	"$basetexture"        "models/mark2580/gtav/garage_stuff/label_lithium_a"
+    "$bumpmap"            "dev/bump_normal"
+
+   "$phongexponenttexture" "models/mark2580/gtav/garage_stuff/green" 
+	
+	$phong "1"
+	$phongboost "10"
+	$phongfresnelranges "[0.3 0.75 1.00]"
+	$phongalbedotint "1"
+	$phongexponent       50
+}
+

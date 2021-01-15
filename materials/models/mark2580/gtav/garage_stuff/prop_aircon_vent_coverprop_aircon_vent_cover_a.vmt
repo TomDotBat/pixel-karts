@@ -1,0 +1,17 @@
+"VertexLitGeneric"
+{
+	"$basetexture"        "models/mark2580/gtav/garage_stuff/prop_aircon_vent_coverprop_aircon_vent_cover_a"
+ //   "$bumpmap"            "models/mark2580/gtav/mp_office_03c/warehouse_large/prop_aircon_s_05_n"
+
+   "$phongexponenttexture" "models/mark2580/gtav/garage_stuff/green" 
+	
+	$phong "1"
+	$phongboost "10"
+	$phongfresnelranges "[0.3 0.75 1.00]"
+	$phongalbedotint "1"
+	$phongexponent       50
+	
+	$alphatest 1
+	$alphatestreference 0.5
+}
+

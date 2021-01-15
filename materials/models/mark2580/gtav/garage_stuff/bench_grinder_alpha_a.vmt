@@ -1,0 +1,17 @@
+"VertexLitGeneric"
+{
+   "$basetexture"         "models/mark2580/gtav/garage_stuff/bench_grinder_alpha_a"
+   "$bumpmap"             "models/mark2580/gtav/garage_stuff/flat_normal_alt2"
+
+	
+	$nocull 1
+	
+	$ambientocclusion     "0"
+	$translucent 1
+	
+	
+	$envmap "env_cubemap"
+	$envmaptint "[1 1 1]"
+	$normalmapalphaenvmapmask 1
+	$envmapfresnel 1
+}
