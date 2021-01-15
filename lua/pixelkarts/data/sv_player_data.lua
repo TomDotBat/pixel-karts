@@ -44,15 +44,15 @@ function PIXEL.Karts.GetPlayerData(steamid, callback)
         local row = data[1]
         if not row then callback(false) return end
 
-        data = row["data"]
-        data = util.JSONToTable(data)
+        local json = row["data"]
+        data = util.JSONToTable(json)
         if not data then
-            callback(false)
+            callback(false, nil, json)
             return
         end
 
-        PIXEL.Karts.CachePlayerData(steamid, data)
-        callback(true, data)
+        PIXEL.Karts.CachePlayerData(steamid, data, json)
+        callback(true, data, json)
     end
 
     function q:onError(err, sql)
@@ -68,12 +68,13 @@ function PIXEL.Karts.SetPlayerData(steamid, data, callback)
     local q = database:query(string.format([[INSERT INTO %s(steamid, data) VALUES ("%s", "%s") ON DUPLICATE KEY UPDATE steamid="%s", data="%s";]], tblPlyData, steamid, data, steamid, data))
 
     function q:onSuccess()
-        if callback then callback(true) end
+        PIXEL.Karts.ClearCachedPlayerData(steamid)
+        if callback then callback(true, data) end
     end
 
     function q:onError(err, sql)
         print("[PIXEL Karts] WARNING - Database failed to get player data for '" .. steamid .. "'.\n" .. err)
-        if callback then callback(false) end
+        if callback then callback(false, data) end
     end
 
     q:start()
@@ -87,20 +88,28 @@ function PIXEL.Karts.UpdatePlayerData(steamid, newData, callback)
             data = newData
         end
 
-        PIXEL.Karts.SetPlayerData(steamid, data, function(success2)
-            if success2 then PIXEL.Karts.CachePlayerData(steamid, data) end
-            callback(success2, data)
+        PIXEL.Karts.SetPlayerData(steamid, data, function(success2, json)
+            if success2 then PIXEL.Karts.CachePlayerData(steamid, data, json) end
+            callback(success2, data, json)
         end)
     end)
 end
 
 PIXEL.Karts.PlayerDataCache = PIXEL.Karts.PlayerDataCache or {}
+PIXEL.Karts.PlayerDataCacheJson = PIXEL.Karts.PlayerDataCacheJson or {}
 
-function PIXEL.Karts.CachePlayerData(steamid, data)
+function PIXEL.Karts.CachePlayerData(steamid, data, json)
     PIXEL.Karts.PlayerDataCache[steamid] = data
+    PIXEL.Karts.PlayerDataCacheJson[steamid] = json
+
     timer.Create("PIXEL.Karts.CacheExpire:" .. steamid, 300, 1, function()
         PIXEL.Karts.PlayerDataCache[steamid] = nil
     end)
+end
+
+function PIXEL.Karts.ClearCachedPlayerData(steamid)
+    PIXEL.Karts.PlayerDataCache[steamid] = nil
+    timer.Remove("PIXEL.Karts.CacheExpire:" .. steamid)
 end
 
 hook.Add("PlayerInitialSpawn", "PIXEL.Karts.CacheNewPlayer", function(ply)
@@ -112,32 +121,35 @@ hook.Add("PlayerInitialSpawn", "PIXEL.Karts.CacheNewPlayer", function(ply)
 end)
 
 hook.Add("PlayerDisconnected", "PIXEL.Karts.ClearPlayerCache", function(ply)
-    local steamid = ply:SteamID64()
-    PIXEL.Karts.PlayerDataCache[steamid] = nil
-    timer.Remove("PIXEL.Karts.CacheExpire:" .. steamid)
+    PIXEL.Karts.ClearCachedPlayerData(ply:SteamID64())
 end)
 
-function PIXEL.Karts.SendPlayerData(ply)
+function PIXEL.Karts.SendPlayerData(_, ply)
     local steamid = ply:SteamID64()
-    local data = PIXEL.Karts.PlayerDataCache[steamid]
-    if not data then
-        PIXEL.Karts.GetPlayerData(steamid, function(success, newData)
+    local json = PIXEL.Karts.PlayerDataCacheJson[steamid]
+    if not json then
+        PIXEL.Karts.GetPlayerData(steamid, function(success, data, newJson)
             if not success then return end
 
-            local len = #newData
+            newJson = util.Compress(newJson)
+            local len = #newJson
+
             net.Start("PIXEL.Karts.UpdatePlayerData")
              net.WriteUInt(len, 16)
-             net.WriteData(newData, len)
+             net.WriteData(newJson, len)
             net.Send(ply)
         end)
         return
     end
 
-    local len = #data
+    json = util.Compress(json)
+    local len = #json
+
     net.Start("PIXEL.Karts.UpdatePlayerData")
      net.WriteUInt(len, 16)
-     net.WriteData(data, len)
+     net.WriteData(json, len)
     net.Send(ply)
 end
+net.Receive("PIXEL.Karts.UpdatePlayerData", PIXEL.Karts.SendPlayerData)
 
 util.AddNetworkString("PIXEL.Karts.UpdatePlayerData")
