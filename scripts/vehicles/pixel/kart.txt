@@ -14,7 +14,7 @@
         "HorsePower" "100"
         "MaxRPM" "4700"
         "MaxSpeed" "40"
-        "MaxReverseSpeed" "5"
+        "MaxReverseSpeed" "15"
         "AutobrakeSpeedGain" "1.1"
         "AutobrakeSpeedFactor" "3"
         "Autotransmission" "0"
