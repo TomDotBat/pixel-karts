@@ -3,7 +3,7 @@ PIXEL.Karts.Vehicles = PIXEL.Karts.Vehicles or {}
 local karts = PIXEL.Karts.Vehicles
 
 hook.Add("OnEntityCreated", "PIXEL.Karts.InitialiseKarts", function(ent)
-    timer.Simple(.2, function()
+    timer.Simple(.5, function()
         if not IsValid(ent) then return end
         if not ent:GetNWBool("PIXEL.Karts.IsKart", false) then return end
 
