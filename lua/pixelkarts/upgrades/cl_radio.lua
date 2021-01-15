@@ -35,7 +35,6 @@ local localPly
 local function radioThink(kart, localKart, thirdperson)
     if not IsValid(kart) or kart:IsDormant() then
         PCS[kart] = nil
-        kart:RadioStop()
         return
     end
 
