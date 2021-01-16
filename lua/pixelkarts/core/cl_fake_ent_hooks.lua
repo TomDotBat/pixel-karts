@@ -2,18 +2,21 @@
 PIXEL.Karts.Vehicles = PIXEL.Karts.Vehicles or {}
 local karts = PIXEL.Karts.Vehicles
 
+function PIXEL.Karts.InitialiseKart(kart)
+    for k, v in pairs(PIXEL.Karts.KartTable) do
+        kart[k] = v
+    end
+
+    kart:Initialize()
+
+    PIXEL.Karts.Vehicles[kart:GetNWString("PIXEL.Karts.KartID", "clientside")] = kart
+end
+
 hook.Add("OnEntityCreated", "PIXEL.Karts.InitialiseKarts", function(ent)
     timer.Simple(.5, function()
         if not IsValid(ent) then return end
         if not ent:GetNWBool("PIXEL.Karts.IsKart", false) then return end
-
-        for k, v in pairs(PIXEL.Karts.KartTable) do
-            ent[k] = v
-        end
-
-        ent:Initialize()
-
-        PIXEL.Karts.Vehicles[ent:GetNWString("PIXEL.Karts.KartID", "")] = ent
+        PIXEL.Karts.InitialiseKart(ent)
     end)
 end)
 
@@ -44,7 +47,7 @@ end)
 
 hook.Add("EntityRemoved", "PIXEL.Karts.OnRemove", function(ent)
     if not ent.IsPIXELKart then return end
-    PIXEL.Karts.Vehicles[ent:GetNWString("PIXEL.Karts.KartID", "")] = nil
+    PIXEL.Karts.Vehicles[ent:GetNWString("PIXEL.Karts.KartID", "clientside")] = nil
 
     hook.Run("PIXEL.Karts.OnRemove", ent)
 end)

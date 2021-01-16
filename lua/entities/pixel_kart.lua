@@ -84,7 +84,8 @@ function ENT:Initialize()
     veh:Initialize()
 end
 
-function ENT:SetupClientsideVars()
+function ENT:SetupClientside()
     self.IsClientside = true
     PIXEL.Karts.SetupNWVars(self)
+    PIXEL.Karts.InitialiseKart(self)
 end
