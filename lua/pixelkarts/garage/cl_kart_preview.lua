@@ -6,11 +6,16 @@ function PIXEL.Karts.CreatePreviewKart()
 
     local garageConfig = PIXEL.Karts.Config.Garage
 
-    local kart = ClientsideModel("models/freeman/vehicles/electric_go-kart.mdl", RENDERGROUP_STATIC)
+    local kart = ents.CreateClientside("pixel_kart")
+    if not IsValid(kart) then return end
+
+    kart:SetModel("models/freeman/vehicles/electric_go-kart.mdl")
     kart:SetPos(garageConfig.KartPos)
     kart:SetAngles(garageConfig.KartAngles)
-    kart:SetupBones()
+    kart:SetupClientside()
+    kart:Spawn()
 
+    kart:SetupBones()
     kart:AddCallback("BuildBonePositions", function()
         for i, manip in pairs(garageConfig.BoneManipulations) do
             kart:SetBonePosition(
@@ -26,8 +31,10 @@ function PIXEL.Karts.CreatePreviewKart()
 end
 
 function PIXEL.Karts.DestroyPreviewKart()
-    if IsValid(PIXEL.Karts.PreviewKart) then
-        PIXEL.Karts.PreviewKart:Remove()
-        PIXEL.Karts.PreviewKart = nil
+    local kart = PIXEL.Karts.PreviewKart
+    if IsValid(kart) then
+        PIXEL.Karts.DeinitialiseKart(kart)
+        kart:Remove()
+        kart = nil
     end
 end
