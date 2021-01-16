@@ -18,6 +18,15 @@ function PIXEL.Karts.SetupNWVars(kart)
             kart["Set" .. upgradeName] = function(s, new)
                 kart.KartVars[upgradeName] = new
             end
+
+            if upgrade.Type == "boolean" then continue end
+            kart["Get" .. upgradeName .. "Enabled"] = function(s)
+                return kart.KartVars["PIXEL.Karts." .. upgradeName .. ".Enabled"]
+            end
+
+            kart["Set" .. upgradeName .. "Enabled"] = function(s)
+                return kart.KartVars["PIXEL.Karts." .. upgradeName .. ".Enabled"]
+            end
         end
         return
     end
