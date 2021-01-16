@@ -17,7 +17,6 @@ local wobbleAngle = Angle()
 local curTime = CurTime
 local sin, cos = math.sin, math.cos
 
-
 function PIXEL.Karts.SetupGarageCamera()
     hook.Add("CalcView", "PIXEL.Karts.GarageCamera", function(ply, pos, angles, fov)
         wobbleAngle[1] = sin(curTime() * .8)

@@ -38,7 +38,6 @@ hook.Add("Think", "PIXEL.Karts.KartThink", function()
             continue
         end
 
-        veh:Think()
         hook.Run("PIXEL.Karts.Think", veh)
     end
 end)
@@ -48,5 +47,4 @@ hook.Add("EntityRemoved", "PIXEL.Karts.OnRemove", function(ent)
     PIXEL.Karts.Vehicles[ent:GetNWString("PIXEL.Karts.KartID", "")] = nil
 
     hook.Run("PIXEL.Karts.OnRemove", ent)
-    ent:OnRemove()
 end)

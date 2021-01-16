@@ -31,3 +31,7 @@ end)
 hook.Add("PIXEL.Karts.LeftKart", "PIXEL.Karts.GliderHUD", function()
     hook.Remove("HUDPaint", "PIXEL.Karts.GliderHUD")
 end)
+
+hook.Add("PIXEL.Karts.Think", "PIXEL.Karts.GliderBodygroup", function(kart)
+    kart:SetBodygroup(4, kart:GetNWBool("PIXEL.Karts.IsGliding", false) and 1 or 0)
+end)

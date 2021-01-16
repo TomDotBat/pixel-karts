@@ -99,3 +99,23 @@ end)
 hook.Add("PIXEL.Karts.LeftKart", "PIXEL.Karts.RocketBoostHUD", function()
     hook.Remove("HUDPaint", "PIXEL.Karts.RocketBoostHUD")
 end)
+
+local boosterPos, boosterAng = Vector(0, -42, 14), Angle(90, -90, 0)
+hook.Add("PIXEL.Karts.Think", "PIXEL.Karts.BoosterModel", function(kart)
+    if kart:GetRocketBoost() then
+        if not IsValid(kart.RocketBooster) then
+            kart.RocketBooster = ClientsideModel("models/maxofs2d/thruster_projector.mdl")
+            kart.RocketBooster:SetParent(kart)
+            kart.RocketBooster:SetModelScale(.6)
+        end
+
+        kart.RocketBooster:SetPos(kart:LocalToWorld(boosterPos))
+        kart.RocketBooster:SetAngles(kart:LocalToWorldAngles(boosterAng))
+    elseif IsValid(kart.RocketBooster) then
+        kart.RocketBooster:Remove()
+    end
+end)
+
+hook.Add("PIXEL.Karts.OnRemove", "PIXEL.Karts.RemoveBoosterModel", function(kart)
+    if IsValid(kart.RocketBooster) then kart.RocketBooster:Remove() end
+end)

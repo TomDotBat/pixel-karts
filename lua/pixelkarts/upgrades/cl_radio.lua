@@ -370,3 +370,17 @@ hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.DrawRadios", function(sk
     render.SetStencilEnable(false)
     ui.endDraw()
 end)
+
+PIXEL.Karts.KartTable = PIXEL.Karts.KartTable or {}
+
+function PIXEL.Karts.KartTable:RadioStop()
+    if not self.RadioPlayer then return end
+
+    PIXEL.Karts.Radio.StopMedia(self.RadioPlayer)
+    self.RadioPlayer = nil
+    self.RadioPlayerCreated = nil
+end
+
+hook.Add("PIXEL.Karts.OnRemove", "PIXEL.Karts.StopRadioOnRemove", function(kart)
+    kart:RadioStop()
+end)

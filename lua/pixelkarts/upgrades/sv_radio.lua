@@ -29,3 +29,9 @@ net.Receive("PIXEL.Karts.Radio", function(len, ply)
         veh:RadioSetChannel(newStation)
     end
 end)
+
+PIXEL.Karts.KartTable = PIXEL.Karts.KartTable or {}
+
+function PIXEL.Karts.KartTable:RadioSetChannel(chan)
+    self:SetNW2Int("PIXEL.Karts.RadioChannel", chan)
+end
