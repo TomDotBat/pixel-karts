@@ -2,7 +2,7 @@
 AddCSLuaFile()
 
 PIXEL.Karts.KartTable = PIXEL.Karts.KartTable or {}
-local kart = kart
+local kart = PIXEL.Karts.KartTable
 kart.IsPIXELKart = true
 
 function kart:Initialize()
@@ -82,4 +82,9 @@ function ENT:Initialize()
     SafeRemoveEntityDelayed(self, .1)
 
     veh:Initialize()
+end
+
+function ENT:SetupClientsideVars()
+    self.IsClientside = true
+    PIXEL.Karts.SetupNWVars(self)
 end
