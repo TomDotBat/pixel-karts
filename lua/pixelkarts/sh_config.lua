@@ -87,9 +87,18 @@ PIXEL.Karts.Config = {
     Garage = {
         KartPos = Vector(-881.531250, -771.531250, -191.343750),
         KartAngles = Angle(0, -90, 0),
+
         CameraCircleRadius = 130,
         CameraOffset = Vector(0, 0, 55),
         CameraRotation = 50,
+
+        RadioOrigin = Vector(-814.031250, -882.968750, -151.687500),
+        RadioVolume = .6,
+        RadioURL = "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_p",
+
+        SprayPaintURL = "http://content.pixelnetwork.co/sounds/spray_paint.mp3",
+        SprayPaintVolume = .8,
+
         BoneManipulations = {
             [0] = {
                 position = Vector(-0.000019, 0.000022, 19.999994),
