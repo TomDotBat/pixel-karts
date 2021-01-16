@@ -34,10 +34,7 @@ ENT.Spawnable = true
 ENT.AdminOnly = false
 
 function ENT:Initialize()
-    if CLIENT then
-        self:SetModel("models/freeman/vehicles/electric_go-kart.mdl")
-        return
-    end
+    if CLIENT then return end
 
     if not self.CPPIGetOwner then
         SafeRemoveEntityDelayed(self, .1)
@@ -83,6 +80,8 @@ function ENT:Initialize()
 
     veh:Initialize()
 end
+
+if SERVER then return end
 
 function ENT:SetupClientside()
     self.IsClientside = true
