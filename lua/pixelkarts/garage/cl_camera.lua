@@ -1,37 +1,36 @@
 
-local localPly = LocalPlayer()
+local garageConfig = PIXEL.Karts.Config.Garage
 
 local viewData = {
     drawviewer = true
 }
 
-local curPos, curAng
-local targetPos, targetAng = Vector(-777.760376, -688.692505, -137.569031), Angle(15.400071, -140.457840, 0)
+local kartPos = garageConfig.KartPos
+local rotation = math.rad(garageConfig.CameraRotation)
+local camPos = kartPos + garageConfig.CameraOffset
+    + (Vector(garageConfig.CameraCircleRadius, 0, 0) * math.sin(rotation))
+    + (Vector(0, garageConfig.CameraCircleRadius, 0) * math.cos(rotation))
 
-local frameTime = FrameTime
-local lerpVector, lerpAngle = LerpVector, LerpAngle
-local angle = Angle
-local sin, cos = math.sin, math.cos
+local camAngles = (kartPos - camPos):Angle()
+local wobbleAngle = Angle()
+
 local curTime = CurTime
-hook.Add("CalcView", "PIXEL.Karts.GarageCamera", function(ply, pos, angles, fov)
-    if ply ~= localPly then return end
-    if not (curPos and curAng) then
-        curPos, curAng = localPly:EyePos(), localPly:EyeAngles()
-        return
-    end
+local sin, cos = math.sin, math.cos
 
-    local ft = frameTime() * 2
-    curPos = lerpVector(ft, curPos, targetPos)
-    curAng = lerpAngle(ft, curAng, targetAng)
 
-    viewData.origin = curPos
-    viewData.angles = curAng + angle(sin(curTime()), cos(curTime() * .8), 0)
-    viewData.fov = fov
+function PIXEL.Karts.SetupGarageCamera()
+    hook.Add("CalcView", "PIXEL.Karts.GarageCamera", function(ply, pos, angles, fov)
+        wobbleAngle[1] = sin(curTime() * .8)
+        wobbleAngle[2] = cos(curTime() * .6)
 
-    return viewData
-end)
+        viewData.origin = camPos
+        viewData.angles = camAngles + wobbleAngle
+        viewData.fov = fov
 
---PIXEL.Karts.DestroyPreviewKart()
---PIXEL.Karts.CreatePreviewKart()
+        return viewData
+    end)
+end
 
-hook.Remove("CalcView", "PIXEL.Karts.GarageCamera")
+function PIXEL.Karts.RemoveGarageCamera()
+    hook.Remove("CalcView", "PIXEL.Karts.GarageCamera")
+end
