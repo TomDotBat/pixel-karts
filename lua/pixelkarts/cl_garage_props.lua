@@ -64,5 +64,11 @@ PIXEL.Karts.GarageProps = {
         model = "models/mark2580/gtav/garage_stuff/tape_01.mdl",
         position = Vector(-834.062500, -873.687500, -149.906250),
         angles = Angle(0.098877, 26.455078, 0.911865)
+    },
+    {
+        model = "models/props/cs_office/radio.mdl",
+        position = Vector(-814.031250, -882.968750, -151.687500),
+        angles = Angle(0.000000, 104.529419, 0.000000),
+        needsCss = true
     }
 }

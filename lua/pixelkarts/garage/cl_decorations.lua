@@ -14,6 +14,8 @@ PIXEL.Karts.RemoveDecorations()
 
 function PIXEL.Karts.SpawnDecorations()
     for _, decoration in ipairs(PIXEL.Karts.GarageProps) do
+        if decoration.needsCss and not IsMounted("cstrike") then continue end
+
         local prop = ClientsideModel(decoration.model, RENDERGROUP_STATIC)
         prop:SetPos(decoration.position)
         prop:SetAngles(decoration.angles)
@@ -21,3 +23,5 @@ function PIXEL.Karts.SpawnDecorations()
         table.insert(decorations, prop)
     end
 end
+
+PIXEL.Karts.SpawnDecorations()
