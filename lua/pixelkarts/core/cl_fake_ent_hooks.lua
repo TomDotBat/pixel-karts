@@ -45,9 +45,12 @@ hook.Add("Think", "PIXEL.Karts.KartThink", function()
     end
 end)
 
+function PIXEL.Karts.DeinitialiseKart(kart)
+    PIXEL.Karts.Vehicles[kart:GetNWString("PIXEL.Karts.KartID", "clientside")] = nil
+    hook.Run("PIXEL.Karts.OnRemove", kart)
+end
+
 hook.Add("EntityRemoved", "PIXEL.Karts.OnRemove", function(ent)
     if not ent.IsPIXELKart then return end
-    PIXEL.Karts.Vehicles[ent:GetNWString("PIXEL.Karts.KartID", "clientside")] = nil
-
-    hook.Run("PIXEL.Karts.OnRemove", ent)
+    PIXEL.Karts.DeinitialiseKart(ent)
 end)
