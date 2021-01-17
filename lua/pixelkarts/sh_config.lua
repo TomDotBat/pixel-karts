@@ -93,11 +93,13 @@ PIXEL.Karts.Config = {
         CameraRotation = 50,
 
         RadioOrigin = Vector(-814.031250, -882.968750, -151.687500),
-        RadioVolume = .6,
+        RadioVolume = .5,
         RadioURL = "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_p",
 
         SprayPaintURL = "http://content.pixelnetwork.co/sounds/spray_paint.mp3",
         SprayPaintVolume = .8,
+        SprayPaintCircleRadius = 50,
+        SprayPaintOffset = Vector(0, 0, 25),
 
         BoneManipulations = {
             [0] = {
