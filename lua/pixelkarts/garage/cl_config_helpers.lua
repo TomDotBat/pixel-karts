@@ -75,3 +75,9 @@ concommand.Add("pixel_karts_print_bone_manipulations", function()
 },]], i, pos.x, pos.y, pos.z, ang.p, ang.y, ang.r))
     end
 end)
+
+concommand.Add("pixel_karts_print_trace_pos", function()
+    local tr = LocalPlayer():GetEyeTrace()
+    if not tr.Hit then return end
+    print(tr.HitPos.x .. ", " .. tr.HitPos.y .. ", " .. tr.HitPos.z)
+end)
