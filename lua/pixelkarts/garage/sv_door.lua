@@ -1,7 +1,7 @@
 
 local garageConfig = PIXEL.Karts.Config.Garage
 
-hook.Add("InitPostEntity", "PIXEL.Karts.FakeGarageDoorCollisions", function()
+local function makeDoor()
     if not IsValid(PIXEL.Karts.GarageDoor) then
         PIXEL.Karts.GarageDoor = ents.Create("prop_physics")
     end
@@ -15,4 +15,7 @@ hook.Add("InitPostEntity", "PIXEL.Karts.FakeGarageDoorCollisions", function()
     door:GetPhysicsObject():EnableMotion(false)
     door:SetColor(color_transparent)
     door:SetRenderMode(RENDERMODE_TRANSCOLOR)
-end)
+end
+
+hook.Add("InitPostEntity", "PIXEL.Karts.FakeGarageDoorCollisions", makeDoor)
+hook.Add("PostCleanupMap", "PIXEL.Karts.FakeGarageDoorCollisions", makeDoor)
