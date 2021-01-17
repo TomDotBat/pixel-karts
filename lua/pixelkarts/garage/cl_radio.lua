@@ -28,6 +28,3 @@ function PIXEL.Karts.FadeOutGarageRadio()
         hook.Remove("Think", "PIXEL.Karts.FadeOutRadio")
     end)
 end
-
-PIXEL.Karts.StartGarageRadio()
---PIXEL.Karts.FadeOutGarageRadio()

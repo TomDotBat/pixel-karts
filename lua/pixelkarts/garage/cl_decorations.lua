@@ -10,8 +10,6 @@ function PIXEL.Karts.RemoveDecorations()
     table.Empty(decorations)
 end
 
-PIXEL.Karts.RemoveDecorations()
-
 function PIXEL.Karts.SpawnDecorations()
     for _, decoration in ipairs(PIXEL.Karts.GarageProps) do
         if decoration.needsCss and not IsMounted("cstrike") then continue end
@@ -23,5 +21,3 @@ function PIXEL.Karts.SpawnDecorations()
         table.insert(decorations, prop)
     end
 end
-
-PIXEL.Karts.SpawnDecorations()

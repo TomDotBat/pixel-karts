@@ -138,10 +138,3 @@ function PIXEL.Karts.RemoveSprayCan()
     timer.Remove("PIXEL.Karts.SprayCan.Particles")
     hook.Remove("Think", "PIXEL.Karts.SprayCan.ColorAnimation")
 end
-
-timer.Create("fuckme", 2, 10, function()
-    PIXEL.Karts.SprayPaintKart(PIXEL.Karts.CreatePreviewKart(), HSVToColor((CurTime() * 200) % 360, 1, 1))
-end)
-
-
-PIXEL.Karts.RemoveSprayCan()
