@@ -13,7 +13,7 @@ function PIXEL.Karts.GetLatestPlayerData(callback)
         local data = util.Decompress(net.ReadData(len))
 
         PIXEL.Karts.LocalPlayerDataCache = data
-        timer.Simple(300, function()
+        timer.Create("PIXEL.Karts.CacheExpire", 300, 1, function()
             PIXEL.Karts.LocalPlayerDataCache = nil
         end)
 
