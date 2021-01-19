@@ -50,6 +50,8 @@ util.AddNetworkString("PIXEL.Karts.GarageStateUpdate")
 hook.Add("PlayerDeath", "PIXEL.Karts.LeaveGarageOnDeath", function(ply)
     if not ply:GetNWBool("PIXEL.Karts.IsInGarage", false) then return end
 
+    ply:SetPos(garageConfig.LeavePosition)
+
     ply:SetNWBool("PIXEL.Karts.IsInGarage", false)
     ply:SetNWBool("PIXEL.Karts.IsInGarageWithKart", false)
 
