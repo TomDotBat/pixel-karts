@@ -42,7 +42,7 @@ function PIXEL.Karts.GetPlayerData(steamid, callback)
 
     function q:onSuccess(data)
         local row = data[1]
-        if not row then callback(false) return end
+        if not row then callback(true, {}, "{}") return end
 
         local json = row["data"]
         data = util.JSONToTable(json)
