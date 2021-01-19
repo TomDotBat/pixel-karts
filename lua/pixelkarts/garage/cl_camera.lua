@@ -5,13 +5,13 @@ local viewData = {
     drawviewer = true
 }
 
-local kartPos = garageConfig.KartPos
+local aimPos = garageConfig.KartPos + garageConfig.CameraAimOffset
 local rotation = math.rad(garageConfig.CameraRotation)
-local camPos = kartPos + garageConfig.CameraOffset
+local camPos = aimPos + garageConfig.CameraOffset
     + (Vector(garageConfig.CameraCircleRadius, 0, 0) * math.sin(rotation))
     + (Vector(0, garageConfig.CameraCircleRadius, 0) * math.cos(rotation))
 
-local camAngles = (kartPos - camPos):Angle()
+local camAngles = (aimPos - camPos):Angle()
 local wobbleAngle = Angle()
 
 local curTime = CurTime
