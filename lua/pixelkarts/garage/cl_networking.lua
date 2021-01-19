@@ -21,6 +21,7 @@ timer.Create("PIXEL.Karts.GarageEntryBoxThink", .5, 0, function()
     net.SendToServer()
 
     PIXEL.Karts.GetLatestPlayerData(PIXEL.Karts.OpenGarageMenu)
+    PIXEL.Karts.OpenGarageDoor()
 end)
 
 net.Receive("PIXEL.Karts.GarageStateUpdate", PIXEL.Karts.CloseGarageMenu)

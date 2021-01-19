@@ -2,8 +2,6 @@
 function PIXEL.Karts.OpenGarageMenu(data)
     PIXEL.Karts.FlipGarageDoor(true)
     PIXEL.Karts.StartGarageRadio()
-    PIXEL.Karts.OpenGarageDoor()
-    PIXEL.Karts.SpawnDecorations()
     PIXEL.Karts.CreatePreviewKart()
     PIXEL.Karts.SetupGarageCamera()
 end
