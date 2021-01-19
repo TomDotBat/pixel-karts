@@ -9,7 +9,7 @@ function PIXEL.Karts.StartGarageRadio()
         PIXEL.Karts.GarageRadioStation = station
 
         station:SetPos(garageConfig.RadioOrigin)
-        station:SetVolume(garageConfig.RadioVolume)
+        station:SetVolume(garageConfig.RadioDefaultVolume)
         station:Play()
     end)
 end

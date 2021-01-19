@@ -119,10 +119,11 @@ PIXEL.Karts.Config = {
 
         CameraCircleRadius = 130,
         CameraOffset = Vector(0, 0, 55),
+        CameraAimOffset = Vector(0, 0, 20),
         CameraRotation = 50,
 
         RadioOrigin = Vector(-814.031250, -882.968750, -151.687500),
-        RadioVolume = .5,
+        RadioDefaultVolume = .2,
         RadioURL = "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_p",
 
         SprayPaintURL = "http://content.pixelnetwork.co/sounds/spray_paint.mp3",
