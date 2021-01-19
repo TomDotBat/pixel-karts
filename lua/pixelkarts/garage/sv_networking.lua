@@ -50,4 +50,7 @@ util.AddNetworkString("PIXEL.Karts.GarageStateUpdate")
 hook.Add("PlayerDeath", "PIXEL.Karts.LeaveGarageOnDeath", function(ply)
     ply:SetNWBool("PIXEL.Karts.IsInGarage", false)
     ply:SetNWBool("PIXEL.Karts.IsInGarageWithKart", false)
+
+    net.Start("PIXEL.Karts.GarageStateUpdate")
+    net.SendToServer()
 end)
