@@ -37,6 +37,9 @@ net.Receive("PIXEL.Karts.GarageStateUpdate", function(len, ply)
         ply:SetNWBool("PIXEL.Karts.IsInGarageWithKart", false)
         ply:SetPos(garageConfig.LeavePosition)
         ply:SetEyeAngles(garageConfig.LeaveAngles)
+
+        net.Start("PIXEL.Karts.GarageStateUpdate")
+        net.SendToServer()
     end
 
     ply:SetNWBool("PIXEL.Karts.IsInGarage", not inGarage)
