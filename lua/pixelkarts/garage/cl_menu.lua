@@ -11,6 +11,7 @@ function PIXEL.Karts.CloseGarageMenu()
     PIXEL.Karts.CloseGarageDoor()
     PIXEL.Karts.RemoveGarageCamera()
     PIXEL.Karts.RemoveDecorations()
+    PIXEL.Karts.DestroyPreviewKart()
 
     timer.Simple(1, function()
         PIXEL.Karts.FlipGarageDoor(false)
