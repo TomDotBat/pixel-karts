@@ -42,6 +42,46 @@ door:SetPos(garageConfig.DoorPos)
 door:SetAngles(garageConfig.DoorAngle)
 door:CreateShadow()
 
+local function moveDoor(targetPos)
+    local prog = 0
+    local startPos = door:GetPos()
+    hook.Add("Think", "PIXEL.Karts.GarageDoor", function()
+        if not IsValid(door) then return end
+        if prog >= 1 then hook.Remove("Think", "PIXEL.Karts.GarageDoor") end
+
+        prog = prog + FrameTime() * .8
+        door:SetPos(LerpVector(prog, startPos, targetPos))
+    end)
+end
+
+local function playDoorSound()
+    sound.PlayFile("sound/doors/door_metal_gate_move1.wav", "3d", function(station)
+        if not IsValid(station) then return end
+        station:SetPos(door:GetPos())
+        station:SetVolume(.1)
+        station:Play()
+    end)
+end
+
+local movementOffset = Vector(0, 0, 118)
+function PIXEL.Karts.OpenGarageDoor()
+    if not IsValid(door) then return end
+    playDoorSound()
+    moveDoor(garageConfig.DoorPos + movementOffset)
+end
+
+function PIXEL.Karts.CloseGarageDoor()
+    if not IsValid(door) then return end
+    playDoorSound()
+    moveDoor(garageConfig.DoorPos)
+end
+
+local flipAngle = Angle(0, 180, 0)
+function PIXEL.Karts.FlipGarageDoor(state)
+    if not IsValid(door) then return end
+    door:SetAngles(state and (garageConfig.DoorAngle + flipAngle) or garageConfig.DoorAngle)
+end
+
 --local closestEnt
 --local closestDist = math.huge
 --
