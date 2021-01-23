@@ -8,6 +8,7 @@ local localPly
 hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.GarageDoor", function(depth, skybox)
     if skybox then return end
     if not IsValid(localPly) then localPly = LocalPlayer() end
+    if localPly:SetNWBool("PIXEL.Karts.IsInGarage", false) then return end
 
     local distance = (garageConfig.DoorFloorPos - localPly:EyePos()):Length()
     if distance < hideDist then
