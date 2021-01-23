@@ -9,8 +9,7 @@ hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.GarageDoor", function(de
     if skybox then return end
     if not IsValid(localPly) then localPly = LocalPlayer() end
 
-    local eyePos = localPly:EyePos()
-    local distance = (garageConfig.DoorFloorPos - eyePos):Length()
+    local distance = (garageConfig.DoorFloorPos - localPly:EyePos()):Length()
     if distance < hideDist then
         surface.SetAlphaMultiplier(math.min(math.Remap(distance, fadeStartDist, hideDist, .5, 0), .5))
 
