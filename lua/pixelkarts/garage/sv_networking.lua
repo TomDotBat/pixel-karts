@@ -24,7 +24,12 @@ net.Receive("PIXEL.Karts.GarageStateUpdate", function(len, ply)
             end
 
             ply:SetNWBool("PIXEL.Karts.IsInGarageWithKart", true)
+            ply:ExitVehicle()
             veh:Remove()
+
+            ply:SetPos(garageConfig.InsidePositions[math.random(#garageConfig.InsidePositions)])
+            ply:SetNWBool("PIXEL.Karts.IsInGarage", not inGarage)
+            return
         end
 
         if not ply:GetPos():WithinAABox(garageConfig.EntryBoxPoint1, garageConfig.EntryBoxPoint2) then
@@ -39,7 +44,7 @@ net.Receive("PIXEL.Karts.GarageStateUpdate", function(len, ply)
         ply:SetEyeAngles(garageConfig.LeaveAngles)
 
         net.Start("PIXEL.Karts.GarageStateUpdate")
-        net.SendToServer()
+        net.Send(ply)
     end
 
     ply:SetNWBool("PIXEL.Karts.IsInGarage", not inGarage)
