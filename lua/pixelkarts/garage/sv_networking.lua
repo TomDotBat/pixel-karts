@@ -24,10 +24,18 @@ net.Receive("PIXEL.Karts.GarageStateUpdate", function(len, ply)
             end
 
             ply:SetNWBool("PIXEL.Karts.IsInGarageWithKart", true)
-            ply:ExitVehicle()
-            veh:Remove()
 
-            ply:SetPos(garageConfig.InsidePositions[math.random(#garageConfig.InsidePositions)])
+            timer.Simple(.2, function()
+                if IsValid(ply) then
+                    ply:ExitVehicle()
+                    ply:SetPos(garageConfig.InsidePositions[math.random(#garageConfig.InsidePositions)])
+                end
+
+                if IsValid(veh) then
+                    veh:Remove()
+                end
+            end)
+
             ply:SetNWBool("PIXEL.Karts.IsInGarage", not inGarage)
             return
         end
