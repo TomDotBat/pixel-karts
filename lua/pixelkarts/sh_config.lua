@@ -120,13 +120,15 @@ PIXEL.Karts.Config = {
         LeavePosition = Vector(-1078.805908, -597.136536, -195),
         LeaveAngles = Angle(0, 0, 0),
 
-        KartPos = Vector(-881.531250, -771.531250, -191.343750),
+        KartPos = Vector(-881.531250, -790.531250, -191.343750),
         KartAngles = Angle(0, -90, 0),
 
-        CameraCircleRadius = 130,
+        KartHoloColor = Color(120, 200, 120, 255),
+
+        CameraCircleRadius = 115,
         CameraOffset = Vector(0, 0, 55),
-        CameraAimOffset = Vector(0, 0, 20),
-        CameraRotation = 50,
+        CameraAimOffset = Vector(2, 0, 12),
+        CameraRotation = 40,
 
         RadioOrigin = Vector(-814.031250, -882.968750, -151.687500),
         RadioDefaultVolume = .2,
@@ -138,10 +140,14 @@ PIXEL.Karts.Config = {
         SprayPaintOffset = Vector(0, 0, 25),
 
         WheelBoneNames = {
-            ["wishbone_fl_wheel"] = true,
-            ["wishbone_FR_Wheel"] = true,
-            ["wishbone_RL_Wheel"] = true,
-            ["wishbone_RR_Wheel"] = true
+            Left = {
+                ["wishbone_fl_wheel"] = true,
+                ["wishbone_RL_Wheel"] = true
+            },
+            Right = {
+                ["wishbone_FR_Wheel"] = true,
+                ["wishbone_RR_Wheel"] = true
+            }
         },
 
         BoneManipulations = {
