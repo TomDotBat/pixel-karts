@@ -49,7 +49,7 @@ local function moveDoor(targetPos)
         if not IsValid(door) then return end
         if prog >= 1 then hook.Remove("Think", "PIXEL.Karts.GarageDoor") end
 
-        prog = prog + FrameTime() * .8
+        prog = prog + FrameTime() * .9
         door:SetPos(LerpVector(prog, startPos, targetPos))
     end)
 end
