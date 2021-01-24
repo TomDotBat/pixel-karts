@@ -93,6 +93,12 @@ PIXEL.Karts.Config = {
         DoorFloorWidth = 1280,
         DoorFloorHeight = 820,
 
+        Ramp = {
+            Model = "models/hunter/blocks/cube025x3x025.mdl",
+            Position = Vector(-1127.351196, -835.957336, -204.360306),
+            Angles = Angle(-44.972534, -179.994507, 0.000000)
+        },
+
         EntryBoxPoint1 = Vector(-1034.979858, -752.671753, -55.503555),
         EntryBoxPoint2 = Vector(-1118.906616, -882.049927, -199.116608),
 
@@ -130,6 +136,13 @@ PIXEL.Karts.Config = {
         SprayPaintVolume = .8,
         SprayPaintCircleRadius = 50,
         SprayPaintOffset = Vector(0, 0, 25),
+
+        WheelBoneNames = {
+            ["wishbone_fl_wheel"] = true,
+            ["wishbone_FR_Wheel"] = true,
+            ["wishbone_RL_Wheel"] = true,
+            ["wishbone_RR_Wheel"] = true
+        },
 
         BoneManipulations = {
             [0] = {
