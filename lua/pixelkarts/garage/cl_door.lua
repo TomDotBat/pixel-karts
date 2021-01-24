@@ -58,7 +58,7 @@ local function playDoorSound()
     sound.PlayFile("sound/doors/door_metal_gate_move1.wav", "3d", function(station)
         if not IsValid(station) then return end
         station:SetPos(door:GetPos())
-        station:SetVolume(.1)
+        station:SetVolume(.4)
         station:Play()
     end)
 end
