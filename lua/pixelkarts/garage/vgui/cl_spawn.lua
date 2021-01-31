@@ -67,9 +67,3 @@ function PANEL:LayoutContent(w, h)
 end
 
 vgui.Register("PIXEL.Karts.SpawnKartMenu", PANEL, "PIXEL.Frame")
-
-if not IsValid(LocalPlayer()) then return end
-
-if IsValid(testframe) then testframe:Remove() end
-testframe = vgui.Create("PIXEL.Karts.SpawnKartMenu")
-testframe:MakePopup()
