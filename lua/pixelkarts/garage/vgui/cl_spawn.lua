@@ -39,6 +39,11 @@ function PANEL:Init()
     function self.YesBtn.DoClick(s)
         net.Start("PIXEL.Karts.RespawnKart")
         net.SendToServer()
+
+        net.Receive("PIXEL.Karts.RespawnKart", function()
+            if not IsValid(self) then return end
+            PIXEL.Karts.RemovePreviewHoloEffect()
+        end)
     end
 
     self.NoBtn = vgui.Create("PIXEL.TextButton", self.ButtonHolder)

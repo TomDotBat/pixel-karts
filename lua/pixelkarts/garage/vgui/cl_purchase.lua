@@ -39,6 +39,11 @@ function PANEL:Init()
     function self.YesBtn.DoClick(s)
         net.Start("PIXEL.Karts.PurchaseKart")
         net.SendToServer()
+
+        net.Receive("PIXEL.Karts.RespawnKart", function()
+            if not IsValid(self) then return end
+            PIXEL.Karts.RemovePreviewHoloEffect()
+        end)
     end
 
     self.NoBtn = vgui.Create("PIXEL.TextButton", self.ButtonHolder)
@@ -67,9 +72,3 @@ function PANEL:LayoutContent(w, h)
 end
 
 vgui.Register("PIXEL.Karts.PurchaseKartMenu", PANEL, "PIXEL.Frame")
-
-if not IsValid(LocalPlayer()) then return end
-
-if IsValid(testframe) then testframe:Remove() end
-testframe = vgui.Create("PIXEL.Karts.PurchaseKartMenu")
-testframe:MakePopup()
