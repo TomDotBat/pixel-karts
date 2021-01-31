@@ -8,6 +8,12 @@ PIXEL.Karts.Config = {
         800000 --VIP Plus
     },
 
+    RespawnPrice = { --False means free
+        10000,
+        5000,
+        false
+    },
+
     Upgrades = {
         CustomColor = {
             Type = "Color",
@@ -165,4 +171,10 @@ function meta:PIXELKartsIsLevel(level)
     else
         return self:IsUserGroup("vip+")
     end
+end
+
+function meta:PIXELKartsGetLevel()
+    if self:IsUserGroup("vip+") then return 3 end
+    if self:IsUserGroup("vip") then return 2 end
+    return 1
 end
