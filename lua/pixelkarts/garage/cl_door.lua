@@ -8,11 +8,11 @@ local localPly
 hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.GarageDoor", function(depth, skybox)
     if skybox then return end
     if not IsValid(localPly) then localPly = LocalPlayer() end
-    if localPly:SetNWBool("PIXEL.Karts.IsInGarage", false) then return end
+    if localPly:GetNWBool("PIXEL.Karts.IsInGarage", false) then return end
 
     local distance = (garageConfig.DoorFloorPos - localPly:EyePos()):Length()
     if distance < hideDist then
-        surface.SetAlphaMultiplier(math.min(math.Remap(distance, fadeStartDist, hideDist, .5, 0), .5))
+        surface.SetAlphaMultiplier(math.min(math.Remap(distance, fadeStartDist, hideDist, .8, 0), .8))
 
         local w, h = garageConfig.DoorFloorWidth, garageConfig.DoorFloorHeight
         cam.Start3D2D(garageConfig.DoorFloorPos, garageConfig.DoorFloorAngle, .1)
