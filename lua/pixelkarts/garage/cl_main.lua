@@ -10,20 +10,20 @@ function PIXEL.Karts.OpenGarageMenu(data)
 
     local inVehicle = localPly:InVehicle()
 
+    PIXEL.Karts.DetourNotifications()
     PIXEL.Karts.FlipGarageDoor(true)
     PIXEL.Karts.SetupGarageCamera()
     PIXEL.Karts.StartGarageRadio()
-    PIXEL.Karts.CreatePreviewKart()
+    PIXEL.Karts.CreatePreviewKart(inVehicle)
 
+    if IsValid(PIXEL.Karts.GarageMenu) then PIXEL.Karts.GarageMenu:Remove() end
     if data["owned"] and inVehicle then
         if inVehicle then
-            --go straight to upgrader
+            PIXEL.Karts.GarageMenu = vgui.Create("PIXEL.Karts.Upgrader")
         else
-            if IsValid(PIXEL.Karts.GarageMenu) then PIXEL.Karts.GarageMenu:Remove() end
             PIXEL.Karts.GarageMenu = vgui.Create("PIXEL.Karts.SpawnKartMenu")
         end
     else
-        if IsValid(PIXEL.Karts.GarageMenu) then PIXEL.Karts.GarageMenu:Remove() end
         PIXEL.Karts.GarageMenu = vgui.Create("PIXEL.Karts.PurchaseKartMenu")
     end
 end
@@ -39,6 +39,7 @@ function PIXEL.Karts.CloseGarageMenu()
 
     hook.Remove("HUDShouldDraw", "PIXEL.Karts.HideHUD")
 
+    PIXEL.Karts.UndoNotificationDetour()
     PIXEL.Karts.FadeOutGarageRadio()
     PIXEL.Karts.CloseGarageDoor()
     PIXEL.Karts.RemoveGarageCamera()
