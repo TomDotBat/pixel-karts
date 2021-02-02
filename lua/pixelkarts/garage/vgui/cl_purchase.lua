@@ -4,6 +4,7 @@ local PANEL = {}
 PIXEL.RegisterFont("Karts.RespawnDescription", "Open Sans SemiBold", 18)
 
 function PANEL:Init()
+    self:SetZPos(32767)
     self:SetTitle("Purchase Kart")
     self:SetSize(PIXEL.Scale(220), PIXEL.Scale(110))
     self:SetDraggable(false)
