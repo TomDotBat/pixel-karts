@@ -16,6 +16,8 @@ PIXEL.Karts.Config = {
 
     Upgrades = {
         CustomColor = {
+            Name = "Body Colour",
+            UIElement = "PIXEL.Karts.ColorEditor",
             Type = "Color",
             Price = {
                 50000,
@@ -33,6 +35,8 @@ PIXEL.Karts.Config = {
             RequiredLevel = 2
         },
         UnderGlow = {
+            Name = "Underglow",
+            UIElement = "PIXEL.Karts.UnderglowEditor",
             Type = "Color",
             Price = {
                 75000,
@@ -42,6 +46,8 @@ PIXEL.Karts.Config = {
             RequiredLevel = 3
         },
         RocketBoost = {
+            Name = "Rocket Boost",
+            UIElement = "PIXEL.Karts.RocketBoostEditor",
             Type = "boolean",
             Price = {
                 200000,
@@ -58,6 +64,8 @@ PIXEL.Karts.Config = {
             BoostSoundURL = "http://content.pixelnetwork.co/sounds/kart_boost.mp3"
         },
         Glider = {
+            Name = "Glider",
+            UIElement = "PIXEL.Karts.GliderEditor",
             Type = "boolean",
             Price = {
                 600000,
@@ -81,6 +89,8 @@ PIXEL.Karts.Config = {
             --DeploySoundURL = "http://content.pixelnetwork.co/sounds/kart_boost.mp3"
         },
         BuiltInRadio = {
+            Name = "Built-In Radio",
+            UIElement = "PIXEL.Karts.RadioEditor",
             Type = "boolean",
             Price = {
                 20000,
