@@ -2,6 +2,7 @@
 local PANEL = {}
 
 function PANEL:Init()
+    self:SetZPos(32767)
     self.CloseButton:Remove()
     self:SetDraggable(false)
     self:MakePopup()
