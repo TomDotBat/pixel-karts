@@ -13,10 +13,11 @@ function PIXEL.Karts.InitialiseKart(kart)
 end
 
 hook.Add("OnEntityCreated", "PIXEL.Karts.InitialiseKarts", function(ent)
-    timer.Simple(.5, function()
+    timer.Create("PIXEL.Karts.InitialiseKart:" .. ent:EntIndex(), .5, 8, function()
         if not IsValid(ent) then return end
         if not ent:GetNWBool("PIXEL.Karts.IsKart", false) then return end
         PIXEL.Karts.InitialiseKart(ent)
+        timer.Remove("PIXEL.Karts.InitialiseKart:" .. ent:EntIndex())
     end)
 end)
 
