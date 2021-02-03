@@ -28,14 +28,19 @@ local function startColorAnimation(kart, col)
 end
 
 local function startParticleEffects(can, col)
+    PIXEL.Karts.SprayPaintColor = col
+
+    if timer.Exists("PIXEL.Karts.SprayCan.Particles") then return end
+
     timer.Create("PIXEL.Karts.SprayCan.Particles", 0.03, 0, function()
         if not IsValid(can) then
             timer.Remove("PIXEL.Karts.SprayCan.Particles")
             return
         end
 
+        local color = PIXEL.Karts.SprayPaintColor
         local particle = emitter:Add(string.format("particle/smokesprites_00%02d", math.random(7, 16)), can:LocalToWorld(particleOrigin))
-        particle:SetColor(col.r, col.g, col.b, col.a)
+        particle:SetColor(color.r, color.g, color.b, color.a)
         particle:SetVelocity(can:GetAngles():Forward() * 100)
         particle:SetGravity(particleGravity)
         particle:SetLifeTime(0)
@@ -64,7 +69,7 @@ local function playSpraySound(can)
             station:Play()
         end)
     else
-        PIXEL.Karts.SprayPaintSound:SetTime(0)
+        --PIXEL.Karts.SprayPaintSound:SetTime(0)
         PIXEL.Karts.SprayPaintSound:Play()
     end
 end
