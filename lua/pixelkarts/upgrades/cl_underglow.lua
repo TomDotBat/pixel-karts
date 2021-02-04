@@ -61,13 +61,16 @@ function PIXEL.Karts.SetupUnderglowDrawing()
             if not light then continue end
 
             light.pos = posGetter()
-            --light.nomodel = true
+            light.nomodel = true
             light.brightness = 6
             light.Decay = 1000
             light.Size = 60
             light.DieTime = dieTime
             light.r, light.g, light.b = col.r, col.g, col.b
         end
+
+        if not kart.IsClientside then return end
+        colorCache[kart] = nil
     end)
 
     hook.Add("PIXEL.Karts.OnRemove", "PIXEL.Karts.CacheCleanup", function(kart)
