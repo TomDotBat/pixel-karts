@@ -3,7 +3,7 @@ local function ease(x)
     return 1 - (1 - x) ^ 2
 end
 
-function PIXEL.Karts.CreatePreviewKart(shouldAnimate)
+function PIXEL.Karts.CreatePreviewKart(kartStartPos)
     if IsValid(PIXEL.Karts.PreviewKart) then
         return PIXEL.Karts.PreviewKart
     end
@@ -20,12 +20,9 @@ function PIXEL.Karts.CreatePreviewKart(shouldAnimate)
     kart:SetupBones()
     kart:Spawn()
 
-    if shouldAnimate then
-        local veh = LocalPlayer():GetVehicle()
-        if not IsValid(veh) then return end
-
+    if kartStartPos then
         local progress = 0
-        local startPos, targetPos = veh:GetPos(), garageConfig.KartPos
+        local startPos, targetPos = kartStartPos, garageConfig.KartPos
 
         startPos.y = targetPos.y
         startPos.z = targetPos.z

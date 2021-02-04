@@ -1,20 +1,20 @@
 
-function PIXEL.Karts.OpenGarageMenu(data)
-    local localPly = LocalPlayer()
-
+function PIXEL.Karts.OpenGarageMenu(data, kartPos)
     if PIXEL.HUD and IsValid(PIXEL.HUD.Panel) then
         PIXEL.HUD.Panel:SetVisible(false)
     end
 
     hook.Add("HUDShouldDraw", "PIXEL.Karts.HideHUD", function(name) return false end)
 
-    local inVehicle = localPly:InVehicle()
+    local inVehicle = kartPos ~= vector_origin
 
     PIXEL.Karts.DetourNotifications()
     PIXEL.Karts.FlipGarageDoor(true)
     PIXEL.Karts.SetupGarageCamera()
     PIXEL.Karts.StartGarageRadio()
-    PIXEL.Karts.CreatePreviewKart(inVehicle)
+
+    if inVehicle then PIXEL.Karts.CreatePreviewKart(kartPos)
+    else PIXEL.Karts.CreatePreviewKart() end
 
     if IsValid(PIXEL.Karts.GarageMenu) then PIXEL.Karts.GarageMenu:Remove() end
     if data["owned"] and inVehicle then

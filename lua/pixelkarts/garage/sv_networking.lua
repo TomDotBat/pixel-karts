@@ -18,10 +18,7 @@ local function togglePlayerGarageState(ply)
             return
         end
 
-        if not ply:GetPos():WithinAABox(garageConfig.EntryBoxPoint1, garageConfig.EntryBoxPoint2) then
-            PIXEL.Karts.Notify(ply, "Where the fuck are you?", 1, 5)
-            return
-        end
+        if not ply:GetPos():WithinAABox(garageConfig.EntryBoxPoint1, garageConfig.EntryBoxPoint2) then return end
 
         local veh = ply:GetVehicle()
         if IsValid(veh) then
@@ -39,19 +36,20 @@ local function togglePlayerGarageState(ply)
             ply:SetNWBool("PIXEL.Karts.IsInGarage", true)
             ply:SetNWBool("PIXEL.Karts.IsInGarageWithKart", true)
 
-            timer.Simple(.6, function()
-                if IsValid(ply) then
-                    ply:ExitVehicle()
-                    ply:SetPos(garageConfig.InsidePositions[math.random(#garageConfig.InsidePositions)])
-                end
+            net.Start("PIXEL.Karts.GarageEntered")
+             net.WriteVector(veh:GetPos())
+            net.Send(ply)
 
-                if IsValid(veh) then
-                    veh:Remove()
-                end
-            end)
+            ply:ExitVehicle()
+            ply:SetPos(garageConfig.InsidePositions[math.random(#garageConfig.InsidePositions)])
+            veh:Remove()
 
             return
         end
+
+        net.Start("PIXEL.Karts.GarageEntered")
+         net.WriteVector(vector_origin)
+        net.Send(ply)
 
         ply:SetNWBool("PIXEL.Karts.IsInGarage", true)
         ply:SetNWBool("PIXEL.Karts.IsInGarageWithKart", true)
@@ -59,8 +57,13 @@ local function togglePlayerGarageState(ply)
         ply:SetPos(garageConfig.InsidePositions[math.random(#garageConfig.InsidePositions)])
     end
 end
+util.AddNetworkString("PIXEL.Karts.GarageEntered")
 
 net.Receive("PIXEL.Karts.GarageStateUpdate", function(len, ply)
+    local steamId = ply:SteamID64()
+    if timer.Exists("PIXEL.Karts.GarageStateUpdateCooldown:" .. steamId) then return end
+    timer.Create("PIXEL.Karts.GarageStateUpdateCooldown:" .. steamId, 1, 1, function() end)
+
     togglePlayerGarageState(ply)
 end)
 util.AddNetworkString("PIXEL.Karts.GarageStateUpdate")
