@@ -110,13 +110,16 @@ PIXEL.Karts.Config = {
         DoorFloorHeight = 820,
 
         Ramp = {
-            Model = "models/hunter/blocks/cube025x3x025.mdl",
-            Position = Vector(-1127.351196, -835.957336, -204.360306),
-            Angles = Angle(-44.972534, -179.994507, 0.000000)
+            Model = "models/hunter/blocks/cube05x3x025.mdl",
+            Position = Vector(-1127.312500, -817.656250, -206.187500),
+            Angles = Angle(24.307251, 179.994507, 0.000000)
         },
 
         EntryBoxPoint1 = Vector(-1034.979858, -752.671753, -55.503555),
         EntryBoxPoint2 = Vector(-1118.906616, -882.049927, -199.116608),
+
+        EntryRangeCheckPoint = Vector(-1079.401855, -816.696777, -175),
+        EntryRangeCheckRadius = 120,
 
         InsidePositions = {
             Vector(-559.405640, -392.599762, -131.968750),
