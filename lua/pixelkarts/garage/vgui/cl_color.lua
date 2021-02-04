@@ -15,6 +15,7 @@ function PANEL:Init()
 
     function self.ColorPicker.OnChange(s, color)
         self.ColorEntry:SetValue("#" .. PIXEL.RGBToHex(color))
+        if not IsValid(PIXEL.Karts.PreviewKart) then return end
         PIXEL.Karts.SprayPaintKart(PIXEL.Karts.PreviewKart, color)
     end
 
@@ -47,12 +48,10 @@ function PANEL:Init()
     self.RainbowCheckbox = vgui.Create("PIXEL.Checkbox", self.RainbowModeContainer)
     self.RainbowCheckbox:Dock(LEFT)
 
-    local hsv, time = HSVToColor, CurTime
-    function self.RainbowCheckbox.Think(s)
-        if not s:GetToggle() then return end
-
-        self.ColorPicker:SetColor(hsv((time() * 20) % 360, 1, 1))
-        self.ColorPicker:UpdateColor()
+    function self.RainbowCheckbox.OnToggled(s, enabled)
+        if not IsValid(PIXEL.Karts.PreviewKart) then return end
+        PIXEL.Karts.PreviewKart:SetRainbowMode(enabled)
+        self.ColorPicker:SetMouseInputEnabled(not enabled)
     end
 
     self.RainbowLabel = vgui.Create("PIXEL.Label", self.RainbowModeContainer)
