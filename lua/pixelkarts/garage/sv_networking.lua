@@ -12,13 +12,8 @@ local function togglePlayerGarageState(ply)
         net.Start("PIXEL.Karts.GarageStateUpdate")
         net.Send(ply)
     else
-        if ply:Health() < 1 then
-            ply:SetNWBool("PIXEL.Karts.IsInGarage", false)
-            ply:SetNWBool("PIXEL.Karts.IsInGarageWithKart", false)
-            return
-        end
-
-        if not ply:GetPos():WithinAABox(garageConfig.EntryBoxPoint1, garageConfig.EntryBoxPoint2) then return end
+        if ply:Health() < 1 then return end
+        if ply:GetPos():DistToSqr(garageConfig.EntryRangeCheckPoint) > garageConfig.EntryRangeCheckRadius ^ 2 then return end
 
         local veh = ply:GetVehicle()
         if IsValid(veh) then
@@ -62,7 +57,7 @@ util.AddNetworkString("PIXEL.Karts.GarageEntered")
 net.Receive("PIXEL.Karts.GarageStateUpdate", function(len, ply)
     local steamId = ply:SteamID64()
     if timer.Exists("PIXEL.Karts.GarageStateUpdateCooldown:" .. steamId) then return end
-    timer.Create("PIXEL.Karts.GarageStateUpdateCooldown:" .. steamId, 1, 1, function() end)
+    timer.Create("PIXEL.Karts.GarageStateUpdateCooldown:" .. steamId, .5, 1, function() end)
 
     togglePlayerGarageState(ply)
 end)
