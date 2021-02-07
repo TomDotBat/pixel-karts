@@ -23,6 +23,8 @@ function PANEL:Init()
 
         self:AddUpgrade(upgrade.Name, upgrade.UIElement, isLocked, upgrade.RequiredLevel)
     end
+
+    self.Receipt = vgui.Create("PIXEL.Karts.KartReceipt")
 end
 
 PIXEL.RegisterFont("Karts.UpgradeName", "Open Sans SemiBold", 22)
@@ -82,11 +84,11 @@ function PANEL:GetData(data)
     return self.KartData
 end
 
-function PANEL:GetKartData(key, default)
+function PANEL:GetDataKey(key, default)
     return self.KartData[key] or default
 end
 
-function PANEL:SetKartData(key, val)
+function PANEL:SetDataKey(key, val)
     self.KartData[key] = val
 end
 
@@ -117,8 +119,12 @@ if IsValid(testframe) then
         testframe.UpgradeEditor:Remove()
     end
 
+    if IsValid(testframe.Receipt) then
+        testframe.Receipt:Remove()
+    end
+
     testframe:Remove()
 end
 
---testframe = vgui.Create("PIXEL.Karts.Upgrader")
---testframe:MakePopup()
+testframe = vgui.Create("PIXEL.Karts.Upgrader")
+testframe:MakePopup()
