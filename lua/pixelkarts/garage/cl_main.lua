@@ -20,6 +20,7 @@ function PIXEL.Karts.OpenGarageMenu(data, kartPos)
     if data["owned"] and inVehicle then
         if inVehicle then
             PIXEL.Karts.GarageMenu = vgui.Create("PIXEL.Karts.Upgrader")
+            PIXEL.Karts.GarageMenu:SetData(data)
         else
             PIXEL.Karts.GarageMenu = vgui.Create("PIXEL.Karts.SpawnKartMenu")
         end
