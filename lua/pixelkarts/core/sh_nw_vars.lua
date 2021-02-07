@@ -24,8 +24,8 @@ function PIXEL.Karts.SetupNWVars(kart)
                 return kart.KartVars["PIXEL.Karts." .. upgradeName .. ".Enabled"]
             end
 
-            kart["Set" .. upgradeName .. "Enabled"] = function(s)
-                return kart.KartVars["PIXEL.Karts." .. upgradeName .. ".Enabled"]
+            kart["Set" .. upgradeName .. "Enabled"] = function(s, new)
+                kart.KartVars["PIXEL.Karts." .. upgradeName .. ".Enabled"] = new
             end
         end
         return
