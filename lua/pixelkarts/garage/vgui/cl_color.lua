@@ -17,6 +17,7 @@ function PANEL:Init()
         self.ColorEntry:SetValue("#" .. PIXEL.RGBToHex(color))
         if not IsValid(PIXEL.Karts.PreviewKart) then return end
         PIXEL.Karts.SprayPaintKart(PIXEL.Karts.PreviewKart, color)
+        self.ColorPicker:SetDataKey("custom_color", color)
     end
 
     function self.LeftContainer.PerformLayout(s, w, h)
@@ -52,6 +53,7 @@ function PANEL:Init()
         if not IsValid(PIXEL.Karts.PreviewKart) then return end
         PIXEL.Karts.PreviewKart:SetRainbowMode(enabled)
         self.ColorPicker:SetMouseInputEnabled(not enabled)
+        self.ColorPicker:SetDataKey("rainbow_color", enabled)
     end
 
     self.RainbowLabel = vgui.Create("PIXEL.Label", self.RainbowModeContainer)
@@ -81,6 +83,12 @@ function PANEL:Init()
         if not color then return end
 
         self.ColorPicker:SetColor(color)
+        self.ColorPicker:SetDataKey("custom_color", color)
+    end
+
+    self.ColorPicker:GetDataKey("custom_color", color_white)
+    if self.ColorPicker:GetDataKey("rainbow_color", false) then
+        self.RainbowCheckbox:DoClick()
     end
 end
 
