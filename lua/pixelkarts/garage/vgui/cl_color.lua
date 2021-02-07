@@ -4,6 +4,17 @@ local PANEL = {}
 PIXEL.RegisterFont("Karts.ColourLabels", "Open Sans SemiBold", 18)
 
 function PANEL:Init()
+    local function updateColor(col)
+        self:SetDataKey("custom_color", col)
+
+        local orig = self:GetOriginalDataKey("custom_color", color_white)
+        if orig.r == col.r and orig.g == col.g and orig.b == col.b then
+            self:RemoveReceiptItem("Body Colour")
+        else
+            self:AddReceiptItem("Body Colour", PIXEL.Karts.Config.Upgrades.CustomColor.Price[LocalPlayer():PIXELKartsGetLevel()])
+        end
+    end
+
     self.LeftContainer = vgui.Create("Panel", self)
     self.LeftContainer:Dock(LEFT)
 
@@ -13,11 +24,17 @@ function PANEL:Init()
     self.ColorPicker = vgui.Create("PIXEL.ColorPicker", self.LeftContainer)
     self.ColorPicker:Dock(FILL)
 
+    local doneFirstChange
     function self.ColorPicker.OnChange(s, color)
         self.ColorEntry:SetValue("#" .. PIXEL.RGBToHex(color))
         if not IsValid(PIXEL.Karts.PreviewKart) then return end
-        PIXEL.Karts.SprayPaintKart(PIXEL.Karts.PreviewKart, color)
-        self.ColorPicker:SetDataKey("custom_color", color)
+
+        if doneFirstChange then
+            PIXEL.Karts.SprayPaintKart(PIXEL.Karts.PreviewKart, color)
+        end
+
+        doneFirstChange = true
+        updateColor(color)
     end
 
     function self.LeftContainer.PerformLayout(s, w, h)
@@ -53,7 +70,7 @@ function PANEL:Init()
         if not IsValid(PIXEL.Karts.PreviewKart) then return end
         PIXEL.Karts.PreviewKart:SetRainbowMode(enabled)
         self.ColorPicker:SetMouseInputEnabled(not enabled)
-        self.ColorPicker:SetDataKey("rainbow_color", enabled)
+        self:SetDataKey("rainbow_color", enabled)
     end
 
     self.RainbowLabel = vgui.Create("PIXEL.Label", self.RainbowModeContainer)
@@ -83,13 +100,15 @@ function PANEL:Init()
         if not color then return end
 
         self.ColorPicker:SetColor(color)
-        self.ColorPicker:SetDataKey("custom_color", color)
+        updateColor(color)
     end
 
-    self.ColorPicker:GetDataKey("custom_color", color_white)
-    if self.ColorPicker:GetDataKey("rainbow_color", false) then
-        self.RainbowCheckbox:DoClick()
-    end
+    timer.Simple(0, function()
+        self.ColorPicker:SetColor(self:GetDataKey("custom_color", color_white))
+        if self:GetDataKey("rainbow_color", false) then
+            self.RainbowCheckbox:DoClick()
+        end
+    end)
 end
 
 function PANEL:LayoutContent(w, h)
