@@ -23,4 +23,28 @@ function PANEL:Init()
     end
 end
 
+function PANEL:GetData()
+    return self.UpgradeList:GetData()
+end
+
+function PANEL:SetData(data)
+    self.UpgradeList:SetData(data)
+end
+
+function PANEL:ResetData(data)
+    self.UpgradeList:ResetData(data)
+end
+
+function PANEL:GetDataKey(key, default)
+    return self.UpgradeList:GetDataKey(key, default)
+end
+
+function PANEL:SetDataKey(key, val)
+    self.UpgradeList:SetDataKey(key, val)
+end
+
+function PANEL:ResetDataKey(key, val)
+    self.UpgradeList:ResetDataKey(key, val)
+end
+
 vgui.Register("PIXEL.Karts.BaseUpgradeEditor", PANEL, "PIXEL.Frame")
