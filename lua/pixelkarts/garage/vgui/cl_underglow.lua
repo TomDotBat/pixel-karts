@@ -4,6 +4,28 @@ local PANEL = {}
 PIXEL.RegisterFont("Karts.ColourLabels", "Open Sans SemiBold", 18)
 
 function PANEL:Init()
+    local function updateReceipt()
+        local colChanged
+        do
+            local col = self:GetDataKey("underglow_color", color_white)
+            local orig = self:GetOriginalDataKey("underglow_color", color_white)
+            if not (orig.r == col.r and orig.g == col.g and orig.b == col.b) then
+                colChanged = true
+            end
+        end
+
+        if colChanged or (self:GetOriginalDataKey("underglow_enabled", false) ~= self:GetDataKey("underglow_enabled", false)) then
+            self:AddReceiptItem("Underglow", PIXEL.Karts.Config.Upgrades.UnderGlow.Price[LocalPlayer():PIXELKartsGetLevel()])
+        else
+            self:RemoveReceiptItem("Underglow")
+        end
+    end
+
+    local function updateColor(col)
+        self:SetDataKey("underglow_color", col)
+        updateReceipt()
+    end
+
     local previewKart = PIXEL.Karts.PreviewKart
 
     self.LeftContainer = vgui.Create("Panel", self)
@@ -18,7 +40,9 @@ function PANEL:Init()
     function self.ColorPicker.OnChange(s, color)
         self.ColorEntry:SetValue("#" .. PIXEL.RGBToHex(color))
         if not IsValid(previewKart) then return end
+
         previewKart:SetUnderGlow(color)
+        updateColor(color)
     end
 
     function self.LeftContainer.PerformLayout(s, w, h)
@@ -53,7 +77,11 @@ function PANEL:Init()
     function self.EnableCheckbox.OnToggled(s, enabled)
         self.ColorPicker:SetMouseInputEnabled(enabled)
         if not IsValid(previewKart) then return end
+
         previewKart:SetUnderGlowEnabled(enabled)
+
+        self:SetDataKey("underglow_enabled", enabled)
+        updateReceipt()
     end
 
     self.EnableLabel = vgui.Create("PIXEL.Label", self.EnableContainer)
@@ -83,11 +111,15 @@ function PANEL:Init()
         if not color then return end
 
         self.ColorPicker:SetColor(color)
+        updateColor(color)
     end
 
-    if not IsValid(previewKart) then return end
-    self.ColorPicker:SetColor(previewKart:GetCustomColor())
-    if previewKart:GetRainbowMode() then self.EnableCheckbox:DoClick() end
+    timer.Simple(0, function()
+        self.ColorPicker:SetColor(self:GetDataKey("underglow_color", color_white))
+        if self:GetDataKey("underglow_enabled", false) then
+            self.EnableCheckbox:DoClick()
+        end
+    end)
 end
 
 function PANEL:LayoutContent(w, h)
