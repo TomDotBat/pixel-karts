@@ -76,12 +76,20 @@ function PANEL:AddUpgrade(name, element, locked, rank)
     table.insert(self.Upgrades, upgrade)
 end
 
+function PANEL:GetData(data)
+    return self.KartData
+end
+
 function PANEL:SetData(data)
+    if not self.KartData then
+        self.OriginalKartData = table.Copy(data)
+    end
+
     self.KartData = data
 end
 
-function PANEL:GetData(data)
-    return self.KartData
+function PANEL:ResetData(data)
+    self.KartData = self.OriginalKartData
 end
 
 function PANEL:GetDataKey(key, default)
@@ -90,6 +98,10 @@ end
 
 function PANEL:SetDataKey(key, val)
     self.KartData[key] = val
+end
+
+function PANEL:ResetDataKey(key, val)
+    self.KartData[key] = self.OriginalKartData[key]
 end
 
 function PANEL:OnClose()
