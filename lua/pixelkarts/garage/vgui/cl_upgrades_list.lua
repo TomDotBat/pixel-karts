@@ -28,6 +28,7 @@ function PANEL:Init()
     end
 
     self.Receipt = vgui.Create("PIXEL.Karts.KartReceipt")
+    self.Receipt.UpgradeList = self
 end
 
 PIXEL.RegisterFont("Karts.UpgradeName", "Open Sans SemiBold", 22)
