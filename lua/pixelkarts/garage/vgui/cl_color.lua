@@ -68,9 +68,18 @@ function PANEL:Init()
 
     function self.RainbowCheckbox.OnToggled(s, enabled)
         if not IsValid(PIXEL.Karts.PreviewKart) then return end
+
         PIXEL.Karts.PreviewKart:SetRainbowMode(enabled)
         self.ColorPicker:SetMouseInputEnabled(not enabled)
-        self:SetDataKey("rainbow_color", enabled)
+
+        self:SetDataKey("rainbow_enabled", enabled)
+
+        local orig = self:GetOriginalDataKey("rainbow_enabled", false)
+        if orig == enabled then
+            self:RemoveReceiptItem("Rainbow Body Colour")
+        else
+            self:AddReceiptItem("Rainbow Body Colour", PIXEL.Karts.Config.Upgrades.RainbowMode.Price[LocalPlayer():PIXELKartsGetLevel()])
+        end
     end
 
     self.RainbowLabel = vgui.Create("PIXEL.Label", self.RainbowModeContainer)
@@ -105,7 +114,7 @@ function PANEL:Init()
 
     timer.Simple(0, function()
         self.ColorPicker:SetColor(self:GetDataKey("custom_color", color_white))
-        if self:GetDataKey("rainbow_color", false) then
+        if self:GetDataKey("rainbow_enabled", false) then
             self.RainbowCheckbox:DoClick()
         end
     end)
