@@ -105,6 +105,14 @@ function PANEL:ResetDataKey(key, val)
     self.KartData[key] = self.OriginalKartData[key]
 end
 
+function PANEL:AddReceiptItem(name, price)
+    self.Receipt:AddItem(name, price)
+end
+
+function PANEL:RemoveReceiptItem(name)
+    self.Receipt:RemoveItem(name)
+end
+
 function PANEL:OnClose()
     if IsValid(self.UpgradeEditor) then
         self.UpgradeEditor:Close()
