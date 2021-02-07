@@ -45,6 +45,9 @@ function PANEL:Init()
     function self.Buttons.Cancel.DoClick()
         net.Start("PIXEL.Karts.GarageStateUpdate")
         net.SendToServer()
+
+        if not IsValid(self.UpgradeList) then return end
+        self.UpgradeList:Close()
     end
 
     self.Buttons.Purchase = vgui.Create("PIXEL.TextButton", self.Buttons)
@@ -69,12 +72,22 @@ function PANEL:Init()
     self.CanAfford = false
 end
 
+local hoverBg = ColorAlpha(PIXEL.Colors.Negative, 20)
 function PANEL:AddItem(name, price)
-    local item = self.Items[name] or vgui.Create("Panel", self)
+    local item = self.Items[name] or vgui.Create("PIXEL.Button", self)
     item:Dock(TOP)
 
+    function item.DoClick()
+        self:RemoveItem(name)
+    end
+
     local formattedPrice = DarkRP.formatMoney(price)
+    item.BackgroundColor = Color(0, 0, 0, 0)
+
     function item:Paint(w, h)
+        self.BackgroundColor = PIXEL.LerpColor(FrameTime() * 12, self.BackgroundColor, self:IsHovered() and hoverBg or color_transparent)
+        PIXEL.DrawRoundedBox(PIXEL.Scale(6), 0, 0, w, h, self.BackgroundColor)
+
         PIXEL.DrawSimpleText(name, "PIXEL.Karts.ItemName", PIXEL.Scale(10), h * .5, PIXEL.Colors.SecondaryText, nil, TEXT_ALIGN_CENTER)
         PIXEL.DrawSimpleText(formattedPrice, "PIXEL.Karts.ItemPrice", w - PIXEL.Scale(10), h * .5, PIXEL.Colors.Positive, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
     end
@@ -123,6 +136,7 @@ function PANEL:LayoutContent(w, h)
 
     self.Buttons:SetTall(28)
     self.Buttons:DockMargin(0, PIXEL.Scale(6), 0, 0)
+    self.Buttons:InvalidateLayout(true)
 
     self:SizeToChildren(false, true)
 end
