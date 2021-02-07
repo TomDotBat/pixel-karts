@@ -39,6 +39,10 @@ function PANEL:GetDataKey(key, default)
     return self.UpgradeList:GetDataKey(key, default)
 end
 
+function PANEL:GetOriginalDataKey(key, default)
+    return self.UpgradeList:GetOriginalDataKey(key, default)
+end
+
 function PANEL:SetDataKey(key, val)
     self.UpgradeList:SetDataKey(key, val)
 end

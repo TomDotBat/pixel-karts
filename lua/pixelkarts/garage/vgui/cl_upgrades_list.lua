@@ -97,6 +97,10 @@ function PANEL:GetDataKey(key, default)
     return self.KartData[key] or default
 end
 
+function PANEL:GetOriginalDataKey(key, default)
+    return self.OriginalKartData[key] or default
+end
+
 function PANEL:SetDataKey(key, val)
     self.KartData[key] = val
 end
