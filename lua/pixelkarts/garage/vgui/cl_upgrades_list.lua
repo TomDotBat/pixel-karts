@@ -49,6 +49,7 @@ function PANEL:AddUpgrade(name, element, locked, rank)
         if IsValid(self.UpgradeEditor) then self.UpgradeEditor:Remove() end
         self.UpgradeEditor = vgui.Create(element)
         self.UpgradeEditor:SetTitle(name)
+        self.UpgradeEditor.UpgradeList = self
     end
 
     if locked then
@@ -107,6 +108,10 @@ end
 function PANEL:OnClose()
     if IsValid(self.UpgradeEditor) then
         self.UpgradeEditor:Close()
+    end
+
+    if IsValid(self.Receipt) then
+        self.Receipt:Remove()
     end
 end
 
