@@ -53,8 +53,8 @@ end
 
 function PANEL:AddReceiptItem(name, price)
     self.UpgradeList:AddReceiptItem(name, price)
-
-    
+end
+ 
 function PANEL:RemoveReceiptItem(name)
     self.UpgradeList:RemoveReceiptItem(name)
 end
