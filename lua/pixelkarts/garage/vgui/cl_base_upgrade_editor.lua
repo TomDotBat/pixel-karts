@@ -52,7 +52,11 @@ function PANEL:ResetDataKey(key, val)
 end
 
 function PANEL:AddReceiptItem(name, price)
-    self.UpgradeList:ResetDataKey(name, price)
+    self.UpgradeList:AddReceiptItem(name, price)
+
+    
+function PANEL:RemoveReceiptItem(name)
+    self.UpgradeList:RemoveReceiptItem(name)
 end
 
 vgui.Register("PIXEL.Karts.BaseUpgradeEditor", PANEL, "PIXEL.Frame")
