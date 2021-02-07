@@ -74,6 +74,22 @@ function PANEL:AddUpgrade(name, element, locked, rank)
     table.insert(self.Upgrades, upgrade)
 end
 
+function PANEL:SetData(data)
+    self.KartData = data
+end
+
+function PANEL:GetData(data)
+    return self.KartData
+end
+
+function PANEL:GetKartData(key, default)
+    return self.KartData[key] or default
+end
+
+function PANEL:SetKartData(key, val)
+    self.KartData[key] = val
+end
+
 function PANEL:OnClose()
     if IsValid(self.UpgradeEditor) then
         self.UpgradeEditor:Close()
@@ -104,5 +120,5 @@ if IsValid(testframe) then
     testframe:Remove()
 end
 
-testframe = vgui.Create("PIXEL.Karts.Upgrader")
-testframe:MakePopup()
+--testframe = vgui.Create("PIXEL.Karts.Upgrader")
+--testframe:MakePopup()
