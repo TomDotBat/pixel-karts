@@ -88,4 +88,5 @@ function ENT:SetupClientside()
     self.IsClientside = true
     PIXEL.Karts.SetupNWVars(self)
     PIXEL.Karts.InitialiseKart(self)
+    PIXEL.Karts.Vehicles[self:GetNWString("PIXEL.Karts.KartID", "clientside")] = self
 end
