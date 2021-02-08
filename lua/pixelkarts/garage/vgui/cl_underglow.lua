@@ -1,8 +1,6 @@
 
 local PANEL = {}
 
-PIXEL.RegisterFont("Karts.ColourLabels", "Open Sans SemiBold", 18)
-
 function PANEL:Init()
     local function updateReceipt()
         local colChanged
