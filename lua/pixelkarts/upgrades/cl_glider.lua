@@ -35,6 +35,7 @@ end)
 hook.Add("PIXEL.Karts.Think", "PIXEL.Karts.GliderBodygroup", function(kart)
     if kart.IsClientside then
         kart:SetBodygroup(4, kart:GetGlider() and 1 or 0)
+        return
     end
 
     kart:SetBodygroup(4, kart:GetNWBool("PIXEL.Karts.IsGliding", false) and 1 or 0)
