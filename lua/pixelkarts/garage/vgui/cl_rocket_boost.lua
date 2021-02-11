@@ -2,6 +2,8 @@
 local PANEL = {}
 
 function PANEL:Init()
+    PIXEL.Karts.MoveGarageCamera(340, Vector(-40, -40, 25))
+
     local function updateReceipt()
         if self:GetOriginalDataKey("rocket_boost_enabled", false) ~= self:GetDataKey("rocket_boost_enabled", false) then
             self:AddReceiptItem("Rocket Booster", PIXEL.Karts.Config.Upgrades.BuiltInRadio.Price[LocalPlayer():PIXELKartsGetLevel()])

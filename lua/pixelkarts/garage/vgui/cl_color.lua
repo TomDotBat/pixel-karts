@@ -2,6 +2,8 @@
 local PANEL = {}
 
 function PANEL:Init()
+    PIXEL.Karts.MoveGarageCamera(0, Vector(0, -20, 25))
+
     local function updateColor(col)
         self:SetDataKey("custom_color", col)
 

@@ -24,6 +24,8 @@ function PANEL:Init()
     function self:SetTall(h)
         self:SetSize(PIXEL.Scale(280), h)
     end
+
+    PIXEL.Karts.ResetGarageCamera()
 end
 
 function PANEL:GetData()
