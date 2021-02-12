@@ -2,9 +2,12 @@
 local PANEL = {}
 
 function PANEL:Init()
+    local config = PIXEL.Karts.Config.Upgrades.BuiltInRadio
+    local dataKey = config.DataKey
+
     local function updateReceipt()
-        if self:GetOriginalDataKey("radio_enabled", false) ~= self:GetDataKey("radio_enabled", false) then
-            self:AddReceiptItem("Built-In Radio", PIXEL.Karts.Config.Upgrades.BuiltInRadio.Price[LocalPlayer():PIXELKartsGetLevel()])
+        if self:GetOriginalDataKey(dataKey, false) ~= self:GetDataKey(dataKey, false) then
+            self:AddReceiptItem("Built-In Radio", config.Price[LocalPlayer():PIXELKartsGetLevel()])
         else
             self:RemoveReceiptItem("Built-In Radio")
         end
@@ -28,7 +31,7 @@ function PANEL:Init()
         if not IsValid(previewKart) then return end
         previewKart:SetBuiltInRadio(enabled)
 
-        self:SetDataKey("radio_enabled", enabled)
+        self:SetDataKey(dataKey, enabled)
         updateReceipt()
     end
 
@@ -46,7 +49,7 @@ function PANEL:Init()
     end
 
     timer.Simple(0, function()
-        if self:GetDataKey("radio_enabled", false) then
+        if self:GetDataKey(dataKey, false) then
             self.EnableCheckbox:DoClick()
         end
     end)

@@ -4,9 +4,12 @@ local PANEL = {}
 function PANEL:Init()
     PIXEL.Karts.MoveGarageCamera(340, Vector(-40, -40, 25))
 
+    local config = PIXEL.Karts.Config.Upgrades.RocketBoost
+    local dataKey = config.DataKey
+
     local function updateReceipt()
-        if self:GetOriginalDataKey("rocket_boost_enabled", false) ~= self:GetDataKey("rocket_boost_enabled", false) then
-            self:AddReceiptItem("Rocket Booster", PIXEL.Karts.Config.Upgrades.BuiltInRadio.Price[LocalPlayer():PIXELKartsGetLevel()])
+        if self:GetOriginalDataKey(dataKey, false) ~= self:GetDataKey(dataKey, false) then
+            self:AddReceiptItem("Rocket Booster", config.Price[LocalPlayer():PIXELKartsGetLevel()])
         else
             self:RemoveReceiptItem("Rocket Booster")
         end
@@ -20,7 +23,7 @@ function PANEL:Init()
     self.DescriptionLabel:SetText(
         string.format([[Rocket boosters allow you to give your kart a short burst of speed on demand.
 While driving your kart, use the %s key to trigger it.]],
-            PIXEL.Karts.Config.Upgrades.RocketBoost.BoostKeyName)
+            config.BoostKeyName)
     )
 
     self.BottomContainer = vgui.Create("Panel", self)
@@ -34,7 +37,7 @@ While driving your kart, use the %s key to trigger it.]],
         if not IsValid(previewKart) then return end
         previewKart:SetRocketBoost(enabled)
 
-        self:SetDataKey("rocket_boost_enabled", enabled)
+        self:SetDataKey(dataKey, enabled)
         updateReceipt()
     end
 
@@ -52,7 +55,7 @@ While driving your kart, use the %s key to trigger it.]],
     end
 
     timer.Simple(0, function()
-        if self:GetDataKey("rocket_boost_enabled", false) then
+        if self:GetDataKey(dataKey, false) then
             self.EnableCheckbox:DoClick()
         end
     end)

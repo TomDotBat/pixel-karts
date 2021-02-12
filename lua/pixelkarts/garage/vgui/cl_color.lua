@@ -4,14 +4,18 @@ local PANEL = {}
 function PANEL:Init()
     PIXEL.Karts.MoveGarageCamera(0, Vector(0, -20, 25))
 
-    local function updateColor(col)
-        self:SetDataKey("custom_color", col)
+    local upgrades = PIXEL.Karts.Config.Upgrades
+    local colorDataKey = upgrades.CustomColor.DataKey
+    local rainbowDataKey = upgrades.RainbowMode.DataKey
 
-        local orig = self:GetOriginalDataKey("custom_color", color_white)
+    local function updateColor(col)
+        self:SetDataKey(colorDataKey, col)
+
+        local orig = self:GetOriginalDataKey(colorDataKey, color_white)
         if orig.r == col.r and orig.g == col.g and orig.b == col.b then
             self:RemoveReceiptItem("Body Colour")
         else
-            self:AddReceiptItem("Body Colour", PIXEL.Karts.Config.Upgrades.CustomColor.Price[LocalPlayer():PIXELKartsGetLevel()])
+            self:AddReceiptItem("Body Colour", upgrades.CustomColor.Price[LocalPlayer():PIXELKartsGetLevel()])
         end
     end
 
@@ -72,13 +76,13 @@ function PANEL:Init()
         PIXEL.Karts.PreviewKart:SetRainbowMode(enabled)
         self.ColorPicker:SetMouseInputEnabled(not enabled)
 
-        self:SetDataKey("rainbow_enabled", enabled)
+        self:SetDataKey(rainbowDataKey, enabled)
 
-        local orig = self:GetOriginalDataKey("rainbow_enabled", false)
+        local orig = self:GetOriginalDataKey(rainbowDataKey, false)
         if orig == enabled then
             self:RemoveReceiptItem("Rainbow Body Colour")
         else
-            self:AddReceiptItem("Rainbow Body Colour", PIXEL.Karts.Config.Upgrades.RainbowMode.Price[LocalPlayer():PIXELKartsGetLevel()])
+            self:AddReceiptItem("Rainbow Body Colour", upgrades.RainbowMode.Price[LocalPlayer():PIXELKartsGetLevel()])
         end
     end
 
@@ -113,8 +117,8 @@ function PANEL:Init()
     end
 
     timer.Simple(0, function()
-        self.ColorPicker:SetColor(self:GetDataKey("custom_color", color_white))
-        if self:GetDataKey("rainbow_enabled", false) then
+        self.ColorPicker:SetColor(self:GetDataKey(colorDataKey, color_white))
+        if self:GetDataKey(rainbowDataKey, false) then
             self.RainbowCheckbox:DoClick()
         end
     end)

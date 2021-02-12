@@ -4,25 +4,29 @@ local PANEL = {}
 function PANEL:Init()
     PIXEL.Karts.MoveGarageCamera(0, Vector(0, -20, 25))
 
+    local config = PIXEL.Karts.Config.Upgrades.UnderGlow
+    local colorDataKey = config.DataKey
+    local enabledDataKey = config.DataKeyEnabled
+
     local function updateReceipt()
         local colChanged
         do
-            local col = self:GetDataKey("underglow_color", color_white)
-            local orig = self:GetOriginalDataKey("underglow_color", color_white)
+            local col = self:GetDataKey(colorDataKey, color_white)
+            local orig = self:GetOriginalDataKey(colorDataKey, color_white)
             if not (orig.r == col.r and orig.g == col.g and orig.b == col.b) then
                 colChanged = true
             end
         end
 
-        if colChanged or (self:GetOriginalDataKey("underglow_enabled", false) ~= self:GetDataKey("underglow_enabled", false)) then
-            self:AddReceiptItem("Underglow", PIXEL.Karts.Config.Upgrades.UnderGlow.Price[LocalPlayer():PIXELKartsGetLevel()])
+        if colChanged or (self:GetOriginalDataKey(enabledDataKey, false) ~= self:GetDataKey(enabledDataKey, false)) then
+            self:AddReceiptItem("Underglow", config.Price[LocalPlayer():PIXELKartsGetLevel()])
         else
             self:RemoveReceiptItem("Underglow")
         end
     end
 
     local function updateColor(col)
-        self:SetDataKey("underglow_color", col)
+        self:SetDataKey(colorDataKey, col)
         updateReceipt()
     end
 
@@ -80,7 +84,7 @@ function PANEL:Init()
 
         previewKart:SetUnderGlowEnabled(enabled)
 
-        self:SetDataKey("underglow_enabled", enabled)
+        self:SetDataKey(enabledDataKey, enabled)
         updateReceipt()
     end
 
@@ -115,8 +119,8 @@ function PANEL:Init()
     end
 
     timer.Simple(0, function()
-        self.ColorPicker:SetColor(self:GetDataKey("underglow_color", color_white))
-        if self:GetDataKey("underglow_enabled", false) then
+        self.ColorPicker:SetColor(self:GetDataKey(colorDataKey, color_white))
+        if self:GetDataKey(enabledDataKey, false) then
             self.EnableCheckbox:DoClick()
         end
     end)

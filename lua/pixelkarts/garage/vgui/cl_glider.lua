@@ -2,9 +2,12 @@
 local PANEL = {}
 
 function PANEL:Init()
+    local config = PIXEL.Karts.Config.Upgrades.Glider
+    local dataKey = config.DataKey
+
     local function updateReceipt()
-        if self:GetOriginalDataKey("glider_enabled", false) ~= self:GetDataKey("glider_enabled", false) then
-            self:AddReceiptItem("Glider", PIXEL.Karts.Config.Upgrades.Glider.Price[LocalPlayer():PIXELKartsGetLevel()])
+        if self:GetOriginalDataKey(dataKey, false) ~= self:GetDataKey(dataKey, false) then
+            self:AddReceiptItem("Glider", config.Price[LocalPlayer():PIXELKartsGetLevel()])
         else
             self:RemoveReceiptItem("Glider")
         end
@@ -18,7 +21,7 @@ function PANEL:Init()
     self.DescriptionLabel:SetText(
         string.format([[The glider enables your kart to fly, you can toggle it with your %s key. 
 Use it with the rocket booster to get in the air from ground level.]],
-            PIXEL.Karts.Config.Upgrades.Glider.DeployKeyName)
+            config.DeployKeyName)
     )
 
     self.BottomContainer = vgui.Create("Panel", self)
@@ -32,7 +35,7 @@ Use it with the rocket booster to get in the air from ground level.]],
         if not IsValid(previewKart) then return end
         previewKart:SetGlider(enabled)
 
-        self:SetDataKey("glider_enabled", enabled)
+        self:SetDataKey(dataKey, enabled)
         updateReceipt()
     end
 
@@ -50,7 +53,7 @@ Use it with the rocket booster to get in the air from ground level.]],
     end
 
     timer.Simple(0, function()
-        if self:GetDataKey("glider_enabled", false) then
+        if self:GetDataKey(dataKey, false) then
             self.EnableCheckbox:DoClick()
         end
     end)
