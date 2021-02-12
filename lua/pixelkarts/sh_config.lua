@@ -18,6 +18,7 @@ PIXEL.Karts.Config = {
         CustomColor = {
             Name = "Body Colour",
             UIElement = "PIXEL.Karts.ColorEditor",
+            DataKey = "custom_color",
             Type = "Color",
             Price = {
                 50000,
@@ -27,6 +28,7 @@ PIXEL.Karts.Config = {
         },
         RainbowMode = {
             Type = "boolean",
+            DataKey = "rainbow_enabled",
             Price = {
                 750000,
                 750000,
@@ -37,6 +39,8 @@ PIXEL.Karts.Config = {
         UnderGlow = {
             Name = "Underglow",
             UIElement = "PIXEL.Karts.UnderglowEditor",
+            DataKey = "underglow_color",
+            DataKeyEnabled = "underglow_enabled",
             Type = "Color",
             Price = {
                 75000,
@@ -48,6 +52,7 @@ PIXEL.Karts.Config = {
         RocketBoost = {
             Name = "Rocket Boost",
             UIElement = "PIXEL.Karts.RocketBoostEditor",
+            DataKey = "rocket_boost_enabled",
             Type = "boolean",
             Price = {
                 200000,
@@ -66,6 +71,7 @@ PIXEL.Karts.Config = {
         Glider = {
             Name = "Glider",
             UIElement = "PIXEL.Karts.GliderEditor",
+            DataKey = "glider_enabled",
             Type = "boolean",
             Price = {
                 600000,
@@ -91,6 +97,7 @@ PIXEL.Karts.Config = {
         BuiltInRadio = {
             Name = "Built-In Radio",
             UIElement = "PIXEL.Karts.RadioEditor",
+            DataKey = "radio_enabled",
             Type = "boolean",
             Price = {
                 20000,
