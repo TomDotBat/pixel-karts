@@ -36,7 +36,7 @@ local function togglePlayerGarageState(ply)
             net.Send(ply)
 
             ply:ExitVehicle()
-            ply:SetPos(garageConfig.InsidePositions[math.random(#garageConfig.InsidePositions)])
+            ply:SetPos(garageConfig.InsidePosition)
             veh:Remove()
 
             return
@@ -49,7 +49,7 @@ local function togglePlayerGarageState(ply)
         ply:SetNWBool("PIXEL.Karts.IsInGarage", true)
         ply:SetNWBool("PIXEL.Karts.IsInGarageWithKart", true)
 
-        ply:SetPos(garageConfig.InsidePositions[math.random(#garageConfig.InsidePositions)])
+        ply:SetPos(garageConfig.InsidePosition)
     end
 end
 util.AddNetworkString("PIXEL.Karts.GarageEntered")
