@@ -17,14 +17,6 @@ function PIXEL.Karts.ClearCachedPlayerData(steamid)
     timer.Remove("PIXEL.Karts.CacheExpire:" .. steamid)
 end
 
-hook.Add("PlayerInitialSpawn", "PIXEL.Karts.CacheNewPlayer", function(ply)
-    local steamid = ply:SteamID64()
-    PIXEL.Karts.GetPlayerData(steamid, function(data)
-        if not IsValid(ply) then return end
-        PIXEL.Karts.PlayerDataCache[steamid] = data
-    end)
-end)
-
 hook.Add("PlayerDisconnected", "PIXEL.Karts.ClearPlayerCache", function(ply)
     PIXEL.Karts.ClearCachedPlayerData(ply:SteamID64())
 end)
