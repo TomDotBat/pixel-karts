@@ -59,7 +59,7 @@ PIXEL.Karts.Config = {
                 150000,
                 125000
             },
-            BoostKeyName = "Shift",
+            BoostKeyName = "Sprint",
             BoostKey = IN_SPEED,
             BoostPower = 50000,
             BoostTime = .5,
