@@ -9,12 +9,22 @@ function kart:Initialize()
     PIXEL.Karts.SetupNWVars(self)
 
     if CLIENT then return end
-
     self:SetNWInt("PIXEL.Karts.Health", 100)
 end
 
 function kart:GetClass()
     return "pixel_kart"
+end
+
+function kart:SetupFromData(data)
+    if not istable(data) then return end
+
+    for upgradeName, upgrade in pairs(PIXEL.Karts.Config.Upgrades) do
+        local upgradeKey = upgrade.DataKey
+        if not (upgradeKey and data[upgradeKey]) then continue end
+
+        self["Set" .. upgradeName](self, data[upgradeKey])
+    end
 end
 
 ENT.Type = "anim"
