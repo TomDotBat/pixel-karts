@@ -36,7 +36,7 @@ function PIXEL.Karts.DeployGlider(ply, veh)
     end
 
     if not veh:GetGlider() then
-        PIXEL.Karts.Notify(ply, "Your kart doesn't have a glider loser.", 1)
+        --PIXEL.Karts.Notify(ply, "Your kart doesn't have a glider loser.", 1)
         return
     end
 

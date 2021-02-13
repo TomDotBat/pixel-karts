@@ -13,7 +13,7 @@ end)
 
 function PIXEL.Karts.RocketBoost(ply, veh)
     if not veh:GetRocketBoost() then
-        PIXEL.Karts.Notify(ply, "Your kart doesn't have a rocket booster loser.", 1)
+        --PIXEL.Karts.Notify(ply, "Your kart doesn't have a rocket booster loser.", 1)
         return
     end
 
