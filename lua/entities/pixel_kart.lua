@@ -24,6 +24,13 @@ function kart:SetupFromData(data)
         if not (upgradeKey and data[upgradeKey]) then continue end
 
         self["Set" .. upgradeName](self, data[upgradeKey])
+
+        if upgrade.Type == "boolean" or upgrade.Type == "number" then continue end
+
+        local enableKey = upgrade.DataKeyEnabled
+        if not (enableKey and data[enableKey]) then continue end
+
+        self["Set" .. upgradeName .. "Enabled"](self, data[enableKey])
     end
 end
 
