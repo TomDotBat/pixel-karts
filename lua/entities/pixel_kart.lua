@@ -11,13 +11,6 @@ function kart:Initialize()
     if CLIENT then return end
 
     self:SetNWInt("PIXEL.Karts.Health", 100)
-
-    self:SetRocketBoost(true)
-    self:SetGlider(true)
-    self:SetRainbowMode(false)
-    self:SetBuiltInRadio(true)
-    self:SetUnderGlowEnabled(true)
-    self:SetUnderGlow(Color(0, 140, 255))
 end
 
 function kart:GetClass()
