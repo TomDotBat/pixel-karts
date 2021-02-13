@@ -160,6 +160,9 @@ PIXEL.Karts.Config = {
         RadioDefaultVolume = .2,
         RadioURL = "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_p",
 
+        UpgradeSoundURL = "https://content.pixelnetwork.co/sounds/kart_upgrade.mp3",
+        UpgradeSoundVolume = .6,
+
         SprayPaintURL = "http://content.pixelnetwork.co/sounds/spray_paint.mp3",
         SprayPaintVolume = .8,
         SprayPaintCircleRadius = 50,
