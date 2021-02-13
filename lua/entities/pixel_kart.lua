@@ -10,6 +10,21 @@ function kart:Initialize()
 
     if CLIENT then return end
     self:SetNWInt("PIXEL.Karts.Health", 100)
+
+    local owner = self:CPPIGetOwner()
+    PIXEL.Karts.GetPlayerData(owner:SteamID64(), function(success, data)
+        if not IsValid(self) then return end
+        if not success then
+            if IsValid(owner) then
+                PIXEL.Karts.Notify(owner, "There was an error loading your personal kart data, please report this.", 1)
+            end
+
+            self:Remove()
+            return
+        end
+
+        self:SetupFromData(data)
+    end)
 end
 
 function kart:GetClass()
