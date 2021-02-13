@@ -144,20 +144,3 @@ function PANEL:LayoutContent(w, h)
 end
 
 vgui.Register("PIXEL.Karts.Upgrader", PANEL, "PIXEL.Frame")
-
-if not IsValid(LocalPlayer()) then return end
-
-if IsValid(testframe) then
-    if IsValid(testframe.UpgradeEditor) then
-        testframe.UpgradeEditor:Remove()
-    end
-
-    if IsValid(testframe.Receipt) then
-        testframe.Receipt:Remove()
-    end
-
-    testframe:Remove()
-end
-
-testframe = vgui.Create("PIXEL.Karts.Upgrader")
-testframe:MakePopup()
