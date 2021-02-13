@@ -13,23 +13,25 @@ function PIXEL.Karts.OpenGarageMenu(data, kartPos)
     PIXEL.Karts.SetupGarageCamera()
     PIXEL.Karts.StartGarageRadio()
 
-    local kart
-    if inVehicle then kart = PIXEL.Karts.CreatePreviewKart(kartPos)
-    else kart = PIXEL.Karts.CreatePreviewKart() end
-
-    if kart.SetupFromData then
-        kart:SetupFromData(data)
-    end
 
     if IsValid(PIXEL.Karts.GarageMenu) then PIXEL.Karts.GarageMenu:Remove() end
     if data["owned"] and inVehicle then
+        local kart
         if inVehicle then
             PIXEL.Karts.GarageMenu = vgui.Create("PIXEL.Karts.Upgrader")
             PIXEL.Karts.GarageMenu:SetData(data)
+
+            kart = PIXEL.Karts.CreatePreviewKart(kartPos)
         else
             PIXEL.Karts.GarageMenu = vgui.Create("PIXEL.Karts.SpawnKartMenu")
+            kart = PIXEL.Karts.CreatePreviewKart()
+        end
+
+        if kart.SetupFromData then
+            kart:SetupFromData(data)
         end
     else
+        PIXEL.Karts.CreatePreviewKart()
         PIXEL.Karts.GarageMenu = vgui.Create("PIXEL.Karts.PurchaseKartMenu")
     end
 end
