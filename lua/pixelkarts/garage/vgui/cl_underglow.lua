@@ -78,7 +78,7 @@ function PANEL:Init()
     self.EnableCheckbox = vgui.Create("PIXEL.Checkbox", self.EnableContainer)
     self.EnableCheckbox:Dock(LEFT)
 
-    function self.EnableCheckbox.OnToggled(s, enabled)
+    function self.EnableCheckbox.OnToggled(s, enabled, disableSound)
         self.ColorPicker:SetMouseInputEnabled(enabled)
         if not IsValid(previewKart) then return end
 
@@ -86,6 +86,9 @@ function PANEL:Init()
 
         self:SetDataKey(enabledDataKey, enabled)
         updateReceipt()
+
+        if disableSound then return end
+        PIXEL.Karts.PlayUpgradeSound(previewKart)
     end
 
     self.EnableLabel = vgui.Create("PIXEL.Label", self.EnableContainer)
@@ -121,7 +124,7 @@ function PANEL:Init()
     timer.Simple(0, function()
         self.ColorPicker:SetColor(self:GetDataKey(colorDataKey, color_white))
         if self:GetDataKey(enabledDataKey, false) then
-            self.EnableCheckbox:DoClick()
+            self.EnableCheckbox:DoClick(true)
         end
     end)
 end

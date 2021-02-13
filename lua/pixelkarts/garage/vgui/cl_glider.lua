@@ -31,12 +31,15 @@ Use it with the rocket booster to get in the air from ground level.]],
     self.EnableCheckbox:Dock(LEFT)
 
     local previewKart = PIXEL.Karts.PreviewKart
-    function self.EnableCheckbox.OnToggled(s, enabled)
+    function self.EnableCheckbox.OnToggled(s, enabled, disableSound)
         if not IsValid(previewKart) then return end
         previewKart:SetGlider(enabled)
 
         self:SetDataKey(dataKey, enabled)
         updateReceipt()
+
+        if disableSound then return end
+        PIXEL.Karts.PlayUpgradeSound(previewKart)
     end
 
     self.EnableLabel = vgui.Create("PIXEL.Label", self.BottomContainer)
@@ -54,7 +57,7 @@ Use it with the rocket booster to get in the air from ground level.]],
 
     timer.Simple(0, function()
         if self:GetDataKey(dataKey, false) then
-            self.EnableCheckbox:DoClick()
+            self.EnableCheckbox:DoClick(true)
         end
     end)
 end
