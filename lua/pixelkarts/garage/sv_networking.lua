@@ -11,6 +11,7 @@ local function togglePlayerGarageState(ply)
         else
             local kart = ents.Create("pixel_kart")
             kart:CPPISetOwner(ply)
+            kart.NoUndo = true
             kart:SetPos(garageConfig.SpawnPos)
             kart:SetAngles(garageConfig.SpawnAngle)
             kart:Spawn()
@@ -109,7 +110,7 @@ net.Receive("PIXEL.Karts.PurchaseKart", function(len, ply)
         ply.PIXELKartsHasKart = true
 
         local randColor = PIXEL.Karts.Config.DefaultColors[math.random(#PIXEL.Karts.Config.DefaultColors)]
-        net.Start("PIXEL.Karts.RespawnKart")
+        net.Start("PIXEL.Karts.PurchaseKart")
          net.WriteColor(randColor)
         net.Send(ply)
 
@@ -185,6 +186,12 @@ net.Receive("PIXEL.Karts.RespawnKart", function(len, ply)
     if ply.PIXELKartsHasKart then return end
 
     local price = PIXEL.Karts.Config.RespawnPrice[ply:PIXELKartsGetLevel()]
+    if not price then
+        net.Start("PIXEL.Karts.RespawnKart")
+        net.Send(ply)
+        return
+    end
+
     if not ply:canAfford(price) then
         togglePlayerGarageState(ply)
         PIXEL.Karts.Notify(ply, "You can't afford to respawn your kart.", 1)

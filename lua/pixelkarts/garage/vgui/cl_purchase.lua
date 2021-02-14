@@ -41,12 +41,12 @@ function PANEL:Init()
         net.Start("PIXEL.Karts.PurchaseKart")
         net.SendToServer()
 
-        self:Close()
-
-        net.Receive("PIXEL.Karts.RespawnKart", function()
+        net.Receive("PIXEL.Karts.PurchaseKart", function()
             local col = net.ReadColor()
 
             if not IsValid(self) then return end
+            self:Close()
+
             PIXEL.Karts.RemovePreviewHoloEffect()
 
             PIXEL.Karts.GetLatestPlayerData(function(data)
