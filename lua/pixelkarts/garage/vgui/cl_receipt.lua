@@ -54,6 +54,80 @@ function PANEL:Init()
     self.Buttons.Purchase:Dock(RIGHT)
     self.Buttons.Purchase:SetText("Purchase")
 
+    function self.Buttons.Purchase.DoClick()
+        if not self.CanAfford then
+            PIXEL.Karts.Notify("You can't afford to purchase these upgrades.", NOTIFY_ERROR)
+            return
+        end
+
+        if not IsValid(self.UpgradeList) then return end
+
+        local dataKeys = {}
+        for _, keyTbl in pairs(self.DataKeys) do
+            for _, key in ipairs(keyTbl) do
+                dataKeys[key] = true
+            end
+        end
+
+        local data = self.UpgradeList:GetData()
+
+        local changes = {}
+        for upgradeName, upgrade in pairs(PIXEL.Karts.Config.Upgrades) do
+            local upgradeKey = upgrade.DataKey
+            if not upgradeKey then continue end
+            if not dataKeys[upgradeKey] then continue end
+
+            if upgrade.Type == "Color" then
+                local upgradeKeyEnabled = upgrade.DataKeyEnabled
+                if not (data[upgradeKey] and data[upgradeKeyEnabled]) then continue end
+
+                local col = data[upgradeKey]
+                if not IsColor(col) then
+                    if not istable(col) then continue end
+                    col = Color(col.r or 255, col.g or 255, col.g or 255, col.a or 255)
+                end
+
+                table.insert(changes, {
+                    upgradeName,
+                    upgrade.Type,
+                    col,
+                    data[upgrade.DataKeyEnabled] or self.UpgradeList:GetOriginalDataKey(upgrade.DataKeyEnabled)
+                })
+
+                continue
+            end
+
+            table.insert(changes, {
+                upgradeName,
+                upgrade.Type,
+                data[upgradeKey]
+            })
+        end
+
+        net.Start("PIXEL.Karts.PurchaseKartUpgrades")
+         local changeCount = #changes
+         net.WriteUInt(changeCount, 4)
+         for i = 1, changeCount do
+            local change = changes[i]
+            net.WriteString(change[1])
+            if change[2] == "Color" then
+                net.WriteColor(change[3])
+                net.WriteBool(change[4])
+            elseif change[2] == "boolean" then
+                net.WriteBool(change[3])
+            end
+         end
+        net.SendToServer()
+
+        net.Receive("PIXEL.Karts.PurchaseKartUpgrades", function()
+            if not IsValid(self) then return end
+
+            PIXEL.Karts.LocalPlayerDataCache = self.UpgradeList:GetData()
+
+            self.UpgradeList:Close()
+        end)
+    end
+
     function self.Buttons.PerformLayout(s, w, h)
         if table.Count(self.Prices) == 0 then
             s.Cancel:SetWide(w)
