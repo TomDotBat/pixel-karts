@@ -73,12 +73,15 @@ function PANEL:Init()
 end
 
 local hoverBg = ColorAlpha(PIXEL.Colors.Negative, 20)
-function PANEL:AddItem(name, price)
+function PANEL:AddItem(name, price, dataKey)
     local item = self.Items[name] or vgui.Create("PIXEL.Button", self)
     item:Dock(TOP)
 
     function item.DoClick()
         self:RemoveItem(name)
+
+        if not IsValid(self.UpgradeList.UpgradeEditor) then return end
+        self.UpgradeList.UpgradeEditor:Close()
     end
 
     local formattedPrice = DarkRP.formatMoney(price)
@@ -94,6 +97,7 @@ function PANEL:AddItem(name, price)
 
     self.Items[name] = item
     self.Prices[name] = price
+    self.DataKeys[name] = 
 
     self:CalculateTotal()
 end
@@ -106,6 +110,15 @@ function PANEL:RemoveItem(name)
     self.Prices[name] = nil
 
     self:CalculateTotal()
+
+    if not IsValid(PIXEL.Karts.PreviewKart) then return end
+    if not IsValid(self.UpgradeList) then return end
+
+    local data = self.UpgradeList:GetData()
+    data[self.DataKeys[name]] = nil
+    self.DataKeys[name] = nil
+
+    PIXEL.Karts.PreviewKart:SetupFromData(data)
 end
 
 function PANEL:CalculateTotal()
@@ -142,20 +155,3 @@ function PANEL:LayoutContent(w, h)
 end
 
 vgui.Register("PIXEL.Karts.KartReceipt", PANEL, "PIXEL.Frame")
-
-if not IsValid(LocalPlayer()) then return end
-
-if IsValid(testframe) then
-    if IsValid(testframe.UpgradeEditor) then
-        testframe.UpgradeEditor:Remove()
-    end
-
-    if IsValid(testframe.Receipt) then
-        testframe.Receipt:Remove()
-    end
-
-    testframe:Remove()
-end
-
-testframe = vgui.Create("PIXEL.Karts.Upgrader")
-testframe:MakePopup()
