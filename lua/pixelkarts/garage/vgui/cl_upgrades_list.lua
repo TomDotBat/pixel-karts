@@ -14,8 +14,6 @@ function PANEL:Init()
     self.LocalPly = LocalPlayer()
 
     self.Upgrades = {}
-    self.KartData = {}
-    self.OriginalKartData = {}
 
     for _, upgrade in pairs(PIXEL.Karts.Config.Upgrades) do
         if not upgrade.Name then continue end
