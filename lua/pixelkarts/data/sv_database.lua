@@ -65,6 +65,10 @@ end
 
 function PIXEL.Karts.SetPlayerData(steamid, data, callback)
     data = util.TableToJSON(data)
+    if not data then callback(false) end
+
+    data = database:escape(data)
+
     local q = database:query(string.format([[INSERT INTO %s(steamid, data) VALUES ("%s", "%s") ON DUPLICATE KEY UPDATE steamid="%s", data="%s";]], tblPlyData, steamid, data, steamid, data))
 
     function q:onSuccess()
