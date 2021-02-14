@@ -56,8 +56,8 @@ function PANEL:ResetDataKey(key, val)
     self.UpgradeList:ResetDataKey(key, val)
 end
 
-function PANEL:AddReceiptItem(name, price)
-    self.UpgradeList:AddReceiptItem(name, price)
+function PANEL:AddReceiptItem(name, price, ...)
+    self.UpgradeList:AddReceiptItem(name, price, ...)
 end
 
 function PANEL:RemoveReceiptItem(name)
