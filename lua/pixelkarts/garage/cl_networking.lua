@@ -27,6 +27,11 @@ timer.Create("PIXEL.Karts.GarageEntryBoxThink", .5, 0, function()
         end)
     end)
 
+    local personalKart = localPly:GetNWEntity("PIXEL.Karts.PersonalKart", nil)
+    if IsValid(personalKart) and localPly:GetVehicle() ~= personalKart then
+        return
+    end
+
     PIXEL.Karts.SpawnDecorations()
     PIXEL.Karts.OpenGarageDoor()
 end)
