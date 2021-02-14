@@ -44,6 +44,10 @@ function PANEL:Init()
         net.Receive("PIXEL.Karts.RespawnKart", function()
             if not IsValid(self) then return end
             PIXEL.Karts.RemovePreviewHoloEffect()
+
+            if istable(PIXEL.Karts.LocalPlayerDataCache) then
+                PIXEL.Karts.LocalPlayerDataCache["purchased_kart"] = true
+            end
         end)
     end
 
