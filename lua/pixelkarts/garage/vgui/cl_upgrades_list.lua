@@ -4,6 +4,7 @@ local PANEL = {}
 function PANEL:Init()
     self:SetZPos(32767)
     self:SetDraggable(false)
+    self:MakePopup()
     self.CloseButton:Remove()
 
     self:SetTitle("Available Upgrades")
