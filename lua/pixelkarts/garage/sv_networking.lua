@@ -232,3 +232,9 @@ hook.Add("PlayerDeath", "PIXEL.Karts.LeaveGarageOnDeath", function(ply)
     net.Start("PIXEL.Karts.GarageStateUpdate")
     net.Send(ply)
 end)
+
+hook.Add("PlayerDisconnected", "PIXEL.Karts.CleanupOnLeave", function(ply)
+    local kart = ply:GetNWEntity("PIXEL.Karts.PersonalKart", nil)
+    if not IsValid(kart) then return end
+    SafeRemoveEntity(kart)
+end)
