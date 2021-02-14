@@ -41,9 +41,16 @@ function PANEL:Init()
         net.Start("PIXEL.Karts.RespawnKart")
         net.SendToServer()
 
+        self:Close()
+
         net.Receive("PIXEL.Karts.RespawnKart", function()
             if not IsValid(self) then return end
             PIXEL.Karts.RemovePreviewHoloEffect()
+
+            PIXEL.Karts.GetLatestPlayerData(function(data)
+                PIXEL.Karts.GarageMenu = vgui.Create("PIXEL.Karts.Upgrader")
+                PIXEL.Karts.GarageMenu:SetData(data)
+            end)
         end)
     end
 
