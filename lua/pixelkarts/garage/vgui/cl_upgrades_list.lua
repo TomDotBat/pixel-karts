@@ -89,7 +89,7 @@ function PANEL:SetData(data)
         self.OriginalKartData = table.Copy(data)
     end
 
-    self.KartData = data
+    self.KartData = table.Copy(data)
 end
 
 function PANEL:ResetData(data)
