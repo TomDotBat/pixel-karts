@@ -20,7 +20,12 @@ function PIXEL.Karts.CreatePreviewKart(kartStartPos)
     kart:SetupBones()
     kart:Spawn()
 
-    if kartStartPos and kartStartPos ~= garageConfig.KartPos then
+    if kartStartPos then
+        if kartStartPos == garageConfig.KartPos then
+            PIXEL.Karts.PreviewKart = kart
+            return kart
+        end
+
         local progress = 0
         local startPos, targetPos = kartStartPos, garageConfig.KartPos
 
