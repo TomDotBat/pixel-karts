@@ -124,7 +124,7 @@ PIXEL.Karts.Config = {
         DoorFloorWidth = 1280,
         DoorFloorHeight = 820,
 
-        SpawnPos = Vector(-1175.125000, -815.625000, -169.281250),
+        SpawnPos = Vector(-1175.125000, -815.625000, -160),
         SpawnAngle = Angle(0, 90, 0),
 
         Ramp = {
