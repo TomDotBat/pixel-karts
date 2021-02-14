@@ -6,13 +6,15 @@ function meta:PIXELKartsGetData(callback)
         PIXEL.Karts.GetLatestPlayerData(callback)
     else
         local steamid = self:SteamID64()
-        local json = PIXEL.Karts.PlayerDataCacheJson[steamid]
-        if not json then
+        local cacheData = PIXEL.Karts.PlayerDataCache[steamid]
+        if not cacheData then
             PIXEL.Karts.GetPlayerData(steamid, function(success, data)
                 if not success then return end
                 if not IsValid(self) then return end
                 callback(data)
             end)
+        else
+            callback(cacheData)
         end
     end
 end
