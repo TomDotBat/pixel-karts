@@ -189,6 +189,7 @@ net.Receive("PIXEL.Karts.RespawnKart", function(len, ply)
     if not price then
         net.Start("PIXEL.Karts.RespawnKart")
         net.Send(ply)
+        ply.PIXELKartsHasKart = true
         return
     end
 
