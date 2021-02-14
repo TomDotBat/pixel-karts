@@ -1,4 +1,7 @@
 
+PIXEL.Karts.PlayerDataCache = PIXEL.Karts.PlayerDataCache or {}
+PIXEL.Karts.PlayerDataCacheJson = PIXEL.Karts.PlayerDataCacheJson or {}
+
 function PIXEL.Karts.CachePlayerData(steamid, data, json)
     PIXEL.Karts.PlayerDataCache[steamid] = data
     PIXEL.Karts.PlayerDataCacheJson[steamid] = json
