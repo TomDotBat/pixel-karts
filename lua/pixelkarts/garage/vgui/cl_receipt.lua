@@ -10,7 +10,7 @@ function PANEL:Init()
     self:SetDraggable(false)
     self.CloseButton:Remove()
 
-    self:SetTitle("Upgrade Receipt")
+    self:SetTitle("Actions")
 
     local width = PIXEL.Scale(280)
     self:SetSize(width, 0)
@@ -35,7 +35,7 @@ function PANEL:Init()
 
     self.Buttons.Cancel = vgui.Create("PIXEL.TextButton", self.Buttons)
     self.Buttons.Cancel:Dock(LEFT)
-    self.Buttons.Cancel:SetText("Cancel")
+    self.Buttons.Cancel:SetText("Leave Garage")
 
     self.Buttons.Cancel.NormalCol = PIXEL.CopyColor(PIXEL.Colors.Negative)
     self.Buttons.Cancel.BackgroundCol = self.Buttons.Cancel.NormalCol
@@ -59,10 +59,23 @@ function PANEL:Init()
             s.Cancel:SetWide(w)
             s.Purchase:SetWide(0)
         else
-            local btnW = w * .5 - PIXEL.Scale(3)
+            local btnW = w * .5 - PIXEL.Scale(2)
             s.Cancel:SetWide(btnW)
             s.Purchase:SetWide(btnW)
         end
+    end
+
+    self.PutAway = vgui.Create("PIXEL.TextButton", self)
+    self.PutAway:SetText("Store Kart")
+    self.PutAway:Dock(TOP)
+    self.PutAway:SetZPos(10002)
+
+    function self.PutAway.DoClick()
+        net.Start("PIXEL.Karts.PutAwayKart")
+        net.SendToServer()
+
+        if not IsValid(self.UpgradeList) then return end
+        self.UpgradeList:Close()
     end
 
     self.LocalPly = LocalPlayer()
@@ -156,6 +169,9 @@ function PANEL:LayoutContent(w, h)
     self.Buttons:SetTall(28)
     self.Buttons:DockMargin(0, PIXEL.Scale(6), 0, 0)
     self.Buttons:InvalidateLayout(true)
+
+    self.PutAway:SetTall(28)
+    self.PutAway:DockMargin(0, PIXEL.Scale(4), 0, 0)
 
     self:SizeToChildren(false, true)
 end
