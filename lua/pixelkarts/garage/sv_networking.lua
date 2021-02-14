@@ -4,10 +4,26 @@ local garageConfig = PIXEL.Karts.Config.Garage
 local function togglePlayerGarageState(ply)
     if ply:GetNWBool("PIXEL.Karts.IsInGarage", false) then
         ply:SetNWBool("PIXEL.Karts.IsInGarage", false)
-        ply:SetNWBool("PIXEL.Karts.IsInGarageWithKart", false)
 
-        ply:SetPos(garageConfig.LeavePosition)
-        ply:SetEyeAngles(garageConfig.LeaveAngles)
+        if not ply.PIXELKartsHasKart then
+            ply:SetPos(garageConfig.LeavePosition)
+            ply:SetEyeAngles(garageConfig.LeaveAngles)
+        else
+            local kart = ents.Create("pixel_kart")
+            kart:CPPISetOwner(ply)
+            kart:SetPos(garageConfig.SpawnPos)
+            kart:SetAngles(garageConfig.SpawnAngle)
+            kart:Spawn()
+
+            local veh = kart.Kart
+            if IsValid(veh) then
+                ply:EnterVehicle(veh)
+                ply:SetNWEntity("PIXEL.Karts.PersonalKart", veh)
+            else
+                ply:SetPos(garageConfig.LeavePosition)
+                ply:SetEyeAngles(garageConfig.LeaveAngles)
+            end
+        end
 
         net.Start("PIXEL.Karts.GarageStateUpdate")
         net.Send(ply)
@@ -29,7 +45,6 @@ local function togglePlayerGarageState(ply)
             veh:SetRenderMode(RENDERMODE_TRANSCOLOR)
 
             ply:SetNWBool("PIXEL.Karts.IsInGarage", true)
-            ply:SetNWBool("PIXEL.Karts.IsInGarageWithKart", true)
             ply:SetNWEntity("PIXEL.Karts.PersonalKart", nil)
 
             ply:PIXELKartsGetDataKey("purchased_kart", function(hasKart)
@@ -46,7 +61,7 @@ local function togglePlayerGarageState(ply)
             veh:Remove()
 
             return
-        elseif IsValid(ply:GetNWEntity("PIXEL.Karts.PersonalKart", nil)) and not ply.PIXELKartsHasKart then
+        elseif IsValid(ply:GetNWEntity("PIXEL.Karts.PersonalKart", nil)) then
             PIXEL.Karts.Notify(ply, "You already have a kart taken out of the garage.", 1, 5)
             return
         end
@@ -56,7 +71,6 @@ local function togglePlayerGarageState(ply)
         net.Send(ply)
 
         ply:SetNWBool("PIXEL.Karts.IsInGarage", true)
-        ply:SetNWBool("PIXEL.Karts.IsInGarageWithKart", true)
         ply:SetNWEntity("PIXEL.Karts.PersonalKart", nil)
 
         ply:SetPos(garageConfig.InsidePosition)
@@ -147,8 +161,9 @@ net.Receive("PIXEL.Karts.PurchaseKartUpgrades", function(len, ply)
         local upgradeKey = upgrade.DataKey
 
         if upgrade.Type == "Color" then
-            local upgradeKeyEnabled = upgrade.DataKeyEnabled
             mergeData[upgradeKey] = ColorAlpha(newData[1], 255)
+            local upgradeKeyEnabled = upgrade.DataKeyEnabled
+            if not upgradeKeyEnabled then continue end
             mergeData[upgradeKeyEnabled] = newData[2]
         elseif upgrade.Type == "boolean" then
             mergeData[upgradeKey] = newData
@@ -192,7 +207,6 @@ net.Receive("PIXEL.Karts.PutAwayKart", function(len, ply)
     ply:SetPos(garageConfig.LeavePosition)
 
     ply:SetNWBool("PIXEL.Karts.IsInGarage", false)
-    ply:SetNWBool("PIXEL.Karts.IsInGarageWithKart", false)
 
     net.Start("PIXEL.Karts.GarageStateUpdate")
     net.Send(ply)
@@ -206,7 +220,6 @@ hook.Add("PlayerDeath", "PIXEL.Karts.LeaveGarageOnDeath", function(ply)
     ply:SetPos(garageConfig.LeavePosition)
 
     ply:SetNWBool("PIXEL.Karts.IsInGarage", false)
-    ply:SetNWBool("PIXEL.Karts.IsInGarageWithKart", false)
 
     net.Start("PIXEL.Karts.GarageStateUpdate")
     net.Send(ply)
