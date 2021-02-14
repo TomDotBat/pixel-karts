@@ -44,11 +44,20 @@ function PANEL:Init()
         self:Close()
 
         net.Receive("PIXEL.Karts.RespawnKart", function()
+            local col = net.ReadColor()
+
             if not IsValid(self) then return end
             PIXEL.Karts.RemovePreviewHoloEffect()
 
             PIXEL.Karts.GetLatestPlayerData(function(data)
                 data["purchased_kart"] = true
+                data["custom_color"] = col
+
+                timer.Simple(0, function()
+                    if IsValid(PIXEL.Karts.PreviewKart) then
+                        PIXEL.Karts.PreviewKart:SetCustomColor(col)
+                    end
+                end)
 
                 PIXEL.Karts.GarageMenu = vgui.Create("PIXEL.Karts.Upgrader")
                 PIXEL.Karts.GarageMenu:SetData(data)

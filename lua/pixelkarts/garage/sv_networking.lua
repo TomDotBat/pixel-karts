@@ -86,13 +86,20 @@ net.Receive("PIXEL.Karts.PurchaseKart", function(len, ply)
         return
     end
 
+    ply:addMoney(-price)
+
     ply:PIXELKartsSetDataKey("purchased_kart", true, function()
-        ply:addMoney(-price)
+        if not IsValid(ply) then return end
+
         PIXEL.Karts.Notify(ply, "Purchased a kart for " .. DarkRP.formatMoney(price) .. ".", 1)
         ply.PIXELKartsHasKart = true
 
+        local randColor = PIXEL.Karts.Config.DefaultColors[math.random(#PIXEL.Karts.Config.DefaultColors)]
         net.Start("PIXEL.Karts.RespawnKart")
+         net.WriteColor(randColor)
         net.Send(ply)
+
+        ply:PIXELKartsSetDataKey("custom_color", randColor, function() end)
     end)
 end)
 util.AddNetworkString("PIXEL.Karts.PurchaseKart")

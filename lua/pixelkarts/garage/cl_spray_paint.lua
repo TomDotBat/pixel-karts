@@ -16,13 +16,13 @@ local particleOrigin = Vector(1, 0, 10.8)
 local particleGravity = Vector(0, 0, 1.5)
 
 local function startColorAnimation(kart, col)
-    local intialKartColor = kart:GetColor()
+    local intialKartColor = kart:GetCustomColor()
     local startTime = CurTime()
     local endTime = startTime + .9
 
     hook.Add("Think", "PIXEL.Karts.SprayCan.ColorAnimation", function()
         if IsValid(kart) then
-            kart:SetColor(PIXEL.LerpColor((CurTime() - startTime) / (endTime - startTime), intialKartColor, col))
+            kart:SetCustomColor(PIXEL.LerpColor((CurTime() - startTime) / (endTime - startTime), intialKartColor, col))
         end
     end)
 end

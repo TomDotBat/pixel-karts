@@ -14,6 +14,14 @@ PIXEL.Karts.Config = {
         false
     },
 
+    DefaultColors = {
+        Color(255, 0, 191),
+        Color(0, 161, 255),
+        Color(42, 185, 73),
+        Color(185, 183, 32),
+        Color(203, 31, 31)
+    },
+
     Upgrades = {
         CustomColor = {
             Name = "Body Colour",
