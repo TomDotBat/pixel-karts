@@ -3,6 +3,8 @@ if CLIENT then
     function PIXEL.Karts.Notify(text, type, len)
         surface.PlaySound("buttons/lightswitch2.wav")
         notification.AddLegacy(text, type or 0, len or 5)
+
+        print("[PIXEL Karts] " .. text)
     end
 
     net.Receive("PIXEL.Karts.Notify", function()
