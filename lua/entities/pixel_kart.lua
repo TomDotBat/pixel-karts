@@ -34,9 +34,6 @@ end
 function kart:SetupFromData(data)
     if not istable(data) then return end
 
-    PrintTable(data)
-    print("=======================")
-
     for upgradeName, upgrade in pairs(PIXEL.Karts.Config.Upgrades) do
         local upgradeKey = upgrade.DataKey
         if not (upgradeKey and data[upgradeKey]) then continue end
