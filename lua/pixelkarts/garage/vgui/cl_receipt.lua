@@ -123,6 +123,7 @@ function PANEL:RemoveItem(name)
     end
 
     if not IsValid(PIXEL.Karts.PreviewKart) then return end
+    PIXEL.Karts.PreviewKart:Reset()
     PIXEL.Karts.PreviewKart:SetupFromData(self.UpgradeList:GetData())
 end
 
