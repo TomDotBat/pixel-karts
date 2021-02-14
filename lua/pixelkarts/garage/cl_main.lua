@@ -14,7 +14,7 @@ function PIXEL.Karts.OpenGarageMenu(data, kartPos)
     PIXEL.Karts.StartGarageRadio()
 
     if IsValid(PIXEL.Karts.GarageMenu) then PIXEL.Karts.GarageMenu:Remove() end
-    if data["purchased_kart"] and inVehicle then
+    if data["purchased_kart"] then
         local kart
         if inVehicle then
             PIXEL.Karts.GarageMenu = vgui.Create("PIXEL.Karts.Upgrader")
