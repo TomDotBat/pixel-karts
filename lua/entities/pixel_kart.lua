@@ -38,7 +38,14 @@ function kart:SetupFromData(data)
         local upgradeKey = upgrade.DataKey
         if not (upgradeKey and data[upgradeKey]) then continue end
 
-        self["Set" .. upgradeName](self, data[upgradeKey])
+
+        local value = data[upgradeKey]
+        if upgrade.Type == "Color" and istable(value) then
+            value = Color(value.r or 255, value.g or 255, value.b or 255, value.a or 255)
+        end
+
+        print("Set" .. upgradeName, value)
+        self["Set" .. upgradeName](self, value)
 
         if upgrade.Type == "boolean" or upgrade.Type == "number" then continue end
 
