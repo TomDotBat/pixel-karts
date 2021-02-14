@@ -45,9 +45,12 @@ function PANEL:Init()
             if not IsValid(self) then return end
             PIXEL.Karts.RemovePreviewHoloEffect()
 
-            if istable(PIXEL.Karts.LocalPlayerDataCache) then
-                PIXEL.Karts.LocalPlayerDataCache["purchased_kart"] = true
-            end
+            PIXEL.Karts.GetLatestPlayerData(function(data)
+                data["purchased_kart"] = true
+
+                PIXEL.Karts.GarageMenu = vgui.Create("PIXEL.Karts.Upgrader")
+                PIXEL.Karts.GarageMenu:SetData(data)
+            end)
         end)
     end
 
