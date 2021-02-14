@@ -3,9 +3,9 @@ PIXEL.Karts.Config = {
     AbilitiesInOtherKarts = false,
 
     KartPrice = {
-        1500000, --Non VIP
-        1000000, --VIP
-        800000 --VIP Plus
+        5000000, --Non VIP
+        2000000, --VIP
+        1000000 --VIP Plus
     },
 
     RespawnPrice = { --False means free
@@ -63,9 +63,9 @@ PIXEL.Karts.Config = {
             DataKey = "rocket_boost_enabled",
             Type = "boolean",
             Price = {
-                200000,
-                150000,
-                125000
+                500000,
+                250000,
+                100000
             },
             BoostKeyName = "Sprint",
             BoostKey = IN_SPEED,
