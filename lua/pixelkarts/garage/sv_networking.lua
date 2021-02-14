@@ -141,7 +141,7 @@ net.Receive("PIXEL.Karts.PurchaseKartUpgrades", function(len, ply)
 
         if upgrade.Type == "Color" then
             local upgradeKeyEnabled = upgrade.DataKeyEnabled
-            mergeData[upgradeKey] = newData[1]
+            mergeData[upgradeKey] = ColorAlpha(newData[1], 255)
             mergeData[upgradeKeyEnabled] = newData[2]
         elseif upgrade.Type == "boolean" then
             mergeData[upgradeKey] = newData
