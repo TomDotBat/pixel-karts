@@ -68,12 +68,13 @@ function PANEL:Init()
     self.LocalPly = LocalPlayer()
     self.Items = {}
     self.Prices = {}
+    self.DataKeys = {}
     self.TotalPrice = "$0"
     self.CanAfford = false
 end
 
 local hoverBg = ColorAlpha(PIXEL.Colors.Negative, 20)
-function PANEL:AddItem(name, price, dataKey)
+function PANEL:AddItem(name, price, ...)
     local item = self.Items[name] or vgui.Create("PIXEL.Button", self)
     item:Dock(TOP)
 
@@ -97,7 +98,7 @@ function PANEL:AddItem(name, price, dataKey)
 
     self.Items[name] = item
     self.Prices[name] = price
-    self.DataKeys[name] = 
+    self.DataKeys[name] = {...}
 
     self:CalculateTotal()
 end
@@ -111,14 +112,18 @@ function PANEL:RemoveItem(name)
 
     self:CalculateTotal()
 
-    if not IsValid(PIXEL.Karts.PreviewKart) then return end
     if not IsValid(self.UpgradeList) then return end
 
-    local data = self.UpgradeList:GetData()
-    data[self.DataKeys[name]] = nil
-    self.DataKeys[name] = nil
+    if istable(self.DataKeys[name]) then
+        for _, dataKey in pairs(self.DataKeys[name]) do
+            self.UpgradeList:ResetDataKey(dataKey)
+        end
 
-    PIXEL.Karts.PreviewKart:SetupFromData(data)
+        self.DataKeys[name] = nil
+    end
+
+    if not IsValid(PIXEL.Karts.PreviewKart) then return end
+    PIXEL.Karts.PreviewKart:SetupFromData(self.UpgradeList:GetData())
 end
 
 function PANEL:CalculateTotal()
