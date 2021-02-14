@@ -38,6 +38,8 @@ local function radioThink(kart, localKart, thirdperson)
         return
     end
 
+    if not kart.GetBuiltInRadio then return end
+
     local isPlaying = IsValid(kart.RadioPlayer)
     local shouldPlay = cvarEnable:GetBool() and kart:GetBuiltInRadio()
 
