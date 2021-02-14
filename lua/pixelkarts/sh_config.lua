@@ -182,8 +182,6 @@ PIXEL.Karts.Config = {
 local meta = FindMetaTable("Player")
 
 function meta:PIXELKartsIsLevel(level)
-    if true then return true end
-
     if not level then return true end
     if level == 0 or level == 1 then return true end
 
