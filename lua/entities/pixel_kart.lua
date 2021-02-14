@@ -102,7 +102,7 @@ function ENT:Initialize()
     veh:CPPISetOwner(owner)
     veh.PIXELKartID = ownerId
 
-    if owner:IsSuperAdmin() then
+    if not self.NoUndo then
         undo.Create("PIXEL Kart")
             undo.AddEntity(veh)
             undo.SetPlayer(owner)
