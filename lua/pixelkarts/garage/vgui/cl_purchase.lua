@@ -41,6 +41,8 @@ function PANEL:Init()
         net.Start("PIXEL.Karts.PurchaseKart")
         net.SendToServer()
 
+        self:Close()
+
         net.Receive("PIXEL.Karts.RespawnKart", function()
             if not IsValid(self) then return end
             PIXEL.Karts.RemovePreviewHoloEffect()
