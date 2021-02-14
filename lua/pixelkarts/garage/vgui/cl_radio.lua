@@ -7,7 +7,7 @@ function PANEL:Init()
 
     local function updateReceipt()
         if self:GetOriginalDataKey(dataKey, false) ~= self:GetDataKey(dataKey, false) then
-            self:AddReceiptItem("Built-In Radio", config.Price[LocalPlayer():PIXELKartsGetLevel()])
+            self:AddReceiptItem("Built-In Radio", config.Price[LocalPlayer():PIXELKartsGetLevel()], dataKey)
         else
             self:RemoveReceiptItem("Built-In Radio")
         end

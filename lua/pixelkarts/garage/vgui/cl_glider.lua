@@ -7,7 +7,7 @@ function PANEL:Init()
 
     local function updateReceipt()
         if self:GetOriginalDataKey(dataKey, false) ~= self:GetDataKey(dataKey, false) then
-            self:AddReceiptItem("Glider", config.Price[LocalPlayer():PIXELKartsGetLevel()])
+            self:AddReceiptItem("Glider", config.Price[LocalPlayer():PIXELKartsGetLevel()], dataKey)
         else
             self:RemoveReceiptItem("Glider")
         end

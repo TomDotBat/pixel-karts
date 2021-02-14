@@ -15,7 +15,7 @@ function PANEL:Init()
         if orig.r == col.r and orig.g == col.g and orig.b == col.b then
             self:RemoveReceiptItem("Body Colour")
         else
-            self:AddReceiptItem("Body Colour", upgrades.CustomColor.Price[LocalPlayer():PIXELKartsGetLevel()])
+            self:AddReceiptItem("Body Colour", upgrades.CustomColor.Price[LocalPlayer():PIXELKartsGetLevel()], colorDataKey)
         end
     end
 
@@ -82,7 +82,7 @@ function PANEL:Init()
         if orig == enabled then
             self:RemoveReceiptItem("Rainbow Body Colour")
         else
-            self:AddReceiptItem("Rainbow Body Colour", upgrades.RainbowMode.Price[LocalPlayer():PIXELKartsGetLevel()])
+            self:AddReceiptItem("Rainbow Body Colour", upgrades.RainbowMode.Price[LocalPlayer():PIXELKartsGetLevel()], rainbowDataKey)
         end
     end
 

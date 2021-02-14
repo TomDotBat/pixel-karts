@@ -19,7 +19,7 @@ function PANEL:Init()
         end
 
         if colChanged or (self:GetOriginalDataKey(enabledDataKey, false) ~= self:GetDataKey(enabledDataKey, false)) then
-            self:AddReceiptItem("Underglow", config.Price[LocalPlayer():PIXELKartsGetLevel()])
+            self:AddReceiptItem("Underglow", config.Price[LocalPlayer():PIXELKartsGetLevel()], dataKey)
         else
             self:RemoveReceiptItem("Underglow")
         end
