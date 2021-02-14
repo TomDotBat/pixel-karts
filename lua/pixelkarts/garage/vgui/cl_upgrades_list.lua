@@ -110,7 +110,8 @@ function PANEL:SetDataKey(key, val)
     self.KartData[key] = val
 end
 
-function PANEL:ResetDataKey(key, val)
+function PANEL:ResetDataKey(key)
+    if not key then return end
     self.KartData[key] = self.OriginalKartData[key]
 end
 
