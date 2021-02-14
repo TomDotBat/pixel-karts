@@ -113,8 +113,8 @@ function PANEL:ResetDataKey(key)
     self.KartData[key] = self.OriginalKartData[key]
 end
 
-function PANEL:AddReceiptItem(name, price)
-    self.Receipt:AddItem(name, price)
+function PANEL:AddReceiptItem(name, price, ...)
+    self.Receipt:AddItem(name, price, ...)
 end
 
 function PANEL:RemoveReceiptItem(name)
