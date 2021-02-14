@@ -79,7 +79,6 @@ function PANEL:Init()
 
             if upgrade.Type == "Color" then
                 local upgradeKeyEnabled = upgrade.DataKeyEnabled
-                if not (data[upgradeKey] and data[upgradeKeyEnabled]) then continue end
 
                 local col = data[upgradeKey]
                 if not IsColor(col) then
@@ -87,12 +86,21 @@ function PANEL:Init()
                     col = Color(col.r or 255, col.g or 255, col.g or 255, col.a or 255)
                 end
 
-                table.insert(changes, {
-                    upgradeName,
-                    upgrade.Type,
-                    col,
-                    data[upgrade.DataKeyEnabled] or self.UpgradeList:GetOriginalDataKey(upgrade.DataKeyEnabled)
-                })
+                if upgradeKeyEnabled then
+                    table.insert(changes, {
+                        upgradeName,
+                        upgrade.Type,
+                        col,
+                        data[upgradeKeyEnabled] or self.UpgradeList:GetOriginalDataKey(upgrade.DataKeyEnabled)
+                    })
+                else
+                    table.insert(changes, {
+                        upgradeName,
+                        upgrade.Type,
+                        col,
+                        true
+                    })
+                end
 
                 continue
             end
