@@ -44,7 +44,6 @@ function kart:SetupFromData(data)
             value = Color(value.r or 255, value.g or 255, value.b or 255, value.a or 255)
         end
 
-        print("Set" .. upgradeName, value)
         self["Set" .. upgradeName](self, value)
 
         if upgrade.Type == "boolean" or upgrade.Type == "number" then continue end
