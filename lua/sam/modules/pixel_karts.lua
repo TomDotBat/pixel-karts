@@ -12,7 +12,7 @@ sam.command.new("forceleavegarage")
     for i = 1, #targets do
         local target = targets[i]
         if target:GetNWBool("PIXEL.Karts.IsInGarage", false) then
-            PIXEL.Karts.TogglePlayerGarageState(target)
+            PIXEL.Karts.TogglePlayerGarageState(target, true)
         end
     end
 

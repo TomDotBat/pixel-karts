@@ -1,11 +1,11 @@
 
 local garageConfig = PIXEL.Karts.Config.Garage
 
-local function togglePlayerGarageState(ply)
+local function togglePlayerGarageState(ply, forced)
     if ply:GetNWBool("PIXEL.Karts.IsInGarage", false) then
         ply:SetNWBool("PIXEL.Karts.IsInGarage", false)
 
-        if not ply.PIXELKartsHasKart then
+        if forced or not ply.PIXELKartsHasKart then
             ply:SetPos(garageConfig.LeavePosition)
             ply:SetEyeAngles(garageConfig.LeaveAngles)
         else
