@@ -23,4 +23,9 @@ hook.Add("PIXEL.Karts.KartDataLoaded", "PIXEL.Karts.CreatePassengerSeat", functi
 
     seat.IsPIXELKartsPassengerSeat = true
     seat:Spawn()
+
+    timer.Simple(0, function()
+        if not IsValid(seat) then return end
+        seat:SetCollisionGroup(COLLISION_GROUP_WEAPON)
+    end)
 end)
