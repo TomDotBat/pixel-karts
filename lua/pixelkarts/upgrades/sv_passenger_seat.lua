@@ -14,8 +14,7 @@ hook.Add("PIXEL.Karts.KartDataLoaded", "PIXEL.Karts.CreatePassengerSeat", functi
     seat:SetPos(kart:LocalToWorld(seatConfig.SeatPos))
     seat:SetAngles(kart:LocalToWorldAngles(seatConfig.SeatAngle))
     seat:SetParent(kart)
-    seat:SetNotSolid(true)
-    seat:SetCollisionGroup(COLLISION_GROUP_NONE)
+    seat:SetCollisionGroup(COLLISION_GROUP_WEAPON)
     seat:SetModelScale(.6)
 
     for key, val in pairs(seatClass.KeyValues) do
