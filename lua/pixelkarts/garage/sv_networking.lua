@@ -78,7 +78,7 @@ local function togglePlayerGarageState(ply)
     end
 end
 util.AddNetworkString("PIXEL.Karts.GarageEntered")
-
+PIXEL.Karts.TogglePlayerGarageState = togglePlayerGarageState
 
 net.Receive("PIXEL.Karts.GarageStateUpdate", function(len, ply)
     local steamId = ply:SteamID64()
