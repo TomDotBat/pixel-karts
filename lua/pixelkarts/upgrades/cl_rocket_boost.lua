@@ -101,7 +101,7 @@ hook.Add("PIXEL.Karts.LeftKart", "PIXEL.Karts.RocketBoostHUD", function()
 end)
 
 local boosterPos, boosterAng = Vector(0, -42, 14), Angle(90, -90, 0)
-hook.Add("PIXEL.Karts.Think", "PIXEL.Karts.BoosterModel", function(kart)
+hook.Add("PIXEL.Karts.UpdateModels", "PIXEL.Karts.BoosterModel", function(kart)
     if kart:GetRocketBoost() then
         if not IsValid(kart.RocketBooster) then
             kart.RocketBooster = ClientsideModel("models/maxofs2d/thruster_projector.mdl")
