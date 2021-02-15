@@ -54,6 +54,10 @@ function kart:SetupFromData(data)
 
         self["Set" .. upgradeName .. "Enabled"](self, data[enableKey])
     end
+
+    if SERVER then
+        hook.Run("PIXEL.Karts.KartDataLoaded", self)
+    end
 end
 
 function kart:Reset()
