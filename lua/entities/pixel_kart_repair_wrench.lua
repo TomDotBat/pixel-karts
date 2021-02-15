@@ -28,7 +28,7 @@ if SERVER then
         self.Used = true
 
         tar:SetNWInt("PIXEL.Karts.Health", 100)
-        SafeRemoveEntity(self)
+        SafeRemoveEntityDelayed(self, 0)
     end
 else
     function ENT:Draw()

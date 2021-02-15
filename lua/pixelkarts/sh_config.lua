@@ -112,6 +112,19 @@ PIXEL.Karts.Config = {
                 20000,
                 15000
             }
+        },
+        PassengerSeat = {
+            Name = "Passenger Seat",
+            UIElement = "PIXEL.Karts.PassengerSeatEditor",
+            DataKey = "passenger_seat_enabled",
+            Type = "boolean",
+            Price = {
+                100000,
+                50000,
+                35000
+            },
+            SeatPos = Vector(0, -37, 18),
+            SeatAngle = Angle(0, 0, 0)
         }
     },
 

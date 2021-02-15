@@ -55,3 +55,33 @@ hook.Add("EntityRemoved", "PIXEL.Karts.OnRemove", function(ent)
     if not ent.IsPIXELKart then return end
     PIXEL.Karts.DeinitialiseKart(ent)
 end)
+
+
+local fastUpdateCvar = CreateClientConVar("pixel_karts_fast_model_update_enabled", "1", true, false, "Should kart models be updated more frequently? This may be intensive.", 0, 1)
+
+local function setupModelUpdater(shouldFastUpdate)
+    hook.Remove("PIXEL.Karts.Think", "PIXEL.Karts.ModelUpdater")
+    hook.Remove("PreRender", "PIXEL.Karts.ModelUpdater")
+
+    if shouldFastUpdate then
+        hook.Add("PreRender", "PIXEL.Karts.ModelUpdater", function()
+            for steamId, veh in pairs(karts) do
+                if not IsValid(veh) then
+                    karts[steamId] = nil
+                    continue
+                end
+
+                hook.Run("PIXEL.Karts.UpdateModels", veh)
+            end
+        end)
+    else
+        hook.Add("PIXEL.Karts.Think", "PIXEL.Karts.ModelUpdater", function(kart)
+            hook.Run("PIXEL.Karts.UpdateModels", kart)
+        end)
+    end
+end
+setupModelUpdater(fastUpdateCvar:GetBool())
+
+cvars.AddChangeCallback("pixel_karts_fast_model_update_enabled", function(_, _, val)
+    setupModelUpdater(val == "1")
+end)
