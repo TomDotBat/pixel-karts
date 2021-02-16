@@ -63,12 +63,9 @@ hook.Add("PIXEL.Karts.EnteredKart", "PIXEL.Karts.Radio.DrawSteeringWheelScreen",
         if depth then return end
         if not IsValid(kart) then return end
 
-        local pos, ang = kart:GetBonePosition(boneId)
-        if pos == kart:GetPos() then
-            local matrix = kart:GetBoneMatrix(boneId)
-            pos = matrix:GetTranslation()
-            ang = matrix:GetAngles()
-        end
+        local matrix = kart:GetBoneMatrix(boneId)
+        local pos = matrix:GetTranslation()
+        local ang = matrix:GetAngles()
 
         ang:RotateAroundAxis(ang:Up(), 180)
         ang:RotateAroundAxis(ang:Right(), 90)
