@@ -46,7 +46,7 @@ hook.Add("Think", "PIXEL.Karts.KartThink", function()
     end
 end)
 
-hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.Draw", function(skybox, depth)
+hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.DrawExtras", function(skybox, depth)
     if depth then return end
 
     if not IsValid(localPly) then localPly = LocalPlayer() end
@@ -58,7 +58,7 @@ hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.Draw", function(skybox, 
             continue
         end
 
-        if veh:GetPos():DistToSqr(plyPos) > 200000 then continue end
+        if veh:GetPos():DistToSqr(plyPos) > PIXEL.Karts.Config.ExtraDrawRange then continue end
         hook.Run("PIXEL.Karts.DrawKartExtras", veh, localPly)
     end
 end)

@@ -22,6 +22,8 @@ PIXEL.Karts.Config = {
         Color(203, 31, 31)
     },
 
+    ExtraDrawRange = 200000,
+
     Upgrades = {
         CustomColor = {
             Name = "Body Colour",
