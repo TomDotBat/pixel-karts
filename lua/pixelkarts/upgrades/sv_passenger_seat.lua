@@ -29,3 +29,11 @@ hook.Add("PIXEL.Karts.KartDataLoaded", "PIXEL.Karts.CreatePassengerSeat", functi
         seat:SetCollisionGroup(COLLISION_GROUP_WEAPON)
     end)
 end)
+
+hook.Add("PlayerEnteredVehicle", "PIXEL.Karts.AllowWeaponsInPassengerSeat", function(ply, veh)
+    if veh.IsPIXELKartsPassengerSeat then
+        ply:SetAllowWeaponsInVehicle(true)
+    elseif veh.IsPIXELKart then
+        ply:SetAllowWeaponsInVehicle(false)
+    end
+end)
