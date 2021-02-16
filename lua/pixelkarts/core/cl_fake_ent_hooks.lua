@@ -46,16 +46,22 @@ hook.Add("Think", "PIXEL.Karts.KartThink", function()
     end
 end)
 
-function PIXEL.Karts.DeinitialiseKart(kart)
-    PIXEL.Karts.Vehicles[kart:GetNWString("PIXEL.Karts.KartID", "clientside")] = nil
-    hook.Run("PIXEL.Karts.OnRemove", kart)
-end
+hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.Draw", function(skybox, depth)
+    if depth then return end
 
-hook.Add("EntityRemoved", "PIXEL.Karts.OnRemove", function(ent)
-    if not ent.IsPIXELKart then return end
-    PIXEL.Karts.DeinitialiseKart(ent)
+    if not IsValid(localPly) then localPly = LocalPlayer() end
+    local plyPos = localPly:GetPos()
+
+    for steamId, veh in pairs(karts) do
+        if not IsValid(veh) then
+            karts[steamId] = nil
+            continue
+        end
+
+        if veh:GetPos():DistToSqr(plyPos) > 200000 then continue end
+        hook.Run("PIXEL.Karts.DrawKartExtras", veh, localPly)
+    end
 end)
-
 
 local fastUpdateCvar = CreateClientConVar("pixel_karts_fast_model_update_enabled", "1", true, false, "Should kart models be updated more frequently? This may be intensive.", 0, 1)
 
@@ -84,4 +90,14 @@ setupModelUpdater(fastUpdateCvar:GetBool())
 
 cvars.AddChangeCallback("pixel_karts_fast_model_update_enabled", function(_, _, val)
     setupModelUpdater(val == "1")
+end)
+
+function PIXEL.Karts.DeinitialiseKart(kart)
+    PIXEL.Karts.Vehicles[kart:GetNWString("PIXEL.Karts.KartID", "clientside")] = nil
+    hook.Run("PIXEL.Karts.OnRemove", kart)
+end
+
+hook.Add("EntityRemoved", "PIXEL.Karts.OnRemove", function(ent)
+    if not ent.IsPIXELKart then return end
+    PIXEL.Karts.DeinitialiseKart(ent)
 end)
