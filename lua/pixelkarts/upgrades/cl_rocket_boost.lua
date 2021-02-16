@@ -50,6 +50,7 @@ net.Receive("PIXEL.Karts.RocketBoost", function()
 
     sound.PlayURL(PIXEL.Karts.Config.Upgrades.RocketBoost.BoostSoundURL, "3d", function(station)
         if not IsValid(station) then return end
+        if not IsValid(kart) then return end
 
         station:SetVolume(PIXEL.Karts.Config.Upgrades.RocketBoost.BoostSoundVolume)
         station:SetPos(kart:GetPos())

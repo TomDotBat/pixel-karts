@@ -102,6 +102,7 @@ function PIXEL.Karts.DeployGlider(ply, veh)
     local thrust = Vector(0, 0, gliderUpgrade.UpwardsThrust)
     timer.Create("PIXEL.Karts.GliderPhysics:" .. veh:EntIndex(), gliderUpgrade.ThrustInterval, gliderUpgrade.MaxGlideTime / gliderUpgrade.ThrustInterval, function()
         if not IsValid(phys) then return end
+        if not IsValid(veh) then return end
         phys:ApplyForceCenter(thrust + veh:GetForward() * gliderUpgrade.ForwardThrust)
     end)
 
