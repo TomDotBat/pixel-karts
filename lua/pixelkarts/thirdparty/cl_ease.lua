@@ -1,4 +1,8 @@
 
+function PIXEL.Karts.UnclampedLerp(delta, from, to)
+	return from + (to - from) * delta
+end
+
 if math and math.ease then return end --Rubat pls merge
 
 math.ease = {}
