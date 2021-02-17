@@ -127,6 +127,20 @@ PIXEL.Karts.Config = {
             },
             SeatPos = Vector(0, -37, 18),
             SeatAngle = Angle(0, 0, 0)
+        },
+        Logo = {
+            Name = "Logo",
+            UIElement = "PIXEL.Karts.LogoEditor",
+            DataKey = "logo_imgur_id",
+            DataKeyEnabled = "logo_enabled",
+            Type = "string",
+            Price = {
+                100000,
+                50000,
+                35000
+            },
+            RequiredLevel = 3,
+            DefaultLogoId = "STCrxYK"
         }
     },
 
