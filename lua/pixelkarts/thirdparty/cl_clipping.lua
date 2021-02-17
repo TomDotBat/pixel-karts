@@ -124,4 +124,4 @@ do
 	end
 end
 
-PIXEL.Karts.Clipping = clip
+PIXEL.Karts.Clip = clip
