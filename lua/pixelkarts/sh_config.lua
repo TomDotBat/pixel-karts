@@ -40,7 +40,7 @@ PIXEL.Karts.Config = {
             Type = "boolean",
             DataKey = "rainbow_enabled",
             Price = {
-                750000,
+                0,
                 750000,
                 500000
             },
@@ -53,8 +53,8 @@ PIXEL.Karts.Config = {
             DataKeyEnabled = "underglow_enabled",
             Type = "Color",
             Price = {
-                75000,
-                75000,
+                0,
+                0,
                 75000
             },
             RequiredLevel = 3
@@ -84,7 +84,7 @@ PIXEL.Karts.Config = {
             DataKey = "glider_enabled",
             Type = "boolean",
             Price = {
-                600000,
+                0,
                 500000,
                 400000
             },
@@ -135,9 +135,9 @@ PIXEL.Karts.Config = {
             DataKeyEnabled = "logo_enabled",
             Type = "string",
             Price = {
-                100000,
-                50000,
-                35000
+                0,
+                0,
+                100000
             },
             RequiredLevel = 3,
             DefaultLogoId = "STCrxYK"
