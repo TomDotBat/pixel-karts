@@ -114,7 +114,7 @@ net.Receive("PIXEL.Karts.PurchaseKart", function(len, ply)
          net.WriteColor(randColor)
         net.Send(ply)
 
-        ply:PIXELKartsSetDataKey("custom_color", randColor, function() end)
+        ply:PIXELKartsSetDataKey("custom_color", randColor)
 
         hook.Run("PIXEL.Karts.SetupKartDefaults", ply)
     end)
