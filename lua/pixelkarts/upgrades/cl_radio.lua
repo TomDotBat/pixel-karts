@@ -222,7 +222,7 @@ function PIXEL.Karts.Radio.OpenSettingsMenu()
 end
 concommand.Add("pixel_karts_radio_settings", PIXEL.Karts.Radio.OpenSettingsMenu)
 
-local ui = ui3d2d
+local ui = PIXEL.UI.UI3D2D
 local function startCutOut(drawMask)
     render.ClearStencil()
     render.SetStencilEnable(true)
