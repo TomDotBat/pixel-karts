@@ -47,6 +47,8 @@ local transparent = Color(0, 0, 0, 0)
 local clipping = false
 
 local clip = {}
+PIXEL.Karts.Clip = clip
+
 setmetatable(clip, {
 	__call = function()
 		if clipping then
@@ -123,5 +125,3 @@ do
 		clipping = true
 	end
 end
-
-PIXEL.Karts.Clip = clip
