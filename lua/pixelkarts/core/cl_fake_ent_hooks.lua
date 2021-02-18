@@ -58,7 +58,7 @@ hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.DrawExtras", function(sk
             continue
         end
 
-        if veh:GetPos():DistToSqr(plyPos) > PIXEL.Karts.Config.ExtraDrawRange then continue end
+        if not veh.IsPIXELKart and veh:GetPos():DistToSqr(plyPos) > PIXEL.Karts.Config.ExtraDrawRange then continue end
         hook.Run("PIXEL.Karts.DrawKartExtras", veh, localPly)
     end
 end)
