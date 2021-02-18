@@ -97,8 +97,8 @@ function PIXEL.Karts.SetupNWVars(kart)
                 kart:SetNWBool("PIXEL.Karts." .. upgradeName .. ".Enabled", state)
             end
 
-            kart["Set" .. upgradeName] = function(s, num)
-                return kart:SetNWString("PIXEL.Karts." .. upgradeName, num)
+            kart["Set" .. upgradeName] = function(s, str)
+                return kart:SetNWString("PIXEL.Karts." .. upgradeName, str)
             end
         end
     end
