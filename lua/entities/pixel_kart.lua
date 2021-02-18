@@ -7,7 +7,10 @@ kart.IsPIXELKart = true
 
 function kart:Initialize()
     PIXEL.Karts.SetupNWVars(self)
-    self:SetCollisionGroup(COLLISION_GROUP_WEAPON)
+
+    if PIXEL.Karts.Config.NoCollideKarts then
+        self:SetCollisionGroup(COLLISION_GROUP_WEAPON)
+    end
 
     if CLIENT then return end
     self:SetNWInt("PIXEL.Karts.Health", 100)
