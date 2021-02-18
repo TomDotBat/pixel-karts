@@ -81,9 +81,6 @@ function PANEL:Init()
 
         self:SetDataKey(enabledDataKey, enabled)
         updateReceipt()
-
-        if disableSound then return end
-        PIXEL.Karts.PlayUpgradeSound(previewKart)
     end
 
     self.EnableLabel = vgui.Create("PIXEL.Label", self.EnableContainer)
@@ -114,7 +111,7 @@ function PANEL:Init()
     timer.Simple(0, function()
         self.ImgurPreview.ImgurID = self:GetDataKey(idDataKey, config.DefaultLogoId)
         if self:GetDataKey(enabledDataKey, false) then
-            self.EnableCheckbox:DoClick(true)
+            self.EnableCheckbox:DoClick()
         end
     end)
 end
