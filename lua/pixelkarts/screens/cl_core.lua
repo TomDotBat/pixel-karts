@@ -8,42 +8,43 @@ PIXEL.RegisterFontUnscaled("Karts.Header", "Open Sans SemiBold", 38)
 
 local rounding = 4
 local ui = PIXEL.UI.UI3D2D
-local hoverCol = PIXEL.OffsetColor(PIXEL.Colors.Primary, -10)
-local pressingCol = PIXEL.OffsetColor(PIXEL.Colors.Primary, 5)
+local defaultCol = PIXEL.Colors.Primary
+local defaultHoverCol = PIXEL.OffsetColor(PIXEL.Colors.Primary, -10)
+local defaultPressingCol = PIXEL.OffsetColor(PIXEL.Colors.Primary, 5)
 
-function PIXEL.Karts.DrawButton(x, y, w, h, doClick)
+function PIXEL.Karts.DrawButton(x, y, w, h, doClick, col, hoverCol, pressingCol)
     if ui.isHovering(x, y, w, h) then
         if ui.isPressing() then
-            PIXEL.DrawRoundedBox(rounding, x, y, w, h, pressingCol)
+            PIXEL.DrawRoundedBox(rounding, x, y, w, h, pressingCol or defaultPressingCol)
             if ui.isPressed() and doClick then doClick() end
         else
-            PIXEL.DrawRoundedBox(rounding, x, y, w, h, hoverCol)
+            PIXEL.DrawRoundedBox(rounding, x, y, w, h, hoverCol or defaultHoverCol)
         end
 
         return true
     end
 
-    PIXEL.DrawRoundedBox(rounding, x, y, w, h, PIXEL.Colors.Primary)
+    PIXEL.DrawRoundedBox(rounding, x, y, w, h, col or defaultCol)
 end
 
-function PIXEL.Karts.DrawTextButton(text, x, y, w, h, doClick)
-    if PIXEL.Karts.DrawButton(x, y, w, h, doClick) then
-        PIXEL.DrawSimpleText(text, "PIXEL.Karts.Radio.Buttons", x + w * .5, y + h * .5, PIXEL.Colors.SecondaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+function PIXEL.Karts.DrawTextButton(text, x, y, w, h, doClick, col, hoverCol, pressingCol, textCol, textHoverCol)
+    if PIXEL.Karts.DrawButton(x, y, w, h, doClick, col, hoverCol, pressingCol) then
+        PIXEL.DrawSimpleText(text, "PIXEL.Karts.Radio.Buttons", x + w * .5, y + h * .5, textHoverCol or PIXEL.Colors.SecondaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
         return true
     end
 
-    PIXEL.DrawSimpleText(text, "PIXEL.Karts.Radio.Buttons", x + w * .5, y + h * .5, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+    PIXEL.DrawSimpleText(text, "PIXEL.Karts.Radio.Buttons", x + w * .5, y + h * .5, textCol or PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 end
 
-function PIXEL.Karts.DrawImgurButton(imgurId, scale, x, y, w, h, doClick, extraX)
+function PIXEL.Karts.DrawImgurButton(imgurId, scale, x, y, w, h, doClick, extraX, col, hoverCol, pressingCol, imgurCol, imgurHoverCol)
     extraX = extraX or 0
     local imgW, imgH = w * scale, h * scale
-    if PIXEL.Karts.DrawButton(x, y, w, h, doClick) then
-        PIXEL.DrawImgur(x + (w - imgW) * .5 + extraX, y + (h - imgH) * .5, imgW, imgH, imgurId, PIXEL.Colors.SecondaryText)
+    if PIXEL.Karts.DrawButton(x, y, w, h, doClick, col, hoverCol, pressingCol) then
+        PIXEL.DrawImgur(x + (w - imgW) * .5 + extraX, y + (h - imgH) * .5, imgW, imgH, imgurId, imgurHoverCol or PIXEL.Colors.SecondaryText)
         return true
     end
 
-    PIXEL.DrawImgur(x + (w - imgW) * .5 + extraX, y + (h - imgH) * .5, imgW, imgH, imgurId, PIXEL.Colors.PrimaryText)
+    PIXEL.DrawImgur(x + (w - imgW) * .5 + extraX, y + (h - imgH) * .5, imgW, imgH, imgurId, imgurCol or PIXEL.Colors.PrimaryText)
 end
 
 local function drawHeader(screen, kart, w, h, localPly)
