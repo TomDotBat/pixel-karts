@@ -77,39 +77,36 @@ function PANEL:Init()
             if not upgradeKey then continue end
             if not dataKeys[upgradeKey] then continue end
 
-            if upgrade.Type == "Color" then
-                local upgradeKeyEnabled = upgrade.DataKeyEnabled
-
-                local col = data[upgradeKey]
-                if not IsColor(col) then
-                    if not istable(col) then continue end
-                    col = Color(col.r or 255, col.g or 255, col.g or 255, col.a or 255)
+            if upgrade.Type == "boolean" then
+                table.insert(changes, {
+                    upgradeName,
+                    upgrade.Type,
+                    data[upgradeKey]
+                })
+            else
+                local value = data[upgradeKey]
+                if upgrade.Type == "Color" and not IsColor(value) then
+                    if not istable(value) then continue end
+                    value = Color(value.r or 255, value.g or 255, value.g or 255, value.a or 255)
                 end
 
+                local upgradeKeyEnabled = upgrade.DataKeyEnabled
                 if upgradeKeyEnabled then
                     table.insert(changes, {
                         upgradeName,
                         upgrade.Type,
-                        col,
-                        data[upgradeKeyEnabled] or self.UpgradeList:GetOriginalDataKey(upgrade.DataKeyEnabled)
+                        value,
+                        data[upgradeKeyEnabled] or self.UpgradeList:GetOriginalDataKey(upgradeKeyEnabled)
                     })
                 else
                     table.insert(changes, {
                         upgradeName,
                         upgrade.Type,
-                        col,
+                        value,
                         true
                     })
                 end
-
-                continue
             end
-
-            table.insert(changes, {
-                upgradeName,
-                upgrade.Type,
-                data[upgradeKey]
-            })
         end
 
         net.Start("PIXEL.Karts.PurchaseKartUpgrades")
@@ -123,6 +120,9 @@ function PANEL:Init()
                 net.WriteBool(change[4])
             elseif change[2] == "boolean" then
                 net.WriteBool(change[3])
+            elseif change[2] == "string" then
+                net.WriteString(change[3])
+                net.WriteBool(change[4])
             end
          end
         net.SendToServer()
