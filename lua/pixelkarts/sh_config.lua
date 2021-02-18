@@ -133,6 +133,9 @@ PIXEL.Karts.Config = {
             UIElement = "PIXEL.Karts.LogoEditor",
             DataKey = "logo_imgur_id",
             DataKeyEnabled = "logo_enabled",
+            Validator = function(str)
+                return string.find(str, "[0-9A-z][0-9A-z][0-9A-z][0-9A-z][0-9A-z][0-9A-z][0-9A-z]")
+            end,
             Type = "string",
             Price = {
                 0,
