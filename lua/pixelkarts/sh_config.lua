@@ -1,5 +1,6 @@
 
 PIXEL.Karts.Config = {
+    NoCollideKarts = true,
     AbilitiesInOtherKarts = false,
 
     KartPrice = {
