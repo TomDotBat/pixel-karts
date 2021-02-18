@@ -142,10 +142,12 @@ net.Receive("PIXEL.Karts.PurchaseKartUpgrades", function(len, ply)
 
         totalPrice = totalPrice + upgrade.Price[rankLevel]
 
-        if upgrade.Type == "Color" then
-            changes[upgradeName] = {net.ReadColor(), net.ReadBool()}
-        elseif upgrade.Type == "boolean" then
+        if upgrade.Type == "boolean" then
             changes[upgradeName] = net.ReadBool()
+        elseif upgrade.Type == "Color" then
+            changes[upgradeName] = {net.ReadColor(), net.ReadBool()}
+        elseif upgrade.Type == "string" then
+            changes[upgradeName] = {net.ReadString(), net.ReadBool()}
         end
     end
 
@@ -163,13 +165,13 @@ net.Receive("PIXEL.Karts.PurchaseKartUpgrades", function(len, ply)
 
         local upgradeKey = upgrade.DataKey
 
-        if upgrade.Type == "Color" then
-            mergeData[upgradeKey] = ColorAlpha(newData[1], 255)
+        if upgrade.Type == "boolean" then
+            mergeData[upgradeKey] = newData
+        else
+            mergeData[upgradeKey] = (upgrade.Type == "Color") and ColorAlpha(newData[1], 255) or newData[1]
             local upgradeKeyEnabled = upgrade.DataKeyEnabled
             if not upgradeKeyEnabled then continue end
             mergeData[upgradeKeyEnabled] = newData[2]
-        elseif upgrade.Type == "boolean" then
-            mergeData[upgradeKey] = newData
         end
     end
 
