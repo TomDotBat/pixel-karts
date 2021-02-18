@@ -144,7 +144,7 @@ PIXEL.Karts.Config = {
                 100000
             },
             RequiredLevel = 3,
-            DefaultLogoId = "STCrxYK"
+            DefaultLogoId = "YCRtBVO"
         }
     },
 
