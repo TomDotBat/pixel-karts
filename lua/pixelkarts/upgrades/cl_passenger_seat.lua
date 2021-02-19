@@ -33,5 +33,5 @@ hook.Add("PIXEL.Karts.Think", "PIXEL.Karts.PassengerSeatThink", function(kart)
 end)
 
 hook.Add("PIXEL.Karts.OnRemove", "PIXEL.Karts.RemovePassengerSeatModel", function(kart)
-    if IsValid(kart.PassengerSeat) then kart.PassengerSeat:Remove() end
+    if kart.IsClientside and IsValid(kart.PassengerSeat) then kart.PassengerSeat:Remove() end
 end)
