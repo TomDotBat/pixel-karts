@@ -10,10 +10,6 @@ hook.Add("PIXEL.Karts.KartDataLoaded", "PIXEL.Karts.CreatePassengerSeat", functi
     kart.PassengerSeat = ents.Create(seatClass.Class)
     local seat = kart.PassengerSeat
 
-    if PIXEL.Karts.Config.NoCollideKartsWithPlayers then
-        seat:SetCustomCollisionCheck(true)
-    end
-
     seat:SetModel(seatClass.Model)
     seat:SetPos(kart:LocalToWorld(seatConfig.SeatPos))
     seat:SetAngles(kart:LocalToWorldAngles(seatConfig.SeatAngle))
