@@ -36,15 +36,15 @@ function PIXEL.Karts.DrawTextButton(text, round, x, y, w, h, doClick, col, hover
     PIXEL.DrawSimpleText(text, "PIXEL.Karts.Radio.Buttons", x + w * .5, y + h * .5, textCol or PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 end
 
-function PIXEL.Karts.DrawImgurButton(imgurId, scale, round, x, y, w, h, doClick, extraX, col, hoverCol, pressingCol, imgurCol, imgurHoverCol)
-    extraX = extraX or 0
+function PIXEL.Karts.DrawImgurButton(imgurId, scale, round, x, y, w, h, doClick, extraOffset, col, hoverCol, pressingCol, imgurCol, imgurHoverCol)
+    extraOffset = extraOffset or 0
     local imgW, imgH = w * scale, h * scale
     if PIXEL.Karts.DrawButton(round, x, y, w, h, doClick, col, hoverCol, pressingCol) then
-        PIXEL.DrawImgur(x + (w - imgW) * .5 + extraX, y + (h - imgH) * .5, imgW, imgH, imgurId, imgurHoverCol or PIXEL.Colors.SecondaryText)
+        PIXEL.DrawImgur(x + (w - imgW) * .5 + extraOffset, y + (h - imgH) * .5, imgW, imgH, imgurId, imgurHoverCol or PIXEL.Colors.SecondaryText)
         return true
     end
 
-    PIXEL.DrawImgur(x + (w - imgW) * .5 + extraX, y + (h - imgH) * .5, imgW, imgH, imgurId, imgurCol or PIXEL.Colors.PrimaryText)
+    PIXEL.DrawImgur(x + (w - imgW) * .5 + extraOffset, y + (h - imgH) * .5, imgW, imgH, imgurId, imgurCol or PIXEL.Colors.PrimaryText)
 end
 
 local function drawHeader(screen, kart, w, h, localPly)
@@ -54,12 +54,12 @@ local function drawHeader(screen, kart, w, h, localPly)
     local iconSize = headerH * .75
     local spacing = 10
 
-    --if screen:getId() ~= "dashboard" then
+    if screen:getId() ~= "dashboard" then
         PIXEL.Karts.DrawImgurButton("wuj141s", .8, 4, offsetX, offsetY - iconSize * .5, iconSize, iconSize, function()
             PIXEL.Karts.SelectSteeringWheelScreen("dashboard")
         end)
         offsetX = offsetX + iconSize + spacing
-    --end
+    end
 
     PIXEL.DrawSimpleText(screen:getName(), "PIXEL.Karts.Header", offsetX, offsetY, PIXEL.Colors.PrimaryText, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
 end
@@ -159,13 +159,13 @@ hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.DrawSteeringWheelScreen"
 
     if not ui.startDraw(pos, ang, 0.008, kart) then return end
 
-    --PIXEL.Karts.Clip:Scissor2D(scrW, scrH)
+    PIXEL.Karts.Clip:Scissor2D(scrW, scrH)
         local screen = screens[curScreen]
         screen:draw(kart, localPly)
         if screen:getShowCursor() then
             ui.drawCursor(0, 0, w, h, 32)
         end
-    --PIXEL.Karts.Clip()
+    PIXEL.Karts.Clip()
 
     ui.endDraw()
 end)
