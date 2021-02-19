@@ -27,13 +27,13 @@ function PIXEL.Karts.DrawButton(round, x, y, w, h, doClick, col, hoverCol, press
     PIXEL.DrawRoundedBox(round or defaultRound, x, y, w, h, col or defaultCol)
 end
 
-function PIXEL.Karts.DrawTextButton(text, round, x, y, w, h, doClick, col, hoverCol, pressingCol, textCol, textHoverCol)
+function PIXEL.Karts.DrawTextButton(text, font, round, x, y, w, h, doClick, col, hoverCol, pressingCol, textCol, textHoverCol)
     if PIXEL.Karts.DrawButton(round, x, y, w, h, doClick, col, hoverCol, pressingCol) then
-        PIXEL.DrawSimpleText(text, "PIXEL.Karts.Radio.Buttons", x + w * .5, y + h * .5, textHoverCol or PIXEL.Colors.SecondaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        PIXEL.DrawSimpleText(text, font, x + w * .5, y + h * .5, textHoverCol or PIXEL.Colors.SecondaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
         return true
     end
 
-    PIXEL.DrawSimpleText(text, "PIXEL.Karts.Radio.Buttons", x + w * .5, y + h * .5, textCol or PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+    PIXEL.DrawSimpleText(text, font, x + w * .5, y + h * .5, textCol or PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 end
 
 function PIXEL.Karts.DrawImgurButton(imgurId, scale, round, x, y, w, h, doClick, extraOffset, col, hoverCol, pressingCol, imgurCol, imgurHoverCol)
