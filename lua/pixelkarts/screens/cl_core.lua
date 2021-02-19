@@ -6,29 +6,29 @@ local scrW, scrH = 395, 304
 local headerH = 55
 PIXEL.RegisterFontUnscaled("Karts.Header", "Open Sans SemiBold", 38)
 
-local rounding = 4
 local ui = PIXEL.UI.UI3D2D
+local defaultRound = 8
 local defaultCol = PIXEL.Colors.Primary
 local defaultHoverCol = PIXEL.OffsetColor(PIXEL.Colors.Primary, -10)
 local defaultPressingCol = PIXEL.OffsetColor(PIXEL.Colors.Primary, 5)
 
-function PIXEL.Karts.DrawButton(x, y, w, h, doClick, col, hoverCol, pressingCol)
+function PIXEL.Karts.DrawButton(round, x, y, w, h, doClick, col, hoverCol, pressingCol)
     if ui.isHovering(x, y, w, h) then
         if ui.isPressing() then
-            PIXEL.DrawRoundedBox(rounding, x, y, w, h, pressingCol or defaultPressingCol)
+            PIXEL.DrawRoundedBox(round or defaultRound, x, y, w, h, pressingCol or defaultPressingCol)
             if ui.isPressed() and doClick then doClick() end
         else
-            PIXEL.DrawRoundedBox(rounding, x, y, w, h, hoverCol or defaultHoverCol)
+            PIXEL.DrawRoundedBox(round or defaultRound, x, y, w, h, hoverCol or defaultHoverCol)
         end
 
         return true
     end
 
-    PIXEL.DrawRoundedBox(rounding, x, y, w, h, col or defaultCol)
+    PIXEL.DrawRoundedBox(round or defaultRound, x, y, w, h, col or defaultCol)
 end
 
-function PIXEL.Karts.DrawTextButton(text, x, y, w, h, doClick, col, hoverCol, pressingCol, textCol, textHoverCol)
-    if PIXEL.Karts.DrawButton(x, y, w, h, doClick, col, hoverCol, pressingCol) then
+function PIXEL.Karts.DrawTextButton(text, round, x, y, w, h, doClick, col, hoverCol, pressingCol, textCol, textHoverCol)
+    if PIXEL.Karts.DrawButton(round, x, y, w, h, doClick, col, hoverCol, pressingCol) then
         PIXEL.DrawSimpleText(text, "PIXEL.Karts.Radio.Buttons", x + w * .5, y + h * .5, textHoverCol or PIXEL.Colors.SecondaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
         return true
     end
@@ -36,10 +36,10 @@ function PIXEL.Karts.DrawTextButton(text, x, y, w, h, doClick, col, hoverCol, pr
     PIXEL.DrawSimpleText(text, "PIXEL.Karts.Radio.Buttons", x + w * .5, y + h * .5, textCol or PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 end
 
-function PIXEL.Karts.DrawImgurButton(imgurId, scale, x, y, w, h, doClick, extraX, col, hoverCol, pressingCol, imgurCol, imgurHoverCol)
+function PIXEL.Karts.DrawImgurButton(imgurId, scale, round, x, y, w, h, doClick, extraX, col, hoverCol, pressingCol, imgurCol, imgurHoverCol)
     extraX = extraX or 0
     local imgW, imgH = w * scale, h * scale
-    if PIXEL.Karts.DrawButton(x, y, w, h, doClick, col, hoverCol, pressingCol) then
+    if PIXEL.Karts.DrawButton(round, x, y, w, h, doClick, col, hoverCol, pressingCol) then
         PIXEL.DrawImgur(x + (w - imgW) * .5 + extraX, y + (h - imgH) * .5, imgW, imgH, imgurId, imgurHoverCol or PIXEL.Colors.SecondaryText)
         return true
     end
@@ -54,12 +54,12 @@ local function drawHeader(screen, kart, w, h, localPly)
     local iconSize = headerH * .75
     local spacing = 10
 
-    if screen:getId() ~= "dashboard" then
-        PIXEL.Karts.DrawImgurButton("wuj141s", .8, offsetX, offsetY - iconSize * .5, iconSize, iconSize, function()
+    --if screen:getId() ~= "dashboard" then
+        PIXEL.Karts.DrawImgurButton("wuj141s", .8, 4, offsetX, offsetY - iconSize * .5, iconSize, iconSize, function()
             PIXEL.Karts.SelectSteeringWheelScreen("dashboard")
         end)
         offsetX = offsetX + iconSize + spacing
-    end
+    --end
 
     PIXEL.DrawSimpleText(screen:getName(), "PIXEL.Karts.Header", offsetX, offsetY, PIXEL.Colors.PrimaryText, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
 end
@@ -159,13 +159,13 @@ hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.DrawSteeringWheelScreen"
 
     if not ui.startDraw(pos, ang, 0.008, kart) then return end
 
-    PIXEL.Karts.Clip:Scissor2D(scrW, scrH)
+    --PIXEL.Karts.Clip:Scissor2D(scrW, scrH)
         local screen = screens[curScreen]
         screen:draw(kart, localPly)
         if screen:getShowCursor() then
             ui.drawCursor(0, 0, w, h, 32)
         end
-    PIXEL.Karts.Clip()
+    --PIXEL.Karts.Clip()
 
     ui.endDraw()
 end)
