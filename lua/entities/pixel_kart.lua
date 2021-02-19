@@ -8,8 +8,8 @@ kart.IsPIXELKart = true
 function kart:Initialize()
     PIXEL.Karts.SetupNWVars(self)
 
-    if PIXEL.Karts.Config.NoCollideKarts then
-        self:SetCollisionGroup(COLLISION_GROUP_WEAPON)
+    if PIXEL.Karts.Config.NoCollideKartsWithPlayers then
+        self:SetCustomCollisionCheck(true)
     end
 
     if CLIENT then return end
