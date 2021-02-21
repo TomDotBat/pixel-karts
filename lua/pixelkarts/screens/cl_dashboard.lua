@@ -41,7 +41,7 @@ PIXEL.Karts.SteeringWheelScreen("dashboard", "Dashboard", function(screen, kart,
     local appCount = table.Count(apps)
     local rowCount = (appCount <= 4) and 1 or 2
 
-    local iconSize = 80 / rowCount
+    local iconSize = (rowCount == 1) and 80 or 60
     local iconSpacing = 10
     local fullWidth = iconSize + iconSpacing
 
@@ -49,7 +49,7 @@ PIXEL.Karts.SteeringWheelScreen("dashboard", "Dashboard", function(screen, kart,
     local iconY = offset + (h * .5 - iconSize * .5)
 
     local appNo = 1
-    for rowNo = 1, rowCount do
+    --for rowNo = 1, rowCount do
         for appId, app in pairs(apps) do
             if drawIcon(app:getImgurId(), .8, iconX, iconY, iconSize, doClick) then
                 PIXEL.DrawSimpleText(app:getName(), "PIXEL.Karts.AppName", w * .5, fullH - 6, PIXEL.Colors.SecondaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_BOTTOM)
@@ -58,7 +58,7 @@ PIXEL.Karts.SteeringWheelScreen("dashboard", "Dashboard", function(screen, kart,
             iconX = iconX + fullWidth
             appNo = appNo + 1
         end
-    end
+    --end
 end, true, nil, true)
 
 PIXEL.Karts.SteeringWheelApp("abilities", "Abilities", "aaaaaaaaa")
