@@ -45,3 +45,36 @@ sam.command.new("removekart")
     })
 end)
 :End()
+
+sam.command.new("resetkartlogo")
+:SetCategory("PIXEL Karts")
+:Help("Forcefully sets a players' PIXEL Kart logo to the default.")
+:SetPermission("resetkartlogo", "admin")
+
+:AddArg("player")
+
+:OnExecute(function(caller, targets)
+    if not PIXEL.Karts then return end
+
+    for i = 1, #targets do
+        local target = targets[i]
+        local logoConfig = PIXEL.Karts.Config.Upgrades.Logo
+
+        target:PIXELKartsGetDataKey(logoConfig.DataKey, function(imgurId)
+            if not imgurId then return end
+            BroadcastLua([[file.Delete("pixel/]] .. imgurId .. [[.png")]])
+        end)
+
+        target:PIXELKartsSetDataKey(logoConfig.DataKey, logoConfig.DefaultLogoId)
+
+        local kart = target:GetNWEntity("PIXEL.Karts.PersonalKart", nil)
+        if IsValid(kart) and kart.SetLogo then
+            kart:SetLogo(logoConfig.DefaultLogoId)
+        end
+    end
+
+    sam.player.send_message(nil, "{A} reset {T}'s PIXEL Kart logo.", {
+        A = caller, T = targets
+    })
+end)
+:End()
