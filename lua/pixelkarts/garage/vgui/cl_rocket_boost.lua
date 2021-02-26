@@ -18,7 +18,7 @@ function PANEL:Init()
     self.DescriptionLabel = vgui.Create("PIXEL.Label", self)
     self.DescriptionLabel:Dock(TOP)
     self.DescriptionLabel:SetAutoHeight(true)
-    self.DescriptionLabel:SetFont("PIXEL.Karts.UpgradeLabel")
+    self.DescriptionLabel:SetFont("Karts.UpgradeLabel")
     self.DescriptionLabel:SetAutoWrap(true)
     self.DescriptionLabel:SetText(
         string.format([[Rocket boosters allow you to give your kart a short burst of speed on demand.
@@ -47,7 +47,7 @@ While driving your kart, use the %s key to trigger it.]],
     self.EnableLabel = vgui.Create("PIXEL.Label", self.BottomContainer)
     self.EnableLabel:Dock(LEFT)
     self.EnableLabel:SetText("Enable Rocket Booster")
-    self.EnableLabel:SetFont("PIXEL.Karts.ColourLabels")
+    self.EnableLabel:SetFont("Karts.ColourLabels")
     self.EnableLabel:SetAutoWidth(true)
 
     function self.BottomContainer.PerformLayout(s, w, h)

@@ -45,7 +45,7 @@ function PANEL:AddUpgrade(name, element, locked, rank)
     upgrade:Dock(TOP)
 
     local editButton = vgui.Create("PIXEL.TextButton", upgrade)
-    editButton:SetFont("PIXEL.Karts.UpgradeEdit")
+    editButton:SetFont("Karts.UpgradeEdit")
 
     function editButton.DoClick()
         if locked then return end
