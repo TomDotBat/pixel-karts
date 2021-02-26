@@ -199,8 +199,8 @@ function PIXEL.Karts.Radio.OpenSettingsMenu()
     local oldPaint = fr.Paint
     fr.Paint = function(s, w, h)
         oldPaint(s, w, h)
-        PIXEL.DrawSimpleText("Volume", "PIXEL.Karts.RadioConfig", PIXEL.Scale(8), PIXEL.Scale(36), colors.PrimaryText)
-        PIXEL.DrawSimpleText("Disable 3D Volume", "PIXEL.Karts.RadioConfig", PIXEL.Scale(36), PIXEL.Scale(62), colors.PrimaryText)
+        PIXEL.DrawSimpleText("Volume", "Karts.RadioConfig", PIXEL.Scale(8), PIXEL.Scale(36), colors.PrimaryText)
+        PIXEL.DrawSimpleText("Disable 3D Volume", "Karts.RadioConfig", PIXEL.Scale(36), PIXEL.Scale(62), colors.PrimaryText)
     end
 
     local slider = fr:Add("PIXEL.Slider")
@@ -267,11 +267,11 @@ end
 
 local function textButton(text, x, y, w, h, doClick)
     if button(x, y, w, h, doClick) then
-        PIXEL.DrawSimpleText(text, "PIXEL.Karts.Radio.Buttons", x + w * .5, y + h * .5, colors.SecondaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        PIXEL.DrawSimpleText(text, "Karts.Radio.Buttons", x + w * .5, y + h * .5, colors.SecondaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
         return true
     end
 
-    PIXEL.DrawSimpleText(text, "PIXEL.Karts.Radio.Buttons", x + w * .5, y + h * .5, colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+    PIXEL.DrawSimpleText(text, "Karts.Radio.Buttons", x + w * .5, y + h * .5, colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 end
 
 local function imgurButton(imgurId, scale, x, y, w, h, doClick, extraX)
@@ -328,15 +328,15 @@ hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.DrawRadios", function(sk
     PIXEL.DrawRoundedBox(rounding, x, y, w, h, bgCol)
     PIXEL.DrawRoundedBox(rounding, x, y, w, 34, headerCol)
 
-    PIXEL.DrawSimpleText("Kart Radio", "PIXEL.Karts.Radio.Title", x + 10, y + 5, colors.PrimaryText)
+    PIXEL.DrawSimpleText("Kart Radio", "Karts.Radio.Title", x + 10, y + 5, colors.PrimaryText)
     imgurButton("IXSuV4w", .75, x + w - 28, y + 6, 22, 22, function()
         PIXEL.Karts.Radio.OpenSettingsMenu()
     end, 1) --Settings
 
     if isOn then
-        local font = "PIXEL.Karts.Radio.Station"
+        local font = "Karts.Radio.Station"
         if #stereoChan > 16 then
-            font = "PIXEL.Karts.Radio.StationSmall"
+            font = "Karts.Radio.StationSmall"
         end
         PIXEL.DrawSimpleText(stereoChan, font, 0, 0, colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 

@@ -25,8 +25,8 @@ function PANEL:Init()
         PIXEL.DrawRoundedBox(sepH * .5, 0, 0, w, sepH, seperatorCol)
 
         local centerH = sepH + (h - sepH) * .5 + PIXEL.Scale(1)
-        PIXEL.DrawSimpleText("Total: ", "PIXEL.Karts.ItemName", PIXEL.Scale(10), centerH, PIXEL.Colors.PrimaryText, nil, TEXT_ALIGN_CENTER)
-        PIXEL.DrawSimpleText(self.TotalPrice, "PIXEL.Karts.ItemPrice", w - PIXEL.Scale(10), centerH, self.CanAfford and PIXEL.Colors.Positive or PIXEL.Colors.Negative, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
+        PIXEL.DrawSimpleText("Total: ", "Karts.ItemName", PIXEL.Scale(10), centerH, PIXEL.Colors.PrimaryText, nil, TEXT_ALIGN_CENTER)
+        PIXEL.DrawSimpleText(self.TotalPrice, "Karts.ItemPrice", w - PIXEL.Scale(10), centerH, self.CanAfford and PIXEL.Colors.Positive or PIXEL.Colors.Negative, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
     end
 
     self.Buttons = vgui.Create("Panel", self)
@@ -187,8 +187,8 @@ function PANEL:AddItem(name, price, ...)
         self.BackgroundColor = PIXEL.LerpColor(FrameTime() * 12, self.BackgroundColor, self:IsHovered() and hoverBg or color_transparent)
         PIXEL.DrawRoundedBox(PIXEL.Scale(6), 0, 0, w, h, self.BackgroundColor)
 
-        PIXEL.DrawSimpleText(name, "PIXEL.Karts.ItemName", PIXEL.Scale(10), h * .5, PIXEL.Colors.SecondaryText, nil, TEXT_ALIGN_CENTER)
-        PIXEL.DrawSimpleText(formattedPrice, "PIXEL.Karts.ItemPrice", w - PIXEL.Scale(10), h * .5, PIXEL.Colors.Positive, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
+        PIXEL.DrawSimpleText(name, "Karts.ItemName", PIXEL.Scale(10), h * .5, PIXEL.Colors.SecondaryText, nil, TEXT_ALIGN_CENTER)
+        PIXEL.DrawSimpleText(formattedPrice, "Karts.ItemPrice", w - PIXEL.Scale(10), h * .5, PIXEL.Colors.Positive, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
     end
 
     self.Items[name] = item

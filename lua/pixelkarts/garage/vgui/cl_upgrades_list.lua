@@ -45,7 +45,7 @@ function PANEL:AddUpgrade(name, element, locked, rank)
     upgrade:Dock(TOP)
 
     local editButton = vgui.Create("PIXEL.TextButton", upgrade)
-    editButton:SetFont("PIXEL.Karts.UpgradeEdit")
+    editButton:SetFont("Karts.UpgradeEdit")
 
     function editButton.DoClick()
         if locked then return end
@@ -67,7 +67,7 @@ function PANEL:AddUpgrade(name, element, locked, rank)
 
     function upgrade:Paint(w, h)
         PIXEL.DrawRoundedBox(PIXEL.Scale(6), 0, 0, w, h, upgradeBg)
-        PIXEL.DrawSimpleText(name, "PIXEL.Karts.UpgradeName", PIXEL.Scale(10), h * .5, PIXEL.Colors.PrimaryText, nil, TEXT_ALIGN_CENTER)
+        PIXEL.DrawSimpleText(name, "Karts.UpgradeName", PIXEL.Scale(10), h * .5, PIXEL.Colors.PrimaryText, nil, TEXT_ALIGN_CENTER)
     end
 
     function upgrade:PerformLayout(w, h)

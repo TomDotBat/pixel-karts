@@ -24,7 +24,7 @@ hook.Add("PIXEL.Karts.EnteredKart", "PIXEL.Karts.GliderHUD", function(kart)
             PIXEL.LerpColor(cooldownProg, PIXEL.Colors.Negative, PIXEL.Colors.Primary)
         )
 
-        PIXEL.DrawSimpleText("Deploy Glider (" .. keyName .. ")", "PIXEL.Karts.RocketBoost", progX + progW * .5, progY + progH * .5, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        PIXEL.DrawSimpleText("Deploy Glider (" .. keyName .. ")", "Karts.RocketBoost", progX + progW * .5, progY + progH * .5, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     end)
 end)
 

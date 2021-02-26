@@ -93,7 +93,7 @@ hook.Add("PIXEL.Karts.EnteredKart", "PIXEL.Karts.RocketBoostHUD", function(kart)
             PIXEL.LerpColor(cooldownProg, PIXEL.Colors.Negative, PIXEL.Colors.Primary)
         )
 
-        PIXEL.DrawSimpleText("Rocket Boost (" .. keyName .. ")", "PIXEL.Karts.RocketBoost", progX + progW * .5, progY + progH * .5, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        PIXEL.DrawSimpleText("Rocket Boost (" .. keyName .. ")", "Karts.RocketBoost", progX + progW * .5, progY + progH * .5, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     end)
 end)
 

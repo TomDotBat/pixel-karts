@@ -16,7 +16,7 @@ function PANEL:Init()
     self.DescriptionLabel = vgui.Create("PIXEL.Label", self)
     self.DescriptionLabel:Dock(TOP)
     self.DescriptionLabel:SetAutoHeight(true)
-    self.DescriptionLabel:SetFont("PIXEL.Karts.UpgradeLabel")
+    self.DescriptionLabel:SetFont("Karts.UpgradeLabel")
     self.DescriptionLabel:SetAutoWrap(true)
     self.DescriptionLabel:SetText(
         string.format([[The glider enables your kart to fly, you can toggle it with your %s key. 
@@ -45,7 +45,7 @@ Use it with the rocket booster to get in the air from ground level.]],
     self.EnableLabel = vgui.Create("PIXEL.Label", self.BottomContainer)
     self.EnableLabel:Dock(LEFT)
     self.EnableLabel:SetText("Enable Glider")
-    self.EnableLabel:SetFont("PIXEL.Karts.ColourLabels")
+    self.EnableLabel:SetFont("Karts.ColourLabels")
     self.EnableLabel:SetAutoWidth(true)
 
     function self.BottomContainer.PerformLayout(s, w, h)

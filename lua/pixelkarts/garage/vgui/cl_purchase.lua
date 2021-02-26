@@ -19,7 +19,7 @@ function PANEL:Init()
     self.Question = vgui.Create("PIXEL.Label", self.QuestionHolder)
     self.Question:SetTextAlign(TEXT_ALIGN_CENTER)
     self.Question:SetAutoWrap(true)
-    self.Question:SetFont("PIXEL.Karts.RespawnDescription")
+    self.Question:SetFont("Karts.RespawnDescription")
     self.Question:SetText("Would you like to buy a Kart for "
         .. DarkRP.formatMoney(
             PIXEL.Karts.Config.KartPrice[LocalPlayer():PIXELKartsGetLevel(level)]
