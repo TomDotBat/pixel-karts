@@ -53,7 +53,7 @@ PIXEL.Karts.SteeringWheelScreen("startup", "Startup Sequence", function(screen, 
         local size = Lerp(progress, logoSize, logoSize * .8)
         local halfSize = size * .5
         PIXEL.DrawImgur(w * .5 - halfSize, h * .5 - halfSize - Lerp(progress, 0, 30), size, size, "YCRtBVO", color_white)
-        PIXEL.DrawSimpleText("PIXELOS is starting", "PIXEL.Karts.Startup", w * .5, h - Lerp(progress, -40, 20), PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_BOTTOM)
+        PIXEL.DrawSimpleText("PIXELOS is starting", "Karts.Startup", w * .5, h - Lerp(progress, -40, 20), PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_BOTTOM)
         return
     end
 
@@ -68,12 +68,12 @@ PIXEL.Karts.SteeringWheelScreen("startup", "Startup Sequence", function(screen, 
             startingText = startingText .. "."
         end
 
-        PIXEL.DrawSimpleText(startingText, "PIXEL.Karts.Startup", w * .5, h - 20, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_BOTTOM)
+        PIXEL.DrawSimpleText(startingText, "Karts.Startup", w * .5, h - 20, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_BOTTOM)
         return
     end
 
     local size = logoSize * .8
     local halfSize = size * .5
     PIXEL.DrawImgur(w * .5 - halfSize, h * .5 - halfSize - 30, size, size, "YCRtBVO", color_white)
-    PIXEL.DrawSimpleText("PIXELOS is starting...", "PIXEL.Karts.Startup", w * .5, h - 20, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_BOTTOM)
+    PIXEL.DrawSimpleText("PIXELOS is starting...", "Karts.Startup", w * .5, h - 20, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_BOTTOM)
 end, nil, true)

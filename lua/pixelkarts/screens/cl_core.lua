@@ -61,7 +61,7 @@ local function drawHeader(screen, kart, w, h, localPly)
         offsetX = offsetX + iconSize + spacing
     end
 
-    PIXEL.DrawSimpleText(screen:getName(), "PIXEL.Karts.Header", offsetX, offsetY, PIXEL.Colors.PrimaryText, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
+    PIXEL.DrawSimpleText(screen:getName(), "Karts.Header", offsetX, offsetY, PIXEL.Colors.PrimaryText, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
 end
 
 function PIXEL.Karts.SteeringWheelScreen(id, name, drawFunc, showCursor, hideHeader, persistData)

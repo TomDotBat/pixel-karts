@@ -19,7 +19,7 @@ hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.GarageDoor", function(de
             surface.SetDrawColor(PIXEL.Colors.Primary)
             surface.DrawRect(0, 0, w, h)
             PIXEL.DrawOutlinedBox(0, 0, w, h, 25, PIXEL.Colors.PrimaryText)
-            PIXEL.DrawSimpleText("PIXEL Karts", "PIXEL.Karts.GarageDoor", w * .5, h * .5, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+            PIXEL.DrawSimpleText("PIXEL Karts", "Karts.GarageDoor", w * .5, h * .5, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
         cam.End3D2D()
 
         surface.SetAlphaMultiplier(1)

@@ -52,7 +52,7 @@ PIXEL.Karts.SteeringWheelScreen("dashboard", "Dashboard", function(screen, kart,
     --for rowNo = 1, rowCount do
         for appId, app in pairs(apps) do
             if drawIcon(app:getImgurId(), .8, iconX, iconY, iconSize, doClick) then
-                PIXEL.DrawSimpleText(app:getName(), "PIXEL.Karts.AppName", w * .5, fullH - 6, PIXEL.Colors.SecondaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_BOTTOM)
+                PIXEL.DrawSimpleText(app:getName(), "Karts.AppName", w * .5, fullH - 6, PIXEL.Colors.SecondaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_BOTTOM)
             end
 
             iconX = iconX + fullWidth

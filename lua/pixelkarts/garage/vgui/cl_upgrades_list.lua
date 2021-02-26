@@ -67,7 +67,7 @@ function PANEL:AddUpgrade(name, element, locked, rank)
 
     function upgrade:Paint(w, h)
         PIXEL.DrawRoundedBox(PIXEL.Scale(6), 0, 0, w, h, upgradeBg)
-        PIXEL.DrawSimpleText(name, "PIXEL.Karts.UpgradeName", PIXEL.Scale(10), h * .5, PIXEL.Colors.PrimaryText, nil, TEXT_ALIGN_CENTER)
+        PIXEL.DrawSimpleText(name, "Karts.UpgradeName", PIXEL.Scale(10), h * .5, PIXEL.Colors.PrimaryText, nil, TEXT_ALIGN_CENTER)
     end
 
     function upgrade:PerformLayout(w, h)

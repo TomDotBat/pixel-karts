@@ -30,7 +30,7 @@ function PANEL:Paint(w, h)
     surface.SetAlphaMultiplier(self.Alpha)
 
     PIXEL.DrawRoundedBox(0, 0, 0, w, h, color_white)
-    PIXEL.DrawSimpleText(self.Notification, "PIXEL.Karts.Notification", w * .5, h * .5, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+    PIXEL.DrawSimpleText(self.Notification, "Karts.Notification", w * .5, h * .5, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
     surface.SetAlphaMultiplier(1)
 end
