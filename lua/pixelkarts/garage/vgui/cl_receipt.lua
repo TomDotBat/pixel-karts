@@ -248,11 +248,11 @@ function PANEL:LayoutContent(w, h)
         self.Total:DockMargin(0, PIXEL.Scale(4), 0, 0)
     end
 
-    self.Buttons:SetTall(28)
+    self.Buttons:SetTall(PIXEL.Scale(28))
     self.Buttons:DockMargin(0, PIXEL.Scale(6), 0, 0)
     self.Buttons:InvalidateLayout(true)
 
-    self.PutAway:SetTall(28)
+    self.PutAway:SetTall(PIXEL.Scale(28))
     self.PutAway:DockMargin(0, PIXEL.Scale(4), 0, 0)
 
     self:SizeToChildren(false, true)
