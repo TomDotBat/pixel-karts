@@ -6,8 +6,7 @@ hook.Add("EntityTakeDamage", "PIXEL.Karts.Damage", function(tar, dmg)
         ), 0))
     elseif tar:IsPlayer() then
         local veh = tar:GetVehicle()
-        if not IsValid(veh) then return end
-        if not (veh.IsPIXELKart or veh.IsPIXELKartsPassengerSeat) then return end
+        if IsValid(veh) and (veh.IsPIXELKart or veh.IsPIXELKartsPassengerSeat) then return end
 
         local inflictor = dmg:GetInflictor()
         if dmg:GetAttacker() == tar or (IsValid(inflictor) and (inflictor.IsPIXELKart or inflictor.IsPIXELKartsPassengerSeat)) then
