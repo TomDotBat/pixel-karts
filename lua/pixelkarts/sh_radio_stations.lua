@@ -5,6 +5,10 @@ PIXEL.Karts.RadioStations = {
 		Link = "http://listen.radionomy.com/drive.m3u"
 	},
 	{
+		Name = "Capital FM",
+		Link = "http://media-ice.musicradio.com/CapitalUKMP3.m3u"
+	},
+	{
 		Name = "French Kiss FM",
 		Link = "http://stream.frenchkissfm.com/listen.pls"
 	},
