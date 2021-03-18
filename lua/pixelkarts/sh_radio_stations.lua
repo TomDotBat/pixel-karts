@@ -27,9 +27,5 @@ PIXEL.Karts.RadioStations = {
 	{
 		Name = "Rave Town",
 		Link = "http://144.217.129.213:8702/stream"
-	},
-	{
-		Name = "GG Radio",
-		Link = "http://sv.ggradio.net:8000/stream"
 	}
 }
