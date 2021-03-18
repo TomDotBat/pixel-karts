@@ -5,11 +5,19 @@ hook.Add("EntityTakeDamage", "PIXEL.Karts.Damage", function(tar, dmg)
             tar:GetNWInt("PIXEL.Karts.Health", 0) - dmg:GetDamage()
         ), 0))
     elseif tar:IsPlayer() then
+        do
+            local inflictor = dmg:GetInflictor()
+            if IsValid(inflictor) and (inflictor.IsPIXELKart or inflictor.IsPIXELKartsPassengerSeat) then
+                dmg:SetDamage(0)
+                dmg:ScaleDamage(0)
+                return true
+            end
+        end
+
         local veh = tar:GetVehicle()
         if not (IsValid(veh) and (veh.IsPIXELKart or veh.IsPIXELKartsPassengerSeat)) then return end
 
-        local inflictor = dmg:GetInflictor()
-        if dmg:GetAttacker() == tar or (IsValid(inflictor) and (inflictor.IsPIXELKart or inflictor.IsPIXELKartsPassengerSeat)) then
+        if dmg:GetAttacker() == tar then
             dmg:SetDamage(0)
             dmg:ScaleDamage(0)
             return true
