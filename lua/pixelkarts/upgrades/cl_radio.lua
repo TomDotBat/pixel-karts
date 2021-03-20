@@ -56,6 +56,7 @@ local function radioThink(kart, localKart, thirdperson)
     if not localKart and shouldPlay then
         local kartPos = kart:GetPos()
         local requiredDist = cvarOutsideDist:GetFloat()
+        if not localPly then return end
 
         if not isPlaying then requiredDist = requiredDist - 100 end
         local playOutside = cvarOutsideEnable:GetBool() and kartPos:Distance(localPly:EyePos()) < requiredDist
