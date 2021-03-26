@@ -1,5 +1,6 @@
 
 local garageConfig = PIXEL.Karts.Config.Garage
+if not garageConfig.DoorCollisions then return end
 
 local function makeDoor()
     if not IsValid(PIXEL.Karts.GarageDoor) then
