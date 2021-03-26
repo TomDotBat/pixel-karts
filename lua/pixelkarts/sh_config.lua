@@ -154,7 +154,7 @@ PIXEL.Karts.Config = {
         DoorCollisions = false,
 
         DoorFloorPos = Vector(-9970, 7134, -2763.6),
-        DoorFloorAngle = Angle(0, -90, 0),
+        DoorFloorAngle = Angle(0, -90, 5),
         DoorFloorWidth = 1440,
         DoorFloorHeight = 880,
 
