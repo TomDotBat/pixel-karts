@@ -84,7 +84,7 @@ PIXEL.Karts.GarageProps = {
         model = "models/mark2580/gtav/garage_stuff/car_battery_01.mdl",
         position = Vector(-9733.656250, 6957.750000, -2757.937500),
         angles = Angle(0.016479, 115.565186, 0.049438)
-    }    
+    }
     --{
     --    model = "models/props/cs_office/radio.mdl",
     --    position = Vector(-814.031250, -882.968750, -151.687500),
@@ -92,4 +92,3 @@ PIXEL.Karts.GarageProps = {
     --    needsCss = true
     --}
 }
-PIXEL.Karts.RemoveDecorations()
