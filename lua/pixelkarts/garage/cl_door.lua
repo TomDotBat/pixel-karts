@@ -28,19 +28,19 @@ end)
 
 CreateMaterial("pixel_karts_garage_door", "VertexLitGeneric", {
     ["$basetexture"] = "metal/metaldoor061a",
-    ["$basetexturetransform"] = "center .5 .5 scale .36 .36 rotate 0 translate .642 .95"
+    ["$basetexturetransform"] = "center .5 .5 scale .32 .32 rotate 0 translate .83 .5"
 })
 
 if not IsValid(PIXEL.Karts.GarageDoor) then
-    PIXEL.Karts.GarageDoor = ClientsideModel("models/hunter/plates/plate3x3.mdl")
+    PIXEL.Karts.GarageDoor = ClientsideModel("models/hunter/plates/plate4x4.mdl")
 end
 
 local door = PIXEL.Karts.GarageDoor
-door:SetModel("models/hunter/plates/plate3x3.mdl")
+door:SetModel("models/hunter/plates/plate4x4.mdl")
 door:SetMaterial("!pixel_karts_garage_door")
 door:SetPos(garageConfig.DoorPos)
 door:SetAngles(garageConfig.DoorAngle)
-door:CreateShadow()
+--door:DestroyShadow()
 
 local function moveDoor(targetPos)
     local prog = 0
