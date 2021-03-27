@@ -1,5 +1,4 @@
 
-
 local colors = PIXEL.Colors
 PIXEL.Karts.Radio = {}
 
