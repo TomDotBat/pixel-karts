@@ -4,14 +4,14 @@ PIXEL.Karts.Config = {
     AbilitiesInOtherKarts = false,
 
     KartPrice = {
-        5000000, --Non VIP
-        2000000, --VIP
-        1000000 --VIP Plus
+        6000000, --Non VIP
+        2500000, --VIP
+        1500000 --VIP Plus
     },
 
     RespawnPrice = { --False means free
+        15000,
         10000,
-        5000,
         false
     },
 
@@ -32,9 +32,9 @@ PIXEL.Karts.Config = {
             DataKey = "custom_color",
             Type = "Color",
             Price = {
-                50000,
-                30000,
-                25000
+                80000,
+                60000,
+                45000
             }
         },
         RainbowMode = {
@@ -42,8 +42,8 @@ PIXEL.Karts.Config = {
             DataKey = "rainbow_enabled",
             Price = {
                 0,
-                750000,
-                500000
+                800000,
+                600000
             },
             RequiredLevel = 2
         },
@@ -56,7 +56,7 @@ PIXEL.Karts.Config = {
             Price = {
                 0,
                 0,
-                75000
+                240000
             },
             RequiredLevel = 3
         },
@@ -66,7 +66,7 @@ PIXEL.Karts.Config = {
             DataKey = "rocket_boost_enabled",
             Type = "boolean",
             Price = {
-                500000,
+                800000,
                 250000,
                 100000
             },
@@ -86,8 +86,8 @@ PIXEL.Karts.Config = {
             Type = "boolean",
             Price = {
                 0,
-                500000,
-                400000
+                1200000,
+                800000
             },
             RequiredLevel = 2,
             UpwardsThrust = 32000,
@@ -111,9 +111,9 @@ PIXEL.Karts.Config = {
             DataKey = "radio_enabled",
             Type = "boolean",
             Price = {
-                20000,
-                20000,
-                15000
+                80000,
+                60000,
+                25000
             }
         },
         PassengerSeat = {
@@ -122,9 +122,9 @@ PIXEL.Karts.Config = {
             DataKey = "passenger_seat_enabled",
             Type = "boolean",
             Price = {
-                100000,
-                50000,
-                35000
+                500000,
+                350000,
+                200000
             },
             SeatPos = Vector(0, -37, 18),
             SeatAngle = Angle(0, 0, 0)
@@ -141,7 +141,7 @@ PIXEL.Karts.Config = {
             Price = {
                 0,
                 0,
-                100000
+                200000
             },
             RequiredLevel = 3,
             DefaultLogoId = "YCRtBVO"
