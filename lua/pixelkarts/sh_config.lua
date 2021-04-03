@@ -4,14 +4,14 @@ PIXEL.Karts.Config = {
     AbilitiesInOtherKarts = false,
 
     KartPrice = {
-        5000000, --Non VIP
-        2000000, --VIP
-        1000000 --VIP Plus
+        6000000, --Non VIP
+        2500000, --VIP
+        1500000 --VIP Plus
     },
 
     RespawnPrice = { --False means free
+        15000,
         10000,
-        5000,
         false
     },
 
@@ -32,9 +32,9 @@ PIXEL.Karts.Config = {
             DataKey = "custom_color",
             Type = "Color",
             Price = {
-                50000,
-                30000,
-                25000
+                80000,
+                60000,
+                45000
             }
         },
         RainbowMode = {
@@ -42,8 +42,8 @@ PIXEL.Karts.Config = {
             DataKey = "rainbow_enabled",
             Price = {
                 0,
-                750000,
-                500000
+                800000,
+                600000
             },
             RequiredLevel = 2
         },
@@ -56,7 +56,7 @@ PIXEL.Karts.Config = {
             Price = {
                 0,
                 0,
-                75000
+                240000
             },
             RequiredLevel = 3
         },
@@ -66,7 +66,7 @@ PIXEL.Karts.Config = {
             DataKey = "rocket_boost_enabled",
             Type = "boolean",
             Price = {
-                500000,
+                800000,
                 250000,
                 100000
             },
@@ -86,8 +86,8 @@ PIXEL.Karts.Config = {
             Type = "boolean",
             Price = {
                 0,
-                500000,
-                400000
+                1200000,
+                800000
             },
             RequiredLevel = 2,
             UpwardsThrust = 32000,
@@ -111,9 +111,9 @@ PIXEL.Karts.Config = {
             DataKey = "radio_enabled",
             Type = "boolean",
             Price = {
-                20000,
-                20000,
-                15000
+                80000,
+                60000,
+                25000
             }
         },
         PassengerSeat = {
@@ -122,9 +122,9 @@ PIXEL.Karts.Config = {
             DataKey = "passenger_seat_enabled",
             Type = "boolean",
             Price = {
-                100000,
-                50000,
-                35000
+                500000,
+                350000,
+                200000
             },
             SeatPos = Vector(0, -37, 18),
             SeatAngle = Angle(0, 0, 0)
@@ -141,7 +141,7 @@ PIXEL.Karts.Config = {
             Price = {
                 0,
                 0,
-                100000
+                200000
             },
             RequiredLevel = 3,
             DefaultLogoId = "YCRtBVO"
@@ -149,35 +149,36 @@ PIXEL.Karts.Config = {
     },
 
     Garage = {
-        DoorPos = Vector(-1034.875000, -818.687500, -125.937500),
-        DoorAngle = Angle(90, 0, 180.000000),
+        DoorPos = Vector(-9966, 7062.9, -2670),
+        DoorAngle = Angle(90, 0, 180),
+        DoorCollisions = false,
 
-        DoorFloorPos = Vector(-1037, -754, -195.9),
-        DoorFloorAngle = Angle(0, -90, 0),
-        DoorFloorWidth = 1280,
-        DoorFloorHeight = 820,
+        DoorFloorPos = Vector(-9970, 7134, -2763.6),
+        DoorFloorAngle = Angle(0, -90, 5),
+        DoorFloorWidth = 1440,
+        DoorFloorHeight = 880,
 
-        SpawnPos = Vector(-1175.125000, -815.625000, -160),
+        SpawnPos = Vector(-10104.146484, 7062.911621, -2736.141602),
         SpawnAngle = Angle(0, 90, 0),
 
-        Ramp = {
-            Model = "models/hunter/blocks/cube05x3x025.mdl",
-            Position = Vector(-1127.312500, -817.656250, -206.187500),
-            Angles = Angle(24.307251, 179.994507, 0.000000)
-        },
+        --Ramp = {
+        --    Model = "models/hunter/blocks/cube05x3x025.mdl",
+        --    Position = Vector(-1127.312500, -817.656250, -206.187500),
+        --    Angles = Angle(24.307251, 179.994507, 0.000000)
+        --},
 
-        EntryBoxPoint1 = Vector(-1034.979858, -752.671753, -55.503555),
-        EntryBoxPoint2 = Vector(-1118.906616, -882.049927, -199.116608),
+        EntryBoxPoint1 = Vector(-9970, 7134, -2780),
+        EntryBoxPoint2 = Vector(-10058, 6990, -2700),
 
-        EntryRangeCheckPoint = Vector(-1079.401855, -816.696777, -175),
+        EntryRangeCheckPoint = Vector(-10013.449219, 7062.537598, -2699.968750),
         EntryRangeCheckRadius = 120,
 
-        InsidePosition = Vector(-559.405640, -392.599762, -131.968750),
+        InsidePosition = Vector(-9928.836914, 6961.133301, -2439.531738),
 
-        LeavePosition = Vector(-1078.805908, -597.136536, -195),
+        LeavePosition = Vector(-10016.114258, 6945.311523, -2760),
         LeaveAngles = Angle(0, 0, 0),
 
-        KartPos = Vector(-881.531250, -790.531250, -191.343750),
+        KartPos = Vector(-9828.906250, 7059.781250, -2763.656250),
         KartAngles = Angle(0, -90, 0),
 
         KartHoloColor = Color(120, 200, 120, 255),
@@ -187,7 +188,7 @@ PIXEL.Karts.Config = {
         CameraAimOffset = Vector(2, 0, 12),
         CameraRotation = 40,
 
-        RadioOrigin = Vector(-814.031250, -882.968750, -151.687500),
+        RadioOrigin = Vector(-9842.997070, 6946.765625, -2711.539795    ),
         RadioDefaultVolume = .2,
         RadioURL = "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_p",
 

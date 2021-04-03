@@ -1,5 +1,6 @@
 
 local rampConfig = PIXEL.Karts.Config.Garage.Ramp
+if not rampConfig then return end
 
 local function buildRamp()
     if not IsValid(PIXEL.Karts.Ramp) then
