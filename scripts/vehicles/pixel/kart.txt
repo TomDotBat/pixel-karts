@@ -9,6 +9,7 @@
         "AddGravity" "0.6"
         "MaxAngularVelocity" "720"
     }
+
     "Engine"
     {
         "HorsePower" "100"
@@ -28,6 +29,7 @@
         "ShiftUpRPM" "3800"
         "ShiftDownRPM" "1600"
     }
+
     "Steering"
     {
         "DegreesSlow" "40"
@@ -53,11 +55,12 @@
         "SkidAllowed" "1"
         "DustCloud" "1"
     }
+
     "Axle"
     {
         "Wheel"
         {
-            "Radius" "8"
+            "Radius" "8.2"
             "Mass" "180"
             "Inertia" "0.9"
             "Damping" "0"
@@ -69,7 +72,7 @@
 
         "Suspension"
         {
-            "SpringConstant" "43"
+            "SpringConstant" "55"
             "SpringDamping" "0.5"
             "StabilizerConstant" "0"
             "SpringDampingCompression" "5"
@@ -79,11 +82,12 @@
         "TorqueFactor" "0.9"
         "BrakeFactor" "0.5"
     }
+
     "Axle"
     {
         "Wheel"
         {
-            "Radius" "12"
+            "Radius" "12.5"
             "Mass" "180"
             "Inertia" "0.9"
             "Damping" "0"
@@ -95,7 +99,7 @@
 
         "Suspension"
         {
-            "SpringConstant" "80"
+            "SpringConstant" "100"
             "SpringDamping" "0.5"
             "StabilizerConstant" "0"
             "SpringDampingCompression" "5"
