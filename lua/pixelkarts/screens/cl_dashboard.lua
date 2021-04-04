@@ -31,7 +31,7 @@ local iconBgHoverCol = Color(255, 255, 255, 20)
 local iconCol = PIXEL.Colors.PrimaryText
 local iconHoverCol = PIXEL.Colors.SecondaryText
 
-local function drawIcon(imgurId, scale, x, y, size, doClick)
+local function drawIcon(imgurId, scale, x, y, size, appName)
     return PIXEL.Karts.DrawImgurButton(imgurId, scale, nil, x, y, size, size, doClick, 1, iconBgCol, iconBgHoverCol, iconBgHoverCol, iconCol, iconHoverCol)
 end
 
@@ -51,7 +51,7 @@ PIXEL.Karts.SteeringWheelScreen("dashboard", "Dashboard", function(screen, kart,
     local appNo = 1
     --for rowNo = 1, rowCount do
         for appId, app in pairs(apps) do
-            if drawIcon(app:getImgurId(), .8, iconX, iconY, iconSize, doClick) then
+            if drawIcon(app:getImgurId(), .8, iconX, iconY, iconSize, app:getScreenId()) then
                 PIXEL.DrawSimpleText(app:getName(), "Karts.AppName", w * .5, fullH - 6, PIXEL.Colors.SecondaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_BOTTOM)
             end
 
@@ -61,7 +61,6 @@ PIXEL.Karts.SteeringWheelScreen("dashboard", "Dashboard", function(screen, kart,
     --end
 end, true, nil, true)
 
-PIXEL.Karts.SteeringWheelApp("abilities", "Abilities", "aaaaaaaaa")
 PIXEL.Karts.SteeringWheelApp("abilities2", "Abilitiesaa", "uL4bDBn")
 PIXEL.Karts.SteeringWheelApp("abilities4", "Abilitiesss", "uL4bDBn")
 PIXEL.Karts.SteeringWheelApp("abilities3", "Abilitiesvbb", "uL4bDBn")
