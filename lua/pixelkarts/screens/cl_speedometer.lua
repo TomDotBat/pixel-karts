@@ -41,4 +41,4 @@ PIXEL.Karts.SteeringWheelScreen("speedometer", "Speedometer", function(screen, k
     end
 end, true, false)
 
-PIXEL.Karts.SteeringWheelApp("speedometer", "Speedometer", "9uSMiMR")
+PIXEL.Karts.SteeringWheelApp("speedometer", "Speedometer", "9uSMiMR", "speedometer")
