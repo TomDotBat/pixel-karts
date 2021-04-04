@@ -4,7 +4,7 @@ PIXEL.RegisterFontUnscaled("Karts.Speedometer", "Open Sans SemiBold", 70)
 local BAR_COUNT = 5
 local UNITS_TO_MPH = 20
 local UPDATE_RATE = .25
-local MAX_SPEED = 35
+local MAX_SPEED = 40
 
 local barSpacing = 10
 local barW, barH = 50, 20
@@ -33,9 +33,12 @@ PIXEL.Karts.SteeringWheelScreen("speedometer", "Speedometer", function(screen, k
 
     for i = 1, BAR_COUNT do
         local thisBarH = barH * i
-        local barProg = (BAR_COUNT / i - 1)
-        print(barProg)
-        PIXEL.DrawRoundedBox(4, barX, barY - thisBarH, barW, thisBarH, smoothSpeed < (MAX_SPEED / barProg) and emptyBarCol or PIXEL.LerpColor(barProg, PIXEL.Colors.Positive, PIXEL.Colors.Negative))
+        local barProg = i / BAR_COUNT
+
+        PIXEL.DrawRoundedBox(
+            4, barX, barY - thisBarH, barW, thisBarH,
+            smoothSpeed <= (MAX_SPEED * barProg) and emptyBarCol or PIXEL.LerpColor(barProg, PIXEL.Colors.Positive, PIXEL.Colors.Negative)
+        )
         barX = barX + fullWidth
     end
 end, true, false)
