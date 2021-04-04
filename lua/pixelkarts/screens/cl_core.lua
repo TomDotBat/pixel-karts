@@ -80,6 +80,7 @@ function PIXEL.Karts.SteeringWheelScreen(id, name, drawFunc, showCursor, hideHea
     else
         local bodyH = scrH - headerH
         function tbl:draw(kart, localPly)
+            if not IsValid(kart) then return end
             drawFunc(self, kart, headerH, scrW, bodyH, localPly, scrH)
             drawHeader(self, kart, scrW, scrH, localPly)
         end

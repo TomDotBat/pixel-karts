@@ -15,8 +15,6 @@ local curSpeed, smoothSpeed = 0, 0
 local emptyBarCol = PIXEL.OffsetColor(PIXEL.Colors.Background, 8)
 
 PIXEL.Karts.SteeringWheelScreen("speedometer", "Speedometer", function(screen, kart, offset, w, h, localPly, fullH)
-    if not IsValid(kart) then return end
-
     if CurTime() >= nextUpdate then
         curSpeed = kart:GetVelocity():Length2D() / UNITS_TO_MPH
         nextUpdate = CurTime() + UPDATE_RATE
