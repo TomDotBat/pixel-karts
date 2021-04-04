@@ -4,7 +4,7 @@ local function startBuildMode()
     trackedEnts = {}
 
     hook.Add("OnEntityCreated", "PIXEL.Karts.DecorationBuilder", function(ent)
-        if not (IsValid(ent) and  ent:GetClass() == "prop_physics") then return end
+        if not (IsValid(ent) and ent:GetClass() == "prop_physics") then return end
         table.insert(trackedEnts, ent)
     end)
 end
