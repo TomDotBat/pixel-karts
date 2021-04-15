@@ -62,10 +62,12 @@ sam.command.new("resetkartlogo")
 
         target:PIXELKartsGetDataKey(logoConfig.DataKey, function(imgurId)
             if not imgurId then return end
+            if not IsValid(target) then return end
+
+            target:PIXELKartsSetDataKey(logoConfig.DataKey, logoConfig.DefaultLogoId)
             BroadcastLua([[file.Delete("pixel/]] .. imgurId .. [[.png")]])
         end)
 
-        target:PIXELKartsSetDataKey(logoConfig.DataKey, logoConfig.DefaultLogoId)
 
         local kart = target:GetNWEntity("PIXEL.Karts.PersonalKart", nil)
         if IsValid(kart) and kart.SetLogo then
