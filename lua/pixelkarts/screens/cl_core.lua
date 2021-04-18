@@ -105,13 +105,21 @@ function PIXEL.Karts.SteeringWheelScreen(id, name, drawFunc, showCursor, hideHea
     return tbl
 end
 
+function PIXEL.Karts.GetSteeringWheelScreen(id)
+    return screens[id]
+end
+
 local curScreen = "startup"
 function PIXEL.Karts.SelectSteeringWheelScreen(id)
     if not screens[id] then return end
     curScreen = id
 end
 
+local notifScreen
+
 hook.Add("PIXEL.Karts.EnteredKart", "PIXEL.Karts.Radio.DrawSteeringWheelScreen", function(kart)
+    notifScreen = PIXEL.Karts.GetSteeringWheelScreen("notification_overlay")
+
     tomdotkart = kart
 
     timer.Simple(1.4, function()
@@ -127,6 +135,7 @@ end)
 
 if not IsValid(tomdotkart) then return end
 local kart = tomdotkart
+notifScreen = PIXEL.Karts.GetSteeringWheelScreen("notification_overlay")
 
 local boneId
 for i = 0, kart:GetBoneCount() do
@@ -163,6 +172,9 @@ hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.DrawSteeringWheelScreen"
     PIXEL.Karts.Clip:Scissor2D(scrW, scrH)
         local screen = screens[curScreen]
         screen:draw(kart, localPly)
+
+        notifScreen:draw(kart, localPly)
+
         if screen:getShowCursor() then
             ui.drawCursor(0, 0, w, h, 32)
         end
