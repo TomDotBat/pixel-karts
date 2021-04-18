@@ -1,7 +1,5 @@
 
 PIXEL.Karts.Vehicles = PIXEL.Karts.Vehicles or {}
---@TODO: Variable naming. (Should be Vehicles)
-local karts = PIXEL.Karts.Vehicles
 
 --@TODO: Go back to the pixel Kart entity and refactor this.
 function PIXEL.Karts.InitialiseKart(kart)
@@ -23,6 +21,8 @@ hook.Add("OnEntityCreated", "PIXEL.Karts.InitialiseKarts", function(ent)
     end)
 end)
 
+local vehicles = PIXEL.Karts.Vehicles
+
 --@TODO: REFACTOR THIS.
 local localPly, curKart
 hook.Add("Think", "PIXEL.Karts.KartThink", function()
@@ -39,9 +39,9 @@ hook.Add("Think", "PIXEL.Karts.KartThink", function()
         curKart = nil
     end
 
-    for steamId, veh in pairs(karts) do
+    for steamId, veh in pairs(vehicles) do
         if not IsValid(veh) then
-            karts[steamId] = nil
+            vehicles[steamId] = nil
             continue
         end
 
@@ -55,9 +55,9 @@ hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.DrawExtras", function(sk
     if not IsValid(localPly) then localPly = LocalPlayer() end
     local plyPos = localPly:GetPos()
 
-    for steamId, veh in pairs(karts) do
+    for steamId, veh in pairs(vehicles) do
         if not IsValid(veh) then
-            karts[steamId] = nil
+            vehicles[steamId] = nil
             continue
         end
 
@@ -74,9 +74,9 @@ local function setupModelUpdater(shouldFastUpdate)
 
     if shouldFastUpdate then
         hook.Add("PreRender", "PIXEL.Karts.ModelUpdater", function()
-            for steamId, veh in pairs(karts) do
+            for steamId, veh in pairs(vehicles) do
                 if not IsValid(veh) then
-                    karts[steamId] = nil
+                    vehicles[steamId] = nil
                     continue
                 end
 
