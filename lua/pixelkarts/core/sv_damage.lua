@@ -1,5 +1,5 @@
 
-hook.Add("EntityTakeDamage", "PIXEL.Karts.Damage", function(tar, dmg)
+hook.Add("EntityTakeDamage", "PIXEL.Karts.Damage", function(target, dmg)
     if target.IsPIXELKart then
         target:SetNWInt("PIXEL.Karts.Health", math.max(math.floor(
             target:GetNWInt("PIXEL.Karts.Health", 0) - dmg:GetDamage()
