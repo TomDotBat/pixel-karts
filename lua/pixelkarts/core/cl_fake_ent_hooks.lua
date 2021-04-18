@@ -1,7 +1,9 @@
 
 PIXEL.Karts.Vehicles = PIXEL.Karts.Vehicles or {}
+--@TODO: Variable naming. (Should be Vehicles)
 local karts = PIXEL.Karts.Vehicles
 
+--@TODO: Go back to the pixel Kart entity and refactor this.
 function PIXEL.Karts.InitialiseKart(kart)
     for k, v in pairs(PIXEL.Karts.KartTable) do
         kart[k] = v
@@ -11,7 +13,7 @@ function PIXEL.Karts.InitialiseKart(kart)
 
     PIXEL.Karts.Vehicles[kart:GetNWString("PIXEL.Karts.KartID", "clientside")] = kart
 end
-
+-- @TODO: no.
 hook.Add("OnEntityCreated", "PIXEL.Karts.InitialiseKarts", function(ent)
     timer.Create("PIXEL.Karts.InitialiseKart:" .. ent:EntIndex(), .5, 8, function()
         if not IsValid(ent) then return end
@@ -21,6 +23,7 @@ hook.Add("OnEntityCreated", "PIXEL.Karts.InitialiseKarts", function(ent)
     end)
 end)
 
+--@TODO: REFACTOR THIS.
 local localPly, curKart
 hook.Add("Think", "PIXEL.Karts.KartThink", function()
     if not IsValid(localPly) then localPly = LocalPlayer() end

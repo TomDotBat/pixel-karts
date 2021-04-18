@@ -1,6 +1,8 @@
 
 local garageConfig = PIXEL.Karts.Config.Garage
 
+local distCheckRadiusSqr = garageConfig.EntryRangeCheckRadius * garageConfig.EntryRangeCheckRadius
+--@TODO: VAR PROXIES
 local function togglePlayerGarageState(ply, forced)
     if ply:GetNWBool("PIXEL.Karts.IsInGarage", false) then
         ply:SetNWBool("PIXEL.Karts.IsInGarage", false)
@@ -30,7 +32,7 @@ local function togglePlayerGarageState(ply, forced)
         net.Send(ply)
     else
         if ply:Health() < 1 then return end
-        if ply:GetPos():DistToSqr(garageConfig.EntryRangeCheckPoint) > garageConfig.EntryRangeCheckRadius ^ 2 then return end
+        if ply:GetPos():DistToSqr(garageConfig.EntryRangeCheckPoint) > distCheckRadiusSqr then return end
 
         local veh = ply:GetVehicle()
         if IsValid(veh) then
@@ -79,7 +81,7 @@ local function togglePlayerGarageState(ply, forced)
 end
 util.AddNetworkString("PIXEL.Karts.GarageEntered")
 PIXEL.Karts.TogglePlayerGarageState = togglePlayerGarageState
-
+---@Todo VARPROXIES?
 net.Receive("PIXEL.Karts.GarageStateUpdate", function(len, ply)
     local steamId = ply:SteamID64()
     if timer.Exists("PIXEL.Karts.GarageStateUpdateCooldown:" .. steamId) then return end
@@ -95,6 +97,7 @@ net.Receive("PIXEL.Karts.PurchaseKart", function(len, ply)
     if ply.PIXELKartsHasKart then return end
 
     local price = PIXEL.Karts.Config.KartPrice[ply:PIXELKartsGetLevel()]
+    ---@Todo Chuck this in the config
     if not ply:canAfford(price) then
         togglePlayerGarageState(ply)
         PIXEL.Karts.Notify(ply, "You can't afford to buy a kart.", 1)
@@ -103,12 +106,13 @@ net.Receive("PIXEL.Karts.PurchaseKart", function(len, ply)
 
     ply:addMoney(-price)
 
+     
     ply:PIXELKartsSetDataKey("purchased_kart", true, function()
         if not IsValid(ply) then return end
-
+        ---@Todo Chuck this in the config
         PIXEL.Karts.Notify(ply, "Purchased a kart for " .. DarkRP.formatMoney(price) .. ".", 1)
         ply.PIXELKartsHasKart = true
-
+        ---@Todo Chuck this in the config
         local randColor = PIXEL.Karts.Config.DefaultColors[math.random(#PIXEL.Karts.Config.DefaultColors)]
         net.Start("PIXEL.Karts.PurchaseKart")
          net.WriteColor(randColor)
@@ -186,6 +190,7 @@ util.AddNetworkString("PIXEL.Karts.PurchaseKartUpgrades")
 
 
 net.Receive("PIXEL.Karts.RespawnKart", function(len, ply)
+-- Rate limit
     if not ply:GetNWBool("PIXEL.Karts.IsInGarage", false) then return end
     if ply.PIXELKartsHasKart then return end
 
@@ -214,6 +219,8 @@ util.AddNetworkString("PIXEL.Karts.RespawnKart")
 
 
 net.Receive("PIXEL.Karts.PutAwayKart", function(len, ply)
+
+-- Rate limit
     if not ply:GetNWBool("PIXEL.Karts.IsInGarage", false) then return end
 
     ply:SetPos(garageConfig.LeavePosition)
@@ -242,3 +249,32 @@ hook.Add("PlayerDisconnected", "PIXEL.Karts.CleanupOnLeave", function(ply)
     if not IsValid(kart) then return end
     SafeRemoveEntity(kart)
 end)
+
+--[[
+
+do
+    local cache = {}
+
+    -----
+    --- Groups string into 3's.
+    --- Eg: 25000000 = 25,000,000
+    --- @param money string
+    function STRING_FORMATTING.FormatMoney(money, cached)
+        money = tostring(money)
+        if not cached and cache[money] then return cache[money] end
+        local amount = math.floor(money:len() / 3)
+        local remainder =  money:len() - (amount*3)
+
+        local remainderStr = money:sub(1,remainder)
+        local restOfStr = money:sub(remainder+1)
+
+        local str = (remainderStr:len() == 0 or #money < 4) and "" or ","
+        for i = 0, amount-1 do
+            str = str .. (i == 0 and "" or ",") .. restOfStr:sub((i * 3) + 1, (i + 1) * 3)
+        end
+        cache[money] = remainderStr .. str
+        return remainderStr .. str
+    end
+end
+
+]]--

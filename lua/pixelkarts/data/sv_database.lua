@@ -1,3 +1,5 @@
+---@TODO: USE RELATIONAL DATABASES.
+
 
 require("mysqloo")
 
@@ -33,6 +35,37 @@ function database:onConnected()
     q:start()
 end
 
+--[[ TODO:
+local function query(query, onSuccess, onError, ...)
+    local query1 = self.instance:prepare(string.format(query, args))
+
+    function query1:onSuccess(data)
+        if onSuccess then
+            onSuccess(data)
+        end
+    end
+
+    function query1:onError(err)
+        if onError then
+            onError(err)
+        end
+
+        print("SQL Error: " .. err .. "\nOn query: " .. query)
+    end
+
+    for i, v in ipairs({...}) do
+        local argType = string.ToTable(type(v))
+        argType[1] = string.upper(argType[1])
+        argType = table.concat(argType)
+        query1["set" .. argType](query1, i, v)
+    end
+
+    query1:start()
+end
+
+]]--
+
+
 function database:onConnectionFailed(err)
     print("[PIXEL Karts] WARNING - Database connection failed.\n" .. err)
 end
@@ -67,6 +100,7 @@ function PIXEL.Karts.SetPlayerData(steamid, data, callback)
     data = util.TableToJSON(data)
     if not data then callback(false) end
 
+    -- TODO USE PREPARED.
     data = database:escape(data)
 
     local q = database:query(string.format([[INSERT INTO %s(steamid, data) VALUES ("%s", "%s") ON DUPLICATE KEY UPDATE steamid="%s", data="%s";]], tblPlyData, steamid, data, steamid, data))

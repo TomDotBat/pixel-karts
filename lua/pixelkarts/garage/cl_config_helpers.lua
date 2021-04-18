@@ -17,7 +17,7 @@ local function endBuildMode()
     for i, ent in ipairs(trackedEnts) do
         if not IsValid(ent) then continue end
         local pos, ang = ent:GetPos(), ent:GetAngles()
-
+        
         print(string.format([[{
     model = "%s",
     position = Vector(%f, %f, %f),

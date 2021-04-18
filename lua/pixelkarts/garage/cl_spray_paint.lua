@@ -39,6 +39,7 @@ local function startParticleEffects(can, col)
         end
 
         local color = PIXEL.Karts.SprayPaintColor
+        ---@TODO: Register an effect this is aids.
         local particle = emitter:Add(string.format("particle/smokesprites_00%02d", math.random(7, 16)), can:LocalToWorld(particleOrigin))
         particle:SetColor(color.r, color.g, color.b, color.a)
         particle:SetVelocity(can:GetAngles():Forward() * 100)

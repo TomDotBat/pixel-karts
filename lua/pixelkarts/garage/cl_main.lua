@@ -1,5 +1,6 @@
 
 function PIXEL.Karts.OpenGarageMenu(data, kartPos)
+    
     RunConsoleCommand("simple_thirdperson_enabled", 0)
 
     if PIXEL.HUD and IsValid(PIXEL.HUD.Panel) then

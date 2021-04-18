@@ -8,6 +8,7 @@ local localPly
 hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.GarageDoor", function(depth, skybox)
     if skybox then return end
     if not IsValid(localPly) then localPly = LocalPlayer() end
+    -- We can use https://wiki.facepunch.com/gmod/Entity:SetNWVarProxy
     if localPly:GetNWBool("PIXEL.Karts.IsInGarage", false) then return end
 
     local distance = (garageConfig.DoorFloorPos - localPly:EyePos()):Length()
@@ -26,11 +27,12 @@ hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.GarageDoor", function(de
     end
 end)
 
+----@TODO YOU KNOW WHAT TO DO.
 CreateMaterial("pixel_karts_garage_door", "VertexLitGeneric", {
     ["$basetexture"] = "metal/metaldoor061a",
     ["$basetexturetransform"] = "center .5 .5 scale .32 .32 rotate 0 translate .83 .5"
 })
-
+--- What the fuck is this.
 if not IsValid(PIXEL.Karts.GarageDoor) then
     PIXEL.Karts.GarageDoor = ClientsideModel("models/hunter/plates/plate4x4.mdl")
 end

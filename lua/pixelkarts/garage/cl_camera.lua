@@ -7,11 +7,13 @@ local viewData = {
 
 local targetCamPos, camPos
 local aimPos = garageConfig.KartPos + garageConfig.CameraAimOffset
+---@todo Bring this within scope.
 
 local wobbleAngle = Angle()
 
 local curTime = CurTime
 local lerpVector, sin, cos = Lerp, math.sin, math.cos
+local frameTime = FrameTime
 
 function PIXEL.Karts.SetupGarageCamera()
     PIXEL.Karts.ResetGarageCamera(true)
@@ -20,16 +22,18 @@ function PIXEL.Karts.SetupGarageCamera()
         wobbleAngle[1] = sin(curTime() * .8)
         wobbleAngle[2] = cos(curTime() * .6)
 
-        camPos = lerpVector(FrameTime() * 8, camPos, targetCamPos)
+        camPos = lerpVector(frameTime() * 8, camPos, targetCamPos)
 
         viewData.origin = camPos
+        -- Localise this (:Angle can be localise).
         viewData.angles = (aimPos - camPos):Angle() + wobbleAngle
         viewData.fov = fov
 
         return viewData
     end)
 end
-
+--- @todo localise Vector.
+--- @todo Localise math funcs.
 function PIXEL.Karts.MoveGarageCamera(rotation, offset)
     rotation = math.rad(rotation)
 

@@ -12,6 +12,7 @@ end
 
 function PIXEL.Karts.SpawnDecorations()
     for _, decoration in ipairs(PIXEL.Karts.GarageProps) do
+        --- @todo Localise IsMounted
         if decoration.needsCss and not IsMounted("cstrike") then continue end
 
         local prop = ClientsideModel(decoration.model, RENDERGROUP_STATIC)

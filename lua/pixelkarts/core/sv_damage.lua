@@ -1,4 +1,7 @@
 
+--- @TODO
+--- Rename tar to target.
+--- 
 hook.Add("EntityTakeDamage", "PIXEL.Karts.Damage", function(tar, dmg)
     if tar.IsPIXELKart then
         tar:SetNWInt("PIXEL.Karts.Health", math.max(math.floor(

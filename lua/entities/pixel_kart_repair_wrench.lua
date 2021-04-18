@@ -9,7 +9,7 @@ ENT.Category = "PIXEL Karts"
 ENT.Author = "Tom.bat"
 ENT.Spawnable = true
 ENT.AdminOnly = false
-
+--@TODO: We could make this a seperate file.
 if SERVER then
     function ENT:Initialize()
         self:SetModel("models/mark2580/gtav/garage_stuff/span_02.mdl")
@@ -31,6 +31,7 @@ if SERVER then
         SafeRemoveEntityDelayed(self, 0)
     end
 else
+    --@TODO: We could make this a seperate file.
     function ENT:Draw()
         self:DrawModel()
         PIXEL.DrawEntOverhead(self, "Repair Wrench", nil, nil, 0.034)

@@ -1,6 +1,9 @@
 
+--@TODO: Could be made into a creator and made at runtime.
+
 AddCSLuaFile()
 
+--@TODO: We could make this a seperate file.
 PIXEL.Karts.KartTable = PIXEL.Karts.KartTable or {}
 local kart = PIXEL.Karts.KartTable
 kart.IsPIXELKart = true
@@ -82,6 +85,7 @@ function ENT:Initialize()
     local owner = self:CPPIGetOwner()
     local ownerId = owner:SteamID64()
     if PIXEL.Karts.Vehicles[ownerId] then
+        --@TODO: DEbug message could be disabled.
         PIXEL.Karts.Notify(owner, "Ayy wassup bro i think u got too many karts there.", 1)
         SafeRemoveEntityDelayed(self, .1)
         return

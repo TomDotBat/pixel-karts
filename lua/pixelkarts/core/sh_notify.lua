@@ -1,5 +1,6 @@
 
 if CLIENT then
+    -- Suggestion: Make a debug parameter at the end for debug.
     function PIXEL.Karts.Notify(text, type, len)
         surface.PlaySound("buttons/lightswitch2.wav")
         notification.AddLegacy(text, type or 0, len or 5)

@@ -8,7 +8,7 @@ timer.Create("PIXEL.Karts.GarageEntryBoxThink", .5, 0, function()
         localPly = LocalPlayer()
         return
     end
-
+    ---@TODO net var proxy
     if localPly:GetNWBool("PIXEL.Karts.IsInGarage", false) then
         inGarage = false
         return
