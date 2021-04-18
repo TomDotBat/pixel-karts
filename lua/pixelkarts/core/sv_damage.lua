@@ -1,13 +1,10 @@
 
---- @TODO
---- Rename tar to target.
---- 
 hook.Add("EntityTakeDamage", "PIXEL.Karts.Damage", function(tar, dmg)
-    if tar.IsPIXELKart then
-        tar:SetNWInt("PIXEL.Karts.Health", math.max(math.floor(
-            tar:GetNWInt("PIXEL.Karts.Health", 0) - dmg:GetDamage()
+    if target.IsPIXELKart then
+        target:SetNWInt("PIXEL.Karts.Health", math.max(math.floor(
+            target:GetNWInt("PIXEL.Karts.Health", 0) - dmg:GetDamage()
         ), 0))
-    elseif tar:IsPlayer() then
+    elseif target:IsPlayer() then
         do
             local inflictor = dmg:GetInflictor()
             if IsValid(inflictor) and (inflictor.IsPIXELKart or inflictor.IsPIXELKartsPassengerSeat) then
@@ -17,10 +14,10 @@ hook.Add("EntityTakeDamage", "PIXEL.Karts.Damage", function(tar, dmg)
             end
         end
 
-        local veh = tar:GetVehicle()
+        local veh = target:GetVehicle()
         if not (IsValid(veh) and (veh.IsPIXELKart or veh.IsPIXELKartsPassengerSeat)) then return end
 
-        if dmg:GetAttacker() == tar then
+        if dmg:GetAttacker() == target then
             dmg:SetDamage(0)
             dmg:ScaleDamage(0)
             return true
