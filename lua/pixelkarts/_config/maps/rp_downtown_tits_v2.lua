@@ -99,3 +99,6 @@ CONFIG.GarageProps = {
         NeedsCss = true
     }
 }
+
+--Ignore anything below this.
+CONFIG = nil

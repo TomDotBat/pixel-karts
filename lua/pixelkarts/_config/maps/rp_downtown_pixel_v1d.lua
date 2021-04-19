@@ -113,3 +113,6 @@ CONFIG.GarageProps = {
         Angles = Angle(0.016479, 115.565186, 0.049438)
     }
 }
+
+--Ignore anything below this.
+CONFIG = nil

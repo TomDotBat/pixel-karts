@@ -6,3 +6,6 @@
 ]]
 
 local CONFIG = PIXEL.Karts.Config
+
+--Ignore anything below this.
+CONFIG = nil
