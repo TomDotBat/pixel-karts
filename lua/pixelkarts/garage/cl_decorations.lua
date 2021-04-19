@@ -20,11 +20,11 @@ function PIXEL.Karts.SpawnDecorations()
     local insert = table.insert
 
     for _, decoration in ipairs(garageProps) do
-        if decoration.needsCss and not isMounted("cstrike") then continue end
+        if decoration.NeedsCss and not isMounted("cstrike") then continue end
 
-        local prop = createClientsideModel(decoration.model, renderGroupStatic)
-        prop:SetPos(decoration.position)
-        prop:SetAngles(decoration.angles)
+        local prop = createClientsideModel(decoration.Model, renderGroupStatic)
+        prop:SetPos(decoration.Position)
+        prop:SetAngles(decoration.Angles)
 
         insert(decorations, prop)
     end
