@@ -21,6 +21,9 @@ local CONFIG = PIXEL.Karts.Config
     your console. This will print out a prop config you can paste into this file, note that the "NeedsCss"
     key doesn't get added automatically, so you will have to find the CSS props in the output and add the key
     yourself.
+    If you want to add props individually without the builder, you can use the "pixel_karts_print_target"
+    command. To use it, place a prop where you prefer it to be, look at it and run the command. It will
+    print a prop config table for you to use in this file.
 
     The Garage Props system is entirely optional, but recommended for performance benefits, you can
     simply empty the GarageProps table or delete it entirely to use your own system (PermaProps for example).
