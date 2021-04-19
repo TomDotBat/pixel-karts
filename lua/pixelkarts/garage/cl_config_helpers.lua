@@ -17,11 +17,11 @@ local function endBuildMode()
     for i, ent in ipairs(trackedEnts) do
         if not IsValid(ent) then continue end
         local pos, ang = ent:GetPos(), ent:GetAngles()
-        
+
         print(string.format([[{
-    model = "%s",
-    position = Vector(%f, %f, %f),
-    angles = Angle(%f, %f, %f)
+    Model = "%s",
+    Position = Vector(%f, %f, %f),
+    Angles = Angle(%f, %f, %f)
 },]], ent:GetModel(), pos.x, pos.y, pos.z, ang.p, ang.y, ang.r))
     end
 
@@ -45,9 +45,9 @@ concommand.Add("pixel_karts_print_target", function()
     local pos, ang = ent:GetPos(), ent:GetAngles()
 
     print(string.format([[{
-model = "%s",
-position = Vector(%f, %f, %f),
-angles = Angle(%f, %f, %f)
+Model = "%s",
+Position = Vector(%f, %f, %f),
+Angles = Angle(%f, %f, %f)
 },]], ent:GetModel(), pos.x, pos.y, pos.z, ang.p, ang.y, ang.r))
 end)
 
@@ -70,8 +70,8 @@ concommand.Add("pixel_karts_print_bone_manipulations", function()
         ang = ent:WorldToLocalAngles(ang)
 
         print(string.format([[[%i] = {
-    position = Vector(%f, %f, %f),
-    angles = Angle(%f, %f, %f)
+    Position = Vector(%f, %f, %f),
+    Angles = Angle(%f, %f, %f)
 },]], i, pos.x, pos.y, pos.z, ang.p, ang.y, ang.r))
     end
 end)
