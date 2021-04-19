@@ -25,8 +25,7 @@ function ENT:Initialize()
     local owner = self:CPPIGetOwner()
     local ownerId = owner:SteamID64()
     if PIXEL.Karts.Vehicles[ownerId] then
-        --@TODO: DEbug message could be disabled.
-        PIXEL.Karts.Notify(owner, "Ayy wassup bro i think u got too many karts there.", 1)
+        PIXEL.Karts.Notify(owner, "You can't have more than one kart spawned at once.", 1)
         SafeRemoveEntityDelayed(self, .1)
         return
     end
