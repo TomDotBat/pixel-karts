@@ -1,37 +1,12 @@
 
-local garageConfig = PIXEL.Karts.Config.Garage
-
-local hideDist, fadeStartDist = 400, 100
-PIXEL.RegisterFontUnscaled("Karts.GarageDoor", "Open Sans Bold", 255)
-
-local localPly
-hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.GarageDoor", function(depth, skybox)
-    if skybox then return end
-    if not IsValid(localPly) then localPly = LocalPlayer() end
-    -- We can use https://wiki.facepunch.com/gmod/Entity:SetNWVarProxy
-    if localPly:GetNWBool("PIXEL.Karts.IsInGarage", false) then return end
-
-    local distance = (garageConfig.DoorFloorPos - localPly:EyePos()):Length()
-    if distance < hideDist then
-        surface.SetAlphaMultiplier(math.min(math.Remap(distance, fadeStartDist, hideDist, .8, 0), .8))
-
-        local w, h = garageConfig.DoorFloorWidth, garageConfig.DoorFloorHeight
-        cam.Start3D2D(garageConfig.DoorFloorPos, garageConfig.DoorFloorAngle, .1)
-            surface.SetDrawColor(PIXEL.Colors.Primary)
-            surface.DrawRect(0, 0, w, h)
-            PIXEL.DrawOutlinedBox(0, 0, w, h, 25, PIXEL.Colors.PrimaryText)
-            PIXEL.DrawSimpleText("PIXEL Karts", "Karts.GarageDoor", w * .5, h * .5, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-        cam.End3D2D()
-
-        surface.SetAlphaMultiplier(1)
-    end
-end)
+local doorConfig = PIXEL.Karts.Config.GarageDoor
 
 ----@TODO YOU KNOW WHAT TO DO.
 CreateMaterial("pixel_karts_garage_door", "VertexLitGeneric", {
-    ["$basetexture"] = "metal/metaldoor061a",
-    ["$basetexturetransform"] = "center .5 .5 scale .32 .32 rotate 0 translate .83 .5"
+    ["$basetexture"] = doorConfig.MaterialTexture,
+    ["$basetexturetransform"] = doorConfig.MaterialSettings
 })
+
 --- What the fuck is this.
 if not IsValid(PIXEL.Karts.GarageDoor) then
     PIXEL.Karts.GarageDoor = ClientsideModel("models/hunter/plates/plate4x4.mdl")
@@ -40,8 +15,8 @@ end
 local door = PIXEL.Karts.GarageDoor
 door:SetModel("models/hunter/plates/plate4x4.mdl")
 door:SetMaterial("!pixel_karts_garage_door")
-door:SetPos(garageConfig.DoorPos)
-door:SetAngles(garageConfig.DoorAngle)
+door:SetPos(doorConfig.Position)
+door:SetAngles(doorConfig.Angles)
 --door:DestroyShadow()
 
 local function moveDoor(targetPos)
@@ -65,23 +40,22 @@ local function playDoorSound()
     end)
 end
 
-local movementOffset = Vector(0, 0, 118)
 function PIXEL.Karts.OpenGarageDoor()
     if not IsValid(door) then return end
     playDoorSound()
-    moveDoor(garageConfig.DoorPos + movementOffset)
+    moveDoor(doorConfig.Position + doorConfig.OpenOffset)
 end
 
 function PIXEL.Karts.CloseGarageDoor()
     if not IsValid(door) then return end
     playDoorSound()
-    moveDoor(garageConfig.DoorPos)
+    moveDoor(doorConfig.Position)
 end
 
 local flipAngle = Angle(0, 180, 0)
 function PIXEL.Karts.FlipGarageDoor(state)
     if not IsValid(door) then return end
-    door:SetAngles(state and (garageConfig.DoorAngle + flipAngle) or garageConfig.DoorAngle)
+    door:SetAngles(state and (doorConfig.Angles + flipAngle) or doorConfig.Angles)
 end
 
 --local closestEnt

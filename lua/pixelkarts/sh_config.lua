@@ -26,15 +26,6 @@ PIXEL.Karts.Config = {
     ExtraDrawRange = 200000,
 
     Garage = {
-        DoorPos = Vector(-9966, 7062.9, -2670),
-        DoorAngle = Angle(90, 0, 180),
-        DoorCollisions = false,
-
-        DoorFloorPos = Vector(-9970, 7134, -2763.6),
-        DoorFloorAngle = Angle(0, -90, 5),
-        DoorFloorWidth = 1440,
-        DoorFloorHeight = 880,
-
         SpawnPos = Vector(-10104.146484, 7062.911621, -2736.141602),
         SpawnAngle = Angle(0, 90, 0),
 

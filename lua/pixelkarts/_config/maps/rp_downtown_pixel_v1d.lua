@@ -2,6 +2,40 @@
 local CONFIG = PIXEL.Karts.Config
 
 --[[
+    PIXEL Karts garage door configuration.
+
+    This is for creating our own fake door. As the client cannot
+    control map doors by default, we delete it, make our own
+    and animate it how we like.
+]]
+
+CONFIG.GarageDoor = {
+    Position = Vector(-9966, 7062.9, -2670),
+    Angles = Angle(90, 0, 180),
+    OpenOffset = Vector(0, 0, 118), --The change difference in position when the door is fully opened.
+    MaterialTexture = "metal/metaldoor061a", --The texture that should be applied to our fake door.
+    MaterialSettings = "center .5 .5 scale .32 .32 rotate 0 translate .83 .5", --Overrides the texture transform with our own so we can stretch/scale the material.
+    MakeCollisions = false --Creates a prop for players to collide with when they walk into the garage.
+}
+
+--[[
+    PIXEL Karts garage door mat configuration.
+
+    This is the 3D2D door mat that appears on the ground in front of the
+    garage when nearby. You can change the text and positioning/sizing of
+    it, or disable it entirely depending on your preference.
+]]
+
+CONFIG.GarageDoorMat = {
+    Enabled = true, --Set to false to disable the door mat.
+    Text = "PIXEL Karts", --The text that should appear on the door mat.
+    Position = Vector(-9970, 7134, -2763.6),
+    Angles = Angle(0, -90, 5),
+    Width = 1440,
+    Height = 880
+}
+
+--[[
     Placement configuration for props within the PIXEL Karts Garage.
 
     Example prop:
