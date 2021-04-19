@@ -212,22 +212,3 @@ PIXEL.Karts.Config = {
         }
     }
 }
-
-local meta = FindMetaTable("Player")
-
-function meta:PIXELKartsIsLevel(level)
-    if not level then return true end
-    if level == 0 or level == 1 then return true end
-
-    if level == 2 then
-        return self:IsUserGroup("vip") or self:IsUserGroup("vip+")
-    else
-        return self:IsUserGroup("vip+")
-    end
-end
-
-function meta:PIXELKartsGetLevel()
-    if self:IsUserGroup("vip+") then return 3 end
-    if self:IsUserGroup("vip") then return 2 end
-    return 1
-end
