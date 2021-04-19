@@ -11,9 +11,11 @@ function PIXEL.Karts.RemoveDecorations()
 end
 
 function PIXEL.Karts.SpawnDecorations()
+    local isMounted = IsMounted
+
     for _, decoration in ipairs(PIXEL.Karts.GarageProps) do
         --- @todo Localise IsMounted
-        if decoration.needsCss and not IsMounted("cstrike") then continue end
+        if decoration.needsCss and not isMounted("cstrike") then continue end
 
         local prop = ClientsideModel(decoration.model, RENDERGROUP_STATIC)
         prop:SetPos(decoration.position)
