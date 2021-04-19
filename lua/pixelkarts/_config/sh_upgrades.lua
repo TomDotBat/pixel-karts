@@ -29,6 +29,9 @@ end
         RequiredLevel = 2 --The rank level required to buy/use this upgrade.
     }
 
+    Note: All values related to ability/upgrade specifics have been tweaked and playtested already,
+    This means it's unlikely that you will change anything other than pricing.
+
     Warning: NEVER change the upgrade key name (the thing inside of the square brackets in UPGRADES[***]).
 ]]
 
