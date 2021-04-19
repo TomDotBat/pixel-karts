@@ -7,7 +7,7 @@ local tblPlyData = "pixel_karts_player_data"
 
 local database = PIXEL.Karts.Database
 if not database then
-    local credentials = PIXEL.Karts.DatabaseCredentials
+    local credentials = PIXEL.Karts.Config.DatabaseCredentials
     PIXEL.Karts.Database = mysqloo.connect(
         credentials.Host,
         credentials.Username,

@@ -8,7 +8,7 @@
     latest version here: https://github.com/FredyH/MySQLOO
 ]]
 
-PIXEL.Karts.DatabaseCredentials = {
+PIXEL.Karts.Config.DatabaseCredentials = {
     Host = "127.0.0.1", --The address of your database server, use "127.0.0.1" instead of "localhost".
     Post = 3306, --The port your database is running on, usually 3306.
     Database = "pixel_karts", --The database you want PIXEL Karts to use. Make sure it exists before use.
