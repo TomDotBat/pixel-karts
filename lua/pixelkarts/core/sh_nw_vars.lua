@@ -1,6 +1,5 @@
 
 function PIXEL.Karts.SetupNWVars(kart)
-    --TODO: Change IsClientSide to IsGarage.
     if kart.IsClientside then
         kart.KartVars = {}
         for upgradeName, upgrade in pairs(PIXEL.Karts.Config.Upgrades) do
