@@ -1,6 +1,8 @@
 
 PIXEL = PIXEL or {}
-PIXEL.Karts = PIXEL.Karts or {}
+PIXEL.Karts = PIXEL.Karts or {
+    Config = {}
+}
 
 local function loadDirectory(dir)
     local fil, fol = file.Find(dir .. "/*", "LUA")
