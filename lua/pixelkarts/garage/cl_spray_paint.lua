@@ -60,13 +60,13 @@ end
 
 local function playSpraySound(can)
     if not IsValid(PIXEL.Karts.SprayPaintSound) then
-        sound.PlayURL(garageConfig.SprayPaintURL, "noblock 3d", function(station)
+        sound.PlayURL(garageConfig.SprayPaintSoundURL, "noblock 3d", function(station)
             if not IsValid(station) then return end
             if not IsValid(can) then return end
             PIXEL.Karts.SprayPaintSound = station
 
             station:SetPos(can:GetPos())
-            station:SetVolume(garageConfig.SprayPaintVolume)
+            station:SetVolume(garageConfig.SprayPaintSoundVolume)
             station:Play()
         end)
     else
