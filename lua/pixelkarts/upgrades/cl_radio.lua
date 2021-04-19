@@ -27,8 +27,10 @@ function PIXEL.Karts.Radio.SetMediaVolume(media, vol)
     end
 end
 
-local PCS = PIXEL.Karts.Radio._PCS or {}
-PIXEL.Karts.Radio._PCS = PCS
+local PCS = PIXEL.Karts.Radio.PCS or {}
+PIXEL.Karts.Radio.PCS = PCS
+
+local radioStations = PIXEL.Karts.Config.RadioStations
 
 local localPly
 local function radioThink(kart, localKart, thirdperson)
@@ -43,7 +45,7 @@ local function radioThink(kart, localKart, thirdperson)
     local shouldPlay = cvarEnable:GetBool() and kart:GetBuiltInRadio()
 
     local station = kart:RadioGetChannel()
-    local stat = PIXEL.Karts.RadioStations[station]
+    local stat = radioStations[station]
     local url = stat and stat.Link
 
     if (not url or url == "") and not stat then

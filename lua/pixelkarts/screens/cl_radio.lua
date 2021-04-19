@@ -4,12 +4,14 @@ PIXEL.RegisterFontUnscaled("Karts.Radio.Station", "Open Sans SemiBold", 70)
 PIXEL.RegisterFontUnscaled("Karts.Radio.StationSmall", "Open Sans SemiBold", 60)
 PIXEL.RegisterFontUnscaled("Karts.Radio.ButtonText", "Open Sans SemiBold", 50)
 
+local radioStations = PIXEL.Karts.Config.RadioStations
+
 PIXEL.Karts.SteeringWheelScreen("radio", "Radio", function(screen, kart, offset, w, h, localPly, fullH)
     PIXEL.DrawRoundedBox(22, 0, 0, w, fullH, PIXEL.Colors.Background)
 
     local radioEnabled
     local stereoChan
-    local station = PIXEL.Karts.RadioStations[kart:RadioGetChannel()]
+    local station = radioStations[kart:RadioGetChannel()]
     if station then
         stereoChan = station.Name
         radioEnabled = true

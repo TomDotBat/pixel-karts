@@ -1,5 +1,5 @@
 
-PIXEL.Karts.RadioStations = {
+PIXEL.Karts.Config.RadioStations = {
 	{
 		Name = "Drive Radio",
 		Link = "http://listen.radionomy.com/drive.m3u"
