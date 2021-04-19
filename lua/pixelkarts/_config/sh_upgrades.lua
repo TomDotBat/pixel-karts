@@ -21,7 +21,7 @@ end
         DataKey = "custom_color", --The key name used in upgrade data, leave unchanged unless you have a need, eg: resetting everyone's custom colours.
         DataKeyEnabled = "custom_color_enabled", --The key used to store toggle state, same as above applies.
         Type = "Color", --The type of data required to be stored about the upgrade, this should never be changed.
-        Price = { --A list of prices in rank level order for this upgrade.
+        Price = { --A list of prices in rank level order for this upgrade. See the rank levels config if this doesn't make sense.
             80000, --Level 1
             60000, --Level 2
             45000 --Level 3
