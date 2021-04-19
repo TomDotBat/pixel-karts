@@ -1,5 +1,6 @@
 
 local CONFIG = PIXEL.Karts.Config
+local GARAGE_CONFIG = CONFIG.Garage
 
 --[[
     PIXEL Karts garage ramp configuration.
@@ -51,6 +52,58 @@ CONFIG.GarageDoorMat = {
     Width = 1440,
     Height = 880
 }
+
+GARAGE_CONFIG.RadioOrigin = Vector(-9842.997070, 6946.765625, -2711.539795) --The point in space where the garage radio can be heard from.
+
+--[[
+    PIXEL Karts spawn position configuration.
+
+    Where the karts are spawned when players leave the garage, and their
+    rotation.
+]]
+
+GARAGE_CONFIG.SpawnPos = Vector(-10104.146484, 7062.911621, -2736.141602)
+GARAGE_CONFIG.SpawnAngle = Angle(0, 90, 0)
+
+--[[
+    PIXEL Karts garage entry, inside and leave position configuration.
+
+    This is for the box check that runs on the client to see if they
+    are standing on the garage door mat. The door range check on the
+    server, the inside position (where players are hidden) of the garage,
+    and the position and angles the player should be put in when they
+    leave the garage without a kart.
+]]
+
+GARAGE_CONFIG.EntryBoxPoint1 = Vector(-9970, 7134, -2780)
+GARAGE_CONFIG.EntryBoxPoint2 = Vector(-10058, 6990, -2700)
+
+GARAGE_CONFIG.EntryRangeCheckPoint = Vector(-10013.449219, 7062.537598, -2699.968750)
+GARAGE_CONFIG.EntryRangeCheckRadius = 120
+
+GARAGE_CONFIG.LeavePosition = Vector(-10016.114258, 6945.311523, -2760)
+GARAGE_CONFIG.LeaveAngles = Angle(0, 0, 0)
+
+GARAGE_CONFIG.InsidePosition = Vector(-9928.836914, 6961.133301, -2439.531738)
+
+--[[
+    PIXEL Karts garage customisation position configuration.
+
+    This configures the placement of the kart in the garage,
+    the camera position and radius of the circle the spray paint
+    can should follow around the kart when changing colour.
+]]
+
+GARAGE_CONFIG.KartPos = Vector(-9828.906250, 7059.781250, -2763.656250)
+GARAGE_CONFIG.KartAngles = Angle(0, -90, 0)
+
+GARAGE_CONFIG.CameraCircleRadius = 115
+GARAGE_CONFIG.CameraOffset = Vector(0, 0, 55) --The offset applied to the camera (usually height), from the kart.
+GARAGE_CONFIG.CameraAimOffset = Vector(2, 0, 12) --The offset from the kart position we should aim the camera at.
+GARAGE_CONFIG.CameraRotation = 40 --The starting rotation of the camera, as if it was in a circle around the kart.
+
+GARAGE_CONFIG.SprayPaintCircleRadius = 50
+GARAGE_CONFIG.SprayPaintOffset = Vector(0, 0, 25) --The offset from the kart that the spray paint can should be at.
 
 --[[
     Placement configuration for props within the PIXEL Karts Garage.
@@ -170,3 +223,4 @@ CONFIG.GarageProps = {
 
 --Ignore anything below this.
 CONFIG = nil
+GARAGE_CONFIG = nil
