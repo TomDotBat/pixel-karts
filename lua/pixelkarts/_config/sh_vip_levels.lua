@@ -28,6 +28,12 @@ local RANK_LEVELS = {
 
 local USE_SECONDARY_GROUPS = true --If this is set to true, the level system will try to use the player's secondary user group for their rank level instead.
 
+PIXEL.Karts.Config.RankLevelNames = { --The display names of each rank level
+    [1] = "None",
+    [2] = "VIP", --Rank level 1 displays as "VIP"
+    [3] = "VIP+"
+}
+
 --[[
     Advanced VIP level configuration for PIXEL Karts.
 

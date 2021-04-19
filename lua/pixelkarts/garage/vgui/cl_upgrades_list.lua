@@ -33,11 +33,7 @@ end
 PIXEL.RegisterFont("Karts.UpgradeName", "Open Sans SemiBold", 22)
 PIXEL.RegisterFont("Karts.UpgradeEdit", "Open Sans SemiBold", 18)
 
-local rankNames = {
-    [1] = "",
-    [2] = "VIP",
-    [3] = "VIP+"
-}
+local rankNames = PIXEL.Karts.Config.RankLevelNames
 
 local upgradeBg = PIXEL.OffsetColor(PIXEL.Colors.Background, 4)
 function PANEL:AddUpgrade(name, element, locked, rank)
