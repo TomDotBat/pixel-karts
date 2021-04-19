@@ -16,14 +16,16 @@ function PANEL:Init()
     self.QuestionHolder = vgui.Create("Panel", self)
     self.QuestionHolder:Dock(TOP)
 
+    local respawnPrice = PIXEL.Karts.Config.RespawnPrice[LocalPlayer():PIXELKartsGetLevel(level)]
+
     self.Question = vgui.Create("PIXEL.Label", self.QuestionHolder)
     self.Question:SetTextAlign(TEXT_ALIGN_CENTER)
     self.Question:SetAutoWrap(true)
     self.Question:SetFont("Karts.RespawnDescription")
-    self.Question:SetText("Would you like to respawn your Kart for "
-        .. DarkRP.formatMoney(
-            PIXEL.Karts.Config.RespawnPrice[LocalPlayer():PIXELKartsGetLevel(level)]
-        ) .. "?")
+    self.Question:SetText(
+        respawnPrice and ("Would you like to respawn your Kart for " .. DarkRP.formatMoney(respawnPrice) .. "?")
+        or "Would you like to respawn your Kart?"
+    )
 
     function self.QuestionHolder.PerformLayout(s, w, h)
         self.Question:SetSize(w, h)
