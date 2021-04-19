@@ -14,13 +14,14 @@ function PIXEL.Karts.SpawnDecorations()
     local garageProps = PIXEL.Karts.Config.GarageProps
     if not istable(garageProps) then return end
 
-    local isMounted = IsMounted
+    local isCssMounted = isMounted("cstrike")
+
     local createClientsideModel = ClientsideModel
     local renderGroupStatic = RENDERGROUP_STATIC
     local insert = table.insert
 
     for _, decoration in ipairs(garageProps) do
-        if decoration.NeedsCss and not isMounted("cstrike") then continue end
+        if decoration.NeedsCss and not isCssMounted then continue end
 
         local prop = createClientsideModel(decoration.Model, renderGroupStatic)
         prop:SetPos(decoration.Position)
