@@ -1,5 +1,3 @@
----@TODO: USE RELATIONAL DATABASES.
-
 
 require("mysqloo")
 

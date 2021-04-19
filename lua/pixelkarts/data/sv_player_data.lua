@@ -30,7 +30,7 @@ function PIXEL.Karts.SendPlayerData(ply)
     if not json then
         PIXEL.Karts.GetPlayerData(steamid, function(success, data, newJson)
             if not success then return end
-            --@TODO: Refactor this.
+
             newJson = util.Compress(newJson)
             local len = #newJson
 

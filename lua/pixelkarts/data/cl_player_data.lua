@@ -10,7 +10,7 @@ function PIXEL.Karts.GetLatestPlayerData(callback)
 
     net.Receive("PIXEL.Karts.UpdatePlayerData", function()
         local len = net.ReadUInt(16)
-        local data = util.Decompress(net.ReadData(len)) -- NO EW WHAT.
+        local data = util.Decompress(net.ReadData(len))
         if not data then return end
 
         data = util.JSONToTable(data)
