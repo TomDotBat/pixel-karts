@@ -2,6 +2,23 @@
 local CONFIG = PIXEL.Karts.Config
 
 --[[
+    PIXEL Karts garage ramp configuration.
+
+    Some maps have extremely high kerbs which our poor little
+    kart can't actually climb. This can become a massive problem
+    when we want to drive in to the PIXEL Karts garage. The solution
+    is to make an invisible ramp. You can disable this entirely if
+    preferred, in favour for your own PermaProps system.
+]]
+
+CONFIG.GarageRamp = {
+    Enabled = true, --Set to false to disable spawning the ramp.
+    Model = "models/hunter/blocks/cube05x3x025.mdl",
+    Position = Vector(-1127.312500, -817.656250, -206.187500),
+    Angles = Angle(24.307251, 179.994507, 0)
+}
+
+--[[
     PIXEL Karts garage door configuration.
 
     This is for creating our own fake door. As the client cannot
