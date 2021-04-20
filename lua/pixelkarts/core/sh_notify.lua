@@ -16,10 +16,8 @@ if CLIENT then
     end)
 else
     function PIXEL.Karts.Notify(ply, phrase, langData, type, len)
-        local text = lang:getString(phrase, langData)
-
         net.Start("PIXEL.Karts.Notify")
-         net.WriteString(text)
+         net.WriteString(lang:getString(phrase, langData))
          net.WriteUInt(type or 0, 3)
          net.WriteUInt(len or 5, 9)
         net.Send(ply)
