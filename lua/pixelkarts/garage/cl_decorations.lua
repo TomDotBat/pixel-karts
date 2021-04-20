@@ -14,7 +14,7 @@ function PIXEL.Karts.SpawnDecorations()
     local garageProps = PIXEL.Karts.Config.GarageProps
     if not istable(garageProps) then return end
 
-    local isCssMounted = isMounted("cstrike")
+    local isCssMounted = IsMounted("cstrike")
 
     local createClientsideModel = ClientsideModel
     local renderGroupStatic = RENDERGROUP_STATIC
