@@ -5,7 +5,7 @@
     Ignore everything until the next comment.
 ]]
 
-local CONFIG = PIXEL.Karts.Config.Garage
+local CONFIG = PIXEL.Karts.Config
 
 if not CONFIG then
     CONFIG = {}
