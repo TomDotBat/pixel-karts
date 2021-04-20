@@ -10,18 +10,21 @@
 hook.Add("PostGamemodeLoaded", "PIXEL.Kart.CreateWrenchEntity", function()
     if not DarkRP then return end
 
+    local lang = gmodI18n.getAddon("pixelkarts")
+    local categoryName = lang:getString("systemName")
+
     DarkRP.createCategory({
-        name = "PIXEL Karts",
+        name = categoryName,
         categorises = "entities",
         startExpanded = true,
         color = PIXEL.Colors.Primary,
         sortOrder = 100
     })
 
-    DarkRP.createEntity("Kart Repair Wrench", {
+    DarkRP.createEntity(lang:getString("repairWrench"), {
         ent = "pixel_karts_repair_wrench",
         model = "models/mark2580/gtav/garage_stuff/span_02.mdl",
-        category = "PIXEL Karts",
+        category = categoryName,
         price = 600,
         max = 2,
         cmd = "buypixelkartswrench"
