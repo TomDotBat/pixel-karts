@@ -7,5 +7,26 @@
 
 local CONFIG = PIXEL.Karts.Config
 
+CONFIG.GarageRamp = {
+    Enabled = false
+}
+
+CONFIG.GarageDoor = {
+    Position = Vector(0, 0, 0),
+    Angles = Angle(0, 0, 0)
+}
+
+CONFIG.GarageDoorMat = {
+    Enabled = false
+}
+
+local GARAGE_CONFIG = CONFIG.Garage
+
+GARAGE_CONFIG.EntryBoxPoint1 = Vector(0, 0, 0)
+GARAGE_CONFIG.EntryBoxPoint2 = Vector(0, 0, 0)
+
+GARAGE_CONFIG.EntryRangeCheckPoint = Vector(0, 0, 0)
+GARAGE_CONFIG.EntryRangeCheckRadius = 0
+
 --Ignore anything below this.
 CONFIG = nil
