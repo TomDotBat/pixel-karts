@@ -8,7 +8,7 @@ local viewData = {
 local targetCamPos, camPos
 local aimPos = garageConfig.KartPos + garageConfig.CameraAimOffset
 
-local sin, cos = LerpVect, math.sin, math.cos
+local sin, cos = math.sin, math.cos
 
 function PIXEL.Karts.SetupGarageCamera()
     local wobbleAngle = Angle()
