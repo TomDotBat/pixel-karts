@@ -16,7 +16,6 @@ end
     Configuration starts below. Here's a brief explanation
     on some of the common keys in upgrades:
     {
-        Name = "Body Colour", --The display name of the upgrade.
         UIElement = "PIXEL.Karts.ColorEditor", --The UI element to show when editing the upgrade, usually you should ignore this.
         DataKey = "custom_color", --The key name used in upgrade data, leave unchanged unless you have a need, eg: resetting everyone's custom colours.
         DataKeyEnabled = "custom_color_enabled", --The key used to store toggle state, same as above applies.
@@ -36,7 +35,6 @@ end
 ]]
 
 UPGRADES["CustomColor"] = { --Custom colour upgrade configuration
-    Name = "Body Colour",
     UIElement = "PIXEL.Karts.ColorEditor",
     DataKey = "custom_color",
     Type = "Color",
@@ -59,7 +57,6 @@ UPGRADES["RainbowMode"] = { --Rainbow mode upgrade configuration
 }
 
 UPGRADES["UnderGlow"] = { --Underglow upgrade configuration
-    Name = "Underglow",
     UIElement = "PIXEL.Karts.UnderglowEditor",
     DataKey = "underglow_color",
     DataKeyEnabled = "underglow_enabled",
@@ -73,7 +70,6 @@ UPGRADES["UnderGlow"] = { --Underglow upgrade configuration
 }
 
 UPGRADES["RocketBoost"] = { --Rocket boost upgrade configuration
-    Name = "Rocket Boost",
     UIElement = "PIXEL.Karts.RocketBoostEditor",
     DataKey = "rocket_boost_enabled",
     Type = "boolean",
@@ -93,7 +89,6 @@ UPGRADES["RocketBoost"] = { --Rocket boost upgrade configuration
 }
 
 UPGRADES["Glider"] = { --Glider upgrade configuration
-    Name = "Glider",
     UIElement = "PIXEL.Karts.GliderEditor",
     DataKey = "glider_enabled",
     Type = "boolean",
@@ -118,7 +113,6 @@ UPGRADES["Glider"] = { --Glider upgrade configuration
 }
 
 UPGRADES["BuiltInRadio"] = { --Built-in radio upgrade configuration
-    Name = "Built-In Radio",
     UIElement = "PIXEL.Karts.RadioEditor",
     DataKey = "radio_enabled",
     Type = "boolean",
@@ -130,7 +124,6 @@ UPGRADES["BuiltInRadio"] = { --Built-in radio upgrade configuration
 }
 
 UPGRADES["PassengerSeat"] = { --Passenger seat upgrade configuration
-    Name = "Passenger Seat",
     UIElement = "PIXEL.Karts.PassengerSeatEditor",
     DataKey = "passenger_seat_enabled",
     Type = "boolean",
@@ -144,7 +137,6 @@ UPGRADES["PassengerSeat"] = { --Passenger seat upgrade configuration
 }
 
 UPGRADES["Logo"] = { --Custom logo upgrade configuration
-    Name = "Logo",
     UIElement = "PIXEL.Karts.LogoEditor",
     DataKey = "logo_imgur_id",
     DataKeyEnabled = "logo_enabled",

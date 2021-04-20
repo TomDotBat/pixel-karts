@@ -28,7 +28,7 @@ local function endBuildMode()
     trackedEnts = nil
 end
 
-CreateClientConVar("pixel_karts_decoration_builder", "0", false, false, "Enable PIXEL Karts decoration builder mode.", 0, 1)
+CreateClientConVar("pixel_karts_decoration_builder", "0", false, false, gmodI18n.getAddon("pixelkarts"):getString("decorationBuilderDescription"), 0, 1)
 cvars.AddChangeCallback("pixel_karts_decoration_builder", function(_, _, val)
     if val == "0" then
         endBuildMode()

@@ -9,6 +9,7 @@ PIXEL.Karts.SteeringWheelScreen("startup", "Startup Sequence", function(screen, 
     local data = screen:getData()
     if not data then return end
 
+    if not data.startUpText then data.startUpText = gmodI18n.getAddon("pixelkarts"):getString("startingUp") end
     if not data.startTime then data.startTime = UnPredictedCurTime() end
 
     local stage = data.stage
@@ -49,11 +50,13 @@ PIXEL.Karts.SteeringWheelScreen("startup", "Startup Sequence", function(screen, 
         return
     end
 
+    local startUpText = data.startUpText
+
     if stage == 5 then
         local size = Lerp(progress, logoSize, logoSize * .8)
         local halfSize = size * .5
         PIXEL.DrawImgur(w * .5 - halfSize, h * .5 - halfSize - Lerp(progress, 0, 30), size, size, "YCRtBVO", color_white)
-        PIXEL.DrawSimpleText("PIXELOS is starting", "Karts.Startup", w * .5, h - Lerp(progress, -40, 20), PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_BOTTOM)
+        PIXEL.DrawSimpleText(startUpText, "Karts.Startup", w * .5, h - Lerp(progress, -40, 20), PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_BOTTOM)
         return
     end
 
@@ -62,7 +65,7 @@ PIXEL.Karts.SteeringWheelScreen("startup", "Startup Sequence", function(screen, 
         local halfSize = size * .5
         PIXEL.DrawImgur(w * .5 - halfSize, h * .5 - halfSize - 30, size, size, "YCRtBVO", color_white)
 
-        local startingText = "PIXELOS is starting"
+        local startingText = startUpText
         for i = .2, 1, .2 do
             if progress < i then break end
             startingText = startingText .. "."
@@ -75,5 +78,5 @@ PIXEL.Karts.SteeringWheelScreen("startup", "Startup Sequence", function(screen, 
     local size = logoSize * .8
     local halfSize = size * .5
     PIXEL.DrawImgur(w * .5 - halfSize, h * .5 - halfSize - 30, size, size, "YCRtBVO", color_white)
-    PIXEL.DrawSimpleText("PIXELOS is starting...", "Karts.Startup", w * .5, h - 20, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_BOTTOM)
+    PIXEL.DrawSimpleText(startUpText .. "...", "Karts.Startup", w * .5, h - 20, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_BOTTOM)
 end, nil, true)

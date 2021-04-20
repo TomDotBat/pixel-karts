@@ -194,15 +194,17 @@ function PIXEL.Karts.Radio.OpenSettingsMenu()
     PIXEL.Karts.Radio.SettingsMenu = vgui.Create("PIXEL.Frame")
     local fr = PIXEL.Karts.Radio.SettingsMenu
 
-    fr:SetTitle("Radio Settings")
+    local lang = gmodI18n.getAddon("pixelkarts")
+
+    fr:SetTitle(lang:getString("radioSettings"))
     fr:SetSize(PIXEL.Scale(180), PIXEL.Scale(88))
     fr:Center()
 
     local oldPaint = fr.Paint
     fr.Paint = function(s, w, h)
         oldPaint(s, w, h)
-        PIXEL.DrawSimpleText("Volume", "Karts.RadioConfig", PIXEL.Scale(8), PIXEL.Scale(36), colors.PrimaryText)
-        PIXEL.DrawSimpleText("Disable 3D Volume", "Karts.RadioConfig", PIXEL.Scale(36), PIXEL.Scale(62), colors.PrimaryText)
+        PIXEL.DrawSimpleText(lang:getString("radioVolume"), "Karts.RadioConfig", PIXEL.Scale(8), PIXEL.Scale(36), colors.PrimaryText)
+        PIXEL.DrawSimpleText(lang:getString("radioDisable3dVolume"), "Karts.RadioConfig", PIXEL.Scale(36), PIXEL.Scale(62), colors.PrimaryText)
     end
 
     local slider = fr:Add("PIXEL.Slider")

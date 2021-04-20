@@ -43,7 +43,7 @@ local function drawIcon(imgurId, scale, x, y, size, app)
     return PIXEL.Karts.DrawImgurButton(imgurId, scale, nil, x, y, size, size, function() PIXEL.Karts.SelectSteeringWheelScreen(app:getScreenId()) end, 1, iconBgCol, iconBgHoverCol, iconBgHoverCol, iconCol, app:getColor())
 end
 
-PIXEL.Karts.SteeringWheelScreen("dashboard", "Dashboard", function(screen, kart, offset, w, h, localPly, fullH)
+PIXEL.Karts.SteeringWheelScreen("dashboard", gmodI18n.getAddon("pixelkarts"):getString("dashboard"), function(screen, kart, offset, w, h, localPly, fullH)
     PIXEL.DrawRoundedBox(22, 0, 0, w, fullH, PIXEL.Colors.Background)
 
     local data = screen:getData()

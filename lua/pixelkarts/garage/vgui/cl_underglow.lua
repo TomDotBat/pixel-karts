@@ -1,6 +1,9 @@
 
 local PANEL = {}
 
+local lang = gmodI18n.getAddon("pixelkarts")
+local upgradeName = lang:getString("upgradeUnderGlow")
+
 function PANEL:Init()
     PIXEL.Karts.MoveGarageCamera(0, Vector(0, -20, 25))
 
@@ -19,9 +22,9 @@ function PANEL:Init()
         end
 
         if colChanged or (self:GetOriginalDataKey(enabledDataKey, false) ~= self:GetDataKey(enabledDataKey, false)) then
-            self:AddReceiptItem("Underglow", config.Price[LocalPlayer():PIXELKartsGetLevel()], colorDataKey, enabledDataKey)
+            self:AddReceiptItem(upgradeName, config.Price[LocalPlayer():PIXELKartsGetLevel()], colorDataKey, enabledDataKey)
         else
-            self:RemoveReceiptItem("Underglow")
+            self:RemoveReceiptItem(upgradeName)
         end
     end
 
@@ -64,7 +67,7 @@ function PANEL:Init()
 
     self.ColorEntryLabel = vgui.Create("PIXEL.Label", self.RightCenterContainer)
     self.ColorEntryLabel:Dock(TOP)
-    self.ColorEntryLabel:SetText("Hex Color:")
+    self.ColorEntryLabel:SetText(lang:getString("hexColour"))
     self.ColorEntryLabel:SetFont("Karts.ColourLabels")
     self.ColorEntryLabel:SetAutoHeight(true)
 
@@ -93,7 +96,7 @@ function PANEL:Init()
 
     self.EnableLabel = vgui.Create("PIXEL.Label", self.EnableContainer)
     self.EnableLabel:Dock(LEFT)
-    self.EnableLabel:SetText("Enable Underglow")
+    self.EnableLabel:SetText(lang:getString("enableUnderGlow"))
     self.EnableLabel:SetFont("Karts.ColourLabels")
 
     function self.EnableContainer.PerformLayout(s, w, h)

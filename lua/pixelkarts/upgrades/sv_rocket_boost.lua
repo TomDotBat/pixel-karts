@@ -12,35 +12,32 @@ hook.Add("KeyPress", "PIXEL.Karts.RocketBoostBind", function(ply, key)
 end)
 
 function PIXEL.Karts.RocketBoost(ply, veh)
-    if not veh:GetRocketBoost() then
-        --PIXEL.Karts.Notify(ply, "Your kart doesn't have a rocket booster loser.", 1)
-        return
-    end
-
-    if veh:GetNWFloat("PIXEL.Karts.RocketBoostCooldown", 0) > CurTime() then
-        PIXEL.Karts.Notify(ply, "Your booster is still cooling down.", 1)
-        return
-    end
+    if not veh:GetRocketBoost() then return end
 
     if veh:IsVehicleBodyInWater() then
-        PIXEL.Karts.Notify(ply, "Your kart is underwater.", 1)
+        PIXEL.Karts.Notify(ply, "kartUnderWater", nil, 1)
         return
     end
 
     if veh:GetNWInt("PIXEL.Karts.Health", 0) < 1 then
-        PIXEL.Karts.Notify(ply, "Your kart has no health, its abilities have been disabled until repair.", 1)
+        PIXEL.Karts.Notify(ply, "noHealthAbilitiesDisabled", nil, 1)
+        return
+    end
+
+    if veh:GetNWFloat("PIXEL.Karts.RocketBoostCooldown", 0) > CurTime() then
+        PIXEL.Karts.Notify(ply, "yourAbilityIsOnCooldown", {abilityName = "thingymabob"}, 1)
         return
     end
 
     local boostUpgrade = PIXEL.Karts.Config.Upgrades.RocketBoost
 
     if not ply:PIXELKartsIsLevel(boostUpgrade.RequiredLevel) then
-        PIXEL.Karts.Notify(ply, "You don't have the required rank for rocket boosters.", 1)
+        PIXEL.Karts.Notify(ply, "dontHaveRankToUseAbility", {abilityName = "thingymabob"}, 1)
         return
     end
 
     if not PIXEL.Karts.Config.AbilitiesInOtherKarts and veh:CPPIGetOwner() ~= ply then
-        PIXEL.Karts.Notify(ply, "You can't use abilities in another person's kart.", 1)
+        PIXEL.Karts.Notify(ply, "cantUseAbilityInOthersKart", nil, 1)
         return
     end
 

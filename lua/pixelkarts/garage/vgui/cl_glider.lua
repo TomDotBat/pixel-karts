@@ -1,15 +1,18 @@
 
 local PANEL = {}
 
+local lang = gmodI18n.getAddon("pixelkarts")
+local upgradeName = lang:getString("upgradeGlider")
+
 function PANEL:Init()
     local config = PIXEL.Karts.Config.Upgrades.Glider
     local dataKey = config.DataKey
 
     local function updateReceipt()
         if self:GetOriginalDataKey(dataKey, false) ~= self:GetDataKey(dataKey, false) then
-            self:AddReceiptItem("Glider", config.Price[LocalPlayer():PIXELKartsGetLevel()], dataKey)
+            self:AddReceiptItem(upgradeName, config.Price[LocalPlayer():PIXELKartsGetLevel()], dataKey)
         else
-            self:RemoveReceiptItem("Glider")
+            self:RemoveReceiptItem(upgradeName)
         end
     end
 
@@ -18,11 +21,7 @@ function PANEL:Init()
     self.DescriptionLabel:SetAutoHeight(true)
     self.DescriptionLabel:SetFont("Karts.UpgradeLabel")
     self.DescriptionLabel:SetAutoWrap(true)
-    self.DescriptionLabel:SetText(
-        string.format([[The glider enables your kart to fly, you can toggle it with your %s key. 
-Use it with the rocket booster to get in the air from ground level.]],
-            config.DeployKeyName)
-    )
+    self.DescriptionLabel:SetText(lang:getString("gliderDescription", {keyName = config.DeployKeyName}))
 
     self.BottomContainer = vgui.Create("Panel", self)
     self.BottomContainer:Dock(TOP)
@@ -44,7 +43,7 @@ Use it with the rocket booster to get in the air from ground level.]],
 
     self.EnableLabel = vgui.Create("PIXEL.Label", self.BottomContainer)
     self.EnableLabel:Dock(LEFT)
-    self.EnableLabel:SetText("Enable Glider")
+    self.EnableLabel:SetText(lang:getString("enableGlider"))
     self.EnableLabel:SetFont("Karts.ColourLabels")
     self.EnableLabel:SetAutoWidth(true)
 

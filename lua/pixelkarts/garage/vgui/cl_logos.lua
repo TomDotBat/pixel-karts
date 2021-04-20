@@ -1,6 +1,9 @@
 
 local PANEL = {}
 
+local lang = gmodI18n.getAddon("pixelkarts")
+local upgradeName = lang:getString("upgradeLogo")
+
 function PANEL:Init()
     PIXEL.Karts.MoveGarageCamera(50, Vector(0, -30, 25))
 
@@ -11,9 +14,9 @@ function PANEL:Init()
     local function updateReceipt()
         if (self:GetOriginalDataKey(idDataKey, false) ~= self:GetDataKey(idDataKey, false))
              or (self:GetOriginalDataKey(enabledDataKey, false) ~= self:GetDataKey(enabledDataKey, false)) then
-            self:AddReceiptItem("Logo", config.Price[LocalPlayer():PIXELKartsGetLevel()], idDataKey, enabledDataKey)
+            self:AddReceiptItem(upgradeName, config.Price[LocalPlayer():PIXELKartsGetLevel()], idDataKey, enabledDataKey)
         else
-            self:RemoveReceiptItem("Logo")
+            self:RemoveReceiptItem(upgradeName)
         end
     end
 
@@ -57,7 +60,7 @@ function PANEL:Init()
 
     self.ImgurIDEntryLabel = vgui.Create("PIXEL.Label", self.RightCenterContainer)
     self.ImgurIDEntryLabel:Dock(TOP)
-    self.ImgurIDEntryLabel:SetText("Imgur ID:")
+    self.ImgurIDEntryLabel:SetText(lang:getString("imgurId"))
     self.ImgurIDEntryLabel:SetFont("Karts.ColourLabels")
     self.ImgurIDEntryLabel:SetAutoHeight(true)
 
@@ -85,7 +88,7 @@ function PANEL:Init()
 
     self.EnableLabel = vgui.Create("PIXEL.Label", self.EnableContainer)
     self.EnableLabel:Dock(LEFT)
-    self.EnableLabel:SetText("Enable Logo")
+    self.EnableLabel:SetText(lang:getString("enableLogo"))
     self.EnableLabel:SetFont("Karts.ColourLabels")
 
     function self.EnableContainer.PerformLayout(s, w, h)

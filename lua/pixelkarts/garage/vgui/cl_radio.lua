@@ -1,15 +1,18 @@
 
 local PANEL = {}
 
+local lang = gmodI18n.getAddon("pixelkarts")
+local upgradeName = lang:getString("upgradeBuiltInRadio")
+
 function PANEL:Init()
     local config = PIXEL.Karts.Config.Upgrades.BuiltInRadio
     local dataKey = config.DataKey
 
     local function updateReceipt()
         if self:GetOriginalDataKey(dataKey, false) ~= self:GetDataKey(dataKey, false) then
-            self:AddReceiptItem("Built-In Radio", config.Price[LocalPlayer():PIXELKartsGetLevel()], dataKey)
+            self:AddReceiptItem(upgradeName, config.Price[LocalPlayer():PIXELKartsGetLevel()], dataKey)
         else
-            self:RemoveReceiptItem("Built-In Radio")
+            self:RemoveReceiptItem(upgradeName)
         end
     end
 
@@ -18,7 +21,7 @@ function PANEL:Init()
     self.DescriptionLabel:SetAutoHeight(true)
     self.DescriptionLabel:SetFont("Karts.UpgradeLabel")
     self.DescriptionLabel:SetAutoWrap(true)
-    self.DescriptionLabel:SetText(string.format([[The built in radio allows you to listen to your favourite internet radio stations live.]]))
+    self.DescriptionLabel:SetText(lang:getString("builtInRadioDescription"))
 
     self.BottomContainer = vgui.Create("Panel", self)
     self.BottomContainer:Dock(TOP)
@@ -40,7 +43,7 @@ function PANEL:Init()
 
     self.EnableLabel = vgui.Create("PIXEL.Label", self.BottomContainer)
     self.EnableLabel:Dock(LEFT)
-    self.EnableLabel:SetText("Enable Built-In Radio")
+    self.EnableLabel:SetText(lang:getString("enableBuiltInRadio"))
     self.EnableLabel:SetFont("Karts.ColourLabels")
     self.EnableLabel:SetAutoWidth(true)
 

@@ -14,7 +14,7 @@ function kart:Initialize()
         if not IsValid(self) then return end
         if not success then
             if IsValid(owner) then
-                PIXEL.Karts.Notify(owner, "There was an error loading your personal kart data, please report this.", 1)
+                PIXEL.Karts.Notify(owner, "errorGettingKartData", nil, 1)
             end
 
             self:Remove()

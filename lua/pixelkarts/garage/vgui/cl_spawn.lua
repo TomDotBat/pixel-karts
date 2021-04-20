@@ -1,11 +1,13 @@
 
 local PANEL = {}
 
+local lang = gmodI18n.getAddon("pixelkarts")
+
 PIXEL.RegisterFont("Karts.RespawnDescription", "Open Sans SemiBold", 18)
 
 function PANEL:Init()
     self:SetZPos(32767)
-    self:SetTitle("Respawn Kart")
+    self:SetTitle(lang:getString("respawnTitle"))
     self:SetSize(PIXEL.Scale(220), PIXEL.Scale(110))
     self:SetDraggable(false)
     self:Center()
@@ -23,8 +25,8 @@ function PANEL:Init()
     self.Question:SetAutoWrap(true)
     self.Question:SetFont("Karts.RespawnDescription")
     self.Question:SetText(
-        respawnPrice and ("Would you like to respawn your Kart for " .. PIXEL.FormatMoney(respawnPrice) .. "?")
-        or "Would you like to respawn your Kart?"
+        respawnPrice and lang:getString("respawnDescription", PIXEL.FormatMoney(respawnPrice))
+        or lang:getString("respawnDescriptionFree")
     )
 
     function self.QuestionHolder.PerformLayout(s, w, h)
@@ -36,7 +38,7 @@ function PANEL:Init()
     self.ButtonHolder:Dock(BOTTOM)
 
     self.YesBtn = vgui.Create("PIXEL.TextButton", self.ButtonHolder)
-    self.YesBtn:SetText("Yes")
+    self.YesBtn:SetText(lang:getString("yes"))
     self.YesBtn:Dock(LEFT)
 
     function self.YesBtn.DoClick(s)
@@ -57,7 +59,7 @@ function PANEL:Init()
     end
 
     self.NoBtn = vgui.Create("PIXEL.TextButton", self.ButtonHolder)
-    self.NoBtn:SetText("No")
+    self.NoBtn:SetText(lang:getString("no"))
     self.NoBtn:Dock(RIGHT)
 
     function self.NoBtn.DoClick(s)

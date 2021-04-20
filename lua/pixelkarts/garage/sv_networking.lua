@@ -39,7 +39,7 @@ local function togglePlayerGarageState(ply, forced)
             if not veh.IsPIXELKart then return end
 
             if veh:CPPIGetOwner() ~= ply then
-                PIXEL.Karts.Notify(ply, "You can't enter the garage with someone else's kart.", 1, 5)
+                PIXEL.Karts.Notify(ply, "cantEnterWithOtherKart", nil, 1, 5)
                 return
             end
 
@@ -65,7 +65,7 @@ local function togglePlayerGarageState(ply, forced)
 
             return
         elseif IsValid(ply:GetNWEntity("PIXEL.Karts.PersonalKart", nil)) then
-            PIXEL.Karts.Notify(ply, "You already have a kart taken out of the garage.", 1, 5)
+            PIXEL.Karts.Notify(ply, "alreadyHaveKartOut", nil, 1, 5)
             return
         end
 
@@ -100,7 +100,7 @@ net.Receive("PIXEL.Karts.PurchaseKart", function(len, ply)
     ---@Todo Chuck this in the config
     if not PIXEL.Karts.CanAfford(ply, price) then
         togglePlayerGarageState(ply)
-        PIXEL.Karts.Notify(ply, "You can't afford to buy a kart.", 1)
+        PIXEL.Karts.Notify(ply, "cantAffordKart", nil, 1)
         return
     end
 
@@ -109,7 +109,7 @@ net.Receive("PIXEL.Karts.PurchaseKart", function(len, ply)
     ply:PIXELKartsSetDataKey("purchased_kart", true, function()
         if not IsValid(ply) then return end
         ---@Todo Chuck this in the config
-        PIXEL.Karts.Notify(ply, "Purchased a kart for " .. PIXEL.FormatMoney(price) .. ".", 1)
+        PIXEL.Karts.Notify(ply, "purchasedKartForPrice", {price = PIXEL.FormatMoney(price)}, 1)
         ply.PIXELKartsHasKart = true
         ---@Todo Chuck this in the config
         local randColor = PIXEL.Karts.Config.DefaultColors[math.random(#PIXEL.Karts.Config.DefaultColors)]
@@ -155,7 +155,7 @@ net.Receive("PIXEL.Karts.PurchaseKartUpgrades", function(len, ply)
     end
 
     if not PIXEL.Karts.CanAfford(ply, totalPrice) then
-        PIXEL.Karts.Notify(ply, "You can't afford to purchase these upgrades.", 1)
+        PIXEL.Karts.Notify(ply, "cantAffordUpgrades", nil, 1)
         return
     end
 
@@ -203,12 +203,12 @@ net.Receive("PIXEL.Karts.RespawnKart", function(len, ply)
 
     if not PIXEL.Karts.CanAfford(ply, price) then
         togglePlayerGarageState(ply)
-        PIXEL.Karts.Notify(ply, "You can't afford to respawn your kart.", 1)
+        PIXEL.Karts.Notify(ply, "cantAffordRespawn", nil, 1)
         return
     end
 
     PIXEL.Karts.RemoveMoney(ply, price)
-    PIXEL.Karts.Notify(ply, "Respawned your kart for " .. PIXEL.FormatMoney(price) .. ".", 1)
+    PIXEL.Karts.Notify(ply, "respawnedKartForPrice", {price = PIXEL.FormatMoney(price)}, 1)
     ply.PIXELKartsHasKart = true
 
     net.Start("PIXEL.Karts.RespawnKart")

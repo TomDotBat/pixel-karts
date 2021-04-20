@@ -35,33 +35,30 @@ function PIXEL.Karts.DeployGlider(ply, veh)
         return
     end
 
-    if not veh:GetGlider() then
-        --PIXEL.Karts.Notify(ply, "Your kart doesn't have a glider loser.", 1)
-        return
-    end
+    if not veh:GetGlider() then return end
 
     if veh:IsVehicleBodyInWater() then
-        PIXEL.Karts.Notify(ply, "Your kart is underwater.", 1)
+        PIXEL.Karts.Notify(ply, "kartUnderWater", nil, 1)
         return
     end
 
     if veh:GetNWInt("PIXEL.Karts.Health", 0) < 1 then
-        PIXEL.Karts.Notify(ply, "Your kart has no health, its abilities have been disabled until repair.", 1)
+        PIXEL.Karts.Notify(ply, "noHealthAbilitiesDisabled", nil, 1)
         return
     end
 
     if veh:GetNWFloat("PIXEL.Karts.GliderCooldown", 0) > CurTime() then
-        PIXEL.Karts.Notify(ply, "Your glider is on cooldown.", 1)
+        PIXEL.Karts.Notify(ply, "yourAbilityIsOnCooldown", {abilityName = "thingymabob"}, 1)
         return
     end
 
     if not ply:PIXELKartsIsLevel(gliderUpgrade.RequiredLevel) then
-        PIXEL.Karts.Notify(ply, "You don't have the required rank to use a glider.", 1)
+        PIXEL.Karts.Notify(ply, "dontHaveRankToUseAbility", {abilityName = "thingymabob"}, 1)
         return
     end
 
     if not PIXEL.Karts.Config.AbilitiesInOtherKarts and veh:CPPIGetOwner() ~= ply then
-        PIXEL.Karts.Notify(ply, "You can't use abilities in another person's kart.", 1)
+        PIXEL.Karts.Notify(ply, "cantUseAbilityInOthersKart", nil, 1)
         return
     end
 

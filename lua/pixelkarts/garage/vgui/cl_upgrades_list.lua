@@ -1,13 +1,15 @@
 
 local PANEL = {}
 
+local lang = gmodI18n.getAddon("pixelkarts")
+
 function PANEL:Init()
     self:SetZPos(32767)
     self:SetDraggable(false)
     self:MakePopup()
     self.CloseButton:Remove()
 
-    self:SetTitle("Available Upgrades")
+    self:SetTitle(lang:getString("availableUpgradesTitle"))
     self:SetSize(PIXEL.Scale(280), PIXEL.Scale(300))
     self:SetPos(PIXEL.Scale(20), PIXEL.Scale(20))
 
@@ -15,15 +17,15 @@ function PANEL:Init()
 
     self.Upgrades = {}
 
-    for _, upgrade in pairs(PIXEL.Karts.Config.Upgrades) do
-        if not upgrade.Name then continue end
+    for upgradeId, upgrade in pairs(PIXEL.Karts.Config.Upgrades) do
+        if not upgrade.UIElement then continue end
 
         local isLocked
         if upgrade.RequiredLevel then
             isLocked = not self.LocalPly:PIXELKartsIsLevel(upgrade.RequiredLevel)
         end
 
-        self:AddUpgrade(upgrade.Name, upgrade.UIElement, isLocked, upgrade.RequiredLevel)
+        self:AddUpgrade(lang:getString("upgrade" .. upgradeId), upgrade.UIElement, isLocked, upgrade.RequiredLevel)
     end
 
     self.Receipt = vgui.Create("PIXEL.Karts.KartReceipt")
@@ -52,12 +54,12 @@ function PANEL:AddUpgrade(name, element, locked, rank)
     end
 
     if locked then
-        editButton:SetText((rankNames[rank] or "") .. " Only")
+        editButton:SetText(lang:getString("rankOnly", {rankName = rankNames[rank] or ""}))
         editButton:SetEnabled(false)
         editButton.DisabledCol = PIXEL.Colors.Negative
         editButton.DesiredSize = 80
     else
-        editButton:SetText("Edit")
+        editButton:SetText(lang:getString("edit"))
         editButton.DesiredSize = 50
     end
 

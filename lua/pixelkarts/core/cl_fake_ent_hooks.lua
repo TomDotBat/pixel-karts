@@ -66,7 +66,7 @@ hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.DrawExtras", function(sk
     end
 end)
 
-local fastUpdateCvar = CreateClientConVar("pixel_karts_fast_model_update_enabled", "1", true, false, "Should kart models be updated more frequently? This may be intensive.", 0, 1)
+local fastUpdateCvar = CreateClientConVar("pixel_karts_fast_model_update_enabled", "1", true, false, gmodI18n.getAddon("pixelkarts"):getString("fastModelUpdateDescription"), 0, 1)
 
 local function setupModelUpdater(shouldFastUpdate)
     hook.Remove("PIXEL.Karts.Think", "PIXEL.Karts.ModelUpdater")

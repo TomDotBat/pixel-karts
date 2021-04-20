@@ -4,13 +4,15 @@ PIXEL.RegisterFont("Karts.ItemPrice", "Open Sans SemiBold", 20)
 
 local PANEL = {}
 
+local lang = gmodI18n.getAddon("pixelkarts")
+
 local seperatorCol = PIXEL.OffsetColor(PIXEL.Colors.Background, 20)
 function PANEL:Init()
     self:SetZPos(32767)
     self:SetDraggable(false)
     self.CloseButton:Remove()
 
-    self:SetTitle("Actions")
+    self:SetTitle(lang:getString("actionsTitle"))
 
     local width = PIXEL.Scale(280)
     self:SetSize(width, 0)
@@ -25,7 +27,7 @@ function PANEL:Init()
         PIXEL.DrawRoundedBox(sepH * .5, 0, 0, w, sepH, seperatorCol)
 
         local centerH = sepH + (h - sepH) * .5 + PIXEL.Scale(1)
-        PIXEL.DrawSimpleText("Total: ", "Karts.ItemName", PIXEL.Scale(10), centerH, PIXEL.Colors.PrimaryText, nil, TEXT_ALIGN_CENTER)
+        PIXEL.DrawSimpleText(lang:getString("receiptTotal"), "Karts.ItemName", PIXEL.Scale(10), centerH, PIXEL.Colors.PrimaryText, nil, TEXT_ALIGN_CENTER)
         PIXEL.DrawSimpleText(self.TotalPrice, "Karts.ItemPrice", w - PIXEL.Scale(10), centerH, self.CanAfford and PIXEL.Colors.Positive or PIXEL.Colors.Negative, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
     end
 
@@ -35,7 +37,7 @@ function PANEL:Init()
 
     self.Buttons.Cancel = vgui.Create("PIXEL.TextButton", self.Buttons)
     self.Buttons.Cancel:Dock(LEFT)
-    self.Buttons.Cancel:SetText("Leave Garage")
+    self.Buttons.Cancel:SetText(lang:getString("leaveGarage"))
 
     self.Buttons.Cancel.NormalCol = PIXEL.CopyColor(PIXEL.Colors.Negative)
     self.Buttons.Cancel.BackgroundCol = self.Buttons.Cancel.NormalCol
@@ -52,11 +54,11 @@ function PANEL:Init()
 
     self.Buttons.Purchase = vgui.Create("PIXEL.TextButton", self.Buttons)
     self.Buttons.Purchase:Dock(RIGHT)
-    self.Buttons.Purchase:SetText("Purchase")
+    self.Buttons.Purchase:SetText(lang:getString("purchase"))
 
     function self.Buttons.Purchase.DoClick()
         if not self.CanAfford then
-            PIXEL.Karts.Notify("You can't afford to purchase these upgrades.", NOTIFY_ERROR)
+            PIXEL.Karts.Notify("cantAffordUpgrades", nil, NOTIFY_ERROR)
             return
         end
 
@@ -148,7 +150,7 @@ function PANEL:Init()
     end
 
     self.PutAway = vgui.Create("PIXEL.TextButton", self)
-    self.PutAway:SetText("Store Kart")
+    self.PutAway:SetText(lang:getString("storeKart"))
     self.PutAway:Dock(TOP)
     self.PutAway:SetZPos(10002)
 
@@ -164,7 +166,7 @@ function PANEL:Init()
     self.Items = {}
     self.Prices = {}
     self.DataKeys = {}
-    self.TotalPrice = "$0"
+    self.TotalPrice = PIXEL.FormatMoney(0)
     self.CanAfford = false
 end
 
