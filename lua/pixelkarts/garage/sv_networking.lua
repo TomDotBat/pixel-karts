@@ -248,32 +248,3 @@ hook.Add("PlayerDisconnected", "PIXEL.Karts.CleanupOnLeave", function(ply)
     if not IsValid(kart) then return end
     SafeRemoveEntity(kart)
 end)
-
---[[
-
-do
-    local cache = {}
-
-    -----
-    --- Groups string into 3's.
-    --- Eg: 25000000 = 25,000,000
-    --- @param money string
-    function STRING_FORMATTING.FormatMoney(money, cached)
-        money = tostring(money)
-        if not cached and cache[money] then return cache[money] end
-        local amount = math.floor(money:len() / 3)
-        local remainder =  money:len() - (amount*3)
-
-        local remainderStr = money:sub(1,remainder)
-        local restOfStr = money:sub(remainder+1)
-
-        local str = (remainderStr:len() == 0 or #money < 4) and "" or ","
-        for i = 0, amount-1 do
-            str = str .. (i == 0 and "" or ",") .. restOfStr:sub((i * 3) + 1, (i + 1) * 3)
-        end
-        cache[money] = remainderStr .. str
-        return remainderStr .. str
-    end
-end
-
-]]--
