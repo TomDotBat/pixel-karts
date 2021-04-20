@@ -23,7 +23,7 @@ function PANEL:Init()
     self.Question:SetAutoWrap(true)
     self.Question:SetFont("Karts.RespawnDescription")
     self.Question:SetText(
-        respawnPrice and ("Would you like to respawn your Kart for " .. DarkRP.formatMoney(respawnPrice) .. "?")
+        respawnPrice and ("Would you like to respawn your Kart for " .. PIXEL.FormatMoney(respawnPrice) .. "?")
         or "Would you like to respawn your Kart?"
     )
 

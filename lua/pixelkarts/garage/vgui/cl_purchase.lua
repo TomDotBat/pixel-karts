@@ -21,7 +21,7 @@ function PANEL:Init()
     self.Question:SetAutoWrap(true)
     self.Question:SetFont("Karts.RespawnDescription")
     self.Question:SetText("Would you like to buy a Kart for "
-        .. DarkRP.formatMoney(
+        .. PIXEL.FormatMoney(
             PIXEL.Karts.Config.KartPrice[LocalPlayer():PIXELKartsGetLevel(level)]
         ) .. "?")
 

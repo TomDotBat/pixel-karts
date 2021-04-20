@@ -106,11 +106,10 @@ net.Receive("PIXEL.Karts.PurchaseKart", function(len, ply)
 
     ply:addMoney(-price)
 
-     
     ply:PIXELKartsSetDataKey("purchased_kart", true, function()
         if not IsValid(ply) then return end
         ---@Todo Chuck this in the config
-        PIXEL.Karts.Notify(ply, "Purchased a kart for " .. DarkRP.formatMoney(price) .. ".", 1)
+        PIXEL.Karts.Notify(ply, "Purchased a kart for " .. PIXEL.FormatMoney(price) .. ".", 1)
         ply.PIXELKartsHasKart = true
         ---@Todo Chuck this in the config
         local randColor = PIXEL.Karts.Config.DefaultColors[math.random(#PIXEL.Karts.Config.DefaultColors)]
@@ -209,7 +208,7 @@ net.Receive("PIXEL.Karts.RespawnKart", function(len, ply)
     end
 
     ply:addMoney(-price)
-    PIXEL.Karts.Notify(ply, "Respawned your kart for " .. DarkRP.formatMoney(price) .. ".", 1)
+    PIXEL.Karts.Notify(ply, "Respawned your kart for " .. PIXEL.FormatMoney(price) .. ".", 1)
     ply.PIXELKartsHasKart = true
 
     net.Start("PIXEL.Karts.RespawnKart")

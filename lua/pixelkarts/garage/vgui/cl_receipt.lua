@@ -180,7 +180,7 @@ function PANEL:AddItem(name, price, ...)
         self.UpgradeList.UpgradeEditor:Close()
     end
 
-    local formattedPrice = DarkRP.formatMoney(price)
+    local formattedPrice = PIXEL.FormatMoney(price)
     item.BackgroundColor = Color(0, 0, 0, 0)
 
     function item:Paint(w, h)
@@ -229,7 +229,7 @@ function PANEL:CalculateTotal()
         total = total + price
     end
 
-    self.TotalPrice = DarkRP.formatMoney(total)
+    self.TotalPrice = PIXEL.FormatMoney(total)
     self.CanAfford = self.LocalPly:canAfford(total)
 end
 
