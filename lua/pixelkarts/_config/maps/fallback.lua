@@ -12,6 +12,7 @@ CONFIG.GarageRamp = {
 }
 
 CONFIG.GarageDoor = {
+    Model = "",
     Position = Vector(0, 0, 0),
     Angles = Angle(0, 0, 0)
 }
