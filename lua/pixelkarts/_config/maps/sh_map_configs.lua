@@ -10,7 +10,6 @@
 
 
 local MAP_NAME = game.GetMap()
-local MAP_CONFIG_FILE_NAME = MAP_NAME .. ".lua"
 
 local function loadMapConfig(fileName)
     if SERVER then
@@ -20,13 +19,12 @@ local function loadMapConfig(fileName)
     include(fileName)
 
     MAP_NAME = nil
-    MAP_CONFIG_FILE_NAME = nil
     loadMapConfig = nil
 end
 
-if not file.Exists("pixelkarts/_config/maps/" .. MAP_CONFIG_FILE_NAME, "LUA") then
+if not file.Exists("pixelkarts/_config/maps/" .. MAP_NAME .. ".lua", "LUA") then
     print("[PIXEL Karts] ERROR - A map configuration file for " .. MAP_NAME .. " couldn't be found, using the fallback config.")
-    loadMapConfig("_defaults.lua")
+    loadMapConfig("fallback.lua")
     return
 end
 
