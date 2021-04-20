@@ -44,7 +44,6 @@ CONFIG.GarageDoor = {
 
 CONFIG.GarageDoorMat = {
     Enabled = true, --Set to false to disable the door mat.
-    Text = "PIXEL Karts", --The text that should appear on the door mat.
     Position = Vector(-9970, 7134, -2763.6),
     Angles = Angle(0, -90, 5),
     Width = 1440,

@@ -4,7 +4,7 @@ if not matConfig.Enabled then return end
 
 PIXEL.RegisterFontUnscaled("Karts.GarageDoorMat", "Open Sans Bold", 255)
 
-local text = matConfig.Text
+local text = gmodI18n.getAddon("pixelkarts"):getString("systemName")
 local position, angles = matConfig.Position, matConfig.Angles
 local w, h = matConfig.Width, matConfig.Height
 
