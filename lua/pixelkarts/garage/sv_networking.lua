@@ -98,13 +98,13 @@ net.Receive("PIXEL.Karts.PurchaseKart", function(len, ply)
 
     local price = PIXEL.Karts.Config.KartPrice[ply:PIXELKartsGetLevel()]
     ---@Todo Chuck this in the config
-    if not ply:canAfford(price) then
+    if not PIXEL.Karts.CanAfford(ply, price) then
         togglePlayerGarageState(ply)
         PIXEL.Karts.Notify(ply, "You can't afford to buy a kart.", 1)
         return
     end
 
-    ply:addMoney(-price)
+    PIXEL.Karts.RemoveMoney(ply, price)
 
     ply:PIXELKartsSetDataKey("purchased_kart", true, function()
         if not IsValid(ply) then return end
@@ -154,12 +154,12 @@ net.Receive("PIXEL.Karts.PurchaseKartUpgrades", function(len, ply)
         end
     end
 
-    if not ply:canAfford(totalPrice) then
+    if not PIXEL.Karts.CanAfford(ply, totalPrice) then
         PIXEL.Karts.Notify(ply, "You can't afford to purchase these upgrades.", 1)
         return
     end
 
-    ply:addMoney(-totalPrice)
+    PIXEL.Karts.RemoveMoney(ply, totalPrice)
 
     local mergeData = {}
     for upgradeName, newData in pairs(changes) do
@@ -201,13 +201,13 @@ net.Receive("PIXEL.Karts.RespawnKart", function(len, ply)
         return
     end
 
-    if not ply:canAfford(price) then
+    if not PIXEL.Karts.CanAfford(ply, price) then
         togglePlayerGarageState(ply)
         PIXEL.Karts.Notify(ply, "You can't afford to respawn your kart.", 1)
         return
     end
 
-    ply:addMoney(-price)
+    PIXEL.Karts.RemoveMoney(ply, price)
     PIXEL.Karts.Notify(ply, "Respawned your kart for " .. PIXEL.FormatMoney(price) .. ".", 1)
     ply.PIXELKartsHasKart = true
 

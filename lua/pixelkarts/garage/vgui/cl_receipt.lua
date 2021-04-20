@@ -230,7 +230,7 @@ function PANEL:CalculateTotal()
     end
 
     self.TotalPrice = PIXEL.FormatMoney(total)
-    self.CanAfford = self.LocalPly:canAfford(total)
+    self.CanAfford = PIXEL.Karts.CanAfford(self.LocalPly, total)
 end
 
 function PANEL:LayoutContent(w, h)

@@ -1,0 +1,49 @@
+
+--[[
+    Gamemode specific configuration for for PIXEL Karts.
+
+    The following section only applies for DarkRP, it will
+    allow you to change how the repair wrench entity is added
+    to the F4 menu and the category it should go in.
+]]
+
+hook.Add("PostGamemodeLoaded", "PIXEL.Kart.CreateWrenchEntity", function()
+    if not DarkRP then return end
+
+    DarkRP.createCategory({
+        name = "PIXEL Karts",
+        categorises = "entities",
+        startExpanded = true,
+        color = PIXEL.Colors.Primary,
+        sortOrder = 100
+    })
+
+    DarkRP.createEntity("Kart Repair Wrench", {
+        ent = "pixel_karts_repair_wrench",
+        model = "models/mark2580/gtav/garage_stuff/span_02.mdl",
+        category = "PIXEL Karts",
+        price = 600,
+        max = 2,
+        cmd = "buypixelkartswrench"
+    })
+end)
+
+--[[
+    Gamemode compatability functions for PIXEL Karts.
+
+    If you're using DarkRP then you probably won't need to change
+    anything below here (unless you want to use credits instead
+    of the player's wallet or something).
+
+    If you do need to change this, please make sure you understand
+    what you are doing, as doing something wrong will cause PIXEL
+    Karts to break.
+]]
+
+function PIXEL.Karts.RemoveMoney(ply, amount) --This is called when we want to take money from a player's wallet.
+    ply:addMoney(-amount)
+end
+
+function PIXEL.Karts.CanAfford(ply, amount) --This is called when we want to check if a player can afford something
+    ply:canAfford(amount)
+end
