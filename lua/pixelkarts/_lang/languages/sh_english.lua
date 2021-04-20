@@ -110,17 +110,3 @@ lang:addPhrase("cantUseAbilityInOthersKart", "You can't use abilities in another
 lang:addPhrase("fastModelUpdateDescription", "Should kart models be updated more frequently? This may be intensive.")
 lang:addPhrase("underglowEnableDescription", "Should kart underglows be visible? This may be intensive.")
 lang:addPhrase("decorationBuilderDescription", "Should PIXEL Karts decoration builder mode be active?")
-
-
-
-
-
-
-
-
-
---local lang = gmodI18n.getAddon("pixelkarts")
-lang:getString("helloWorld", {name = "Tom.bat"})
-lang:getString("systemName")
-
-gmodI18n.getAddon("pixelkarts"):getString("decorationBuilderDescription")
