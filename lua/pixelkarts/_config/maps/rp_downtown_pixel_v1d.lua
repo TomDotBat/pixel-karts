@@ -13,10 +13,7 @@ local GARAGE_CONFIG = CONFIG.Garage
 ]]
 
 CONFIG.GarageRamp = {
-    Enabled = true, --Set to false to disable spawning the ramp.
-    Model = "models/hunter/blocks/cube05x3x025.mdl",
-    Position = Vector(-1127.312500, -817.656250, -206.187500),
-    Angles = Angle(24.307251, 179.994507, 0)
+    Enabled = false --Set to false to disable spawning the ramp.
 }
 
 --[[
