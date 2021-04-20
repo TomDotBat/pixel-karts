@@ -25,6 +25,7 @@ CONFIG.GarageRamp = {
 ]]
 
 CONFIG.GarageDoor = {
+    Model = "models/hunter/plates/plate4x4.mdl",
     Position = Vector(-9966, 7062.9, -2670),
     Angles = Angle(90, 0, 180),
     OpenOffset = Vector(0, 0, 118), --The change difference in position when the door is fully opened.

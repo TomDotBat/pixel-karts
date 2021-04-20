@@ -1,6 +1,6 @@
 
-local garageConfig = PIXEL.Karts.Config.GarageDoor
-if not garageConfig.MakeCollisions then return end
+local doorConfig = PIXEL.Karts.Config.GarageDoor
+if not doorConfig.MakeCollisions then return end
 
 local function makeDoor()
     if not IsValid(PIXEL.Karts.GarageDoor) then
@@ -8,9 +8,9 @@ local function makeDoor()
     end
 
     local door = PIXEL.Karts.GarageDoor
-    door:SetModel("models/hunter/plates/plate3x3.mdl")
-    door:SetPos(garageConfig.Position)
-    door:SetAngles(garageConfig.Angles)
+    door:SetModel(doorConfig.Model)
+    door:SetPos(doorConfig.Position)
+    door:SetAngles(doorConfig.Angles)
     door:Spawn()
 
     door:GetPhysicsObject():EnableMotion(false)

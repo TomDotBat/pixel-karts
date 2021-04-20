@@ -9,11 +9,11 @@ CreateMaterial("pixel_karts_garage_door", "VertexLitGeneric", {
 
 --- What the fuck is this.
 if not IsValid(PIXEL.Karts.GarageDoor) then
-    PIXEL.Karts.GarageDoor = ClientsideModel("models/hunter/plates/plate4x4.mdl")
+    PIXEL.Karts.GarageDoor = ClientsideModel(doorConfig.Model)
 end
 
 local door = PIXEL.Karts.GarageDoor
-door:SetModel("models/hunter/plates/plate4x4.mdl")
+door:SetModel(doorConfig.Model)
 door:SetMaterial("!pixel_karts_garage_door")
 door:SetPos(doorConfig.Position)
 door:SetAngles(doorConfig.Angles)
