@@ -71,8 +71,8 @@ function ENT:SetupClientside()
     PIXEL.Karts.SetupNWVars(self)
     PIXEL.Karts.InitialiseKart(self)
 
-    self:SetPoseParameter("vehicle_wheel_fl_height", .16)
-    self:SetPoseParameter("vehicle_wheel_fr_height", .16)
-    self:SetPoseParameter("vehicle_wheel_rl_height", .16)
-    self:SetPoseParameter("vehicle_wheel_rr_height", .16)
+    self:SetPoseParameter("vehicle_wheel_fl_height", .54)
+    self:SetPoseParameter("vehicle_wheel_fr_height", .54)
+    self:SetPoseParameter("vehicle_wheel_rl_height", .54)
+    self:SetPoseParameter("vehicle_wheel_rr_height", .54)
 end

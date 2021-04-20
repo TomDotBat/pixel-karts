@@ -92,7 +92,7 @@ GARAGE_CONFIG.InsidePosition = Vector(-9928.836914, 6961.133301, -2439.531738)
     can should follow around the kart when changing colour.
 ]]
 
-GARAGE_CONFIG.KartPos = Vector(-9828.906250, 7059.781250, -2763.656250)
+GARAGE_CONFIG.KartPos = Vector(-9828.906250, 7059.781250, -2759)
 GARAGE_CONFIG.KartAngles = Angle(0, -90, 0)
 
 GARAGE_CONFIG.CameraCircleRadius = 115
