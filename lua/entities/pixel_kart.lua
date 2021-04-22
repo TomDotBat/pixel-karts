@@ -15,6 +15,8 @@ ENT.AdminOnly = false
 local kartTbl = PIXEL.Karts.KartTable
 
 function ENT:Initialize()
+    self:SetModel("models/freeman/vehicles/electric_go-kart.mdl")
+
     if CLIENT then return end
 
     if not (self.CPPIGetOwner and IsValid(self:CPPIGetOwner())) then
