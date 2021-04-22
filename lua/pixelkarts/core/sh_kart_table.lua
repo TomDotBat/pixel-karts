@@ -59,3 +59,13 @@ end
 function kart:Reset()
     kart.KartVars = {}
 end
+
+function PIXEL.Karts.InitialiseKart(ent)
+    for k, v in pairs(ent) do
+        ent[k] = v
+    end
+
+    ent:Initialize()
+
+    PIXEL.Karts.Vehicles[ent:GetNWString("PIXEL.Karts.KartID", "clientside")] = ent
+end

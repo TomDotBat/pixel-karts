@@ -76,13 +76,3 @@ function ENT:SetupClientside()
     self:SetPoseParameter("vehicle_wheel_rl_height", .54)
     self:SetPoseParameter("vehicle_wheel_rr_height", .54)
 end
-
-function PIXEL.Karts.InitialiseKart(kart)
-    for k, v in pairs(PIXEL.Karts.KartTable) do
-        kart[k] = v
-    end
-
-    kart:Initialize()
-
-    PIXEL.Karts.Vehicles[kart:GetNWString("PIXEL.Karts.KartID", "clientside")] = kart
-end
