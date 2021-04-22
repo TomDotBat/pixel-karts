@@ -120,65 +120,46 @@ local notifScreen
 hook.Add("PIXEL.Karts.EnteredKart", "PIXEL.Karts.Radio.DrawSteeringWheelScreen", function(kart)
     notifScreen = PIXEL.Karts.GetSteeringWheelScreen("notification_overlay")
 
-    tomdotkart = kart
+    for _, screen in pairs(screens) do
+        screen:resetData()
+    end
 
-    timer.Simple(1.4, function()
-        for _, screen in pairs(screens) do
-            screen:resetData()
-        end
+    local boneId = kart:LookupBone("gokart_steeringwheel")
+    if not boneId then return end
+
+    local localPly = LocalPlayer()
+    hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.DrawSteeringWheelScreen", function(skybox, depth)
+        if depth then return end
+        if not IsValid(kart) then return end
+
+        local matrix = kart:GetBoneMatrix(boneId)
+        local pos = matrix:GetTranslation()
+        local ang = matrix:GetAngles()
+
+        ang:RotateAroundAxis(ang:Up(), 180)
+        ang:RotateAroundAxis(ang:Right(), 90)
+
+        pos = pos - ang:Forward() * 1.58
+        pos = pos - ang:Right() * 2.955
+        pos = pos + ang:Up() * 4.358
+
+        if not ui.startDraw(pos, ang, 0.008, kart) then return end
+
+        PIXEL.Karts.Clip:Scissor2D(scrW, scrH)
+            local screen = screens[curScreen]
+            screen:draw(kart, localPly)
+
+            notifScreen:draw(kart, localPly)
+
+            if screen:getShowCursor() then
+                ui.drawCursor(0, 0, w, h, 32)
+            end
+        PIXEL.Karts.Clip()
+
+        ui.endDraw()
     end)
 end)
 
 hook.Add("PIXEL.Karts.LeftKart", "PIXEL.Karts.DrawSteeringWheelScreen", function()
-    --hook.Remove("PostDrawTranslucentRenderables", "PIXEL.Karts.DrawSteeringWheelScreen")
-end)
-
-if not IsValid(tomdotkart) then return end
-local kart = tomdotkart
-notifScreen = PIXEL.Karts.GetSteeringWheelScreen("notification_overlay")
-
-local boneId
-for i = 0, kart:GetBoneCount() do
-    if kart:GetBoneName(i) == "gokart_steeringwheel" then
-        boneId = i
-        break
-    end
-end
-
-if not boneId then return end
-
-for _, screen in pairs(screens) do
-    screen:resetData()
-end
-
-local localPly = LocalPlayer()
-hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.DrawSteeringWheelScreen", function(skybox, depth)
-    if depth then return end
-    if not IsValid(kart) then return end
-
-    local matrix = kart:GetBoneMatrix(boneId)
-    local pos = matrix:GetTranslation()
-    local ang = matrix:GetAngles()
-
-    ang:RotateAroundAxis(ang:Up(), 180)
-    ang:RotateAroundAxis(ang:Right(), 90)
-
-    pos = pos - ang:Forward() * 1.58
-    pos = pos - ang:Right() * 2.955
-    pos = pos + ang:Up() * 4.358
-
-    if not ui.startDraw(pos, ang, 0.008, kart) then return end
-
-    PIXEL.Karts.Clip:Scissor2D(scrW, scrH)
-        local screen = screens[curScreen]
-        screen:draw(kart, localPly)
-
-        notifScreen:draw(kart, localPly)
-
-        if screen:getShowCursor() then
-            ui.drawCursor(0, 0, w, h, 32)
-        end
-    PIXEL.Karts.Clip()
-
-    ui.endDraw()
+    hook.Remove("PostDrawTranslucentRenderables", "PIXEL.Karts.DrawSteeringWheelScreen")
 end)
