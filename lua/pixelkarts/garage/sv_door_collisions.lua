@@ -18,5 +18,5 @@ local function makeDoor()
     door:SetRenderMode(RENDERMODE_TRANSCOLOR)
 end
 
-hook.Add("InitPostEntity", "PIXEL.Karts.FakeGarageDoorCollisions", makeDoor)
-hook.Add("PostCleanupMap", "PIXEL.Karts.FakeGarageDoorCollisions", makeDoor)
+hook.Add("InitPostEntity", "PIXEL.Karts.GarageDoorCollisions", makeDoor)
+hook.Add("PostCleanupMap", "PIXEL.Karts.GarageDoorCollisions", makeDoor)

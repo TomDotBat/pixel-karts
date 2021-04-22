@@ -18,5 +18,5 @@ local function buildRamp()
     ramp:SetRenderMode(RENDERMODE_TRANSCOLOR)
 end
 
-hook.Add("InitPostEntity", "PIXEL.Karts.Ramp", buildRamp)
-hook.Add("PostCleanupMap", "PIXEL.Karts.Ramp", buildRamp)
+hook.Add("InitPostEntity", "PIXEL.Karts.GarageRampCollisions", buildRamp)
+hook.Add("PostCleanupMap", "PIXEL.Karts.GarageRampCollisions", buildRamp)

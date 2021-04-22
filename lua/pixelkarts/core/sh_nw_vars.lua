@@ -41,7 +41,6 @@ function PIXEL.Karts.SetupNWVars(kart)
             kart["Set" .. upgradeName] = function(s, state)
                 kart:SetNWBool("PIXEL.Karts." .. upgradeName, state)
             end
-        -- Serialize into single number to save network space.,
         elseif upgrade.Type == "Color" then
             kart["Get" .. upgradeName .. "Enabled"] = function(s)
                 return kart:GetNWBool("PIXEL.Karts." .. upgradeName .. ".Enabled", false)

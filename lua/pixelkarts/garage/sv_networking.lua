@@ -2,7 +2,7 @@
 local garageConfig = PIXEL.Karts.Config.Garage
 
 local distCheckRadiusSqr = garageConfig.EntryRangeCheckRadius * garageConfig.EntryRangeCheckRadius
---@TODO: VAR PROXIES
+
 local function togglePlayerGarageState(ply, forced)
     if ply:GetNWBool("PIXEL.Karts.IsInGarage", false) then
         ply:SetNWBool("PIXEL.Karts.IsInGarage", false)
@@ -79,9 +79,9 @@ local function togglePlayerGarageState(ply, forced)
         ply:SetPos(garageConfig.InsidePosition)
     end
 end
-util.AddNetworkString("PIXEL.Karts.GarageEntered")
 PIXEL.Karts.TogglePlayerGarageState = togglePlayerGarageState
----@Todo VARPROXIES?
+util.AddNetworkString("PIXEL.Karts.GarageEntered")
+
 net.Receive("PIXEL.Karts.GarageStateUpdate", function(len, ply)
     local steamId = ply:SteamID64()
     if timer.Exists("PIXEL.Karts.GarageStateUpdateCooldown:" .. steamId) then return end
@@ -97,7 +97,6 @@ net.Receive("PIXEL.Karts.PurchaseKart", function(len, ply)
     if ply.PIXELKartsHasKart then return end
 
     local price = PIXEL.Karts.Config.KartPrice[ply:PIXELKartsGetLevel()]
-    ---@Todo Chuck this in the config
     if not PIXEL.Karts.CanAfford(ply, price) then
         togglePlayerGarageState(ply)
         PIXEL.Karts.Notify(ply, "cantAffordKart", nil, 1)
@@ -108,10 +107,10 @@ net.Receive("PIXEL.Karts.PurchaseKart", function(len, ply)
 
     ply:PIXELKartsSetDataKey("purchased_kart", true, function()
         if not IsValid(ply) then return end
-        ---@Todo Chuck this in the config
+
         PIXEL.Karts.Notify(ply, "purchasedKartForPrice", {price = PIXEL.FormatMoney(price)}, 1)
         ply.PIXELKartsHasKart = true
-        ---@Todo Chuck this in the config
+
         local randColor = PIXEL.Karts.Config.DefaultColors[math.random(#PIXEL.Karts.Config.DefaultColors)]
         net.Start("PIXEL.Karts.PurchaseKart")
          net.WriteColor(randColor)
@@ -189,7 +188,6 @@ util.AddNetworkString("PIXEL.Karts.PurchaseKartUpgrades")
 
 
 net.Receive("PIXEL.Karts.RespawnKart", function(len, ply)
--- Rate limit
     if not ply:GetNWBool("PIXEL.Karts.IsInGarage", false) then return end
     if ply.PIXELKartsHasKart then return end
 
@@ -218,8 +216,6 @@ util.AddNetworkString("PIXEL.Karts.RespawnKart")
 
 
 net.Receive("PIXEL.Karts.PutAwayKart", function(len, ply)
-
--- Rate limit
     if not ply:GetNWBool("PIXEL.Karts.IsInGarage", false) then return end
 
     ply:SetPos(garageConfig.LeavePosition)

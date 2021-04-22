@@ -16,7 +16,6 @@ local localPly
 hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.GarageDoorMat", function(depth, skybox)
     if skybox then return end
     if not IsValid(localPly) then localPly = LocalPlayer() end
-    -- We can use https://wiki.facepunch.com/gmod/Entity:SetNWVarProxy
     if localPly:GetNWBool("PIXEL.Karts.IsInGarage", false) then return end
 
     local distance = (position - localPly:EyePos()):Length()

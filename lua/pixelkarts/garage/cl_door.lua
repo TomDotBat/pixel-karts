@@ -1,13 +1,11 @@
 
 local doorConfig = PIXEL.Karts.Config.GarageDoor
 
-----@TODO YOU KNOW WHAT TO DO.
 CreateMaterial("pixel_karts_garage_door", "VertexLitGeneric", {
     ["$basetexture"] = doorConfig.MaterialTexture,
     ["$basetexturetransform"] = doorConfig.MaterialSettings
 })
 
---- What the fuck is this.
 if not IsValid(PIXEL.Karts.GarageDoor) then
     PIXEL.Karts.GarageDoor = ClientsideModel(doorConfig.Model)
 end
