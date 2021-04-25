@@ -18,7 +18,7 @@ function PANEL:Init()
     self.QuestionHolder = vgui.Create("Panel", self)
     self.QuestionHolder:Dock(TOP)
 
-    local respawnPrice = PIXEL.Karts.Config.RespawnPrice[LocalPlayer():PIXELKartsGetLevel(level)]
+    local respawnPrice = PIXEL.Karts.Config.RespawnPrice[LocalPlayer():PIXELKartsGetLevel()]
 
     self.Question = vgui.Create("PIXEL.Label", self.QuestionHolder)
     self.Question:SetTextAlign(TEXT_ALIGN_CENTER)

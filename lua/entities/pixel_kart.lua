@@ -1,6 +1,4 @@
 
---@TODO: Could be made into a creator and made at runtime.
-
 AddCSLuaFile()
 
 ENT.Type = "anim"

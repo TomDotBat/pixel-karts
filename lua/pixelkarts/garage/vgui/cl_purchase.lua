@@ -23,8 +23,8 @@ function PANEL:Init()
     self.Question:SetAutoWrap(true)
     self.Question:SetFont("Karts.RespawnDescription")
     self.Question:SetText(lang:getString("purchaseDescription", {
-        price = PIXEL.FormatMoney(
-            PIXEL.Karts.Config.KartPrice[LocalPlayer():PIXELKartsGetLevel(level)]
+        amount = PIXEL.FormatMoney(
+            PIXEL.Karts.Config.KartPrice[LocalPlayer():PIXELKartsGetLevel()]
         )
     }))
 

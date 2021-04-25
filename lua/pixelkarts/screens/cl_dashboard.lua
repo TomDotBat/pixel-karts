@@ -73,18 +73,12 @@ PIXEL.Karts.SteeringWheelScreen("dashboard", gmodI18n.getAddon("pixelkarts"):get
     local iconY = offset + (h * .5 - iconSize * .5)
 
     local appNo = 1
-    --for rowNo = 1, rowCount do
-        for appId, app in pairs(visibleApps) do
-            if drawIcon(app:getImgurId(), .8, iconX, iconY, iconSize, app) then
-                PIXEL.DrawSimpleText(app:getName(), "Karts.AppName", w * .5, fullH - 6, PIXEL.Colors.SecondaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_BOTTOM)
-            end
-
-            iconX = iconX + fullWidth
-            appNo = appNo + 1
+    for appId, app in pairs(visibleApps) do
+        if drawIcon(app:getImgurId(), .8, iconX, iconY, iconSize, app) then
+            PIXEL.DrawSimpleText(app:getName(), "Karts.AppName", w * .5, fullH - 6, PIXEL.Colors.SecondaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_BOTTOM)
         end
-    --end
-end, true)
 
---PIXEL.Karts.SteeringWheelApp("abilities2", "Abilitiesaa", "uL4bDBn")
---PIXEL.Karts.SteeringWheelApp("abilities4", "Abilitiesss", "uL4bDBn")
---PIXEL.Karts.SteeringWheelApp("abilities3", "Abilitiesvbb", "uL4bDBn")
+        iconX = iconX + fullWidth
+        appNo = appNo + 1
+    end
+end, true)
