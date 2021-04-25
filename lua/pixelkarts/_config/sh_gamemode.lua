@@ -48,5 +48,5 @@ function PIXEL.Karts.RemoveMoney(ply, amount) --This is called when we want to t
 end
 
 function PIXEL.Karts.CanAfford(ply, amount) --This is called when we want to check if a player can afford something
-    ply:canAfford(amount)
+    return ply:canAfford(amount)
 end
