@@ -17,7 +17,7 @@ local notifData
 
 PIXEL.Karts.SteeringWheelScreen("notification_overlay", "Notification Overlay", function(screen, kart, offset, w, h, localPly, fullH)
     if not notifData then return end
-    drawNotification(notifMargin, fullH - notifH - notifMargin, w - notifMargin * 2, notifH, "Fuck", PIXEL.Colors.PrimaryText)
+    --drawNotification(notifMargin, fullH - notifH - notifMargin, w - notifMargin * 2, notifH, "Fuck", PIXEL.Colors.PrimaryText)
 end, true, true)
 
 function PIXEL.Karts.SteeringWheelNotification(text, type, length, icon)
