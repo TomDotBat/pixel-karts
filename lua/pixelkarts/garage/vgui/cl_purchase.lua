@@ -18,9 +18,6 @@ function PANEL:Init()
     self.QuestionHolder = vgui.Create("Panel", self)
     self.QuestionHolder:Dock(TOP)
 
-    print(PIXEL.Karts.Config.KartPrice[LocalPlayer():PIXELKartsGetLevel()])
-    print("frick")
-
     self.Question = vgui.Create("PIXEL.Label", self.QuestionHolder)
     self.Question:SetTextAlign(TEXT_ALIGN_CENTER)
     self.Question:SetAutoWrap(true)
