@@ -1,9 +1,19 @@
 require("mysqloo")
 
-local tblPlyData = "pixel_karts_player_data"
+
+local tblPlyData = "pkarts_player_data"
 PIXEL.Karts.Database = PIXEL.Karts.Database or {}
-function PIXEL.Karts.Database:prepared_query(query, ...)
+function PIXEL.Karts.Database:prepared_query(query, onSucc, onErr, ...)
     local query1 = self.instance:prepare(query)
+
+    function query1:onSuccess(...)
+        onSucc(...)
+    end
+
+    function query1:onError(...)
+        print("Pixel Karts SQL ERROR:" ,...)
+        if onErr then onErr(...) end
+    end
 
     for i, v in ipairs({...}) do
         local argType = string.ToTable(type(v))
@@ -11,7 +21,7 @@ function PIXEL.Karts.Database:prepared_query(query, ...)
         argType = table.concat(argType)
         query1["set" .. argType](query1, i, v)
     end
-    return query1
+    query1:start()
 end
 
 local credentials = PIXEL.Karts.Config.DatabaseCredentials
@@ -29,19 +39,15 @@ PIXEL.Karts.Database.instance:setAutoReconnect(true)
 hook.Add("InitPostEntity", "PIXEL.Karts.InitialiseDatabase", function()
     PIXEL.Karts.Database.instance:connect()
 end)
-
 function PIXEL.Karts.Database.instance:onConnected()
-    local q = PIXEL.Karts.Database:prepared_query([[CREATE TABLE IF NOT EXISTS ]] .. tblPlyData .. [[ (steamid VARCHAR(17) NOT NULL, data TEXT NOT NULL);]], tblPlyData)
-
-    function q:onError(err, sql)
+    PIXEL.Karts.Database:prepared_query([[CREATE TABLE IF NOT EXISTS ]] .. tblPlyData .. [[ (steamid VARCHAR(17) NOT NULL, data TEXT NOT NULL , CONSTRAINT pkarts_player_data_pk PRIMARY KEY (steamid));]], 
+    function ()
+    end,
+    function (err, sql)
         print("[PIXEL Karts] WARNING - Database table creation failed.\n" .. err)
-    end
+    end,
+    tblPlyData)
 
-    function q:onSuccess()
-        print(" ran successfully ")
-    end
-
-    q:start()
 end
 
 function PIXEL.Karts.Database.instance:onConnectionFailed(err)
@@ -49,9 +55,9 @@ function PIXEL.Karts.Database.instance:onConnectionFailed(err)
 end
 
 function PIXEL.Karts.GetPlayerData(steamid, callback)
-    local q = PIXEL.Karts.Database:prepared_query(string.format([[SELECT data FROM %s WHERE steamid = "%s";]], tblPlyData, steamid))
+    local q = PIXEL.Karts.Database:prepared_query([[SELECT data FROM ]] .. tblPlyData .. [[ WHERE steamid = ?;]],
 
-    function q:onSuccess(data)
+    function(data)
         local row = data[1]
         if not row then callback(true, {}, "{}") return end
 
@@ -64,35 +70,30 @@ function PIXEL.Karts.GetPlayerData(steamid, callback)
 
         PIXEL.Karts.CachePlayerData(steamid, data, json)
         callback(true, data, json)
-    end
-
-    function q:onError(err, sql)
+    end,
+    function(err, sql)
         print("[PIXEL Karts] WARNING - Database failed to get player data for '" .. steamid .. "'.\n" .. err)
         callback(false)
-    end
+    end, tostring(steamid))
 
-    q:start()
 end
 
 
 function PIXEL.Karts.SetPlayerData(steamid, data, callback)
+
     data = util.TableToJSON(data)
     if not data then callback(false) end
-    data = database:escape(data)
 
-    local q = database:prepared_query([[INSERT INTO ? (steamid, data) VALUES (?, ?) ON DUPLICATE KEY UPDATE steamid=?, data=?;]], tblPlyData, steamid, data, steamid, data)
-
-    function q:onSuccess()
+    local query = PIXEL.Karts.Database:prepared_query([[INSERT INTO ]] .. tblPlyData .. [[ (steamid, data) VALUES (?, ?) ON DUPLICATE KEY UPDATE data = ?;]], 
+    function ()
         PIXEL.Karts.ClearCachedPlayerData(steamid)
         if callback then callback(true, data) end
-    end
-
-    function q:onError(err, sql)
+    end,
+    function(err, sql)
         print("[PIXEL Karts] WARNING - Database failed to get player data for '" .. steamid .. "'.\n" .. err)
         if callback then callback(false, data) end
-    end
+    end,steamid, data, data)
 
-    q:start()
 end
 
 function PIXEL.Karts.UpdatePlayerData(steamid, newData, callback)
