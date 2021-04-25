@@ -61,7 +61,7 @@ function kart:Reset()
 end
 
 function PIXEL.Karts.InitialiseKart(ent)
-    for k, v in pairs(ent) do
+    for k, v in pairs(kart) do
         ent[k] = v
     end
 
