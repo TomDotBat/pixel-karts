@@ -1,6 +1,8 @@
 
 util.AddNetworkString("PIXEL.Karts.RocketBoost")
 
+local lang = gmodI18n.getAddon("pixelkarts")
+
 local boostKey = PIXEL.Karts.Config.Upgrades.RocketBoost.BoostKey
 hook.Add("KeyPress", "PIXEL.Karts.RocketBoostBind", function(ply, key)
     if key ~= boostKey then return end

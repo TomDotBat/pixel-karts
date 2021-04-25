@@ -27,6 +27,8 @@ local function isTooCloseToGround(veh)
     return true
 end
 
+local lang = gmodI18n.getAddon("pixelkarts")
+
 local pitchAng, rollAng = Vector(-1, 0, 0), Vector(0, 1, 0)
 
 function PIXEL.Karts.DeployGlider(ply, veh)
