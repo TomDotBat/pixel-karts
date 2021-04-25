@@ -70,6 +70,8 @@ end)
 
 PIXEL.RegisterFont("Karts.RocketBoost", "Open Sans SemiBold", 18)
 
+local lang = gmodI18n.getAddon("pixelkarts")
+
 hook.Add("PIXEL.Karts.EnteredKart", "PIXEL.Karts.RocketBoostHUD", function(kart)
     local keyName = PIXEL.Karts.Config.Upgrades.RocketBoost.BoostKeyName
     local cooldown = PIXEL.Karts.Config.Upgrades.RocketBoost.BoostCooldown
