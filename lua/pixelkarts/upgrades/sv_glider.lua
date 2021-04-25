@@ -48,12 +48,12 @@ function PIXEL.Karts.DeployGlider(ply, veh)
     end
 
     if veh:GetNWFloat("PIXEL.Karts.GliderCooldown", 0) > CurTime() then
-        PIXEL.Karts.Notify(ply, "yourAbilityIsOnCooldown", {abilityName = "thingymabob"}, 1)
+        PIXEL.Karts.Notify(ply, "yourAbilityIsOnCooldown", {abilityName = lang:getString("upgradeGlider")}, 1)
         return
     end
 
     if not ply:PIXELKartsIsLevel(gliderUpgrade.RequiredLevel) then
-        PIXEL.Karts.Notify(ply, "dontHaveRankToUseAbility", {abilityName = "thingymabob"}, 1)
+        PIXEL.Karts.Notify(ply, "dontHaveRankToUseAbility", {abilityName = lang:getString("upgradeGlider")}, 1)
         return
     end
 

@@ -25,14 +25,14 @@ function PIXEL.Karts.RocketBoost(ply, veh)
     end
 
     if veh:GetNWFloat("PIXEL.Karts.RocketBoostCooldown", 0) > CurTime() then
-        PIXEL.Karts.Notify(ply, "yourAbilityIsOnCooldown", {abilityName = "thingymabob"}, 1)
+        PIXEL.Karts.Notify(ply, "yourAbilityIsOnCooldown", {abilityName = lang:getString("upgradeRocketBoost")}, 1)
         return
     end
 
     local boostUpgrade = PIXEL.Karts.Config.Upgrades.RocketBoost
 
     if not ply:PIXELKartsIsLevel(boostUpgrade.RequiredLevel) then
-        PIXEL.Karts.Notify(ply, "dontHaveRankToUseAbility", {abilityName = "thingymabob"}, 1)
+        PIXEL.Karts.Notify(ply, "dontHaveRankToUseAbility", {abilityName = lang:getString("upgradeRocketBoost")}, 1)
         return
     end
 
