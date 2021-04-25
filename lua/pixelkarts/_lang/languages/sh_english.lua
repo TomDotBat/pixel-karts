@@ -66,6 +66,10 @@ lang:addPhrase("leaveGarage", "Leave Garage")
 lang:addPhrase("purchase", "Purchase")
 lang:addPhrase("storeKart", "Store Kart")
 
+--Abilities HUD
+lang:addPhrase("rocketBoostCooldown", "Rocket Boost (#keyName)", {keyName = "s&box"})
+lang:addPhrase("gliderCooldown", "Deploy Glider (#keyName)", {keyName = "s&box"})
+
 --Steering Wheel Screen
 lang:addPhrase("startingUp", "PIXELOS is starting")
 
