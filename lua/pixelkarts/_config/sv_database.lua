@@ -1,13 +1,12 @@
 
 --[[
-    If you don't have MYSQLOO please set this to true and ignore second part of
-    this file.
+    Database configuration for PIXEL Karts.
+]]
 
-]]--
-PIXEL.Karts.Config.Sqlite = true
+PIXEL.Karts.Config.Sqlite = true --Should SQLite be used over MySQL?
 
 --[[
-    Database configuration for PIXEL Karts.
+    If you set the above variable to true you can ignore anything below here.
 
     Populate this configuration table with your MySQL/MariaDB credentials.
     Making a seperate database for PIXEL Karts is recommended but not required.
