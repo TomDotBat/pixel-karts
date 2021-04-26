@@ -37,4 +37,5 @@ end
 
 hook.Add("PIXEL.UI.FullyLoaded", "PIXEL.Karts.WaitForPIXELUI", loadAddon)
 
+if CLIENT then return end
 resource.AddWorkshop("2395634176")
