@@ -1,5 +1,6 @@
 
 local doorConfig = PIXEL.Karts.Config.GarageDoor
+if not doorConfig.Model or doorConfig.Model == "" then return end
 
 CreateMaterial("pixel_karts_garage_door", "VertexLitGeneric", {
     ["$basetexture"] = doorConfig.MaterialTexture,
