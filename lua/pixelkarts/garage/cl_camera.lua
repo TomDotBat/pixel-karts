@@ -1,7 +1,7 @@
-
+--{{ user_id | 25 }}
 local garageConfig = PIXEL.Karts.Config.Garage
 
-local viewData = {
+local viewData = { --{{ user_id sha256 key }}
     drawviewer = true
 }
 
@@ -9,7 +9,7 @@ local targetCamPos, camPos
 local aimPos = garageConfig.KartPos + garageConfig.CameraAimOffset
 
 local sin, cos = math.sin, math.cos
-
+--{{ user_id | 25 }}
 function PIXEL.Karts.SetupGarageCamera()
     local wobbleAngle = Angle()
     local curTime = CurTime
@@ -20,7 +20,7 @@ function PIXEL.Karts.SetupGarageCamera()
     PIXEL.Karts.ResetGarageCamera(true)
 
     hook.Add("CalcView", "PIXEL.Karts.GarageCamera", function(ply, pos, angles, fov)
-        wobbleAngle[1] = sin(curTime() * .8)
+        wobbleAngle[1] = sin(curTime() * .8) --{{ user_id | 25 }}
         wobbleAngle[2] = cos(curTime() * .6)
 
         camPos = lerpVector(frameTime() * 8, camPos, targetCamPos)
@@ -30,7 +30,7 @@ function PIXEL.Karts.SetupGarageCamera()
         viewData.fov = fov
 
         return viewData
-    end)
+    end) --{{ user_id sha256 key }}
 end
 
 function PIXEL.Karts.MoveGarageCamera(rotation, offset)
@@ -49,7 +49,7 @@ function PIXEL.Karts.ResetGarageCamera(instant)
      + (Vector(0, garageConfig.CameraCircleRadius, 0) * cos(rotation))
 
     if not instant then return end
-    camPos = targetCamPos
+    camPos = targetCamPos --{{ user_id | 25 }}
 end
 
 function PIXEL.Karts.RemoveGarageCamera()

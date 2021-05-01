@@ -7,7 +7,7 @@ ENT.Base = "base_anim"
 ENT.PrintName = "Repair Wrench"
 ENT.Category = "PIXEL Karts"
 ENT.Author = "Tom.bat"
-ENT.Spawnable = true
+ENT.Spawnable = true --{{ user_id | 25 }}
 ENT.AdminOnly = false
 
 if SERVER then
@@ -21,7 +21,7 @@ if SERVER then
         if not physObj:IsValid() then return end
         physObj:Wake()
     end
-
+--{{ user_id }}
     function ENT:Touch(tar)
         if not tar.IsPIXELKart then return end
         if self.Used then return end
@@ -33,7 +33,7 @@ if SERVER then
 else
     local lang = gmodI18n.getAddon("pixelkarts")
     function ENT:Draw()
-        self:DrawModel()
+        self:DrawModel() --{{ user_id sha256 key }}
         PIXEL.DrawEntOverhead(self, lang:getString("repairWrench"), nil, nil, 0.034)
     end
 end

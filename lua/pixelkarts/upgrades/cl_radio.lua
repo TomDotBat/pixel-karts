@@ -21,7 +21,7 @@ end
 
 function PIXEL.Karts.Radio.SetMediaVolume(media, vol)
     if media.SetVolume then
-        media:SetVolume(vol)
+        media:SetVolume(vol) --{{ user_id sha256 key }}
     else
         media:setVolume(vol * cvarHtmlVolMul:GetFloat())
     end
@@ -78,7 +78,7 @@ local function radioThink(kart, localKart, thirdperson)
     if isPlaying and not shouldPlay then
         kart:RadioStop()
     elseif shouldPlay and (hasUrlChanged or has3DChanged or not isPlaying) and not kart.RadioStarting then
-        local only3DChanged = has3DChanged and not hasUrlChanged and isPlaying
+        local only3DChanged = has3DChanged and not hasUrlChanged and isPlaying --{{ user_id }}
 
         if IsValid(kart.RadioPlayer) and not only3DChanged then
             kart:RadioStop()
@@ -102,7 +102,7 @@ local function radioThink(kart, localKart, thirdperson)
             end
 
             if not IsValid(chan) then
-                kart.RadioPlayAttempts = (kart.RadioPlayAttempts or 0) + 1
+                kart.RadioPlayAttempts = (kart.RadioPlayAttempts or 0) + 1 --{{ user_id }}
                 kart.RadioStarting = false
                 return
             end
@@ -136,7 +136,7 @@ local function radioThink(kart, localKart, thirdperson)
         if not localKart and kart.RadioPlayerCreated then
             volumemul = volumemul * math.min((CurTime() - kart.RadioPlayerCreated) * 2, 1)
         end
-
+--{{ user_id }}
         local vol = cvarVolume:GetFloat() or 50
         vol = vol / 100
         vol = vol * volumemul
@@ -148,7 +148,7 @@ end
 
 hook.Add("EntityNetworkedVarChanged", "PIXEL.Karts.Radio.ChangeListener", function(ent, name, oldval, newval)
     if name ~= "PIXEL.Karts.RadioChannel" then return end
-    PCS[ent] = true
+    PCS[ent] = true --{{ user_id | 25 }}
 end)
 
 hook.Add("NetworkEntityCreated", "PIXEL.Karts.Radio.PCS.Add", function(ent)
@@ -160,7 +160,7 @@ hook.Add("NotifyShouldTransmit", "PIXEL.Karts.Radio.PCS.Updater", function(ent, 
     if not (ent.IsPIXELKart and shouldTransmit) then return end
     PCS[ent] = true
 end)
-
+--{{ user_id }}
 local localKart
 hook.Add("Think", "PIXEL.Karts.Radio.Updater", function()
     local thirdperson
@@ -175,7 +175,7 @@ end)
 
 hook.Add("PIXEL.Karts.EnteredKart", "PIXEL.Karts.Radio.UpdateLocalKart", function(kart)
     if not kart:GetBuiltInRadio() then return end
-    localKart = kart
+    localKart = kart --{{ user_id | 25 }}
 end)
 
 hook.Add("PIXEL.Karts.LeftKart", "PIXEL.Karts.Radio.UpdateLocalKart", function()
@@ -201,7 +201,7 @@ function PIXEL.Karts.Radio.OpenSettingsMenu()
     fr:Center()
 
     local oldPaint = fr.Paint
-    fr.Paint = function(s, w, h)
+    fr.Paint = function(s, w, h) --{{ user_id }}
         oldPaint(s, w, h)
         PIXEL.DrawSimpleText(lang:getString("radioVolume"), "Karts.RadioConfig", PIXEL.Scale(8), PIXEL.Scale(36), colors.PrimaryText)
         PIXEL.DrawSimpleText(lang:getString("radioDisable3dVolume"), "Karts.RadioConfig", PIXEL.Scale(36), PIXEL.Scale(62), colors.PrimaryText)
@@ -209,7 +209,7 @@ function PIXEL.Karts.Radio.OpenSettingsMenu()
 
     local slider = fr:Add("PIXEL.Slider")
     slider:SetPos(PIXEL.Scale(68), PIXEL.Scale(40))
-    slider:SetSize(PIXEL.Scale(104), PIXEL.Scale(10))
+    slider:SetSize(PIXEL.Scale(104), PIXEL.Scale(10)) --{{ user_id sha256 key }}
 
     function slider:OnValueChanged(fraction)
         cvarVolume:SetFloat(fraction * 100)
@@ -232,7 +232,7 @@ function PIXEL.Karts.KartTable:RadioStop()
     if not self.RadioPlayer then return end
 
     PIXEL.Karts.Radio.StopMedia(self.RadioPlayer)
-    self.RadioPlayer = nil
+    self.RadioPlayer = nil --{{ user_id sha256 key }}
     self.RadioPlayerCreated = nil
 end
 

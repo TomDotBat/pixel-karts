@@ -3,14 +3,14 @@ local tblPlyData = "pixel_karts_player_data"
 
 if PIXEL.Karts.Config.SQLite then
     PIXEL.Karts.Database = {}
-
+--{{ user_id }}
     function PIXEL.Karts.Database.Init()
         sql.Query(string.format([[CREATE TABLE IF NOT EXISTS %s (steamid VARCHAR(17) NOT NULL, data TEXT NOT NULL, CONSTRAINT %s_pk PRIMARY KEY (steamid));]], tblPlyData, tblPlyData))
-    end
+    end --{{ user_id | 25 }}
 
     function PIXEL.Karts.GetPlayerData(steamid, callback)
         local data = sql.Query(string.format([[SELECT data FROM %s WHERE steamid = "%s";]], tblPlyData, steamid))
-
+--{{ user_id sha256 key }}
         local function onSuccess()
             data = data or {}
             local row = data[1]
@@ -26,7 +26,7 @@ if PIXEL.Karts.Config.SQLite then
             PIXEL.Karts.CachePlayerData(steamid, data, json)
             callback(true, data, json)
         end
-
+--{{ user_id }}
         local function onError(err)
             print("[PIXEL Karts] WARNING - Database failed to get player data for '" .. steamid .. "'.\n" .. err)
             callback(false)
@@ -51,7 +51,7 @@ if PIXEL.Karts.Config.SQLite then
             PIXEL.Karts.ClearCachedPlayerData(steamid)
             if callback then callback(true, data) end
         end
-
+--{{ user_id | 25 }}
         local function onError(err, query)
             print("[PIXEL Karts] WARNING - Database failed to set player data for '" .. steamid .. "'.\n" .. err)
             if callback then callback(false, data) end
@@ -68,7 +68,7 @@ if PIXEL.Karts.Config.SQLite then
     hook.Add("InitPostEntity", "PIXEL.Karts.InitialiseDatabase", function()
         PIXEL.Karts.Database.Init()
     end)
-
+--{{ user_id sha256 key }}
     return
 end
 
@@ -109,7 +109,7 @@ end
 function database:onConnectionFailed(err)
     print("[PIXEL Karts] WARNING - Database connection failed.\n" .. err)
 end
-
+--{{ user_id sha256 key }}
 function PIXEL.Karts.GetPlayerData(steamid, callback)
     local q = database:query(string.format([[SELECT data FROM %s WHERE steamid = "%s";]], tblPlyData, steamid))
 
@@ -131,7 +131,7 @@ function PIXEL.Karts.GetPlayerData(steamid, callback)
     function q:onError(err, query)
         print("[PIXEL Karts] WARNING - Database failed to get player data for '" .. steamid .. "'.\n" .. err)
         callback(false)
-    end
+    end --{{ user_id | 25 }}
 
     q:start()
 end
@@ -152,7 +152,7 @@ function PIXEL.Karts.SetPlayerData(steamid, data, callback)
     function q:onError(err, query)
         print("[PIXEL Karts] WARNING - Database failed to get player data for '" .. steamid .. "'.\n" .. err)
         if callback then callback(false, data) end
-    end
+    end --{{ user_id sha256 key }}
 
     q:start()
 end
@@ -163,7 +163,7 @@ function PIXEL.Karts.UpdatePlayerData(steamid, newData, callback)
             table.Merge(data, newData)
         else
             data = newData
-        end
+        end --{{ user_id }}
 
         PIXEL.Karts.SetPlayerData(steamid, data, function(success2, json)
             if success2 then PIXEL.Karts.CachePlayerData(steamid, data, json) end

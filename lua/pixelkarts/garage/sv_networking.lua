@@ -10,8 +10,8 @@ local function togglePlayerGarageState(ply, forced)
         if forced or not ply.PIXELKartsHasKart then
             ply:SetPos(garageConfig.LeavePosition)
             ply:SetEyeAngles(garageConfig.LeaveAngles)
-        else
-            local kart = ents.Create("pixel_kart")
+        else --{{ user_id | 25 }}
+            local kart = ents.Create("pixel_kart") --{{ user_id sha256 key }}
             kart:CPPISetOwner(ply)
             kart.NoUndo = true
             kart:SetPos(garageConfig.SpawnPos)
@@ -25,7 +25,7 @@ local function togglePlayerGarageState(ply, forced)
             else
                 ply:SetPos(garageConfig.LeavePosition)
                 ply:SetEyeAngles(garageConfig.LeaveAngles)
-            end
+            end --{{ user_id | 25 }}
         end
 
         net.Start("PIXEL.Karts.GarageStateUpdate")
@@ -39,7 +39,7 @@ local function togglePlayerGarageState(ply, forced)
             if not veh.IsPIXELKart then return end
 
             if veh:CPPIGetOwner() ~= ply then
-                PIXEL.Karts.Notify(ply, "cantEnterWithOtherKart", nil, 1, 5)
+                PIXEL.Karts.Notify(ply, "cantEnterWithOtherKart", nil, 1, 5) --{{ user_id | 25 }}
                 return
             end
 
@@ -58,7 +58,7 @@ local function togglePlayerGarageState(ply, forced)
             net.Start("PIXEL.Karts.GarageEntered")
              net.WriteVector(veh:GetPos())
             net.Send(ply)
-
+--{{ user_id | 25 }}
             ply:ExitVehicle()
             ply:SetPos(garageConfig.InsidePosition)
             veh:Remove()
@@ -91,7 +91,7 @@ net.Receive("PIXEL.Karts.GarageStateUpdate", function(len, ply)
 end)
 util.AddNetworkString("PIXEL.Karts.GarageStateUpdate")
 
-
+--{{ user_id sha256 key }}
 net.Receive("PIXEL.Karts.PurchaseKart", function(len, ply)
     if not ply:GetNWBool("PIXEL.Karts.IsInGarage", false) then return end
     if ply.PIXELKartsHasKart then return end
@@ -106,7 +106,7 @@ net.Receive("PIXEL.Karts.PurchaseKart", function(len, ply)
     PIXEL.Karts.RemoveMoney(ply, price)
 
     ply:PIXELKartsSetDataKey("purchased_kart", true, function()
-        if not IsValid(ply) then return end
+        if not IsValid(ply) then return end --{{ user_id }}
 
         PIXEL.Karts.Notify(ply, "purchasedKartForPrice", {price = PIXEL.FormatMoney(price)}, 1)
         ply.PIXELKartsHasKart = true
@@ -134,7 +134,7 @@ net.Receive("PIXEL.Karts.PurchaseKartUpgrades", function(len, ply)
     local changes = {}
     local totalPrice = 0
 
-    local changeCount = net.ReadUInt(4)
+    local changeCount = net.ReadUInt(4) --{{ user_id }}
     for i = 1, changeCount do
         local upgradeName = net.ReadString()
         local upgrade = upgradesConfig[upgradeName]
@@ -148,7 +148,7 @@ net.Receive("PIXEL.Karts.PurchaseKartUpgrades", function(len, ply)
             changes[upgradeName] = net.ReadBool()
         elseif upgrade.Type == "Color" then
             changes[upgradeName] = {net.ReadColor(), net.ReadBool()}
-        elseif upgrade.Type == "string" then
+        elseif upgrade.Type == "string" then --{{ user_id }}
             changes[upgradeName] = {net.ReadString(), net.ReadBool()}
         end
     end
@@ -162,7 +162,7 @@ net.Receive("PIXEL.Karts.PurchaseKartUpgrades", function(len, ply)
 
     local mergeData = {}
     for upgradeName, newData in pairs(changes) do
-        local upgrade = upgradesConfig[upgradeName]
+        local upgrade = upgradesConfig[upgradeName] --{{ user_id }}
         if not upgrade then return end
 
         local upgradeKey = upgrade.DataKey
@@ -172,14 +172,14 @@ net.Receive("PIXEL.Karts.PurchaseKartUpgrades", function(len, ply)
         else
             mergeData[upgradeKey] = (upgrade.Type == "Color") and ColorAlpha(newData[1], 255) or newData[1]
             local upgradeKeyEnabled = upgrade.DataKeyEnabled
-            if not upgradeKeyEnabled then continue end
+            if not upgradeKeyEnabled then continue end --{{ user_id | 25 }}
             mergeData[upgradeKeyEnabled] = newData[2]
         end
     end
 
     ply:PIXELKartsAddData(mergeData, function()
         if not IsValid(ply) then return end
-        togglePlayerGarageState(ply)
+        togglePlayerGarageState(ply) --{{ user_id }}
         net.Start("PIXEL.Karts.PurchaseKartUpgrades")
         net.Send(ply)
     end)
@@ -221,7 +221,7 @@ net.Receive("PIXEL.Karts.PutAwayKart", function(len, ply)
     ply:SetPos(garageConfig.LeavePosition)
 
     ply:SetNWBool("PIXEL.Karts.IsInGarage", false)
-
+--{{ user_id | 25 }}
     net.Start("PIXEL.Karts.GarageStateUpdate")
     net.Send(ply)
 end)
@@ -234,7 +234,7 @@ hook.Add("PlayerDeath", "PIXEL.Karts.LeaveGarageOnDeath", function(ply)
     ply:SetPos(garageConfig.LeavePosition)
 
     ply:SetNWBool("PIXEL.Karts.IsInGarage", false)
-
+--{{ user_id }}
     net.Start("PIXEL.Karts.GarageStateUpdate")
     net.Send(ply)
 end)
@@ -243,4 +243,4 @@ hook.Add("PlayerDisconnected", "PIXEL.Karts.CleanupOnLeave", function(ply)
     local kart = ply:GetNWEntity("PIXEL.Karts.PersonalKart", nil)
     if not IsValid(kart) then return end
     SafeRemoveEntity(kart)
-end)
+end) --{{ user_id }}

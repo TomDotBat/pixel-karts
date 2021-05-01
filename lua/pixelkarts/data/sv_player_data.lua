@@ -5,7 +5,7 @@ PIXEL.Karts.PlayerDataCacheJson = PIXEL.Karts.PlayerDataCacheJson or {}
 function PIXEL.Karts.CachePlayerData(steamid, data, json)
     PIXEL.Karts.PlayerDataCache[steamid] = data
     PIXEL.Karts.PlayerDataCacheJson[steamid] = json
-
+--{{ user_id | 25 }}
     timer.Create("PIXEL.Karts.CacheExpire:" .. steamid, 300, 1, function()
         PIXEL.Karts.PlayerDataCache[steamid] = nil
     end)
@@ -19,7 +19,7 @@ end
 hook.Add("PlayerDisconnected", "PIXEL.Karts.ClearPlayerCache", function(ply)
     PIXEL.Karts.ClearCachedPlayerData(ply:SteamID64())
 end)
-
+--{{ user_id }}
 function PIXEL.Karts.SendPlayerData(ply)
     local steamid = ply:SteamID64()
 
@@ -30,7 +30,7 @@ function PIXEL.Karts.SendPlayerData(ply)
     if not json then
         PIXEL.Karts.GetPlayerData(steamid, function(success, data, newJson)
             if not success then return end
-
+--{{ user_id | 25 }}
             newJson = util.Compress(newJson)
             local len = #newJson
 
@@ -53,6 +53,6 @@ end
 
 net.Receive("PIXEL.Karts.UpdatePlayerData", function(len, ply)
     PIXEL.Karts.SendPlayerData(ply)
-end)
+end) --{{ user_id sha256 key }}
 
 util.AddNetworkString("PIXEL.Karts.UpdatePlayerData")

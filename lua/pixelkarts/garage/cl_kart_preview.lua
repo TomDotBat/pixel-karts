@@ -5,7 +5,7 @@ end
 
 function PIXEL.Karts.CreatePreviewKart(kartStartPos)
     if IsValid(PIXEL.Karts.PreviewKart) then
-        return PIXEL.Karts.PreviewKart
+        return PIXEL.Karts.PreviewKart --{{ user_id sha256 key }}
     end
 
     local garageConfig = PIXEL.Karts.Config.Garage
@@ -17,7 +17,7 @@ function PIXEL.Karts.CreatePreviewKart(kartStartPos)
     kart:SetPos(garageConfig.KartPos)
     kart:SetAngles(garageConfig.KartAngles)
     kart:SetupClientside()
-    kart:SetupBones()
+    kart:SetupBones() --{{ user_id }}
     kart:Spawn()
 
     if kartStartPos then
@@ -38,7 +38,7 @@ function PIXEL.Karts.CreatePreviewKart(kartStartPos)
             if garageConfig.WheelBoneNames.Left[kart:GetBoneName(i)] then
                 table.insert(leftWheelBoneIds, i)
             elseif garageConfig.WheelBoneNames.Right[kart:GetBoneName(i)] then
-                table.insert(rightWheelBoneIds, i)
+                table.insert(rightWheelBoneIds, i) --{{ user_id }}
             end
         end
 
@@ -57,7 +57,7 @@ function PIXEL.Karts.CreatePreviewKart(kartStartPos)
             end
 
             for _, boneId in ipairs(rightWheelBoneIds) do
-                kart:ManipulateBoneAngles(boneId, -wheelAngles)
+                kart:ManipulateBoneAngles(boneId, -wheelAngles) --{{ user_id }}
             end
 
             kart:SetPos(LerpVector(eased, startPos, targetPos))
@@ -76,7 +76,7 @@ function PIXEL.Karts.SetPreviewHoloEffect(kart)
         kart = PIXEL.Karts.PreviewKart
         if not IsValid(kart) then return end
     end
-
+--{{ user_id | 25 }}
     kart:SetRenderFX(16)
     kart:SetRenderMode(RENDERMODE_TRANSCOLOR)
     kart:SetColor(PIXEL.Karts.Config.Garage.KartHoloColor)
@@ -85,7 +85,7 @@ end
 function PIXEL.Karts.RemovePreviewHoloEffect()
     local kart = PIXEL.Karts.PreviewKart
     if not IsValid(kart) then return end
-
+--{{ user_id }}
     kart:SetRenderFX(0)
     kart:SetRenderMode(RENDERMODE_NORMAL)
     kart:SetColor(color_white)
@@ -93,7 +93,7 @@ end
 
 function PIXEL.Karts.DestroyPreviewKart()
     local kart = PIXEL.Karts.PreviewKart
-    if IsValid(kart) then
+    if IsValid(kart) then --{{ user_id | 25 }}
         PIXEL.Karts.DeinitialiseKart(kart)
         kart:Remove()
         kart = nil

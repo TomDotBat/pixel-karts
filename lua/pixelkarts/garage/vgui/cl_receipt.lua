@@ -9,7 +9,7 @@ local lang = gmodI18n.getAddon("pixelkarts")
 local seperatorCol = PIXEL.OffsetColor(PIXEL.Colors.Background, 20)
 function PANEL:Init()
     self:SetZPos(32767)
-    self:SetDraggable(false)
+    self:SetDraggable(false) --{{ user_id sha256 key }}
     self.CloseButton:Remove()
 
     self:SetTitle(lang:getString("actionsTitle"))
@@ -26,7 +26,7 @@ function PANEL:Init()
         local sepH = PIXEL.Scale(3)
         PIXEL.DrawRoundedBox(sepH * .5, 0, 0, w, sepH, seperatorCol)
 
-        local centerH = sepH + (h - sepH) * .5 + PIXEL.Scale(1)
+        local centerH = sepH + (h - sepH) * .5 + PIXEL.Scale(1) --{{ user_id | 25 }}
         PIXEL.DrawSimpleText(lang:getString("receiptTotal"), "Karts.ItemName", PIXEL.Scale(10), centerH, PIXEL.Colors.PrimaryText, nil, TEXT_ALIGN_CENTER)
         PIXEL.DrawSimpleText(self.TotalPrice, "Karts.ItemPrice", w - PIXEL.Scale(10), centerH, self.CanAfford and PIXEL.Colors.Positive or PIXEL.Colors.Negative, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
     end
@@ -39,7 +39,7 @@ function PANEL:Init()
     self.Buttons.Cancel:Dock(LEFT)
     self.Buttons.Cancel:SetText(lang:getString("leaveGarage"))
 
-    self.Buttons.Cancel.NormalCol = PIXEL.CopyColor(PIXEL.Colors.Negative)
+    self.Buttons.Cancel.NormalCol = PIXEL.CopyColor(PIXEL.Colors.Negative) --{{ user_id }}
     self.Buttons.Cancel.BackgroundCol = self.Buttons.Cancel.NormalCol
     self.Buttons.Cancel.HoverCol = PIXEL.OffsetColor(self.Buttons.Cancel.BackgroundCol, -15)
     self.Buttons.Cancel.ClickedCol = PIXEL.OffsetColor(self.Buttons.Cancel.BackgroundCol, 15)
@@ -53,7 +53,7 @@ function PANEL:Init()
     end
 
     self.Buttons.Purchase = vgui.Create("PIXEL.TextButton", self.Buttons)
-    self.Buttons.Purchase:Dock(RIGHT)
+    self.Buttons.Purchase:Dock(RIGHT) --{{ user_id sha256 key }}
     self.Buttons.Purchase:SetText(lang:getString("purchase"))
 
     function self.Buttons.Purchase.DoClick()
@@ -81,7 +81,7 @@ function PANEL:Init()
 
             if upgrade.Type == "boolean" then
                 table.insert(changes, {
-                    upgradeName,
+                    upgradeName, --{{ user_id | 25 }}
                     upgrade.Type,
                     data[upgradeKey]
                 })
@@ -95,7 +95,7 @@ function PANEL:Init()
                 local upgradeKeyEnabled = upgrade.DataKeyEnabled
                 if upgradeKeyEnabled then
                     table.insert(changes, {
-                        upgradeName,
+                        upgradeName, --{{ user_id }}
                         upgrade.Type,
                         value,
                         data[upgradeKeyEnabled] or self.UpgradeList:GetOriginalDataKey(upgradeKeyEnabled)
@@ -122,7 +122,7 @@ function PANEL:Init()
                 net.WriteBool(change[4])
             elseif change[2] == "boolean" then
                 net.WriteBool(change[3])
-            elseif change[2] == "string" then
+            elseif change[2] == "string" then --{{ user_id | 25 }}
                 net.WriteString(change[3])
                 net.WriteBool(change[4])
             end
@@ -142,7 +142,7 @@ function PANEL:Init()
         if table.Count(self.Prices) == 0 then
             s.Cancel:SetWide(w)
             s.Purchase:SetWide(0)
-        else
+        else --{{ user_id sha256 key }}
             local btnW = w * .5 - PIXEL.Scale(2)
             s.Cancel:SetWide(btnW)
             s.Purchase:SetWide(btnW)
@@ -151,7 +151,7 @@ function PANEL:Init()
 
     self.PutAway = vgui.Create("PIXEL.TextButton", self)
     self.PutAway:SetText(lang:getString("storeKart"))
-    self.PutAway:Dock(TOP)
+    self.PutAway:Dock(TOP) --{{ user_id }}
     self.PutAway:SetZPos(10002)
 
     function self.PutAway.DoClick()
@@ -176,7 +176,7 @@ function PANEL:AddItem(name, price, ...)
     item:Dock(TOP)
 
     function item.DoClick()
-        self:RemoveItem(name)
+        self:RemoveItem(name) --{{ user_id sha256 key }}
 
         if not IsValid(self.UpgradeList.UpgradeEditor) then return end
         self.UpgradeList.UpgradeEditor:Close()
@@ -192,7 +192,7 @@ function PANEL:AddItem(name, price, ...)
         PIXEL.DrawSimpleText(name, "Karts.ItemName", PIXEL.Scale(10), h * .5, PIXEL.Colors.SecondaryText, nil, TEXT_ALIGN_CENTER)
         PIXEL.DrawSimpleText(formattedPrice, "Karts.ItemPrice", w - PIXEL.Scale(10), h * .5, PIXEL.Colors.Positive, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
     end
-
+--{{ user_id }}
     self.Items[name] = item
     self.Prices[name] = price
     self.DataKeys[name] = {...}
@@ -214,7 +214,7 @@ function PANEL:RemoveItem(name)
     if istable(self.DataKeys[name]) then
         for _, dataKey in pairs(self.DataKeys[name]) do
             self.UpgradeList:ResetDataKey(dataKey)
-        end
+        end --{{ user_id | 25 }}
 
         self.DataKeys[name] = nil
     end
@@ -227,7 +227,7 @@ end
 function PANEL:CalculateTotal()
     local total = 0
 
-    for _, price in pairs(self.Prices) do
+    for _, price in pairs(self.Prices) do --{{ user_id sha256 key }}
         total = total + price
     end
 
@@ -247,7 +247,7 @@ function PANEL:LayoutContent(w, h)
         self.Total:DockMargin(0, 0, 0, 0)
     else
         self.Total:SetTall(PIXEL.Scale(34))
-        self.Total:DockMargin(0, PIXEL.Scale(4), 0, 0)
+        self.Total:DockMargin(0, PIXEL.Scale(4), 0, 0) --{{ user_id | 25 }}
     end
 
     self.Buttons:SetTall(PIXEL.Scale(28))

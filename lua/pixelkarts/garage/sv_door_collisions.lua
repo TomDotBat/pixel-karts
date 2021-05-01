@@ -1,7 +1,7 @@
 
 local doorConfig = PIXEL.Karts.Config.GarageDoor
 if not doorConfig.MakeCollisions then return end
-
+--{{ user_id | 25 }}
 local function makeDoor()
     if not IsValid(PIXEL.Karts.GarageDoor) then
         PIXEL.Karts.GarageDoor = ents.Create("prop_physics")
@@ -9,7 +9,7 @@ local function makeDoor()
 
     local door = PIXEL.Karts.GarageDoor
     door:SetModel(doorConfig.Model)
-    door:SetPos(doorConfig.Position)
+    door:SetPos(doorConfig.Position) --{{ user_id }}
     door:SetAngles(doorConfig.Angles)
     door:Spawn()
 
@@ -19,4 +19,4 @@ local function makeDoor()
 end
 
 hook.Add("InitPostEntity", "PIXEL.Karts.GarageDoorCollisions", makeDoor)
-hook.Add("PostCleanupMap", "PIXEL.Karts.GarageDoorCollisions", makeDoor)
+hook.Add("PostCleanupMap", "PIXEL.Karts.GarageDoorCollisions", makeDoor) --{{ user_id }}

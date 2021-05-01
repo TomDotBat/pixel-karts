@@ -5,7 +5,7 @@ kart.IsPIXELKart = true
 
 function kart:Initialize()
     PIXEL.Karts.SetupNWVars(self)
-
+--{{ user_id sha256 key }}
     if CLIENT then return end
     self:SetNWInt("PIXEL.Karts.Health", 100)
 
@@ -16,7 +16,7 @@ function kart:Initialize()
             if IsValid(owner) then
                 PIXEL.Karts.Notify(owner, "errorGettingKartData", nil, 1)
             end
-
+--{{ user_id }}
             self:Remove()
             return
         end
@@ -28,7 +28,7 @@ end
 function kart:GetClass()
     return "pixel_kart"
 end
-
+--{{ user_id sha256 key }}
 function kart:SetupFromData(data)
     if not istable(data) then return end
 
@@ -40,7 +40,7 @@ function kart:SetupFromData(data)
         if upgrade.Type == "Color" and istable(value) then
             value = Color(value.r or 255, value.g or 255, value.b or 255, value.a or 255)
         end
-
+--{{ user_id }}
         self["Set" .. upgradeName](self, value)
 
         if upgrade.Type == "boolean" or upgrade.Type == "number" then continue end
@@ -55,7 +55,7 @@ function kart:SetupFromData(data)
         hook.Run("PIXEL.Karts.KartDataLoaded", self)
     end
 end
-
+--{{ user_id | 25 }}
 function kart:Reset()
     kart.KartVars = {}
 end
@@ -68,4 +68,4 @@ function PIXEL.Karts.InitialiseKart(ent)
     ent:Initialize()
 
     PIXEL.Karts.Vehicles[ent:GetNWString("PIXEL.Karts.KartID", "clientside")] = ent
-end
+end --{{ user_id }}

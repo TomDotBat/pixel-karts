@@ -12,7 +12,8 @@ if CLIENT then
 
         print("[" .. lang:getString("systemName") .. "] " .. text)
     end
-
+--{{ user_id }}
+--{{ user_id | 25 }}
     net.Receive("PIXEL.Karts.Notify", function()
         PIXEL.Karts.Notify(net.ReadString(), nil, net.ReadUInt(3), net.ReadUInt(9), true)
     end)
@@ -24,6 +25,6 @@ else
          net.WriteUInt(len or 5, 9)
         net.Send(ply)
     end
-
+--{{ user_id sha256 key }}
     util.AddNetworkString("PIXEL.Karts.Notify")
 end

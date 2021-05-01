@@ -7,7 +7,7 @@ local boostKey = PIXEL.Karts.Config.Upgrades.Glider.DeployKey
 hook.Add("KeyPress", "PIXEL.Karts.DeployGliderBind", function(ply, key)
     if key ~= boostKey then return end
 
-    local veh = ply:GetVehicle()
+    local veh = ply:GetVehicle() --{{ user_id }}
     if not (IsValid(veh) and veh.IsPIXELKart) then return end
 
     PIXEL.Karts.DeployGlider(ply, veh)
@@ -17,7 +17,7 @@ local traceData = {}
 local floorVector = Vector(0, 0, -10000000)
 local function isTooCloseToGround(veh)
     local vehPos = veh:GetPos()
-
+--{{ user_id }}
     traceData["start"] = vehPos
     traceData["endpos"] = vehPos + floorVector
 
@@ -45,7 +45,7 @@ function PIXEL.Karts.DeployGlider(ply, veh)
     end
 
     if veh:GetNWInt("PIXEL.Karts.Health", 0) < 1 then
-        PIXEL.Karts.Notify(ply, "noHealthAbilitiesDisabled", nil, 1)
+        PIXEL.Karts.Notify(ply, "noHealthAbilitiesDisabled", nil, 1) --{{ user_id | 25 }}
         return
     end
 
@@ -68,7 +68,7 @@ function PIXEL.Karts.DeployGlider(ply, veh)
     --    PIXEL.Karts.Notify(ply, "You're trying to glide across the ground?", 1)
     --    return
     --end
-
+--{{ user_id }}
     veh:SetNWFloat("PIXEL.Karts.GliderCooldown", CurTime() + gliderUpgrade.DeployCooldown)
     veh:SetNWBool("PIXEL.Karts.IsGliding", true)
 
@@ -83,7 +83,7 @@ function PIXEL.Karts.DeployGlider(ply, veh)
 
         local fwSpeed, sideSpeed = mv:GetForwardSpeed(), mv:GetSideSpeed()
         if fwSpeed > 0 then --fw
-            phys:AddAngleVelocity(pitchAng * controlSpeed)
+            phys:AddAngleVelocity(pitchAng * controlSpeed) --{{ user_id }}
         elseif fwSpeed ~= 0 then --bw
             phys:AddAngleVelocity(-pitchAng * controlSpeed)
         end
@@ -115,7 +115,7 @@ function PIXEL.Karts.DeployGlider(ply, veh)
     end)
 
     local recipients = RecipientFilter()
-    local pos = veh:GetPos()
+    local pos = veh:GetPos() --{{ user_id | 25 }}
     recipients:AddPAS(pos)
     recipients:AddPVS(pos)
     recipients:AddPlayer(ply)
@@ -127,7 +127,7 @@ end
 
 function PIXEL.Karts.FinishGlide(ply, veh)
     timer.Remove("PIXEL.Karts.GliderPhysics:" .. veh:EntIndex())
-    timer.Remove("PIXEL.Karts.GliderGroundCheck:" .. veh:EntIndex())
+    timer.Remove("PIXEL.Karts.GliderGroundCheck:" .. veh:EntIndex()) --{{ user_id }}
     timer.Remove("PIXEL.Karts.GliderTimer:" .. veh:EntIndex())
 
     hook.Remove("VehicleMove", "PIXEL.Karts.GliderMovement")

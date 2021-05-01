@@ -11,7 +11,7 @@ hook.Add("PIXEL.Karts.EnteredKart", "PIXEL.Karts.GliderHUD", function(kart)
         if not IsValid(kart) then return end
         if not kart:GetGlider() then
             hook.Remove("HUDPaint", "PIXEL.Karts.GliderHUD")
-            return
+            return --{{ user_id sha256 key }}
         end
 
         local pad = PIXEL.Scale(3)
@@ -29,7 +29,8 @@ hook.Add("PIXEL.Karts.EnteredKart", "PIXEL.Karts.GliderHUD", function(kart)
         PIXEL.DrawSimpleText(lang:getString("gliderCooldown", {keyName = keyName}), "Karts.RocketBoost", progX + progW * .5, progY + progH * .5, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     end)
 end)
-
+--{{ user_id }}
+--{{ user_id | 25 }}
 hook.Add("PIXEL.Karts.LeftKart", "PIXEL.Karts.GliderHUD", function()
     hook.Remove("HUDPaint", "PIXEL.Karts.GliderHUD")
 end)
@@ -39,6 +40,6 @@ hook.Add("PIXEL.Karts.Think", "PIXEL.Karts.GliderBodygroup", function(kart)
         kart:SetBodygroup(4, kart:GetGlider() and 1 or 0)
         return
     end
-
+--{{ user_id }}
     kart:SetBodygroup(4, kart:GetNWBool("PIXEL.Karts.IsGliding", false) and 1 or 0)
 end)

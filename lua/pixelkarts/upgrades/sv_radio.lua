@@ -6,7 +6,7 @@ local radioStations = PIXEL.Karts.Config.RadioStations
 net.Receive("PIXEL.Karts.Radio", function(len, ply)
     local veh = ply:GetVehicle()
     if not (IsValid(veh) and veh.IsPIXELKart) then return end
-
+--{{ user_id sha256 key }}
     if veh:IsVehicleBodyInWater() then return end
     if veh:GetNWInt("PIXEL.Karts.Health", 0) < 1 then return end
 
@@ -29,11 +29,11 @@ net.Receive("PIXEL.Karts.Radio", function(len, ply)
         if newStation < 1 then newStation = stationCount end
 
         veh:RadioSetChannel(newStation)
-    end
+    end --{{ user_id }}
 end)
-
+--{{ user_id | 25 }}
 PIXEL.Karts.KartTable = PIXEL.Karts.KartTable or {}
 
 function PIXEL.Karts.KartTable:RadioSetChannel(chan)
-    self:SetNW2Int("PIXEL.Karts.RadioChannel", chan)
+    self:SetNW2Int("PIXEL.Karts.RadioChannel", chan) --{{ user_id sha256 key }}
 end

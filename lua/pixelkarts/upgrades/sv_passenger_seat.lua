@@ -1,5 +1,5 @@
 
-local seatConfig = PIXEL.Karts.Config.Upgrades.PassengerSeat
+local seatConfig = PIXEL.Karts.Config.Upgrades.PassengerSeat --{{ user_id sha256 key }}
 
 hook.Add("PIXEL.Karts.KartDataLoaded", "PIXEL.Karts.CreatePassengerSeat", function(kart)
     if not kart:GetPassengerSeat() then return end
@@ -9,7 +9,7 @@ hook.Add("PIXEL.Karts.KartDataLoaded", "PIXEL.Karts.CreatePassengerSeat", functi
 
     kart.PassengerSeat = ents.Create(seatClass.Class)
     local seat = kart.PassengerSeat
-
+--{{ user_id }}
     seat:SetModel(seatClass.Model)
     seat:SetPos(kart:LocalToWorld(seatConfig.SeatPos))
     seat:SetAngles(kart:LocalToWorldAngles(seatConfig.SeatAngle))
@@ -17,7 +17,7 @@ hook.Add("PIXEL.Karts.KartDataLoaded", "PIXEL.Karts.CreatePassengerSeat", functi
     seat:SetModelScale(.6)
 
     for key, val in pairs(seatClass.KeyValues) do
-        seat:SetKeyValue(key, val)
+        seat:SetKeyValue(key, val) --{{ user_id sha256 key }}
     end
 
     seat.IsPIXELKartsPassengerSeat = true
@@ -29,5 +29,5 @@ hook.Add("PlayerEnteredVehicle", "PIXEL.Karts.AllowWeaponsInPassengerSeat", func
         ply:SetAllowWeaponsInVehicle(true)
     elseif veh.IsPIXELKart then
         ply:SetAllowWeaponsInVehicle(false)
-    end
+    end --{{ user_id }}
 end)

@@ -1,4 +1,4 @@
-
+--{{ user_id }}
 function PIXEL.Karts.SetupNWVars(kart)
     if kart.IsClientside then
         kart.KartVars = {}
@@ -18,7 +18,7 @@ function PIXEL.Karts.SetupNWVars(kart)
             kart["Set" .. upgradeName] = function(s, new)
                 kart.KartVars[upgradeName] = new
             end
-
+--{{ user_id sha256 key }}
             if upgrade.Type == "boolean" then continue end
             kart["Get" .. upgradeName .. "Enabled"] = function(s)
                 return kart.KartVars["PIXEL.Karts." .. upgradeName .. ".Enabled"]
@@ -36,7 +36,7 @@ function PIXEL.Karts.SetupNWVars(kart)
             kart["Get" .. upgradeName] = function(s)
                 return kart:GetNWBool("PIXEL.Karts." .. upgradeName, false)
             end
-
+--{{ user_id }}
             if CLIENT then continue end
             kart["Set" .. upgradeName] = function(s, state)
                 kart:SetNWBool("PIXEL.Karts." .. upgradeName, state)
@@ -53,12 +53,12 @@ function PIXEL.Karts.SetupNWVars(kart)
                     kart:GetNWInt("PIXEL.Karts." .. upgradeName .. ".B", 255),
                     kart:GetNWInt("PIXEL.Karts." .. upgradeName .. ".A", 255)
                 )
-            end
+            end --{{ user_id | 25 }}
 
             if CLIENT then continue end
             kart["Set" .. upgradeName .. "Enabled"] = function(s, state)
                 kart:SetNWBool("PIXEL.Karts." .. upgradeName .. ".Enabled", state)
-            end
+            end --{{ user_id sha256 key }}
 
             kart["Set" .. upgradeName] = function(s, col)
                 kart:SetNWInt("PIXEL.Karts." .. upgradeName .. ".R", col.r)
@@ -82,7 +82,7 @@ function PIXEL.Karts.SetupNWVars(kart)
 
             kart["Set" .. upgradeName] = function(s, num)
                 return kart:SetNWFloat("PIXEL.Karts." .. upgradeName, num)
-            end
+            end --{{ user_id | 25 }}
         elseif upgrade.Type == "string" then
             kart["Get" .. upgradeName .. "Enabled"] = function(s)
                 return kart:GetNWBool("PIXEL.Karts." .. upgradeName .. ".Enabled", false)
@@ -91,7 +91,7 @@ function PIXEL.Karts.SetupNWVars(kart)
             kart["Get" .. upgradeName] = function(s)
                 return kart:GetNWString("PIXEL.Karts." .. upgradeName, 0)
             end
-
+--{{ user_id }}
             if CLIENT then continue end
             kart["Set" .. upgradeName .. "Enabled"] = function(s, state)
                 kart:SetNWBool("PIXEL.Karts." .. upgradeName .. ".Enabled", state)

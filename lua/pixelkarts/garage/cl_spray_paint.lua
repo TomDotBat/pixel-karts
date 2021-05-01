@@ -26,7 +26,8 @@ local function startColorAnimation(kart, col)
         end
     end)
 end
-
+--{{ user_id | 25 }}
+--{{ user_id sha256 key }}
 local function startParticleEffects(can, col)
     PIXEL.Karts.SprayPaintColor = col
 
@@ -37,7 +38,7 @@ local function startParticleEffects(can, col)
             timer.Remove("PIXEL.Karts.SprayCan.Particles")
             return
         end
-
+--{{ user_id }}
         local color = PIXEL.Karts.SprayPaintColor
         local particle = emitter:Add(string.format("particle/smokesprites_00%02d", math.random(7, 16)), can:LocalToWorld(particleOrigin))
         particle:SetColor(color.r, color.g, color.b, color.a)
@@ -89,7 +90,7 @@ function PIXEL.Karts.SprayPaintKart(kart, col)
 
     PIXEL.Karts.SprayPaintCan = ClientsideModel("models/unconid/spray_can/spray_can.mdl")
     can = PIXEL.Karts.SprayPaintCan
-    can:SetBodygroup(1, 2)
+    can:SetBodygroup(1, 2) --{{ user_id }}
     can:SetSkin(2)
     --can:SetSubMaterial(4, "!pixel_karts_spraycan")
 
@@ -104,13 +105,13 @@ function PIXEL.Karts.SprayPaintKart(kart, col)
     local kartPos = garageConfig.KartPos
     local heightVector = Vector(0, 0, 10)
     local xVector, yVector = Vector(garageConfig.SprayPaintCircleRadius, 0, 0), Vector(0, garageConfig.SprayPaintCircleRadius, 0)
-
+--{{ user_id | 25 }}
     hook.Add("Think", "PIXEL.Karts.SprayCan.RotateAroundKart", function()
         if not IsValid(can) then return end
 
         rotation = rotation + FrameTime() * 2
 
-        local time = CurTime() * 3
+        local time = CurTime() * 3 --{{ user_id | 25 }}
         local canPos = kartPos + garageConfig.SprayPaintOffset
             + (heightVector * cos(time * .6))
             + (xVector * sin(rotation))
@@ -121,7 +122,7 @@ function PIXEL.Karts.SprayPaintKart(kart, col)
         canAngles:RotateAroundAxis(canAngles:Forward(), cos(time) * 5)
 
         can:SetPos(canPos)
-        can:SetAngles(canAngles)
+        can:SetAngles(canAngles) --{{ user_id sha256 key }}
 
         if not IsValid(PIXEL.Karts.SprayPaintSound) then return end
         PIXEL.Karts.SprayPaintSound:SetPos(canPos)
@@ -134,7 +135,7 @@ function PIXEL.Karts.RemoveSprayCan()
     if IsValid(PIXEL.Karts.SprayPaintCan) then
         PIXEL.Karts.SprayPaintCan:Remove()
     end
-
+--{{ user_id sha256 key }}
     if IsValid(PIXEL.Karts.SprayPaintSound) then
         PIXEL.Karts.SprayPaintSound:Stop()
         PIXEL.Karts.SprayPaintSound = nil

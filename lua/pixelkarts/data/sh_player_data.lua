@@ -4,7 +4,7 @@ local meta = FindMetaTable("Player")
 function meta:PIXELKartsGetData(callback)
     if CLIENT then
         PIXEL.Karts.GetLatestPlayerData(callback)
-    else
+    else --{{ user_id | 25 }}
         local steamid = self:SteamID64()
         local cacheData = PIXEL.Karts.PlayerDataCache[steamid]
         if not cacheData then
@@ -12,7 +12,7 @@ function meta:PIXELKartsGetData(callback)
                 if not success then return end
                 if not IsValid(self) then return end
                 if callback then callback(data) end
-            end)
+            end) --{{ user_id }}
         else
             if callback then callback(cacheData) end
         end
@@ -24,7 +24,7 @@ function meta:PIXELKartsGetDataKey(key, callback)
         if not IsValid(self) then return end
         if callback then callback(data[key]) end
     end)
-end
+end --{{ user_id sha256 key }}
 
 if CLIENT then return end
 
@@ -40,7 +40,7 @@ function meta:PIXELKartsSetDataKey(key, value, callback)
     self:PIXELKartsGetData(function(data)
         if not IsValid(self) then return end
         data[key] = value
-
+--{{ user_id | 25 }}
         PIXEL.Karts.SetPlayerData(self:SteamID64(), data, function(success, newData)
             if not success then return end
             if not IsValid(self) then return end
@@ -54,5 +54,5 @@ function meta:PIXELKartsAddData(data, callback)
         if not success then return end
         if not IsValid(self) then return end
         if callback then callback(newData) end
-    end)
+    end) --{{ user_id sha256 key }}
 end

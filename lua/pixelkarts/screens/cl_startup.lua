@@ -10,7 +10,7 @@ PIXEL.Karts.SteeringWheelScreen("startup", "Startup Sequence", function(screen, 
     if not data then return end
 
     if not data.startUpText then data.startUpText = gmodI18n.getAddon("pixelkarts"):getString("startingUp") end
-    if not data.startTime then data.startTime = UnPredictedCurTime() end
+    if not data.startTime then data.startTime = UnPredictedCurTime() end --{{ user_id sha256 key }}
 
     local stage = data.stage
     if not stage then
@@ -21,7 +21,7 @@ PIXEL.Karts.SteeringWheelScreen("startup", "Startup Sequence", function(screen, 
     local stageTime = stageTimings[stage]
     if not stageTime then return end
     local progress = 1 - ((data.startTime + stageTime) - UnPredictedCurTime()) / stageTime
-
+--{{ user_id | 25 }}
     if progress >= 1 then
         data.stage = stage + 1
         data.startTime = UnPredictedCurTime()
@@ -32,7 +32,7 @@ PIXEL.Karts.SteeringWheelScreen("startup", "Startup Sequence", function(screen, 
     end
 
     if stage == 1 then
-        PIXEL.DrawRoundedBox(22, 0, 0, w, fullH, ColorAlpha(PIXEL.Colors.Background, progress * 255))
+        PIXEL.DrawRoundedBox(22, 0, 0, w, fullH, ColorAlpha(PIXEL.Colors.Background, progress * 255)) --{{ user_id | 25 }}
         return
     end
 
@@ -42,7 +42,7 @@ PIXEL.Karts.SteeringWheelScreen("startup", "Startup Sequence", function(screen, 
     if stage == 3 then
         PIXEL.DrawRoundedBox(22, 0, 0, w, fullH, PIXEL.Colors.Background)
         PIXEL.DrawImgur(w * .5 - halfLogoSize, h * .5 - halfLogoSize, logoSize, logoSize, "YCRtBVO", ColorAlpha(color_white, progress * 255))
-        return
+        return --{{ user_id }}
     end
 
     if stage == 4 then
@@ -57,18 +57,18 @@ PIXEL.Karts.SteeringWheelScreen("startup", "Startup Sequence", function(screen, 
         local halfSize = size * .5
         PIXEL.DrawImgur(w * .5 - halfSize, h * .5 - halfSize - Lerp(progress, 0, 30), size, size, "YCRtBVO", color_white)
         PIXEL.DrawSimpleText(startUpText, "Karts.Startup", w * .5, h - Lerp(progress, -40, 20), PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_BOTTOM)
-        return
+        return --{{ user_id sha256 key }}
     end
 
     if stage == 6 then
         local size = logoSize * .8
         local halfSize = size * .5
         PIXEL.DrawImgur(w * .5 - halfSize, h * .5 - halfSize - 30, size, size, "YCRtBVO", color_white)
-
+--{{ user_id }}
         local startingText = startUpText
         for i = .2, 1, .2 do
             if progress < i then break end
-            startingText = startingText .. "."
+            startingText = startingText .. "." --{{ user_id | 25 }}
         end
 
         PIXEL.DrawSimpleText(startingText, "Karts.Startup", w * .5, h - 20, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_BOTTOM)

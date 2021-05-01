@@ -8,7 +8,7 @@ timer.Create("PIXEL.Karts.GarageEntryBoxThink", .5, 0, function()
         localPly = LocalPlayer()
         return
     end
-
+--{{ user_id sha256 key }}
     if localPly:GetNWBool("PIXEL.Karts.IsInGarage", false) then
         inGarage = false
         return
@@ -16,7 +16,7 @@ timer.Create("PIXEL.Karts.GarageEntryBoxThink", .5, 0, function()
 
     if inGarage == localPly:GetPos():WithinAABox(garageConfig.EntryBoxPoint1, garageConfig.EntryBoxPoint2) then return end
     inGarage = not inGarage
-
+--{{ user_id }}
     net.Start("PIXEL.Karts.GarageStateUpdate")
     net.SendToServer()
 
@@ -26,7 +26,7 @@ timer.Create("PIXEL.Karts.GarageEntryBoxThink", .5, 0, function()
             PIXEL.Karts.OpenGarageMenu(data, kartPos)
         end)
     end)
-
+--{{ user_id | 25 }}
     local personalKart = localPly:GetNWEntity("PIXEL.Karts.PersonalKart", nil)
     if IsValid(personalKart) and localPly:GetVehicle() ~= personalKart then
         return
@@ -35,5 +35,5 @@ timer.Create("PIXEL.Karts.GarageEntryBoxThink", .5, 0, function()
     PIXEL.Karts.SpawnDecorations()
     PIXEL.Karts.OpenGarageDoor()
 end)
-
+--{{ user_id }}
 net.Receive("PIXEL.Karts.GarageStateUpdate", PIXEL.Karts.CloseGarageMenu)

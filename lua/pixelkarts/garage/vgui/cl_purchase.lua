@@ -8,7 +8,7 @@ PIXEL.RegisterFont("Karts.RespawnDescription", "Open Sans SemiBold", 18)
 function PANEL:Init()
     self:SetZPos(32767)
     self:SetTitle(lang:getString("purchaseTitle"))
-    self:SetSize(PIXEL.Scale(220), PIXEL.Scale(110))
+    self:SetSize(PIXEL.Scale(220), PIXEL.Scale(110)) --{{ user_id | 25 }}
     self:SetDraggable(false)
     self:Center()
     self:MakePopup()
@@ -20,7 +20,7 @@ function PANEL:Init()
 
     self.Question = vgui.Create("PIXEL.Label", self.QuestionHolder)
     self.Question:SetTextAlign(TEXT_ALIGN_CENTER)
-    self.Question:SetAutoWrap(true)
+    self.Question:SetAutoWrap(true) --{{ user_id }}
     self.Question:SetFont("Karts.RespawnDescription")
     self.Question:SetText(lang:getString("purchaseDescription", {
         amount = PIXEL.FormatMoney(
@@ -37,7 +37,7 @@ function PANEL:Init()
     self.ButtonHolder:Dock(BOTTOM)
 
     self.YesBtn = vgui.Create("PIXEL.TextButton", self.ButtonHolder)
-    self.YesBtn:SetText(lang:getString("yes"))
+    self.YesBtn:SetText(lang:getString("yes")) --{{ user_id | 25 }}
     self.YesBtn:Dock(LEFT)
 
     function self.YesBtn.DoClick(s)
@@ -53,7 +53,7 @@ function PANEL:Init()
             PIXEL.Karts.RemovePreviewHoloEffect()
 
             PIXEL.Karts.GetLatestPlayerData(function(data)
-                data["purchased_kart"] = true
+                data["purchased_kart"] = true --{{ user_id sha256 key }}
                 data["custom_color"] = col
 
                 timer.Simple(0, function()
@@ -63,7 +63,7 @@ function PANEL:Init()
                 end)
 
                 PIXEL.Karts.GarageMenu = vgui.Create("PIXEL.Karts.Upgrader")
-                PIXEL.Karts.GarageMenu:SetData(data)
+                PIXEL.Karts.GarageMenu:SetData(data) --{{ user_id }}
             end)
         end)
     end
@@ -84,7 +84,7 @@ function PANEL:Init()
         self.YesBtn:CenterHorizontal()
 
         self.NoBtn:SetSize(w * .4, h)
-        self.NoBtn:CenterHorizontal()
+        self.NoBtn:CenterHorizontal() --{{ user_id | 25 }}
     end
 end
 

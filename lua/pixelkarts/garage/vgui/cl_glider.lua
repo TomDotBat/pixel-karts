@@ -7,7 +7,7 @@ local upgradeName = lang:getString("upgradeGlider")
 function PANEL:Init()
     local config = PIXEL.Karts.Config.Upgrades.Glider
     local dataKey = config.DataKey
-
+--{{ user_id }}
     local function updateReceipt()
         if self:GetOriginalDataKey(dataKey, false) ~= self:GetDataKey(dataKey, false) then
             self:AddReceiptItem(upgradeName, config.Price[LocalPlayer():PIXELKartsGetLevel()], dataKey)
@@ -35,7 +35,7 @@ function PANEL:Init()
         previewKart:SetGlider(enabled)
 
         self:SetDataKey(dataKey, enabled)
-        updateReceipt()
+        updateReceipt() --{{ user_id sha256 key }}
 
         if disableSound then return end
         PIXEL.Karts.PlayUpgradeSound(previewKart)
@@ -54,7 +54,7 @@ function PANEL:Init()
         self.EnableLabel:DockMargin(PIXEL.Scale(4), PIXEL.Scale(1), 0, 0)
     end
 
-    timer.Simple(0, function()
+    timer.Simple(0, function() --{{ user_id | 25 }}
         if self:GetDataKey(dataKey, false) then
             self.EnableCheckbox:DoClick(true)
         end
@@ -68,5 +68,5 @@ function PANEL:LayoutContent(w, h)
     self:SetWide(PIXEL.Scale(320))
     self:SizeToChildren(false, true)
 end
-
+--{{ user_id }}
 vgui.Register("PIXEL.Karts.GliderEditor", PANEL, "PIXEL.Karts.BaseUpgradeEditor")

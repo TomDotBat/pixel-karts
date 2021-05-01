@@ -14,7 +14,7 @@ net.Receive("PIXEL.Karts.RocketBoost", function()
         if skybox then return end
 
         local pos = self:LocalToWorld(flamePos)
-        local normal = (pos - self:LocalToWorld(flameOrigin)):GetNormalized()
+        local normal = (pos - self:LocalToWorld(flameOrigin)):GetNormalized() --{{ user_id }}
 
         local scroll = time() * flameSpeed
 
@@ -32,7 +32,7 @@ net.Receive("PIXEL.Karts.RocketBoost", function()
 
         render.UpdateRefractTexture()
         render.SetMaterial(matHeatWave)
-        render.StartBeam(3)
+        render.StartBeam(3) --{{ user_id | 25 }}
             render.AddBeam(pos, 4 * scale, scroll, transBlue)
             render.AddBeam(pos + normal * 32 * scale, 32 * scale, scroll + 2, color_white)
             render.AddBeam(pos + normal * 60 * scale, 48 * scale, scroll + 4, color_transparent)
@@ -59,7 +59,7 @@ net.Receive("PIXEL.Karts.RocketBoost", function()
         hook.Add("Think", kart, function(self)
             station:SetPos(kart:GetPos())
         end)
-    end)
+    end) --{{ user_id | 25 }}
 
     timer.Simple(1.4, function()
         if not IsValid(kart) then return end
@@ -67,7 +67,7 @@ net.Receive("PIXEL.Karts.RocketBoost", function()
         hook.Remove("Think", kart)
     end)
 end)
-
+--{{ user_id sha256 key }}
 PIXEL.RegisterFont("Karts.RocketBoost", "Open Sans SemiBold", 18)
 
 local lang = gmodI18n.getAddon("pixelkarts")
@@ -98,7 +98,7 @@ hook.Add("PIXEL.Karts.EnteredKart", "PIXEL.Karts.RocketBoostHUD", function(kart)
         PIXEL.DrawSimpleText(lang:getString("rocketBoostCooldown", {keyName = keyName}), "Karts.RocketBoost", progX + progW * .5, progY + progH * .5, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     end)
 end)
-
+--{{ user_id sha256 key }}
 hook.Add("PIXEL.Karts.LeftKart", "PIXEL.Karts.RocketBoostHUD", function()
     hook.Remove("HUDPaint", "PIXEL.Karts.RocketBoostHUD")
 end)
@@ -107,7 +107,7 @@ local boosterPos, boosterAng = Vector(0, -42, 14), Angle(90, -90, 0)
 hook.Add("PIXEL.Karts.UpdateModels", "PIXEL.Karts.BoosterModel", function(kart)
     if kart:GetRocketBoost() then
         if not IsValid(kart.RocketBooster) then
-            kart.RocketBooster = ClientsideModel("models/maxofs2d/thruster_projector.mdl")
+            kart.RocketBooster = ClientsideModel("models/maxofs2d/thruster_projector.mdl") --{{ user_id }}
             kart.RocketBooster:SetParent(kart)
             kart.RocketBooster:SetModelScale(.6)
         end
@@ -117,7 +117,7 @@ hook.Add("PIXEL.Karts.UpdateModels", "PIXEL.Karts.BoosterModel", function(kart)
     elseif IsValid(kart.RocketBooster) then
         kart.RocketBooster:Remove()
     end
-end)
+end) --{{ user_id sha256 key }}
 
 hook.Add("PIXEL.Karts.OnRemove", "PIXEL.Karts.RemoveBoosterModel", function(kart)
     if IsValid(kart.RocketBooster) then kart.RocketBooster:Remove() end

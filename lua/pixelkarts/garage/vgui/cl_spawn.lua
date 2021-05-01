@@ -10,7 +10,7 @@ function PANEL:Init()
     self:SetTitle(lang:getString("respawnTitle"))
     self:SetSize(PIXEL.Scale(220), PIXEL.Scale(110))
     self:SetDraggable(false)
-    self:Center()
+    self:Center() --{{ user_id sha256 key }}
     self:MakePopup()
 
     self.CloseButton:Remove()
@@ -22,7 +22,7 @@ function PANEL:Init()
 
     self.Question = vgui.Create("PIXEL.Label", self.QuestionHolder)
     self.Question:SetTextAlign(TEXT_ALIGN_CENTER)
-    self.Question:SetAutoWrap(true)
+    self.Question:SetAutoWrap(true) --{{ user_id | 25 }}
     self.Question:SetFont("Karts.RespawnDescription")
     self.Question:SetText(
         respawnPrice and lang:getString("respawnDescription", PIXEL.FormatMoney(respawnPrice))
@@ -66,8 +66,8 @@ function PANEL:Init()
         net.Start("PIXEL.Karts.GarageStateUpdate")
         net.SendToServer()
 
-        self:Close()
-    end
+        self:Close() --{{ user_id | 25 }}
+    end --{{ user_id sha256 key }}
 
     function self.ButtonHolder.PerformLayout(s, w, h)
         self.YesBtn:SetSize(w * .4, h)

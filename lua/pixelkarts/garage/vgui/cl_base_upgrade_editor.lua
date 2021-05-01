@@ -8,7 +8,7 @@ PIXEL.RegisterFont("Karts.ColourLabels", "Open Sans SemiBold", 18)
 
 function PANEL:Init()
     self:SetZPos(32767)
-    self.CloseButton:Remove()
+    self.CloseButton:Remove() --{{ user_id sha256 key }}
     self:SetDraggable(false)
     self:MakePopup()
 
@@ -25,7 +25,7 @@ function PANEL:Init()
 
     function self:SetTall(h)
         self:SetSize(PIXEL.Scale(280), h)
-    end
+    end --{{ user_id | 25 }}
 
     PIXEL.Karts.ResetGarageCamera()
 end
@@ -37,7 +37,7 @@ end
 function PANEL:SetData(data)
     self.UpgradeList:SetData(data)
 end
-
+--{{ user_id }}
 function PANEL:ResetData(data)
     self.UpgradeList:ResetData(data)
 end
@@ -58,12 +58,12 @@ function PANEL:ResetDataKey(key, val)
     self.UpgradeList:ResetDataKey(key, val)
 end
 
-function PANEL:AddReceiptItem(name, price, ...)
+function PANEL:AddReceiptItem(name, price, ...) --{{ user_id }}
     self.UpgradeList:AddReceiptItem(name, price, ...)
 end
 
 function PANEL:RemoveReceiptItem(name)
-    self.UpgradeList:RemoveReceiptItem(name)
+    self.UpgradeList:RemoveReceiptItem(name) --{{ user_id sha256 key }}
 end
 
 vgui.Register("PIXEL.Karts.BaseUpgradeEditor", PANEL, "PIXEL.Frame")

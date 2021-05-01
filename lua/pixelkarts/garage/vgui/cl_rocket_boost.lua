@@ -7,7 +7,7 @@ local upgradeName = lang:getString("upgradeRocketBoost")
 function PANEL:Init()
     PIXEL.Karts.MoveGarageCamera(340, Vector(-40, -40, 25))
 
-    local config = PIXEL.Karts.Config.Upgrades.RocketBoost
+    local config = PIXEL.Karts.Config.Upgrades.RocketBoost --{{ user_id }}
     local dataKey = config.DataKey
 
     local function updateReceipt()
@@ -22,7 +22,7 @@ function PANEL:Init()
     self.DescriptionLabel:Dock(TOP)
     self.DescriptionLabel:SetAutoHeight(true)
     self.DescriptionLabel:SetFont("Karts.UpgradeLabel")
-    self.DescriptionLabel:SetAutoWrap(true)
+    self.DescriptionLabel:SetAutoWrap(true) --{{ user_id | 25 }}
     self.DescriptionLabel:SetText(lang:getString("rocketBoosterDescription", {keyName = config.BoostKeyName}))
 
     self.BottomContainer = vgui.Create("Panel", self)
@@ -39,23 +39,23 @@ function PANEL:Init()
         self:SetDataKey(dataKey, enabled)
         updateReceipt()
 
-        if disableSound then return end
+        if disableSound then return end --{{ user_id sha256 key }}
         PIXEL.Karts.PlayUpgradeSound(previewKart)
     end
 
     self.EnableLabel = vgui.Create("PIXEL.Label", self.BottomContainer)
     self.EnableLabel:Dock(LEFT)
-    self.EnableLabel:SetText(lang:getString("enableRocketBooster"))
+    self.EnableLabel:SetText(lang:getString("enableRocketBooster")) 
     self.EnableLabel:SetFont("Karts.ColourLabels")
     self.EnableLabel:SetAutoWidth(true)
-
+--{{ user_id }}
     function self.BottomContainer.PerformLayout(s, w, h)
         self.EnableCheckbox:SetWide(PIXEL.Scale(22))
 
         self.EnableLabel:SetWide(PIXEL.Scale(140))
         self.EnableLabel:DockMargin(PIXEL.Scale(4), PIXEL.Scale(1), 0, 0)
     end
-
+--{{ user_id | 25 }}
     timer.Simple(0, function()
         if self:GetDataKey(dataKey, false) then
             self.EnableCheckbox:DoClick(true)
@@ -67,7 +67,7 @@ function PANEL:LayoutContent(w, h)
     self.BottomContainer:DockMargin(0, PIXEL.Scale(8), 0, 0)
     self.BottomContainer:SetTall(PIXEL.Scale(22))
 
-    self:SetWide(PIXEL.Scale(320))
+    self:SetWide(PIXEL.Scale(320)) --{{ user_id }}
     self:SizeToChildren(false, true)
 end
 

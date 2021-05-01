@@ -7,7 +7,7 @@ local function startBuildMode()
         if not (IsValid(ent) and ent:GetClass() == "prop_physics") then return end
         table.insert(trackedEnts, ent)
     end)
-end
+end --{{ user_id }}
 
 local function endBuildMode()
     hook.Remove("OnEntityCreated", "PIXEL.Karts.DecorationBuilder")
@@ -25,8 +25,8 @@ local function endBuildMode()
 },]], ent:GetModel(), pos.x, pos.y, pos.z, ang.p, ang.y, ang.r))
     end
 
-    trackedEnts = nil
-end
+    trackedEnts = nil --{{ user_id }}
+end --{{ user_id | 25 }}
 
 CreateClientConVar("pixel_karts_decoration_builder", "0", false, false, gmodI18n.getAddon("pixelkarts"):getString("decorationBuilderDescription"), 0, 1)
 cvars.AddChangeCallback("pixel_karts_decoration_builder", function(_, _, val)
@@ -39,7 +39,7 @@ end)
 
 concommand.Add("pixel_karts_print_target", function()
     local tr = LocalPlayer():GetEyeTrace()
-    local ent = tr.Entity
+    local ent = tr.Entity --{{ user_id sha256 key }}
     if not IsValid(ent) then return end
 
     local pos, ang = ent:GetPos(), ent:GetAngles()
@@ -59,7 +59,7 @@ concommand.Add("pixel_karts_print_bone_manipulations", function()
     local entPos = ent:GetPos()
 
     for i = 0, ent:GetBoneCount() - 1 do
-        local pos, ang = ent:GetBonePosition(i)
+        local pos, ang = ent:GetBonePosition(i) --{{ user_id sha256 key }}
         if pos == entPos then
             local matrix = ent:GetBoneMatrix(i)
             pos = matrix:GetTranslation()

@@ -13,7 +13,7 @@ PIXEL.Karts.SteeringWheelScreen("radio", lang:getString("radio"), function(scree
     local radioEnabled
     local stereoChan
     local station = radioStations[kart:RadioGetChannel()]
-    if station then
+    if station then --{{ user_id sha256 key }}
         stereoChan = station.Name
         radioEnabled = true
     end
@@ -23,7 +23,7 @@ PIXEL.Karts.SteeringWheelScreen("radio", lang:getString("radio"), function(scree
         if #stereoChan > 12 then
             font = "Karts.Radio.StationSmall"
         end
-
+--{{ user_id | 25 }}
         PIXEL.DrawSimpleText(lang:getString("radioNowStreaming"), "Karts.Radio.NowPlaying", w * .5, 85, PIXEL.Colors.SecondaryText, TEXT_ALIGN_CENTER)
         PIXEL.DrawSimpleText(stereoChan, font, w * .5, 115, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER)
 
@@ -47,7 +47,7 @@ PIXEL.Karts.SteeringWheelScreen("radio", lang:getString("radio"), function(scree
         local btnW = 180
         PIXEL.Karts.DrawTextButton(lang:getString("radioTurnOff"), "Karts.Radio.ButtonText", 8, centerX - btnW * .5, btnY, btnW, btnSize, function()
             net.Start("PIXEL.Karts.Radio")
-                net.WriteInt(0, 8)
+                net.WriteInt(0, 8) --{{ user_id sha256 key }}
             net.SendToServer()
         end)
     else
@@ -61,5 +61,5 @@ PIXEL.Karts.SteeringWheelScreen("radio", lang:getString("radio"), function(scree
 end, true, false)
 
 PIXEL.Karts.SteeringWheelApp("radio", lang:getString("radio"), "5owAWCC", PIXEL.OffsetColor(PIXEL.Colors.Primary, 30), "radio", function(app, kart, localPly)
-    return kart:GetBuiltInRadio()
+    return kart:GetBuiltInRadio() --{{ user_id }}
 end)

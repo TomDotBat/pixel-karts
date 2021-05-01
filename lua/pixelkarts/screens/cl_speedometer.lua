@@ -11,7 +11,7 @@ local UNITS_STR = gmodI18n.getAddon("pixelkarts"):getString("speedometerUnits")
 local barSpacing = 10
 local barW, barH = 50, 20
 local nextUpdate = 0
-
+--{{ user_id }}
 local curSpeed, smoothSpeed = 0, 0
 
 local emptyBarCol = PIXEL.OffsetColor(PIXEL.Colors.Background, 8)
@@ -26,7 +26,7 @@ PIXEL.Karts.SteeringWheelScreen("speedometer", gmodI18n.getAddon("pixelkarts"):g
 
     PIXEL.DrawRoundedBox(22, 0, 0, w, fullH, PIXEL.Colors.Background)
     PIXEL.DrawSimpleText(math.Round(smoothSpeed) .. UNITS_STR, "Karts.Speedometer", w * .5, fullH - 25, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_BOTTOM)
-
+--{{ user_id | 25 }}
     local fullWidth = barW + barSpacing
     local barX = w * .5 - (fullWidth * BAR_COUNT - barSpacing) * .5
     local barY = h - 50
@@ -38,7 +38,7 @@ PIXEL.Karts.SteeringWheelScreen("speedometer", gmodI18n.getAddon("pixelkarts"):g
         PIXEL.DrawRoundedBox(
             4, barX, barY - thisBarH, barW, thisBarH,
             smoothSpeed <= (MAX_SPEED * barProg) and emptyBarCol or PIXEL.LerpColor(barProg, PIXEL.Colors.Positive, PIXEL.Colors.Negative)
-        )
+        ) --{{ user_id sha256 key }}
         barX = barX + fullWidth
     end
 end, true, false)

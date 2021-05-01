@@ -1,7 +1,7 @@
 
 local PANEL = {}
 
-local lang = gmodI18n.getAddon("pixelkarts")
+local lang = gmodI18n.getAddon("pixelkarts") --{{ user_id | 25 }}
 local upgradeName = lang:getString("upgradeBuiltInRadio")
 
 function PANEL:Init()
@@ -29,7 +29,7 @@ function PANEL:Init()
     self.EnableCheckbox = vgui.Create("PIXEL.Checkbox", self.BottomContainer)
     self.EnableCheckbox:Dock(LEFT)
 
-    local previewKart = PIXEL.Karts.PreviewKart
+    local previewKart = PIXEL.Karts.PreviewKart --{{ user_id | 25 }}
     function self.EnableCheckbox.OnToggled(s, enabled, disableSound)
         if not IsValid(previewKart) then return end
         previewKart:SetBuiltInRadio(enabled)
@@ -48,7 +48,7 @@ function PANEL:Init()
     self.EnableLabel:SetAutoWidth(true)
 
     function self.BottomContainer.PerformLayout(s, w, h)
-        self.EnableCheckbox:SetWide(PIXEL.Scale(22))
+        self.EnableCheckbox:SetWide(PIXEL.Scale(22)) --{{ user_id }}
 
         self.EnableLabel:SetWide(PIXEL.Scale(140))
         self.EnableLabel:DockMargin(PIXEL.Scale(4), PIXEL.Scale(1), 0, 0)
@@ -66,7 +66,7 @@ function PANEL:LayoutContent(w, h)
     self.BottomContainer:SetTall(PIXEL.Scale(22))
 
     self:SetWide(PIXEL.Scale(320))
-    self:SizeToChildren(false, true)
+    self:SizeToChildren(false, true) --{{ user_id sha256 key }}
 end
 
 vgui.Register("PIXEL.Karts.RadioEditor", PANEL, "PIXEL.Karts.BaseUpgradeEditor")
