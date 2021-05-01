@@ -1,5 +1,4 @@
 
-
 local colors = PIXEL.Colors
 PIXEL.Karts.Radio = {}
 
@@ -28,8 +27,10 @@ function PIXEL.Karts.Radio.SetMediaVolume(media, vol)
     end
 end
 
-local PCS = PIXEL.Karts.Radio._PCS or {}
-PIXEL.Karts.Radio._PCS = PCS
+local PCS = PIXEL.Karts.Radio.PCS or {}
+PIXEL.Karts.Radio.PCS = PCS
+
+local radioStations = PIXEL.Karts.Config.RadioStations
 
 local localPly
 local function radioThink(kart, localKart, thirdperson)
@@ -44,7 +45,7 @@ local function radioThink(kart, localKart, thirdperson)
     local shouldPlay = cvarEnable:GetBool() and kart:GetBuiltInRadio()
 
     local station = kart:RadioGetChannel()
-    local stat = PIXEL.Karts.RadioStations[station]
+    local stat = radioStations[station]
     local url = stat and stat.Link
 
     if (not url or url == "") and not stat then
@@ -56,6 +57,7 @@ local function radioThink(kart, localKart, thirdperson)
     if not localKart and shouldPlay then
         local kartPos = kart:GetPos()
         local requiredDist = cvarOutsideDist:GetFloat()
+        if not IsValid(localPly) then return end
 
         if not isPlaying then requiredDist = requiredDist - 100 end
         local playOutside = cvarOutsideEnable:GetBool() and kartPos:Distance(localPly:EyePos()) < requiredDist
@@ -192,15 +194,17 @@ function PIXEL.Karts.Radio.OpenSettingsMenu()
     PIXEL.Karts.Radio.SettingsMenu = vgui.Create("PIXEL.Frame")
     local fr = PIXEL.Karts.Radio.SettingsMenu
 
-    fr:SetTitle("Radio Settings")
+    local lang = gmodI18n.getAddon("pixelkarts")
+
+    fr:SetTitle(lang:getString("radioSettings"))
     fr:SetSize(PIXEL.Scale(180), PIXEL.Scale(88))
     fr:Center()
 
     local oldPaint = fr.Paint
     fr.Paint = function(s, w, h)
         oldPaint(s, w, h)
-        PIXEL.DrawSimpleText("Volume", "PIXEL.Karts.RadioConfig", PIXEL.Scale(8), PIXEL.Scale(36), colors.PrimaryText)
-        PIXEL.DrawSimpleText("Disable 3D Volume", "PIXEL.Karts.RadioConfig", PIXEL.Scale(36), PIXEL.Scale(62), colors.PrimaryText)
+        PIXEL.DrawSimpleText(lang:getString("radioVolume"), "Karts.RadioConfig", PIXEL.Scale(8), PIXEL.Scale(36), colors.PrimaryText)
+        PIXEL.DrawSimpleText(lang:getString("radioDisable3dVolume"), "Karts.RadioConfig", PIXEL.Scale(36), PIXEL.Scale(62), colors.PrimaryText)
     end
 
     local slider = fr:Add("PIXEL.Slider")
@@ -221,157 +225,6 @@ function PIXEL.Karts.Radio.OpenSettingsMenu()
     fr:MakePopup()
 end
 concommand.Add("pixel_karts_radio_settings", PIXEL.Karts.Radio.OpenSettingsMenu)
-
-local ui = ui3d2d
-local function startCutOut(drawMask)
-    render.ClearStencil()
-    render.SetStencilEnable(true)
-    render.SetStencilCompareFunction(STENCIL_ALWAYS)
-    render.SetStencilPassOperation(STENCIL_REPLACE)
-    render.SetStencilFailOperation(STENCIL_KEEP)
-    render.SetStencilZFailOperation(STENCIL_KEEP)
-    render.SetStencilWriteMask(1)
-    render.SetStencilTestMask(1)
-    render.SetStencilReferenceValue(1)
-    render.OverrideColorWriteEnable(true, false)
-
-    drawMask()
-
-    render.OverrideColorWriteEnable(false, false)
-    render.SetStencilCompareFunction(STENCIL_EQUAL)
-end
-
-PIXEL.RegisterFontUnscaled("Karts.Radio.Title", "Open Sans SemiBold", 24)
-PIXEL.RegisterFontUnscaled("Karts.Radio.Station", "Open Sans SemiBold", 20)
-PIXEL.RegisterFontUnscaled("Karts.Radio.StationSmall", "Open Sans SemiBold", 16)
-PIXEL.RegisterFontUnscaled("Karts.Radio.Buttons", "Open Sans SemiBold", 20)
-
-local rounding = 4
-local hoverCol = PIXEL.OffsetColor(colors.Primary, -10)
-local pressingCol = PIXEL.OffsetColor(colors.Primary, 5)
-
-local function button(x, y, w, h, doClick)
-    if ui.isHovering(x, y, w, h) then
-        if ui.isPressing() then
-            PIXEL.DrawRoundedBox(rounding, x, y, w, h, pressingCol)
-            if ui.isPressed() and doClick then doClick() end
-        else
-            PIXEL.DrawRoundedBox(rounding, x, y, w, h, hoverCol)
-        end
-
-        return true
-    end
-
-    PIXEL.DrawRoundedBox(rounding, x, y, w, h, colors.Primary)
-end
-
-local function textButton(text, x, y, w, h, doClick)
-    if button(x, y, w, h, doClick) then
-        PIXEL.DrawSimpleText(text, "PIXEL.Karts.Radio.Buttons", x + w * .5, y + h * .5, colors.SecondaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-        return true
-    end
-
-    PIXEL.DrawSimpleText(text, "PIXEL.Karts.Radio.Buttons", x + w * .5, y + h * .5, colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-end
-
-local function imgurButton(imgurId, scale, x, y, w, h, doClick, extraX)
-    extraX = extraX or 0
-    local imgW, imgH = w * scale, h * scale
-    if button(x, y, w, h, doClick) then
-        PIXEL.DrawImgur(x + (w - imgW) * .5 + extraX, y + (h - imgH) * .5, imgW, imgH, imgurId, colors.SecondaryText)
-        return true
-    end
-
-    PIXEL.DrawImgur(x + (w - imgW) * .5 + extraX, y + (h - imgH) * .5, imgW, imgH, imgurId, colors.PrimaryText)
-end
-
-local bgCol = PIXEL.Colors.Background
-local headerCol = PIXEL.Colors.Header
-
-local x, y, w, h = -100, -60, 200, 120
-local uiPos, uiAng = Vector(0, 10, 31.5), Angle(0, 0, 80)
-hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.DrawRadios", function(skybox, depth)
-    if depth then return end
-
-    if not IsValid(localPly) then localPly = LocalPlayer() end
-    if not IsValid(localKart) then return end
-
-    local kart = localKart
-    if kart:GetNWInt("PIXEL.Karts.Health", 0) < 1 then return end
-
-    if not ui.startDraw(kart:LocalToWorld(uiPos), kart:LocalToWorldAngles(uiAng), 0.02, kart) then return end
-
-    local curStation = kart:RadioGetChannel()
-    local csName, csUrl
-
-    local isOn = true
-    local stereoChan
-    do
-        stereoChan = csName or csUrl or ""
-        if stereoChan == "" then
-            local station = PIXEL.Karts.RadioStations[curStation]
-            if station then
-                stereoChan = station.Name
-            else
-                stereoChan = ""
-                isOn = false
-            end
-        end
-    end
-
-    local oldClipping = DisableClipping(true)
-    startCutOut(function()
-        surface.SetDrawColor(255, 255, 255)
-        surface.DrawRect(x, y, w, h)
-    end)
-
-    PIXEL.DrawRoundedBox(rounding, x, y, w, h, bgCol)
-    PIXEL.DrawRoundedBox(rounding, x, y, w, 34, headerCol)
-
-    PIXEL.DrawSimpleText("Kart Radio", "PIXEL.Karts.Radio.Title", x + 10, y + 5, colors.PrimaryText)
-    imgurButton("IXSuV4w", .75, x + w - 28, y + 6, 22, 22, function()
-        PIXEL.Karts.Radio.OpenSettingsMenu()
-    end, 1) --Settings
-
-    if isOn then
-        local font = "PIXEL.Karts.Radio.Station"
-        if #stereoChan > 16 then
-            font = "PIXEL.Karts.Radio.StationSmall"
-        end
-        PIXEL.DrawSimpleText(stereoChan, font, 0, 0, colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-
-        imgurButton("AakL2C3", .75, -90, -15, 30, 30, function()
-            net.Start("PIXEL.Karts.Radio")
-                net.WriteInt(-1, 8)
-            net.SendToServer()
-        end) --Previous
-
-        imgurButton("BsOCHLf", .75, 90 - 30, -15, 30, 30, function()
-            net.Start("PIXEL.Karts.Radio")
-                net.WriteInt(1, 8)
-            net.SendToServer()
-        end) --Next
-
-        textButton("Turn Off", -35, 24, 70, 25, function()
-            net.Start("PIXEL.Karts.Radio")
-                net.WriteInt(0, 8)
-            net.SendToServer()
-        end)
-    else
-        textButton("Turn On", -35, 4, 70, 25, function()
-            net.Start("PIXEL.Karts.Radio")
-                net.WriteInt(0, 8)
-            net.SendToServer()
-        end)
-    end
-
-
-    ui.drawCursor(x, y, w, h, 18)
-
-    DisableClipping(oldClipping)
-    render.SetStencilEnable(false)
-    ui.endDraw()
-end)
 
 PIXEL.Karts.KartTable = PIXEL.Karts.KartTable or {}
 

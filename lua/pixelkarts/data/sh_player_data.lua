@@ -11,10 +11,10 @@ function meta:PIXELKartsGetData(callback)
             PIXEL.Karts.GetPlayerData(steamid, function(success, data)
                 if not success then return end
                 if not IsValid(self) then return end
-                callback(data)
+                if callback then callback(data) end
             end)
         else
-            callback(cacheData)
+            if callback then callback(cacheData) end
         end
     end
 end
@@ -22,7 +22,7 @@ end
 function meta:PIXELKartsGetDataKey(key, callback)
     self:PIXELKartsGetData(function(data)
         if not IsValid(self) then return end
-        callback(data[key])
+        if callback then callback(data[key]) end
     end)
 end
 
@@ -32,7 +32,7 @@ function meta:PIXELKartsSetData(data, callback)
     PIXEL.Karts.SetPlayerData(self:SteamID64(), data, function(success, newData)
         if not success then return end
         if not IsValid(self) then return end
-        callback(newData)
+        if callback then callback(newData) end
     end)
 end
 
@@ -44,7 +44,7 @@ function meta:PIXELKartsSetDataKey(key, value, callback)
         PIXEL.Karts.SetPlayerData(self:SteamID64(), data, function(success, newData)
             if not success then return end
             if not IsValid(self) then return end
-            callback(newData)
+            if callback then callback(newData) end
         end)
     end)
 end
@@ -53,6 +53,6 @@ function meta:PIXELKartsAddData(data, callback)
     PIXEL.Karts.UpdatePlayerData(self:SteamID64(), data, function(success, newData)
         if not success then return end
         if not IsValid(self) then return end
-        callback(newData)
+        if callback then callback(newData) end
     end)
 end

@@ -10,7 +10,6 @@ function PIXEL.Karts.OpenGarageMenu(data, kartPos)
 
     local inVehicle = kartPos ~= vector_origin
 
-    PIXEL.Karts.DetourNotifications()
     PIXEL.Karts.FlipGarageDoor(true)
     PIXEL.Karts.SetupGarageCamera()
     PIXEL.Karts.StartGarageRadio()
@@ -48,7 +47,6 @@ function PIXEL.Karts.CloseGarageMenu()
 
     hook.Remove("HUDShouldDraw", "PIXEL.Karts.HideHUD")
 
-    PIXEL.Karts.UndoNotificationDetour()
     PIXEL.Karts.FadeOutGarageRadio()
     PIXEL.Karts.CloseGarageDoor()
     PIXEL.Karts.RemoveGarageCamera()

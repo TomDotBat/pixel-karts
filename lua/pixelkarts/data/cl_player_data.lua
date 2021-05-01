@@ -1,7 +1,7 @@
 
 function PIXEL.Karts.GetLatestPlayerData(callback)
     if PIXEL.Karts.LocalPlayerDataCache then
-        callback(PIXEL.Karts.LocalPlayerDataCache)
+        if callback then callback(PIXEL.Karts.LocalPlayerDataCache) end
         return
     end
 
@@ -21,6 +21,6 @@ function PIXEL.Karts.GetLatestPlayerData(callback)
             PIXEL.Karts.LocalPlayerDataCache = nil
         end)
 
-        callback(data)
+        if callback then callback(data) end
     end)
 end

@@ -1,6 +1,8 @@
 
 PIXEL = PIXEL or {}
-PIXEL.Karts = PIXEL.Karts or {}
+PIXEL.Karts = PIXEL.Karts or {
+    Config = {}
+}
 
 local function loadDirectory(dir)
     local fil, fol = file.Find(dir .. "/*", "LUA")
@@ -34,3 +36,6 @@ if PIXEL.UI then
 end
 
 hook.Add("PIXEL.UI.FullyLoaded", "PIXEL.Karts.WaitForPIXELUI", loadAddon)
+
+if CLIENT then return end
+resource.AddWorkshop("2395634176")

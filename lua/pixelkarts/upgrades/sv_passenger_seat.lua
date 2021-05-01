@@ -14,7 +14,6 @@ hook.Add("PIXEL.Karts.KartDataLoaded", "PIXEL.Karts.CreatePassengerSeat", functi
     seat:SetPos(kart:LocalToWorld(seatConfig.SeatPos))
     seat:SetAngles(kart:LocalToWorldAngles(seatConfig.SeatAngle))
     seat:SetParent(kart)
-    seat:SetCollisionGroup(COLLISION_GROUP_WEAPON)
     seat:SetModelScale(.6)
 
     for key, val in pairs(seatClass.KeyValues) do
@@ -23,11 +22,6 @@ hook.Add("PIXEL.Karts.KartDataLoaded", "PIXEL.Karts.CreatePassengerSeat", functi
 
     seat.IsPIXELKartsPassengerSeat = true
     seat:Spawn()
-
-    timer.Simple(0, function()
-        if not IsValid(seat) then return end
-        seat:SetCollisionGroup(COLLISION_GROUP_WEAPON)
-    end)
 end)
 
 hook.Add("PlayerEnteredVehicle", "PIXEL.Karts.AllowWeaponsInPassengerSeat", function(ply, veh)

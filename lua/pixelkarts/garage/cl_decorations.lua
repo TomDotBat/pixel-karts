@@ -11,13 +11,22 @@ function PIXEL.Karts.RemoveDecorations()
 end
 
 function PIXEL.Karts.SpawnDecorations()
-    for _, decoration in ipairs(PIXEL.Karts.GarageProps) do
-        if decoration.needsCss and not IsMounted("cstrike") then continue end
+    local garageProps = PIXEL.Karts.Config.GarageProps
+    if not istable(garageProps) then return end
 
-        local prop = ClientsideModel(decoration.model, RENDERGROUP_STATIC)
-        prop:SetPos(decoration.position)
-        prop:SetAngles(decoration.angles)
+    local isCssMounted = IsMounted("cstrike")
 
-        table.insert(decorations, prop)
+    local createClientsideModel = ClientsideModel
+    local renderGroupStatic = RENDERGROUP_STATIC
+    local insert = table.insert
+
+    for _, decoration in ipairs(garageProps) do
+        if decoration.NeedsCss and not isCssMounted then continue end
+
+        local prop = createClientsideModel(decoration.Model, renderGroupStatic)
+        prop:SetPos(decoration.Position)
+        prop:SetAngles(decoration.Angles)
+
+        insert(decorations, prop)
     end
 end

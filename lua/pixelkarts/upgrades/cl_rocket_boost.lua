@@ -50,6 +50,7 @@ net.Receive("PIXEL.Karts.RocketBoost", function()
 
     sound.PlayURL(PIXEL.Karts.Config.Upgrades.RocketBoost.BoostSoundURL, "3d", function(station)
         if not IsValid(station) then return end
+        if not IsValid(kart) then return end
 
         station:SetVolume(PIXEL.Karts.Config.Upgrades.RocketBoost.BoostSoundVolume)
         station:SetPos(kart:GetPos())
@@ -68,6 +69,8 @@ net.Receive("PIXEL.Karts.RocketBoost", function()
 end)
 
 PIXEL.RegisterFont("Karts.RocketBoost", "Open Sans SemiBold", 18)
+
+local lang = gmodI18n.getAddon("pixelkarts")
 
 hook.Add("PIXEL.Karts.EnteredKart", "PIXEL.Karts.RocketBoostHUD", function(kart)
     local keyName = PIXEL.Karts.Config.Upgrades.RocketBoost.BoostKeyName
@@ -92,7 +95,7 @@ hook.Add("PIXEL.Karts.EnteredKart", "PIXEL.Karts.RocketBoostHUD", function(kart)
             PIXEL.LerpColor(cooldownProg, PIXEL.Colors.Negative, PIXEL.Colors.Primary)
         )
 
-        PIXEL.DrawSimpleText("Rocket Boost (" .. keyName .. ")", "PIXEL.Karts.RocketBoost", progX + progW * .5, progY + progH * .5, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        PIXEL.DrawSimpleText(lang:getString("rocketBoostCooldown", {keyName = keyName}), "Karts.RocketBoost", progX + progW * .5, progY + progH * .5, PIXEL.Colors.PrimaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     end)
 end)
 

@@ -1,4 +1,6 @@
 
+local lang = gmodI18n.getAddon("pixelkarts")
+
 local PANEL = {}
 
 PIXEL.RegisterFont("Karts.UpgradeLabel", "Open Sans SemiBold", 18)
@@ -12,7 +14,7 @@ function PANEL:Init()
 
     local oldSetTitle = self.SetTitle
     function self:SetTitle(title)
-        oldSetTitle(self, title .. " Editor")
+        oldSetTitle(self, lang:getString("editorTitle", {upgradeName = title}))
     end
 
     local oldSetSize = self.SetSize

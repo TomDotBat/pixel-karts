@@ -1,6 +1,8 @@
 
 util.AddNetworkString("PIXEL.Karts.Radio")
 
+local radioStations = PIXEL.Karts.Config.RadioStations
+
 net.Receive("PIXEL.Karts.Radio", function(len, ply)
     local veh = ply:GetVehicle()
     if not (IsValid(veh) and veh.IsPIXELKart) then return end
@@ -22,7 +24,7 @@ net.Receive("PIXEL.Karts.Radio", function(len, ply)
         end
     else
         local newStation = (curStation or 0) + offset
-        local stationCount = #PIXEL.Karts.RadioStations
+        local stationCount = #radioStations
         if newStation > stationCount then newStation = 1 end
         if newStation < 1 then newStation = stationCount end
 

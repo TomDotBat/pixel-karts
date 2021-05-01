@@ -1,5 +1,6 @@
 
-local rampConfig = PIXEL.Karts.Config.Garage.Ramp
+local rampConfig = PIXEL.Karts.Config.GarageRamp
+if not rampConfig.Enabled then return end
 
 local function buildRamp()
     if not IsValid(PIXEL.Karts.Ramp) then
@@ -17,5 +18,5 @@ local function buildRamp()
     ramp:SetRenderMode(RENDERMODE_TRANSCOLOR)
 end
 
-hook.Add("InitPostEntity", "PIXEL.Karts.Ramp", buildRamp)
-hook.Add("PostCleanupMap", "PIXEL.Karts.Ramp", buildRamp)
+hook.Add("InitPostEntity", "PIXEL.Karts.GarageRampCollisions", buildRamp)
+hook.Add("PostCleanupMap", "PIXEL.Karts.GarageRampCollisions", buildRamp)

@@ -31,8 +31,9 @@ if SERVER then
         SafeRemoveEntityDelayed(self, 0)
     end
 else
+    local lang = gmodI18n.getAddon("pixelkarts")
     function ENT:Draw()
         self:DrawModel()
-        PIXEL.DrawEntOverhead(self, "Repair Wrench", nil, nil, 0.034)
+        PIXEL.DrawEntOverhead(self, lang:getString("repairWrench"), nil, nil, 0.034)
     end
 end

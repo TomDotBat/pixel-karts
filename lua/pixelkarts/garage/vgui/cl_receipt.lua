@@ -4,13 +4,15 @@ PIXEL.RegisterFont("Karts.ItemPrice", "Open Sans SemiBold", 20)
 
 local PANEL = {}
 
+local lang = gmodI18n.getAddon("pixelkarts")
+
 local seperatorCol = PIXEL.OffsetColor(PIXEL.Colors.Background, 20)
 function PANEL:Init()
     self:SetZPos(32767)
     self:SetDraggable(false)
     self.CloseButton:Remove()
 
-    self:SetTitle("Actions")
+    self:SetTitle(lang:getString("actionsTitle"))
 
     local width = PIXEL.Scale(280)
     self:SetSize(width, 0)
@@ -25,8 +27,8 @@ function PANEL:Init()
         PIXEL.DrawRoundedBox(sepH * .5, 0, 0, w, sepH, seperatorCol)
 
         local centerH = sepH + (h - sepH) * .5 + PIXEL.Scale(1)
-        PIXEL.DrawSimpleText("Total: ", "PIXEL.Karts.ItemName", PIXEL.Scale(10), centerH, PIXEL.Colors.PrimaryText, nil, TEXT_ALIGN_CENTER)
-        PIXEL.DrawSimpleText(self.TotalPrice, "PIXEL.Karts.ItemPrice", w - PIXEL.Scale(10), centerH, self.CanAfford and PIXEL.Colors.Positive or PIXEL.Colors.Negative, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
+        PIXEL.DrawSimpleText(lang:getString("receiptTotal"), "Karts.ItemName", PIXEL.Scale(10), centerH, PIXEL.Colors.PrimaryText, nil, TEXT_ALIGN_CENTER)
+        PIXEL.DrawSimpleText(self.TotalPrice, "Karts.ItemPrice", w - PIXEL.Scale(10), centerH, self.CanAfford and PIXEL.Colors.Positive or PIXEL.Colors.Negative, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
     end
 
     self.Buttons = vgui.Create("Panel", self)
@@ -35,7 +37,7 @@ function PANEL:Init()
 
     self.Buttons.Cancel = vgui.Create("PIXEL.TextButton", self.Buttons)
     self.Buttons.Cancel:Dock(LEFT)
-    self.Buttons.Cancel:SetText("Leave Garage")
+    self.Buttons.Cancel:SetText(lang:getString("leaveGarage"))
 
     self.Buttons.Cancel.NormalCol = PIXEL.CopyColor(PIXEL.Colors.Negative)
     self.Buttons.Cancel.BackgroundCol = self.Buttons.Cancel.NormalCol
@@ -52,11 +54,11 @@ function PANEL:Init()
 
     self.Buttons.Purchase = vgui.Create("PIXEL.TextButton", self.Buttons)
     self.Buttons.Purchase:Dock(RIGHT)
-    self.Buttons.Purchase:SetText("Purchase")
+    self.Buttons.Purchase:SetText(lang:getString("purchase"))
 
     function self.Buttons.Purchase.DoClick()
         if not self.CanAfford then
-            PIXEL.Karts.Notify("You can't afford to purchase these upgrades.", NOTIFY_ERROR)
+            PIXEL.Karts.Notify("cantAffordUpgrades", nil, NOTIFY_ERROR)
             return
         end
 
@@ -77,39 +79,36 @@ function PANEL:Init()
             if not upgradeKey then continue end
             if not dataKeys[upgradeKey] then continue end
 
-            if upgrade.Type == "Color" then
-                local upgradeKeyEnabled = upgrade.DataKeyEnabled
-
-                local col = data[upgradeKey]
-                if not IsColor(col) then
-                    if not istable(col) then continue end
-                    col = Color(col.r or 255, col.g or 255, col.g or 255, col.a or 255)
+            if upgrade.Type == "boolean" then
+                table.insert(changes, {
+                    upgradeName,
+                    upgrade.Type,
+                    data[upgradeKey]
+                })
+            else
+                local value = data[upgradeKey]
+                if upgrade.Type == "Color" and not IsColor(value) then
+                    if not istable(value) then continue end
+                    value = Color(value.r or 255, value.g or 255, value.g or 255, value.a or 255)
                 end
 
+                local upgradeKeyEnabled = upgrade.DataKeyEnabled
                 if upgradeKeyEnabled then
                     table.insert(changes, {
                         upgradeName,
                         upgrade.Type,
-                        col,
-                        data[upgradeKeyEnabled] or self.UpgradeList:GetOriginalDataKey(upgrade.DataKeyEnabled)
+                        value,
+                        data[upgradeKeyEnabled] or self.UpgradeList:GetOriginalDataKey(upgradeKeyEnabled)
                     })
                 else
                     table.insert(changes, {
                         upgradeName,
                         upgrade.Type,
-                        col,
+                        value,
                         true
                     })
                 end
-
-                continue
             end
-
-            table.insert(changes, {
-                upgradeName,
-                upgrade.Type,
-                data[upgradeKey]
-            })
         end
 
         net.Start("PIXEL.Karts.PurchaseKartUpgrades")
@@ -123,6 +122,9 @@ function PANEL:Init()
                 net.WriteBool(change[4])
             elseif change[2] == "boolean" then
                 net.WriteBool(change[3])
+            elseif change[2] == "string" then
+                net.WriteString(change[3])
+                net.WriteBool(change[4])
             end
          end
         net.SendToServer()
@@ -148,7 +150,7 @@ function PANEL:Init()
     end
 
     self.PutAway = vgui.Create("PIXEL.TextButton", self)
-    self.PutAway:SetText("Store Kart")
+    self.PutAway:SetText(lang:getString("storeKart"))
     self.PutAway:Dock(TOP)
     self.PutAway:SetZPos(10002)
 
@@ -164,7 +166,7 @@ function PANEL:Init()
     self.Items = {}
     self.Prices = {}
     self.DataKeys = {}
-    self.TotalPrice = "$0"
+    self.TotalPrice = PIXEL.FormatMoney(0)
     self.CanAfford = false
 end
 
@@ -180,15 +182,15 @@ function PANEL:AddItem(name, price, ...)
         self.UpgradeList.UpgradeEditor:Close()
     end
 
-    local formattedPrice = DarkRP.formatMoney(price)
+    local formattedPrice = PIXEL.FormatMoney(price)
     item.BackgroundColor = Color(0, 0, 0, 0)
 
     function item:Paint(w, h)
         self.BackgroundColor = PIXEL.LerpColor(FrameTime() * 12, self.BackgroundColor, self:IsHovered() and hoverBg or color_transparent)
         PIXEL.DrawRoundedBox(PIXEL.Scale(6), 0, 0, w, h, self.BackgroundColor)
 
-        PIXEL.DrawSimpleText(name, "PIXEL.Karts.ItemName", PIXEL.Scale(10), h * .5, PIXEL.Colors.SecondaryText, nil, TEXT_ALIGN_CENTER)
-        PIXEL.DrawSimpleText(formattedPrice, "PIXEL.Karts.ItemPrice", w - PIXEL.Scale(10), h * .5, PIXEL.Colors.Positive, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
+        PIXEL.DrawSimpleText(name, "Karts.ItemName", PIXEL.Scale(10), h * .5, PIXEL.Colors.SecondaryText, nil, TEXT_ALIGN_CENTER)
+        PIXEL.DrawSimpleText(formattedPrice, "Karts.ItemPrice", w - PIXEL.Scale(10), h * .5, PIXEL.Colors.Positive, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
     end
 
     self.Items[name] = item
@@ -229,8 +231,8 @@ function PANEL:CalculateTotal()
         total = total + price
     end
 
-    self.TotalPrice = DarkRP.formatMoney(total)
-    self.CanAfford = self.LocalPly:canAfford(total)
+    self.TotalPrice = PIXEL.FormatMoney(total)
+    self.CanAfford = PIXEL.Karts.CanAfford(self.LocalPly, total)
 end
 
 function PANEL:LayoutContent(w, h)
@@ -248,11 +250,11 @@ function PANEL:LayoutContent(w, h)
         self.Total:DockMargin(0, PIXEL.Scale(4), 0, 0)
     end
 
-    self.Buttons:SetTall(28)
+    self.Buttons:SetTall(PIXEL.Scale(28))
     self.Buttons:DockMargin(0, PIXEL.Scale(6), 0, 0)
     self.Buttons:InvalidateLayout(true)
 
-    self.PutAway:SetTall(28)
+    self.PutAway:SetTall(PIXEL.Scale(28))
     self.PutAway:DockMargin(0, PIXEL.Scale(4), 0, 0)
 
     self:SizeToChildren(false, true)

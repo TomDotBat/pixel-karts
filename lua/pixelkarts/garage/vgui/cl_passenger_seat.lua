@@ -1,6 +1,9 @@
 
 local PANEL = {}
 
+local lang = gmodI18n.getAddon("pixelkarts")
+local upgradeName = lang:getString("upgradePassengerSeat")
+
 function PANEL:Init()
     PIXEL.Karts.MoveGarageCamera(340, Vector(-40, -40, 25))
 
@@ -9,18 +12,18 @@ function PANEL:Init()
 
     local function updateReceipt()
         if self:GetOriginalDataKey(dataKey, false) ~= self:GetDataKey(dataKey, false) then
-            self:AddReceiptItem("Passenger Seat", config.Price[LocalPlayer():PIXELKartsGetLevel()], dataKey)
+            self:AddReceiptItem(upgradeName, config.Price[LocalPlayer():PIXELKartsGetLevel()], dataKey)
         else
-            self:RemoveReceiptItem("Passenger Seat")
+            self:RemoveReceiptItem(upgradeName)
         end
     end
 
     self.DescriptionLabel = vgui.Create("PIXEL.Label", self)
     self.DescriptionLabel:Dock(TOP)
     self.DescriptionLabel:SetAutoHeight(true)
-    self.DescriptionLabel:SetFont("PIXEL.Karts.UpgradeLabel")
+    self.DescriptionLabel:SetFont("Karts.UpgradeLabel")
     self.DescriptionLabel:SetAutoWrap(true)
-    self.DescriptionLabel:SetText("Buying a passenger seat allows another person to tag along for the ride with safety.")
+    self.DescriptionLabel:SetText(lang:getString("passengerSeatDescription"))
 
     self.BottomContainer = vgui.Create("Panel", self)
     self.BottomContainer:Dock(TOP)
@@ -42,8 +45,8 @@ function PANEL:Init()
 
     self.EnableLabel = vgui.Create("PIXEL.Label", self.BottomContainer)
     self.EnableLabel:Dock(LEFT)
-    self.EnableLabel:SetText("Enable Passenger Seat")
-    self.EnableLabel:SetFont("PIXEL.Karts.ColourLabels")
+    self.EnableLabel:SetText(lang:getString("enablePassengerSeat"))
+    self.EnableLabel:SetFont("Karts.ColourLabels")
     self.EnableLabel:SetAutoWidth(true)
 
     function self.BottomContainer.PerformLayout(s, w, h)

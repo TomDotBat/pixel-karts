@@ -1,13 +1,15 @@
 
 local PANEL = {}
 
+local lang = gmodI18n.getAddon("pixelkarts")
+
 function PANEL:Init()
     self:SetZPos(32767)
     self:SetDraggable(false)
     self:MakePopup()
     self.CloseButton:Remove()
 
-    self:SetTitle("Available Upgrades")
+    self:SetTitle(lang:getString("availableUpgradesTitle"))
     self:SetSize(PIXEL.Scale(280), PIXEL.Scale(300))
     self:SetPos(PIXEL.Scale(20), PIXEL.Scale(20))
 
@@ -15,15 +17,15 @@ function PANEL:Init()
 
     self.Upgrades = {}
 
-    for _, upgrade in pairs(PIXEL.Karts.Config.Upgrades) do
-        if not upgrade.Name then continue end
+    for upgradeId, upgrade in pairs(PIXEL.Karts.Config.Upgrades) do
+        if not upgrade.UIElement then continue end
 
         local isLocked
         if upgrade.RequiredLevel then
             isLocked = not self.LocalPly:PIXELKartsIsLevel(upgrade.RequiredLevel)
         end
 
-        self:AddUpgrade(upgrade.Name, upgrade.UIElement, isLocked, upgrade.RequiredLevel)
+        self:AddUpgrade(lang:getString("upgrade" .. upgradeId), upgrade.UIElement, isLocked, upgrade.RequiredLevel)
     end
 
     self.Receipt = vgui.Create("PIXEL.Karts.KartReceipt")
@@ -33,11 +35,7 @@ end
 PIXEL.RegisterFont("Karts.UpgradeName", "Open Sans SemiBold", 22)
 PIXEL.RegisterFont("Karts.UpgradeEdit", "Open Sans SemiBold", 18)
 
-local rankNames = {
-    [1] = "",
-    [2] = "VIP",
-    [3] = "VIP+"
-}
+local rankNames = PIXEL.Karts.Config.RankLevelNames
 
 local upgradeBg = PIXEL.OffsetColor(PIXEL.Colors.Background, 4)
 function PANEL:AddUpgrade(name, element, locked, rank)
@@ -45,7 +43,7 @@ function PANEL:AddUpgrade(name, element, locked, rank)
     upgrade:Dock(TOP)
 
     local editButton = vgui.Create("PIXEL.TextButton", upgrade)
-    editButton:SetFont("PIXEL.Karts.UpgradeEdit")
+    editButton:SetFont("Karts.UpgradeEdit")
 
     function editButton.DoClick()
         if locked then return end
@@ -56,18 +54,18 @@ function PANEL:AddUpgrade(name, element, locked, rank)
     end
 
     if locked then
-        editButton:SetText((rankNames[rank] or "") .. " Only")
+        editButton:SetText(lang:getString("rankOnly", {rankName = rankNames[rank] or ""}))
         editButton:SetEnabled(false)
         editButton.DisabledCol = PIXEL.Colors.Negative
         editButton.DesiredSize = 80
     else
-        editButton:SetText("Edit")
+        editButton:SetText(lang:getString("edit"))
         editButton.DesiredSize = 50
     end
 
     function upgrade:Paint(w, h)
         PIXEL.DrawRoundedBox(PIXEL.Scale(6), 0, 0, w, h, upgradeBg)
-        PIXEL.DrawSimpleText(name, "PIXEL.Karts.UpgradeName", PIXEL.Scale(10), h * .5, PIXEL.Colors.PrimaryText, nil, TEXT_ALIGN_CENTER)
+        PIXEL.DrawSimpleText(name, "Karts.UpgradeName", PIXEL.Scale(10), h * .5, PIXEL.Colors.PrimaryText, nil, TEXT_ALIGN_CENTER)
     end
 
     function upgrade:PerformLayout(w, h)

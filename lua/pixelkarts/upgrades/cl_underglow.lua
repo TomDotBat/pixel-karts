@@ -1,5 +1,5 @@
 
-local underglowCvar = CreateClientConVar("pixel_karts_underglow_enabled", "1", true, false, "Should karts have underglows? This may be intensive.", 0, 1)
+local underglowCvar = CreateClientConVar("pixel_karts_underglow_enabled", "1", true, false, gmodI18n.getAddon("pixelkarts"):getString("underglowEnableDescription"), 0, 1)
 
 function PIXEL.Karts.SetupUnderglowDrawing()
     local colorCache = {}

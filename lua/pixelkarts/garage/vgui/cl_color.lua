@@ -1,6 +1,10 @@
 
 local PANEL = {}
 
+local lang = gmodI18n.getAddon("pixelkarts")
+local upgradeName = lang:getString("upgradeCustomColor")
+local rainbowUpgradeName = lang:getString("upgradeRainbowMode")
+
 function PANEL:Init()
     PIXEL.Karts.MoveGarageCamera(0, Vector(0, -20, 25))
 
@@ -13,9 +17,9 @@ function PANEL:Init()
 
         local orig = self:GetOriginalDataKey(colorDataKey, color_white)
         if orig.r == col.r and orig.g == col.g and orig.b == col.b then
-            self:RemoveReceiptItem("Body Colour")
+            self:RemoveReceiptItem(upgradeName)
         else
-            self:AddReceiptItem("Body Colour", upgrades.CustomColor.Price[LocalPlayer():PIXELKartsGetLevel()], colorDataKey)
+            self:AddReceiptItem(upgradeName, upgrades.CustomColor.Price[LocalPlayer():PIXELKartsGetLevel()], colorDataKey)
         end
     end
 
@@ -56,8 +60,8 @@ function PANEL:Init()
 
     self.ColorEntryLabel = vgui.Create("PIXEL.Label", self.RightCenterContainer)
     self.ColorEntryLabel:Dock(TOP)
-    self.ColorEntryLabel:SetText("Hex Color:")
-    self.ColorEntryLabel:SetFont("PIXEL.Karts.ColourLabels")
+    self.ColorEntryLabel:SetText(lang:getString("hexColour"))
+    self.ColorEntryLabel:SetFont("Karts.ColourLabels")
     self.ColorEntryLabel:SetAutoHeight(true)
 
     self.ColorEntry = vgui.Create("PIXEL.TextEntry", self.RightCenterContainer)
@@ -80,16 +84,16 @@ function PANEL:Init()
 
         local orig = self:GetOriginalDataKey(rainbowDataKey, false)
         if orig == enabled then
-            self:RemoveReceiptItem("Rainbow Body Colour")
+            self:RemoveReceiptItem(rainbowUpgradeName)
         else
-            self:AddReceiptItem("Rainbow Body Colour", upgrades.RainbowMode.Price[LocalPlayer():PIXELKartsGetLevel()], rainbowDataKey)
+            self:AddReceiptItem(rainbowUpgradeName, upgrades.RainbowMode.Price[LocalPlayer():PIXELKartsGetLevel()], rainbowDataKey)
         end
     end
 
     self.RainbowLabel = vgui.Create("PIXEL.Label", self.RainbowModeContainer)
     self.RainbowLabel:Dock(LEFT)
-    self.RainbowLabel:SetText("Rainbow Mode")
-    self.RainbowLabel:SetFont("PIXEL.Karts.ColourLabels")
+    self.RainbowLabel:SetText(rainbowUpgradeName)
+    self.RainbowLabel:SetFont("Karts.ColourLabels")
 
     function self.RainbowModeContainer.PerformLayout(s, w, h)
         self.RainbowCheckbox:SetWide(h)

@@ -1,11 +1,13 @@
 
 local PANEL = {}
 
+local lang = gmodI18n.getAddon("pixelkarts")
+
 PIXEL.RegisterFont("Karts.RespawnDescription", "Open Sans SemiBold", 18)
 
 function PANEL:Init()
     self:SetZPos(32767)
-    self:SetTitle("Respawn Kart")
+    self:SetTitle(lang:getString("respawnTitle"))
     self:SetSize(PIXEL.Scale(220), PIXEL.Scale(110))
     self:SetDraggable(false)
     self:Center()
@@ -16,14 +18,16 @@ function PANEL:Init()
     self.QuestionHolder = vgui.Create("Panel", self)
     self.QuestionHolder:Dock(TOP)
 
+    local respawnPrice = PIXEL.Karts.Config.RespawnPrice[LocalPlayer():PIXELKartsGetLevel()]
+
     self.Question = vgui.Create("PIXEL.Label", self.QuestionHolder)
     self.Question:SetTextAlign(TEXT_ALIGN_CENTER)
     self.Question:SetAutoWrap(true)
-    self.Question:SetFont("PIXEL.Karts.RespawnDescription")
-    self.Question:SetText("Would you like to respawn your Kart for "
-        .. DarkRP.formatMoney(
-            PIXEL.Karts.Config.RespawnPrice[LocalPlayer():PIXELKartsGetLevel(level)]
-        ) .. "?")
+    self.Question:SetFont("Karts.RespawnDescription")
+    self.Question:SetText(
+        respawnPrice and lang:getString("respawnDescription", PIXEL.FormatMoney(respawnPrice))
+        or lang:getString("respawnDescriptionFree")
+    )
 
     function self.QuestionHolder.PerformLayout(s, w, h)
         self.Question:SetSize(w, h)
@@ -34,7 +38,7 @@ function PANEL:Init()
     self.ButtonHolder:Dock(BOTTOM)
 
     self.YesBtn = vgui.Create("PIXEL.TextButton", self.ButtonHolder)
-    self.YesBtn:SetText("Yes")
+    self.YesBtn:SetText(lang:getString("yes"))
     self.YesBtn:Dock(LEFT)
 
     function self.YesBtn.DoClick(s)
@@ -55,7 +59,7 @@ function PANEL:Init()
     end
 
     self.NoBtn = vgui.Create("PIXEL.TextButton", self.ButtonHolder)
-    self.NoBtn:SetText("No")
+    self.NoBtn:SetText(lang:getString("no"))
     self.NoBtn:Dock(RIGHT)
 
     function self.NoBtn.DoClick(s)
