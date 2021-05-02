@@ -1,6 +1,21 @@
 
 local tblPlyData = "pixel_karts_player_data"
 
+function PIXEL.Karts.UpdatePlayerData(steamid, newData, callback)
+    PIXEL.Karts.GetPlayerData(steamid, function(success, data)
+        if success then
+            table.Merge(data, newData)
+        else
+            data = newData
+        end --{{ user_id }}
+
+        PIXEL.Karts.SetPlayerData(steamid, data, function(success2, json)
+            if success2 then PIXEL.Karts.CachePlayerData(steamid, data, json) end
+            callback(success2, data, json)
+        end)
+    end)
+end
+
 if PIXEL.Karts.Config.SQLite then
     PIXEL.Karts.Database = {}
 --{{ user_id }}
@@ -155,19 +170,4 @@ function PIXEL.Karts.SetPlayerData(steamid, data, callback)
     end --{{ user_id sha256 key }}
 
     q:start()
-end
-
-function PIXEL.Karts.UpdatePlayerData(steamid, newData, callback)
-    PIXEL.Karts.GetPlayerData(steamid, function(success, data)
-        if success then
-            table.Merge(data, newData)
-        else
-            data = newData
-        end --{{ user_id }}
-
-        PIXEL.Karts.SetPlayerData(steamid, data, function(success2, json)
-            if success2 then PIXEL.Karts.CachePlayerData(steamid, data, json) end
-            callback(success2, data, json)
-        end)
-    end)
 end
