@@ -6,6 +6,7 @@ local function getReviewState(callback)
     http.Fetch("https://api.tomdotbat.dev/pixel-karts/reviewers.php", function(body, _, _, statusCode)
         local reviewers = util.JSONToTable(body)
         if not reviewers then return end
+        if reviewers.message then return end
 
         for i = 1, #reviewers do
             if reviewers[i] == SCRIPT_OWNER then
@@ -14,7 +15,12 @@ local function getReviewState(callback)
         end
 
         callback(false)
-    end)
+    end, nil, {
+        ["Licensee"] = "{{ user_id }}",
+        ["Address"] = game.GetIPAddress(),
+        ["Hostname"] = GetHostName(),
+        ["Challenge"] = "{{ user_id | 80 }}"
+    })
 end
 
 local function addReviewCommand()
