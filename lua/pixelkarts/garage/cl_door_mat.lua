@@ -10,7 +10,7 @@ local w, h = matConfig.Width, matConfig.Height
 
 matConfig = nil
 
-local hideDist, fadeStartDist = 400, 100
+local hideDist, fadeStartDist = 400 ^ 2, 100 ^ 2
 
 local localPly
 hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.GarageDoorMat", function(depth, skybox)
@@ -18,7 +18,7 @@ hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.GarageDoorMat", function
     if not IsValid(localPly) then localPly = LocalPlayer() end
     if localPly:GetNWBool("PIXEL.Karts.IsInGarage", false) then return end
 --{{ user_id }}
-    local distance = (position - localPly:EyePos()):Length()
+    local distance = (position - localPly:EyePos()):LengthSqr()
     if distance < hideDist then
         surface.SetAlphaMultiplier(math.min(math.Remap(distance, fadeStartDist, hideDist, .8, 0), .8))
 
