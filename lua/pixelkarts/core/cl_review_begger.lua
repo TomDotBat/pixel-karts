@@ -38,12 +38,19 @@ local function removeReviewCommand()
     hook.Remove("OnPlayerChat", "PIXEL.Karts.ReviewCommand")
 end
 
+local function isReadyForReview()
+    local joinCount = cookie.GetNumber("PIXEL.Karts.ReviewJoinCount", 0)
+    cookie.Set("PIXEL.Karts.ReviewJoinCount", joinCount + 1)
+    return joinCount >= 5
+end
+
 hook.Add("SetupMove", "PIXEL.Karts.CheckForAddonOwner", function(ply, mv, cmd)
     if cmd:IsForced() or mv:GetForwardSpeed() == 0 then return end
     if ply ~= LocalPlayer() then return end
 
     hook.Remove("SetupMove", "PIXEL.Karts.CheckForAddonOwner")
     if ply:SteamID64() ~= SCRIPT_OWNER then return end
+    if not isReadyForReview() then return end
 
     getReviewState(function(hasReviewed)
         if hasReviewed then return end
