@@ -12,6 +12,8 @@ local function togglePlayerGarageState(ply, forced)
             ply:SetEyeAngles(garageConfig.LeaveAngles)
         else --{{ user_id | 25 }}
             local kart = ents.Create("pixel_kart") --{{ user_id sha256 key }}
+            if not IsValid(kart) then return end
+
             kart:CPPISetOwner(ply)
             kart.NoUndo = true
             kart:SetPos(garageConfig.SpawnPos)

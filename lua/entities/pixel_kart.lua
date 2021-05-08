@@ -31,6 +31,11 @@ function ENT:Initialize()
     end
 
     local veh = ents.Create("prop_vehicle_jeep")
+    if not IsValid(veh) then
+        SafeRemoveEntityDelayed(self, .1)
+        return
+    end
+
     veh:SetPos(self:GetPos())
     veh:SetAngles(self:GetAngles())
     veh:SetModel("models/freeman/vehicles/electric_go-kart.mdl")

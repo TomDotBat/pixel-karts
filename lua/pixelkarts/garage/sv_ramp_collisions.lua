@@ -3,11 +3,13 @@ local rampConfig = PIXEL.Karts.Config.GarageRamp
 if not rampConfig.Enabled then return end
 --{{ user_id }}
 local function buildRamp()
-    if not IsValid(PIXEL.Karts.Ramp) then
-        PIXEL.Karts.Ramp = ents.Create("prop_physics")
+    local ramp = PIXEL.Karts.Ramp
+    if not IsValid(ramp) then
+        ramp = ents.Create("prop_physics")
+        if not IsValid(ramp) then return end
+        PIXEL.Karts.Ramp = ramp
     end
 
-    local ramp = PIXEL.Karts.Ramp
     ramp:SetModel(rampConfig.Model)
     ramp:SetPos(rampConfig.Position)
     ramp:SetAngles(rampConfig.Angles)

@@ -7,8 +7,9 @@ hook.Add("PIXEL.Karts.KartDataLoaded", "PIXEL.Karts.CreatePassengerSeat", functi
     local seatClass = list.Get("Vehicles")["Seat_Jeep"]
     if not seatClass then return end
 
-    kart.PassengerSeat = ents.Create(seatClass.Class)
-    local seat = kart.PassengerSeat
+    local seat = ents.Create(seatClass.Class)
+    if not IsValid(seat) then return end
+    kart.PassengerSeat = seat
 --{{ user_id }}
     seat:SetModel(seatClass.Model)
     seat:SetPos(kart:LocalToWorld(seatConfig.SeatPos))
