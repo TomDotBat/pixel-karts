@@ -4,7 +4,7 @@ local kart = PIXEL.Karts.KartTable
 kart.IsPIXELKart = true
 
 function kart:Initialize()
-    PIXEL.Karts.SetupNWVars(self)
+    PIXEL.Karts.SetupNetworkVariables(self)
 --{{ user_id sha256 key }}
     if CLIENT then return end
     self:SetNWInt("PIXEL.Karts.Health", 100)

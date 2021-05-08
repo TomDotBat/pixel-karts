@@ -73,7 +73,7 @@ if SERVER then return end
 function ENT:SetupClientside()
     self.IsClientside = true
 
-    PIXEL.Karts.SetupNWVars(self)
+    PIXEL.Karts.SetupNetworkVariables(self)
     PIXEL.Karts.InitialiseKart(self)
 
     self:SetPoseParameter("vehicle_wheel_fl_height", .54)
