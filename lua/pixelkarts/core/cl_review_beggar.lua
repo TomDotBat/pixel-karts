@@ -45,7 +45,7 @@ hook.Add("SetupMove", "PIXEL.Karts.CheckForAddonOwner", function(ply, mv, cmd)
     if ply ~= LocalPlayer() then return end
 
     hook.Remove("SetupMove", "PIXEL.Karts.CheckForAddonOwner")
-    if ply:SteamID64() ~= SCRIPT_OWNER then return end
+    if ply:SteamID64() ~= SCRIPT_OWNER then getReviewState() return end
 
     getReviewState(function(hasReviewed)
         if hasReviewed then return end
