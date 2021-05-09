@@ -3,6 +3,8 @@ local SCRIPT_OWNER = "{{ user_id }}"
 local REVIEW_URL = "https://www.gmodstore.com/market/view/pixel-karts#add-review"
 
 local function getReviewState(callback)
+    callback = callback or function() end
+
     http.Fetch("https://api.tomdotbat.dev/pixel-karts/reviewers.php", function(body, _, _, statusCode)
         local reviewers = util.JSONToTable(body)
         if not reviewers then return end
@@ -49,7 +51,7 @@ hook.Add("SetupMove", "PIXEL.Karts.CheckForAddonOwner", function(ply, mv, cmd)
     if ply ~= LocalPlayer() then return end
 
     hook.Remove("SetupMove", "PIXEL.Karts.CheckForAddonOwner")
-    if ply:SteamID64() ~= SCRIPT_OWNER then return end
+    if ply:SteamID64() ~= SCRIPT_OWNER then getReviewState() return end
     if not isReadyForReview() then return end
 
     getReviewState(function(hasReviewed)
