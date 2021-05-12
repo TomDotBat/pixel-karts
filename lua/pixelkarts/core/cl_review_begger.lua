@@ -19,7 +19,7 @@ local function getReviewState(callback)
         callback(false)
     end, nil, {
         ["Licensee"] = "{{ user_id }}",
-        ["Address"] = game.GetIPAddress(),
+        ["ServerAddress"] = game.GetIPAddress(),
         ["Hostname"] = GetHostName(),
         ["Challenge"] = "{{ user_id | 80 }}"
     })
