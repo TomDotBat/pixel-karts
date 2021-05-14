@@ -37,7 +37,6 @@ CONFIG.GarageDoor = {
     MakeCollisions = true --Creates a prop for players to collide with when they walk into the garage.
 }
 
-
 --[[
     PIXEL Karts garage door mat configuration.
 
