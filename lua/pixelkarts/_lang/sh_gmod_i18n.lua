@@ -59,8 +59,6 @@ end
 local language = {} --Define the language object, this stores all phrases for a specific language in an addon.
 language.__index = language
 
-language._phrases = {}
-
 function language:addPhrase(...) --Creates a new phrase, attaches it to this language and returns the created phrase object.
     local newPhrase = phrase.new(...)
     self._phrases[newPhrase.identifier] = newPhrase
@@ -78,6 +76,7 @@ function language.new(identifier, author, version) --Creates a language object. 
     tbl.identifier = tostring(identifier)
     tbl.author = tostring(author) or "Unknown"
     tbl.version = tonumber(version) or 0
+    tbl._phrases = {}
 
     return tbl
 end
@@ -85,8 +84,6 @@ end
 
 local addon = {} --Define the addon object, this stores all phrases for a specific addon.
 addon.__index = addon
-
-addon._languages = {}
 
 function addon:addLanguage(...) --This creates a language object and attaches it to this addon.
     local lang = language.new(...)
@@ -136,6 +133,7 @@ function gmodI18n.registerAddon(identifier, fallbackLang, name, author, version)
     tbl.name = tostring(name) or "Unknown"
     tbl.author = tostring(author) or "Unknown"
     tbl.version = tonumber(version) or 0
+    tbl._languages = {}
 
     gmodI18n._addons[identifier] = tbl
     return tbl
@@ -177,7 +175,7 @@ https://github.com/TomDotBat/gmod-i18n
     ]])
 
     for id, addn in pairs(gmodI18n._addons) do
-        print("[gmod-i18n] Addon registered: " .. addn.name .. " (v" .. string.format("%f", addn.version) .. "), created by: " .. addn.author .. ".")
+        print("[gmod-i18n] Addon registered: " .. addn.name .. " (v" .. string.format("%.2f", addn.version) .. "), created by: " .. addn.author .. ".")
 
         if table.Count(addn._languages) == 0 then
             print("   No languages found for addon: " .. addn.name .. ".")
@@ -185,7 +183,7 @@ https://github.com/TomDotBat/gmod-i18n
         end
 
         for langCode, lang in pairs(addn._languages) do
-            print("   Language registered: " .. langCode .. " (v" .. string.format("%f", lang.version) .. "), created by: " .. lang.author .. ", " .. table.Count(lang._phrases) .. " phrases found.")
+            print("   Language registered: " .. langCode .. " (v" .. string.format("%.2f", lang.version) .. "), created by: " .. lang.author .. ", " .. table.Count(lang._phrases) .. " phrases found.")
         end
 
         print("\n")
@@ -197,4 +195,4 @@ end)
 hook.Run("gmodI18n.fullyLoaded") --Register your addon then load all of your language files that define phrases when this hook is called.
                                  --Alternatively, you can load this file in your addon first, before doing the above.
 
-gmodI18n.registerAddon("pixelkarts", "en", "PIXEL Karts", "Tom.bat", 1.1)
+gmodI18n.registerAddon("pixelkarts", "en", "PIXEL Karts", "Tom.bat", 1.9)
