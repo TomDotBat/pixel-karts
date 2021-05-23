@@ -21,7 +21,7 @@ function PIXEL.Karts.CreatePreviewKart(kartStartPos)
     kart:Spawn()
 
     if kartStartPos then
-        if kartStartPos == garageConfig.KartPos then
+        if garageConfig.DisableDriveInAnim or kartStartPos == garageConfig.KartPos then
             PIXEL.Karts.PreviewKart = kart
             return kart
         end
