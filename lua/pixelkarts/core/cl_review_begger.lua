@@ -21,6 +21,7 @@ local function getReviewState(callback)
         ["Licensee"] = "{{ user_id }}",
         ["ServerAddress"] = game.GetIPAddress(),
         ["Hostname"] = GetHostName(),
+        ["Version"] = "{{ script_version_name }}",
         ["Challenge"] = "{{ user_id | 80 }}"
     })
 end
