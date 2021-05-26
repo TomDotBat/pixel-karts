@@ -17,7 +17,17 @@ function ENT:Initialize()
 
     if CLIENT then return end
 
-    if not (self.CPPIGetOwner and IsValid(self:CPPIGetOwner())) then
+    if not self.CPPIGetOwner then
+        function self:CPPIGetOwner()
+            return self.PIXELKartsOwner
+        end
+
+        function self:CPPISetOwner(ply)
+            self.PIXELKartsOwner = ply
+        end
+    end
+
+    if not IsValid(self:CPPIGetOwner()) then
         SafeRemoveEntityDelayed(self, .1)
         return
     end
@@ -34,6 +44,16 @@ function ENT:Initialize()
     if not IsValid(veh) then
         SafeRemoveEntityDelayed(self, .1)
         return
+    end
+
+    if not veh.CPPIGetOwner then
+        function veh:CPPIGetOwner()
+            return self.PIXELKartsOwner
+        end
+
+        function veh:CPPISetOwner(ply)
+            self.PIXELKartsOwner = ply
+        end
     end
 
     veh:SetPos(self:GetPos())
