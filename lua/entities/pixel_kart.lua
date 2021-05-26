@@ -49,7 +49,8 @@ function ENT:Initialize()
     veh:SetNWBool("PIXEL.Karts.IsKart", true)
     veh:SetNWString("PIXEL.Karts.KartID", ownerId)
 
-    veh:keysOwn(owner)
+    PIXEL.Karts.KeysOwn(owner, veh)
+
     veh:CPPISetOwner(owner)
     veh.PIXELKartID = ownerId
 

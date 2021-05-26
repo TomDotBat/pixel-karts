@@ -50,3 +50,7 @@ end
 function PIXEL.Karts.CanAfford(ply, amount) --This is called when we want to check if a player can afford something
     return ply:canAfford(amount)
 end
+
+function PIXEL.Karts.KeysOwn(ply, door) --This is called when we want to set a door's owner
+    return door:keysOwn(ply)
+end
