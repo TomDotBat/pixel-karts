@@ -3,13 +3,20 @@ PIXEL.Karts.KartTable = PIXEL.Karts.KartTable or {}
 local kart = PIXEL.Karts.KartTable
 kart.IsPIXELKart = true
 
+AccessorFunc(kart, "pPIXELKartOwner", "PIXELKartOwner")
+
+function kart:SetPIXELKartOwner(owner)
+    if self.CPPISetOwner then self:CPPISetOwner(owner) end
+    self.pPIXELKartOwner = owner
+end
+
 function kart:Initialize()
     PIXEL.Karts.SetupNetworkVariables(self)
 --{{ user_id sha256 key }}
     if CLIENT then return end
     self:SetNWInt("PIXEL.Karts.Health", 100)
 
-    local owner = self:CPPIGetOwner()
+    local owner = self:GetPIXELKartOwner()
     PIXEL.Karts.GetPlayerData(owner:SteamID64(), function(success, data)
         if not IsValid(self) then return end
         if not success then

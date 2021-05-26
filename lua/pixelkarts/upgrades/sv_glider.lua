@@ -59,7 +59,7 @@ function PIXEL.Karts.DeployGlider(ply, veh)
         return
     end
 
-    if not PIXEL.Karts.Config.AbilitiesInOtherKarts and veh:CPPIGetOwner() ~= ply then
+    if not PIXEL.Karts.Config.AbilitiesInOtherKarts and veh:GetPIXELKartOwner() ~= ply then
         PIXEL.Karts.Notify(ply, "cantUseAbilityInOthersKart", nil, 1)
         return
     end

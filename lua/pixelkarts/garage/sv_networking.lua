@@ -14,8 +14,7 @@ local function togglePlayerGarageState(ply, forced)
             local kart = ents.Create("pixel_kart") --{{ user_id sha256 key }}
             if not IsValid(kart) then return end
 
-            kart.PIXELKartsOwner = ply
-            if kart.CPPISetOwner then kart:CPPISetOwner(ply) end
+            kart:SetPIXELKartOwner(ply)
 
             kart.NoUndo = true
             kart:SetPos(garageConfig.SpawnPos)
@@ -42,7 +41,7 @@ local function togglePlayerGarageState(ply, forced)
         if IsValid(veh) then
             if not veh.IsPIXELKart then return end
 
-            if veh:CPPIGetOwner() ~= ply then
+            if veh:GetPIXELKartOwner() ~= ply then
                 PIXEL.Karts.Notify(ply, "cantEnterWithOtherKart", nil, 1, 5) --{{ user_id | 25 }}
                 return
             end
