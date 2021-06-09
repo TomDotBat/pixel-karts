@@ -1,5 +1,17 @@
 
 local doorConfig = PIXEL.Karts.Config.GarageDoor
+
+if doorConfig.MapDoorID then
+    hook.Add("PlayerInitialSpawn", "PIXEL.Karts.RemoveMapDoor", function()
+        hook.Remove("PlayerInitialSpawn", "PIXEL.Karts.RemoveMapDoor")
+
+        local door = ents.GetMapCreatedEntity(doorConfig.MapDoorID)
+        if not IsValid(door) then return end
+
+        SafeRemoveEntityDelayed(door, 0)
+    end)
+end
+
 if not doorConfig.MakeCollisions then return end
 --{{ user_id | 25 }}
 local function makeDoor()
