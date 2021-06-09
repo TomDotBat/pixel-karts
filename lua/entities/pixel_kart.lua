@@ -21,20 +21,20 @@ function ENT:Initialize()
 
     local owner = self:GetPIXELKartOwner()
     if not IsValid(owner) then
-        SafeRemoveEntityDelayed(self, .1)
+        SafeRemoveEntityDelayed(self, 0)
         return
     end
 
     local ownerId = owner:SteamID64()
     if PIXEL.Karts.Vehicles[ownerId] then
         PIXEL.Karts.Notify(owner, "noMoreThanOneKart", nil, 1)
-        SafeRemoveEntityDelayed(self, .1) --{{ user_id }}
+        SafeRemoveEntityDelayed(self, 0) --{{ user_id }}
         return
     end
 
     local veh = ents.Create("prop_vehicle_jeep")
     if not IsValid(veh) then
-        SafeRemoveEntityDelayed(self, .1)
+        SafeRemoveEntityDelayed(self, 0)
         return
     end
 
@@ -66,7 +66,7 @@ function ENT:Initialize()
     self.Kart = veh
     PIXEL.Karts.Vehicles[ownerId] = veh
 
-    SafeRemoveEntityDelayed(self, .1)
+    SafeRemoveEntityDelayed(self, 0)
 
     veh:Initialize()
 end
