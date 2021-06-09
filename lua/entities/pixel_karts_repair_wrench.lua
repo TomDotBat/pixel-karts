@@ -13,6 +13,12 @@ ENT.AdminOnly = false
 if SERVER then
     function ENT:Initialize()
         self:SetModel("models/mark2580/gtav/garage_stuff/span_02.mdl")
+
+        if not PIXEL.UI then
+            SafeRemoveEntityDelayed(self, 0)
+            return
+        end
+
         self:PhysicsInit(SOLID_VPHYSICS)
         self:SetMoveType(MOVETYPE_VPHYSICS)
         self:SetSolid(SOLID_VPHYSICS)

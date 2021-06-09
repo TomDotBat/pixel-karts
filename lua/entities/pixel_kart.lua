@@ -17,6 +17,11 @@ AccessorFunc(ENT, "pPIXELKartOwner", "PIXELKartOwner")
 function ENT:Initialize()
     self:SetModel("models/freeman/vehicles/electric_go-kart.mdl")
 
+    if not PIXEL.UI then
+        SafeRemoveEntityDelayed(self, 0)
+        return
+    end
+
     if CLIENT then return end
 
     local owner = self:GetPIXELKartOwner()
