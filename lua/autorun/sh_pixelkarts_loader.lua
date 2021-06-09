@@ -31,6 +31,7 @@ local function loadDirectory(dir)
 end
 
 local function loadAddon()
+    hook.Remove("InitPostEntity", "PIXEL.Karts.AlertNoPIXELUI")
     loadDirectory("pixelkarts")
 end
 
@@ -40,6 +41,15 @@ if PIXEL.UI then
 end
 
 hook.Add("PIXEL.UI.FullyLoaded", "PIXEL.Karts.WaitForPIXELUI", loadAddon)
+
+if CLIENT then
+    hook.Add("InitPostEntity", "PIXEL.Karts.AlertNoPIXELUI", function()
+        timer.Create("PIXEL.Karts.AlertNoPIXELUI", 15, 0, function()
+            chat.AddText(Color(164, 50, 50), "WARNING ", color_white, " - ", Color(47, 128, 200), "PIXEL Karts ", color_white, "is missing the dependancy PIXEL UI. Please install it from here: https://github.com/TomDotBat/pixel-ui/releases.")
+            chat.AddText(color_white, "Ignoring this message ", Color(164, 50, 50), "will", color_white, " lead to unexpected behaviour.")
+        end)
+    end)
+end
 
 hook.Add("libgmodstore_init", "7629_libgmodstore", function()
     libgmodstore:InitScript(7629, "🏎️PIXEL Karts - Garage, Customisations, Abilities & More!", {
@@ -58,7 +68,6 @@ end
 
 printLicenseInfo()
 concommand.Add("pixel_karts_print_license", printLicenseInfo)
-
 
 if CLIENT then return end
 resource.AddWorkshop("2395634176")
