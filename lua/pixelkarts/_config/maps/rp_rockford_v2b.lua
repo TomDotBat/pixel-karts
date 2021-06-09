@@ -35,7 +35,7 @@ CONFIG.GarageDoor = {
     MaterialTexture = "metal/metaldoor030a", --The texture that should be applied to our fake door.
     MaterialSettings = "center .5 .5 scale .17 .18 rotate 0 translate .32 .7", --Overrides the texture transform with our own so we can stretch/scale the material.
     MakeCollisions = true, --Creates a prop for players to collide with when they walk into the garage.
-    MapDoorID = 1905 --The map creation ID of the door you want to remove in place for our custom one (optional).
+    MapDoorID = 3965 --The map creation ID of the door you want to remove in place for our custom one (optional).
 }
 
 --[[
