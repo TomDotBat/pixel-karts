@@ -10,6 +10,9 @@
 hook.Add("PostGamemodeLoaded", "PIXEL.Kart.CreateWrenchEntity", function()
     if not DarkRP then return end
 
+    if PIXEL.Karts.RegisteredEntities then return end
+    PIXEL.Karts.RegisteredEntities = true
+
     local lang = gmodI18n.getAddon("pixelkarts")
     local categoryName = lang:getString("systemName")
 

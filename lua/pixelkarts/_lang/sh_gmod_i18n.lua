@@ -195,4 +195,4 @@ end)
 hook.Run("gmodI18n.fullyLoaded") --Register your addon then load all of your language files that define phrases when this hook is called.
                                  --Alternatively, you can load this file in your addon first, before doing the above.
 
-gmodI18n.registerAddon("pixelkarts", "en", "PIXEL Karts", "Tom.bat", 1.17)
+gmodI18n.registerAddon("pixelkarts", "en", "PIXEL Karts", "Tom.bat", 1.18)
