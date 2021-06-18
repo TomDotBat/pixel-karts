@@ -1,3 +1,4 @@
+
 --[[-------------------------------------------------------------------------
 gmod-i18n - Making multi-language support for your addons easier.
 Created by Tom.bat (STEAM_0:0:127595314)
@@ -9,10 +10,13 @@ Discord: Tom.bat#0001
 
 --[[-------------------------------------------------------------------------
 Copyright 2021 Thomas O'Sullivan
+
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
+
    http://www.apache.org/licenses/LICENSE-2.0
+
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,7 +24,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ---------------------------------------------------------------------------]]
 
-local ver = 1.0
+local ver = 1.2
 if gmodI18n and gmodI18n.version >= ver then return end --Load the latest copy of gmod-i18n available.
 
 gmodI18n = {
@@ -75,7 +79,7 @@ function language.new(identifier, author, version) --Creates a language object. 
 
     tbl.identifier = tostring(identifier)
     tbl.author = tostring(author) or "Unknown"
-    tbl.version = tonumber(version) or 0
+    tbl.version = tostring(version) or "?.?.?"
     tbl._phrases = {}
 
     return tbl
@@ -122,7 +126,7 @@ function gmodI18n.registerAddon(identifier, fallbackLang, name, author, version)
         existingAddon.fallbackLang = tostring(fallbackLang)
         existingAddon.name = tostring(name) or "Unknown"
         existingAddon.author = tostring(author) or "Unknown"
-        existingAddon.version = tonumber(version) or 0
+        existingAddon.version = tostring(version) or "?.?.?"
         return existingAddon
     end
 
@@ -132,7 +136,7 @@ function gmodI18n.registerAddon(identifier, fallbackLang, name, author, version)
     tbl.fallbackLang = tostring(fallbackLang)
     tbl.name = tostring(name) or "Unknown"
     tbl.author = tostring(author) or "Unknown"
-    tbl.version = tonumber(version) or 0
+    tbl.version = tostring(version) or "?.?.?"
     tbl._languages = {}
 
     gmodI18n._addons[identifier] = tbl
@@ -170,12 +174,13 @@ hook.Add("InitPostEntity", "gmodI18n.loadMessage", function() --Prints a nice me
 \__, |_| |_| |_|\___/ \__,_|      |_||_|\___/|_| |_|
  __/ |                                              
 |___/                                               
+
 Developed by Tom.bat
 https://github.com/TomDotBat/gmod-i18n
     ]])
 
     for id, addn in pairs(gmodI18n._addons) do
-        print("[gmod-i18n] Addon registered: " .. addn.name .. " (v" .. string.format("%.2f", addn.version) .. "), created by: " .. addn.author .. ".")
+        print("[gmod-i18n] Addon registered: " .. addn.name .. " (v" .. addn.version .. "), created by: " .. addn.author .. ".")
 
         if table.Count(addn._languages) == 0 then
             print("   No languages found for addon: " .. addn.name .. ".")
@@ -183,7 +188,7 @@ https://github.com/TomDotBat/gmod-i18n
         end
 
         for langCode, lang in pairs(addn._languages) do
-            print("   Language registered: " .. langCode .. " (v" .. string.format("%.2f", lang.version) .. "), created by: " .. lang.author .. ", " .. table.Count(lang._phrases) .. " phrases found.")
+            print("   Language registered: " .. langCode .. " (v" .. lang.version .. "), created by: " .. lang.author .. ", " .. table.Count(lang._phrases) .. " phrases found.")
         end
 
         print("\n")
