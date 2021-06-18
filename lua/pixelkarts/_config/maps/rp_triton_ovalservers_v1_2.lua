@@ -51,6 +51,18 @@ CONFIG.GarageDoorMat = {
     Height = 820
 }
 
+--[[
+    PIXEL Karts forced door locking configuration.
+
+    These are doors which you don't want people to be able to open
+    under any circumstances, normally because the garage is on the
+    other side.
+]]
+
+CONFIG.ForceLockedDoors = { --A list map creation IDs of the doors you want to force lock, use the "pixel_karts_print_trace_creation_id" command.
+    1740
+}
+
 GARAGE_CONFIG.RadioOrigin = Vector(4715.281250, -210.031250, -368.937500) --The point in space where the garage radio can be heard from.
 
 --[[
