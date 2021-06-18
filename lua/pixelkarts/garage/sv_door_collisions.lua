@@ -27,9 +27,15 @@ local function makeDoor()
     door:SetAngles(doorConfig.Angles)
     door:Spawn()
 
-    door:GetPhysicsObject():EnableMotion(false)
     door:SetColor(color_transparent)
     door:SetRenderMode(RENDERMODE_TRANSCOLOR)
+
+    door:PhysicsDestroy()
+    door:PhysicsInitStatic(SOLID_VPHYSICS)
+
+    local physObj = door:GetPhysicsObject()
+    if not IsValid(physObj) then return end
+    physObj:EnableMotion(false)
 end
 
 hook.Add("InitPostEntity", "PIXEL.Karts.GarageDoorCollisions", makeDoor)
