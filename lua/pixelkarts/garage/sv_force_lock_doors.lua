@@ -14,11 +14,17 @@ hook.Add("InitPostEntity", "PIXEL.Karts.ForceLockDoors", function()
         fakeDoor:SetAngles(door:GetAngles())
         fakeDoor:SetModel(door:GetModel())
 
-        for i = 0, door:GetNumBodyGroups() - 1 do
-            fakeDoor:SetBodygroup(i, door:GetBodygroup(i))
+        local bodyGroupCount = door:GetNumBodyGroups()
+        if bodyGroupCount then
+            for i = 0, bodyGroupCount - 1 do
+                fakeDoor:SetBodygroup(i, door:GetBodygroup(i))
+            end
         end
 
-        fakeDoor:SetSkin(door:GetSkin())
+        local skin = door:GetSkin()
+        if skin then
+            fakeDoor:SetSkin(door:GetSkin())
+        end
         fakeDoor:Spawn()
 
         SafeRemoveEntityDelayed(door, 0)
