@@ -34,7 +34,7 @@ function PANEL:Init() --{{ user_id | 25 }}
 
     local doneFirstChange
     function self.ColorPicker.OnChange(s, color)
-        self.ColorEntry:SetValue("#" .. PIXEL.RGBToHex(color))
+        self.ColorEntry:SetValue("#" .. PIXEL.ColorToHex(color))
         if not IsValid(PIXEL.Karts.PreviewKart) then return end
 
         if doneFirstChange then
