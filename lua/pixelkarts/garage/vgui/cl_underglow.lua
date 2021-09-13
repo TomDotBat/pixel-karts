@@ -45,7 +45,7 @@ function PANEL:Init()
     self.ColorPicker:Dock(FILL)
 
     function self.ColorPicker.OnChange(s, color)
-        self.ColorEntry:SetValue("#" .. PIXEL.RGBToHex(color))
+        self.ColorEntry:SetValue("#" .. PIXEL.ColorToHex(color))
         if not IsValid(previewKart) then return end
 
         previewKart:SetUnderGlow(color)
