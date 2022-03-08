@@ -1,9 +1,0 @@
-Thank you for buying PIXEL Karts, please make sure you follow the instructions below carefully.
-Please note that you must ask for support via gmodstore ONLY, I am NOT required to respond to you anywhere else.
-
-Installation Instructions:
-   1. Download the latest copy of PIXEL UI from GitHub (https://github.com/TomDotBat/pixel-ui).
-   2. Extract the zip files using your preferred ZIP extraction software (eg: WinRAR or 7-ZIP).
-   3. Drag & drop the folders into your addon's folder. Ensure the addon folder and file names don't contain capital letters, otherwise it may fail to load on Linux servers!
-   4. Configure the addon at by changing the config files in "lua/pixelkarts/config/".
-   5. Add the workshop content to your server's collection (https://steamcommunity.com/sharedfiles/filedetails/?id=2395634176).
