@@ -1,6 +1,5 @@
-
 local garageConfig = PIXEL.Karts.Config.Garage
---{{ user_id | 25 }}
+
 function PIXEL.Karts.StartGarageRadio()
     if IsValid(PIXEL.Karts.GarageRadioStation) then return end
 
@@ -13,12 +12,12 @@ function PIXEL.Karts.StartGarageRadio()
         station:Play()
     end)
 end
---{{ user_id | 25 }}
---{{ user_id sha256 key }}
+
+
 function PIXEL.Karts.FadeOutGarageRadio()
     local station = PIXEL.Karts.GarageRadioStation
     if not IsValid(station) then return end
---{{ user_id }}
+
     hook.Add("Think", "PIXEL.Karts.FadeOutRadio", function()
         local vol = math.max(0, station:GetVolume() - FrameTime() * 0.5)
         station:SetVolume(vol)

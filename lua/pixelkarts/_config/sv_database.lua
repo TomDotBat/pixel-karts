@@ -1,4 +1,3 @@
-
 --[[
     Database configuration for PIXEL Karts.
 ]]

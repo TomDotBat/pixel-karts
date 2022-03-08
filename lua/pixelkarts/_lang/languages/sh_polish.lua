@@ -1,4 +1,3 @@
-
 local lang = gmodI18n.registerLanguage("pixelkarts", "pl", "Kasper", 1.0)
 
 --System Name
@@ -41,7 +40,7 @@ lang:addPhrase("editorTitle", "#upgradeName Redaktor", {upgradeName = "thingy"})
 lang:addPhrase("hexColour", "Hex Kolor:")
 
 lang:addPhrase("enableGlider", "Włącz Glider")
-lang:addPhrase("gliderDescription", [[Szybowiec umożliwia latanie gokartowi, możesz go przełączać za pomocą swojego #keyName key. 
+lang:addPhrase("gliderDescription", [[Szybowiec umożliwia latanie gokartowi, możesz go przełączać za pomocą swojego #keyName key.
 Użyj go z dopalaczem rakietowym, aby wzbić się w powietrze z poziomu ziemi.]], {keyName = "s&box"})
 
 lang:addPhrase("imgurId", "Imgur ID:")

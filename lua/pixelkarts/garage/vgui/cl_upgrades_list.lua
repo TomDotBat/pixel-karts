@@ -1,4 +1,3 @@
-
 local PANEL = {}
 
 local lang = gmodI18n.getAddon("pixelkarts")
@@ -14,7 +13,7 @@ function PANEL:Init()
     self:SetPos(PIXEL.Scale(20), PIXEL.Scale(20))
 
     self.LocalPly = LocalPlayer()
---{{ user_id }}
+
     self.Upgrades = {}
 
     for upgradeId, upgrade in pairs(PIXEL.Karts.Config.Upgrades) do
@@ -44,7 +43,7 @@ function PANEL:AddUpgrade(name, element, locked, rank)
 
     local editButton = vgui.Create("PIXEL.TextButton", upgrade)
     editButton:SetFont("Karts.UpgradeEdit")
---{{ user_id | 25 }}
+
     function editButton.DoClick()
         if locked then return end
         if IsValid(self.UpgradeEditor) then self.UpgradeEditor:Remove() end
@@ -62,7 +61,7 @@ function PANEL:AddUpgrade(name, element, locked, rank)
         editButton:SetText(lang:getString("edit"))
         editButton.DesiredSize = 50
     end
---{{ user_id sha256 key }}
+
     function upgrade:Paint(w, h)
         PIXEL.DrawRoundedBox(PIXEL.Scale(6), 0, 0, w, h, upgradeBg)
         PIXEL.DrawSimpleText(name, "Karts.UpgradeName", PIXEL.Scale(10), h * .5, PIXEL.Colors.PrimaryText, nil, TEXT_ALIGN_CENTER)
@@ -81,7 +80,7 @@ end
 function PANEL:GetData(data)
     return self.KartData
 end
---{{ user_id sha256 key }}
+
 function PANEL:SetData(data)
     if not self.KartData then
         self.OriginalKartData = table.Copy(data)
@@ -95,7 +94,7 @@ function PANEL:ResetData(data)
 end
 
 function PANEL:GetDataKey(key, default)
-    return self.KartData[key] or default --{{ user_id }}
+    return self.KartData[key] or default
 end
 
 function PANEL:GetOriginalDataKey(key, default)
@@ -122,7 +121,7 @@ end
 function PANEL:OnClose()
     if IsValid(self.UpgradeEditor) then
         self.UpgradeEditor:Close()
-    end --{{ user_id }}
+    end
 
     if IsValid(self.Receipt) then
         self.Receipt:Remove()
@@ -136,7 +135,7 @@ function PANEL:LayoutContent(w, h)
     for i, upgrade in ipairs(self.Upgrades) do
         if i ~= 1 then upgrade:DockMargin(0, upgradeSpacing, 0, 0) end
         upgrade:SetTall(upgradeH)
-    end --{{ user_id | 25 }}
+    end
 
     self:SizeToChildren(false, true)
 end

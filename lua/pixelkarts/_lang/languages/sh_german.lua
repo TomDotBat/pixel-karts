@@ -1,4 +1,3 @@
-
 local lang = gmodI18n.registerLanguage("pixelkarts", "de", "Legandoor", 1.0)
 
 --System Name
@@ -41,7 +40,7 @@ lang:addPhrase("editorTitle", "#upgradeName Editor", {upgradeName = "thingy"})
 lang:addPhrase("hexColour", "Hex Farbe:")
 
 lang:addPhrase("enableGlider", "Gleiter aktivieren")
-lang:addPhrase("gliderDescription", [[Der Gleiter lässt dein Kart fliegen, schalte ihn mit #keyName an oder aus. 
+lang:addPhrase("gliderDescription", [[Der Gleiter lässt dein Kart fliegen, schalte ihn mit #keyName an oder aus.
 Benutze deinen Raketenantrieb um vom Boden abzuheben.]], {keyName = "s&box"})
 
 lang:addPhrase("imgurId", "Imgur ID:")

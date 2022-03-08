@@ -1,4 +1,3 @@
-
 local lang = gmodI18n.registerLanguage("pixelkarts", "en", "Tom.bat", 1.0)
 
 --System Name
@@ -41,7 +40,7 @@ lang:addPhrase("editorTitle", "#upgradeName Editor", {upgradeName = "thingy"})
 lang:addPhrase("hexColour", "Hex Colour:")
 
 lang:addPhrase("enableGlider", "Enable Glider")
-lang:addPhrase("gliderDescription", [[The glider enables your kart to fly, you can toggle it with your #keyName key. 
+lang:addPhrase("gliderDescription", [[The glider enables your kart to fly, you can toggle it with your #keyName key.
 Use it with the rocket booster to get in the air from ground level.]], {keyName = "s&box"})
 
 lang:addPhrase("imgurId", "Imgur ID:")

@@ -1,4 +1,3 @@
-
 local function setupClientside(kart)
     kart.KartVars = {}
 
@@ -18,7 +17,7 @@ local function setupClientside(kart)
         kart["Set" .. upgradeName] = function(s, new)
             kart.KartVars[upgradeName] = new
         end
---{{ user_id sha256 key }}
+
         if upgrade.Type == "boolean" then continue end
         kart["Get" .. upgradeName .. "Enabled"] = function(s)
             return kart.KartVars["PIXEL.Karts." .. upgradeName .. ".Enabled"]
@@ -30,7 +29,7 @@ local function setupClientside(kart)
     end
 end
 
---{{ user_id }}
+
 
 function PIXEL.Karts.SetupNetworkVariables(kart)
     if kart.IsClientside then
@@ -57,7 +56,7 @@ function PIXEL.Karts.SetupNetworkVariables(kart)
     for upgradeName, upgrade in pairs(PIXEL.Karts.Config.Upgrades) do
         if upgrade.Type ~= "boolean" then
             kart:NetworkVar("Bool", getSlotNo("Bool"), upgradeName .. "Enabled")
-            kart["Set" .. upgradeName .. "Enabled"](kart, false) --{{ user_id sha256 key }}
+            kart["Set" .. upgradeName .. "Enabled"](kart, false)
         end
 
         if upgrade.Type == "boolean" then
@@ -72,7 +71,7 @@ function PIXEL.Karts.SetupNetworkVariables(kart)
             kart["Set" .. upgradeName](kart, 0)
         elseif upgrade.Type == "string" then
             kart:NetworkVar("String", getSlotNo("String"), upgradeName)
---{{ user_id }}
+
             if CLIENT then continue end
             kart["Set" .. upgradeName](kart, "")
         elseif upgrade.Type == "Color" then
@@ -86,7 +85,7 @@ function PIXEL.Karts.SetupNetworkVariables(kart)
                     kart["Get" .. upgradeName .. "Alpha"](s)
                 )
             end
---{{ user_id | 25 }}
+
             if CLIENT then continue end
             local function clampValue(val)
                 if val > 255 then val = 255

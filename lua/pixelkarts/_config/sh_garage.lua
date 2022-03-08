@@ -1,4 +1,3 @@
-
 --[[
     Garage configuration for PIXEL Karts.
 

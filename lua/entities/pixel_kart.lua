@@ -1,7 +1,6 @@
-
 AddCSLuaFile()
 
-ENT.Type = "anim" --{{ user_id }}
+ENT.Type = "anim"
 ENT.Base = "base_anim"
 
 ENT.PrintName = "PIXEL Kart"
@@ -33,7 +32,7 @@ function ENT:Initialize()
     local ownerId = owner:SteamID64()
     if PIXEL.Karts.Vehicles[ownerId] then
         PIXEL.Karts.Notify(owner, "noMoreThanOneKart", nil, 1)
-        SafeRemoveEntityDelayed(self, 0) --{{ user_id }}
+        SafeRemoveEntityDelayed(self, 0)
         return
     end
 
@@ -61,7 +60,7 @@ function ENT:Initialize()
     veh:SetPIXELKartOwner(owner)
     veh.PIXELKartID = ownerId
 
-    if not self.NoUndo then --{{ user_id }}
+    if not self.NoUndo then
         undo.Create("PIXEL Kart")
             undo.AddEntity(veh)
             undo.SetPlayer(owner)
@@ -85,7 +84,7 @@ function ENT:SetupClientside()
     PIXEL.Karts.InitialiseKart(self)
 
     self:SetPoseParameter("vehicle_wheel_fl_height", .54)
-    self:SetPoseParameter("vehicle_wheel_fr_height", .54) --{{ user_id sha256 key }}
+    self:SetPoseParameter("vehicle_wheel_fr_height", .54)
     self:SetPoseParameter("vehicle_wheel_rl_height", .54)
     self:SetPoseParameter("vehicle_wheel_rr_height", .54)
 end

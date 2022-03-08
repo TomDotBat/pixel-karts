@@ -1,4 +1,3 @@
-
 local doorIds = PIXEL.Karts.Config.ForceLockedDoors
 if not istable(doorIds) then return end
 

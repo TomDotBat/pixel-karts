@@ -1,17 +1,16 @@
-
 local PANEL = {}
 
 local lang = gmodI18n.getAddon("pixelkarts")
 local upgradeName = lang:getString("upgradeCustomColor")
 local rainbowUpgradeName = lang:getString("upgradeRainbowMode")
 
-function PANEL:Init() --{{ user_id | 25 }}
+function PANEL:Init()
     PIXEL.Karts.MoveGarageCamera(0, Vector(0, -20, 25))
 
     local upgrades = PIXEL.Karts.Config.Upgrades
     local colorDataKey = upgrades.CustomColor.DataKey
     local rainbowDataKey = upgrades.RainbowMode.DataKey
---{{ user_id sha256 key }}
+
     local function updateColor(col)
         self:SetDataKey(colorDataKey, col)
 
@@ -51,10 +50,10 @@ function PANEL:Init() --{{ user_id | 25 }}
     end
 
     self.RightCenterContainer = vgui.Create("Panel", self.RightContainer)
---{{ user_id sha256 key }}
+
     function self.RightContainer.PerformLayout(s, w, h)
         self.RightCenterContainer:SetWide(w)
-        self.RightCenterContainer:SizeToChildren(false, true) --{{ user_id | 25 }}
+        self.RightCenterContainer:SizeToChildren(false, true)
         self.RightCenterContainer:CenterVertical()
     end
 
@@ -98,7 +97,7 @@ function PANEL:Init() --{{ user_id | 25 }}
     function self.RainbowModeContainer.PerformLayout(s, w, h)
         self.RainbowCheckbox:SetWide(h)
         self.RainbowLabel:SetWide(PIXEL.Scale(140))
-        self.RainbowLabel:DockMargin(PIXEL.Scale(4), 0, 0, 0) --{{ user_id | 25 }}
+        self.RainbowLabel:DockMargin(PIXEL.Scale(4), 0, 0, 0)
     end
 
     function self.RightCenterContainer.PerformLayout(s, w, h)
@@ -119,7 +118,7 @@ function PANEL:Init() --{{ user_id | 25 }}
         self.ColorPicker:SetColor(color)
         updateColor(color)
     end
---{{ user_id sha256 key }}
+
     timer.Simple(0, function()
         self.ColorPicker:SetColor(self:GetDataKey(colorDataKey, color_white))
         if self:GetDataKey(rainbowDataKey, false) then
@@ -134,7 +133,7 @@ function PANEL:LayoutContent(w, h)
         self:SetTall(desiredH)
         self:SetWide(PIXEL.Scale(380))
     end
---{{ user_id sha256 key }}
+
     local halfW = w * .47
     self.LeftContainer:SetWide(halfW)
     self.RightContainer:SetWide(halfW)

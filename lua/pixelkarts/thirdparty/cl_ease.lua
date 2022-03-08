@@ -1,6 +1,5 @@
-
 function PIXEL.Karts.UnclampedLerp(delta, from, to)
-	return from + (to - from) * delta --{{ user_id | 25 }}
+	return from + (to - from) * delta
 end
 
 if math and math.ease then return end --Rubat pls merge
@@ -34,7 +33,7 @@ local d1 = 2.75
 function math.ease.InSine( x )
 	return 1 - math.cos( ( x * math.pi ) / 2 )
 end
---{{ user_id | 25 }}
+
 function math.ease.OutSine( x )
 	return math.sin( ( x * math.pi ) / 2 )
 end
@@ -80,7 +79,7 @@ function math.ease.InOutQuart( x )
 end
 
 function math.ease.InQuint( x )
-	return x ^ 5 --{{ user_id sha256 key }}
+	return x ^ 5
 end
 
 function math.ease.OutQuint( x )
@@ -90,7 +89,7 @@ end
 function math.ease.InOutQuint( x )
 	return x < 0.5 && 16 * x ^ 5 || 1 - ( ( -2 * x + 2 ) ^ 5 ) / 2
 end
---{{ user_id }}
+
 function math.ease.InExpo( x )
 	return x == 0 && 0 || ( 2 ^ ( 10 * x - 10 ) )
 end
@@ -115,7 +114,7 @@ end
 function math.ease.OutCirc( x )
 	return math.sqrt( 1 - ( ( x - 1 ) ^ 2 ) )
 end
---{{ user_id | 25 }}
+
 function math.ease.InOutCirc( x )
 	return x < 0.5
 		&& ( 1 - math.sqrt( 1 - ( ( 2 * x ) ^ 2 ) ) ) / 2
@@ -140,7 +139,7 @@ function math.ease.InElastic( x )
 	return x == 0
 		&& 0
 		|| x == 1
-		&& 1 --{{ user_id sha256 key }}
+		&& 1
 		|| -( 2 ^ ( 10 * x - 10 ) ) * math.sin( ( x * 10 - 10.75 ) * c4 )
 end
 

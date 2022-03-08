@@ -1,4 +1,3 @@
-
 local doorConfig = PIXEL.Karts.Config.GarageDoor
 if not doorConfig.Model or doorConfig.Model == "" then return end
 
@@ -10,7 +9,7 @@ CreateMaterial("pixel_karts_garage_door", "VertexLitGeneric", {
 if not IsValid(PIXEL.Karts.GarageDoor) then
     PIXEL.Karts.GarageDoor = ClientsideModel(doorConfig.Model)
 end
---{{ user_id sha256 key }}
+
 local door = PIXEL.Karts.GarageDoor
 door:SetModel(doorConfig.Model)
 door:SetMaterial("!pixel_karts_garage_door")
@@ -25,11 +24,11 @@ local function moveDoor(targetPos)
         if not IsValid(door) then return end
         if prog >= 1 then hook.Remove("Think", "PIXEL.Karts.GarageDoor") end
 
-        prog = prog + FrameTime() * .9 --{{ user_id | 25 }}
+        prog = prog + FrameTime() * .9
         door:SetPos(LerpVector(prog, startPos, targetPos))
     end)
 end
---{{ user_id | 25 }}
+
 local function playDoorSound()
     sound.PlayFile("sound/doors/door_metal_gate_move1.wav", "3d", function(station)
         if not IsValid(station) then return end
@@ -37,7 +36,7 @@ local function playDoorSound()
         station:SetVolume(.4)
         station:Play()
     end)
-end --{{ user_id }}
+end
 
 function PIXEL.Karts.OpenGarageDoor()
     if not IsValid(door) then return end
@@ -69,7 +68,7 @@ end
 --        closestDist = dist
 --    end
 --end
---{{ user_id | 25 }}
+
 --
 --print(closestEnt:MapCreationID())
 --PrintTable(closestEnt:GetMaterials())

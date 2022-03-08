@@ -1,8 +1,3 @@
-
---PIXEL Karts [{{ script_id }}] v{{ script_version_name }} ({{ script_version_release_type }})
---Licensed to: {{ user_id }}
---{{ user_id sha256 key }}
-
 PIXEL = PIXEL or {}
 PIXEL.Karts = PIXEL.Karts or {
     Config = {}
@@ -19,12 +14,12 @@ local function loadDirectory(dir)
             else include(dirs) end
         elseif v:StartWith("sh_") then
             AddCSLuaFile(dirs)
-            include(dirs) --{{ user_id sha256 key }}
+            include(dirs)
         else
             if SERVER then include(dirs) end
         end
     end
---{{ user_id }}
+
     for k,v in pairs(fol) do
         loadDirectory(dir .. "/" .. v)
     end
@@ -50,24 +45,6 @@ if CLIENT then
         end)
     end)
 end
-
-hook.Add("libgmodstore_init", "7629_libgmodstore", function()
-    libgmodstore:InitScript(7629, "🏎️PIXEL Karts - Garage, Customisations, Abilities & More!", {
-        version = "{{ script_version_name }}",
-        licensee = "{{ user_id }}" --{{ user_id | 25 }}
-    })
-end)
-
-local function printLicenseInfo()
-    print([[================================================
-PIXEL Karts [{{ script_id }}] v{{ script_version_name }} ({{ script_version_release_type }})
-Licensed to: {{ user_id }}
-{{ user_id sha256 key }}
-================================================]])
-end
-
-printLicenseInfo()
-concommand.Add("pixel_karts_print_license", printLicenseInfo)
 
 if CLIENT then return end
 resource.AddWorkshop("2395634176")

@@ -1,4 +1,3 @@
-
 PIXEL.Karts.Vehicles = PIXEL.Karts.Vehicles or {}
 
 hook.Add("OnEntityCreated", "PIXEL.Karts.InitialiseKarts", function(ent) --Don't ask
@@ -26,7 +25,7 @@ hook.Add("Think", "PIXEL.Karts.KartThink", function()
         hook.Run("PIXEL.Karts.LeftKart", curKart)
         curKart = nil
     end
---{{ user_id }}
+
     for steamId, veh in pairs(vehicles) do
         if not IsValid(veh) then
             vehicles[steamId] = nil
@@ -48,11 +47,11 @@ hook.Add("PostDrawTranslucentRenderables", "PIXEL.Karts.DrawExtras", function(sk
             vehicles[steamId] = nil
             continue
         end
---{{ user_id | 25 }}
+
         if not veh.IsPIXELKart and veh:GetPos():DistToSqr(plyPos) > PIXEL.Karts.Config.ExtraDrawRange then continue end
         hook.Run("PIXEL.Karts.DrawKartExtras", veh, localPly)
     end
-end) --{{ user_id }}
+end)
 
 local fastUpdateCvar = CreateClientConVar("pixel_karts_fast_model_update_enabled", "1", true, false, gmodI18n.getAddon("pixelkarts"):getString("fastModelUpdateDescription"), 0, 1)
 
@@ -76,13 +75,13 @@ local function setupModelUpdater(shouldFastUpdate)
             hook.Run("PIXEL.Karts.UpdateModels", kart)
         end)
     end
-end --{{ user_id sha256 key }}
+end
 setupModelUpdater(fastUpdateCvar:GetBool())
 
 cvars.AddChangeCallback("pixel_karts_fast_model_update_enabled", function(_, _, val)
     setupModelUpdater(val == "1")
 end)
---{{ user_id | 25 }}
+
 function PIXEL.Karts.DeinitialiseKart(kart)
     PIXEL.Karts.Vehicles[kart:GetNWString("PIXEL.Karts.KartID", "clientside")] = nil
     hook.Run("PIXEL.Karts.OnRemove", kart)
@@ -91,4 +90,4 @@ end
 hook.Add("EntityRemoved", "PIXEL.Karts.OnRemove", function(ent)
     if not ent.IsPIXELKart then return end
     PIXEL.Karts.DeinitialiseKart(ent)
-end) --{{ user_id sha256 key }}
+end) 

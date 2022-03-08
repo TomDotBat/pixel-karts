@@ -1,4 +1,3 @@
-
 sam.command.new("forceleavegarage")
 :SetCategory("PIXEL Karts")
 :Help("Forces a player to leave the PIXEL Karts garage.")
@@ -7,12 +6,12 @@ sam.command.new("forceleavegarage")
 :AddArg("player")
 
 :OnExecute(function(caller, targets)
-    if not (PIXEL.Karts and PIXEL.Karts.TogglePlayerGarageState) then return end --{{ user_id }}
+    if not (PIXEL.Karts and PIXEL.Karts.TogglePlayerGarageState) then return end
 
     for i = 1, #targets do
         local target = targets[i]
         if target:GetNWBool("PIXEL.Karts.IsInGarage", false) then
-            PIXEL.Karts.TogglePlayerGarageState(target, true) --{{ user_id | 25 }}
+            PIXEL.Karts.TogglePlayerGarageState(target, true)
         end
     end
 
@@ -34,14 +33,14 @@ sam.command.new("removekart")
 
     for i = 1, #targets do
         local target = targets[i]
-        local kart = target:GetNWEntity("PIXEL.Karts.PersonalKart", nil) --{{ user_id sha256 key }}
+        local kart = target:GetNWEntity("PIXEL.Karts.PersonalKart", nil)
         if IsValid(kart) then
             SafeRemoveEntity(kart)
         end
     end
---{{ user_id | 25 }}
+
     sam.player.send_message(nil, "{A} removed {T}'s PIXEL Kart.", {
-        A = caller, T = targets --{{ user_id }}
+        A = caller, T = targets
     })
 end)
 :End()
@@ -64,7 +63,7 @@ sam.command.new("resetkartlogo")
             if not imgurId then return end
             if not IsValid(target) then return end
 
-            target:PIXELKartsSetDataKey(logoConfig.DataKey, logoConfig.DefaultLogoId) --{{ user_id sha256 key }}
+            target:PIXELKartsSetDataKey(logoConfig.DataKey, logoConfig.DefaultLogoId)
             BroadcastLua([[file.Delete("pixel/]] .. imgurId .. [[.png")]])
         end)
 
@@ -74,7 +73,7 @@ sam.command.new("resetkartlogo")
             kart:SetLogo(logoConfig.DefaultLogoId)
         end
     end
---{{ user_id sha256 key }}
+
     sam.player.send_message(nil, "{A} reset {T}'s PIXEL Kart logo.", {
         A = caller, T = targets
     })

@@ -1,4 +1,3 @@
-
 local doorConfig = PIXEL.Karts.Config.GarageDoor
 
 if doorConfig.MapDoorID then
@@ -13,7 +12,7 @@ if doorConfig.MapDoorID then
 end
 
 if not doorConfig.MakeCollisions then return end
---{{ user_id | 25 }}
+
 local function makeDoor()
     local door = PIXEL.Karts.GarageDoor
     if not IsValid(door) then
@@ -23,7 +22,7 @@ local function makeDoor()
     end
 
     door:SetModel(doorConfig.Model)
-    door:SetPos(doorConfig.Position) --{{ user_id }}
+    door:SetPos(doorConfig.Position)
     door:SetAngles(doorConfig.Angles)
     door:Spawn()
 
@@ -39,4 +38,4 @@ local function makeDoor()
 end
 
 hook.Add("InitPostEntity", "PIXEL.Karts.GarageDoorCollisions", makeDoor)
-hook.Add("PostCleanupMap", "PIXEL.Karts.GarageDoorCollisions", makeDoor) --{{ user_id }}
+hook.Add("PostCleanupMap", "PIXEL.Karts.GarageDoorCollisions", makeDoor) 

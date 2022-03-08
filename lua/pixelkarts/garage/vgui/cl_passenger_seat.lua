@@ -1,9 +1,8 @@
-
 local PANEL = {}
 
 local lang = gmodI18n.getAddon("pixelkarts")
 local upgradeName = lang:getString("upgradePassengerSeat")
---{{ user_id | 25 }}
+
 function PANEL:Init()
     PIXEL.Karts.MoveGarageCamera(340, Vector(-40, -40, 25))
 
@@ -17,7 +16,7 @@ function PANEL:Init()
             self:RemoveReceiptItem(upgradeName)
         end
     end
---{{ user_id }}
+
     self.DescriptionLabel = vgui.Create("PIXEL.Label", self)
     self.DescriptionLabel:Dock(TOP)
     self.DescriptionLabel:SetAutoHeight(true)
@@ -44,8 +43,8 @@ function PANEL:Init()
     end
 
     self.EnableLabel = vgui.Create("PIXEL.Label", self.BottomContainer)
-    self.EnableLabel:Dock(LEFT) --{{ user_id | 25 }}
-    self.EnableLabel:SetText(lang:getString("enablePassengerSeat")) --{{ user_id sha256 key }}
+    self.EnableLabel:Dock(LEFT)
+    self.EnableLabel:SetText(lang:getString("enablePassengerSeat"))
     self.EnableLabel:SetFont("Karts.ColourLabels")
     self.EnableLabel:SetAutoWidth(true)
 
@@ -62,7 +61,7 @@ function PANEL:Init()
         end
     end)
 end
---{{ user_id | 25 }}
+
 function PANEL:LayoutContent(w, h)
     self.BottomContainer:DockMargin(0, PIXEL.Scale(8), 0, 0)
     self.BottomContainer:SetTall(PIXEL.Scale(22))
@@ -70,5 +69,5 @@ function PANEL:LayoutContent(w, h)
     self:SetWide(PIXEL.Scale(320))
     self:SizeToChildren(false, true)
 end
---{{ user_id sha256 key }}
+
 vgui.Register("PIXEL.Karts.PassengerSeatEditor", PANEL, "PIXEL.Karts.BaseUpgradeEditor")

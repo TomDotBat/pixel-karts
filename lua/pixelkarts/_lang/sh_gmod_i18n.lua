@@ -1,4 +1,3 @@
-
 --[[-------------------------------------------------------------------------
 gmod-i18n - Making multi-language support for your addons easier.
 Created by Tom.bat (STEAM_0:0:127595314)
@@ -166,14 +165,14 @@ function gmodI18n.getLanguageCode() --Gets the game's language code.
 end
 
 hook.Add("InitPostEntity", "gmodI18n.loadMessage", function() --Prints a nice message displaying information about the addons registered.
-    print([[                          _        _ __  ___        
-                         | |      (_)_ |/ _ \       
- __ _ _ __ ___   ___   __| |______ _ | | (_) |_ __  
-/ _` | '_ ` _ \ / _ \ / _` |______| || |> _ <| '_ \ 
+    print([[                          _        _ __  ___       
+                         | |      (_)_ |/ _ \      
+ __ _ _ __ ___   ___   __| |______ _ | | (_) |_ __ 
+/ _` | '_ ` _ \ / _ \ / _` |______| || |> _ <| '_ \
  (_| | | | | | | (_) | (_| |      | || | (_) | | | |
 \__, |_| |_| |_|\___/ \__,_|      |_||_|\___/|_| |_|
- __/ |                                              
-|___/                                               
+ __/ |                                             
+|___/                                              
 
 Developed by Tom.bat
 https://github.com/TomDotBat/gmod-i18n

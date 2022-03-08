@@ -1,4 +1,3 @@
-
 PIXEL.Karts.SteeringWheelScreens = PIXEL.Karts.SteeringWheelScreens or {}
 local screens = PIXEL.Karts.SteeringWheelScreens
 
@@ -14,7 +13,7 @@ local defaultPressingCol = PIXEL.OffsetColor(PIXEL.Colors.Primary, 5)
 
 function PIXEL.Karts.DrawButton(round, x, y, w, h, doClick, col, hoverCol, pressingCol)
     if ui.isHovering(x, y, w, h) then
-        if ui.isPressing() then --{{ user_id | 25 }}
+        if ui.isPressing() then
             PIXEL.DrawRoundedBox(round or defaultRound, x, y, w, h, pressingCol or defaultPressingCol)
             if ui.isPressed() and doClick then doClick() end
         else
@@ -26,7 +25,7 @@ function PIXEL.Karts.DrawButton(round, x, y, w, h, doClick, col, hoverCol, press
 
     PIXEL.DrawRoundedBox(round or defaultRound, x, y, w, h, col or defaultCol)
 end
---{{ user_id }}
+
 function PIXEL.Karts.DrawTextButton(text, font, round, x, y, w, h, doClick, col, hoverCol, pressingCol, textCol, textHoverCol)
     if PIXEL.Karts.DrawButton(round, x, y, w, h, doClick, col, hoverCol, pressingCol) then
         PIXEL.DrawSimpleText(text, font, x + w * .5, y + h * .5, textHoverCol or PIXEL.Colors.SecondaryText, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
@@ -52,7 +51,7 @@ local function drawHeader(screen, kart, w, h, localPly)
 
     local offsetX, offsetY = 10, headerH * .5
     local iconSize = headerH * .75
-    local spacing = 10 --{{ user_id | 25 }}
+    local spacing = 10
 
     if screen:getId() ~= "dashboard" then
         PIXEL.Karts.DrawImgurButton("wuj141s", .8, 4, offsetX, offsetY - iconSize * .5, iconSize, iconSize, function()
@@ -77,7 +76,7 @@ function PIXEL.Karts.SteeringWheelScreen(id, name, drawFunc, showCursor, hideHea
         function tbl:draw(kart, localPly)
             drawFunc(self, kart, 0, scrW, scrH, localPly, scrH)
         end
-    else --{{ user_id sha256 key }}
+    else
         local bodyH = scrH - headerH
         function tbl:draw(kart, localPly)
             if not IsValid(kart) then return end
@@ -97,7 +96,7 @@ function PIXEL.Karts.SteeringWheelScreen(id, name, drawFunc, showCursor, hideHea
             data = {}
         end
     end
---{{ user_id | 25 }}
+
     function tbl:getDataKey(key) return data[key] end
     function tbl:setDataKey(key, val) data[key] = val end
 
@@ -123,7 +122,7 @@ hook.Add("PIXEL.Karts.EnteredKart", "PIXEL.Karts.Radio.DrawSteeringWheelScreen",
     for _, screen in pairs(screens) do
         screen:resetData()
     end
---{{ user_id }}
+
     local boneId = kart:LookupBone("gokart_steeringwheel")
     if not boneId then return end
 
@@ -142,7 +141,7 @@ hook.Add("PIXEL.Karts.EnteredKart", "PIXEL.Karts.Radio.DrawSteeringWheelScreen",
         pos = pos - ang:Forward() * 1.58
         pos = pos - ang:Right() * 2.955
         pos = pos + ang:Up() * 4.358
---{{ user_id sha256 key }}
+
         if not ui.startDraw(pos, ang, 0.008, kart) then return end
 
         PIXEL.Karts.Clip:Scissor2D(scrW, scrH)
@@ -155,11 +154,11 @@ hook.Add("PIXEL.Karts.EnteredKart", "PIXEL.Karts.Radio.DrawSteeringWheelScreen",
                 ui.drawCursor(0, 0, w, h, 32)
             end
         PIXEL.Karts.Clip()
---{{ user_id | 25 }}
+
         ui.endDraw()
     end)
 end)
 
 hook.Add("PIXEL.Karts.LeftKart", "PIXEL.Karts.DrawSteeringWheelScreen", function()
     hook.Remove("PostDrawTranslucentRenderables", "PIXEL.Karts.DrawSteeringWheelScreen")
-end) --{{ user_id }}
+end) 

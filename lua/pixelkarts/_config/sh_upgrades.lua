@@ -1,4 +1,3 @@
-
 --[[
     Upgrades configuration for PIXEL Karts.
 

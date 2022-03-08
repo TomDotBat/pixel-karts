@@ -1,4 +1,3 @@
-
 local lang = gmodI18n.registerLanguage("pixelkarts", "es", "Goran", 1.0)
 
 --System Name
@@ -41,7 +40,7 @@ lang:addPhrase("editorTitle", "Editor de #upgradeName", {upgradeName = "cosita"}
 lang:addPhrase("hexColour", "Color Hex:")
 
 lang:addPhrase("enableGlider", "Habilitar Planeador")
-lang:addPhrase("gliderDescription", [[El planeador permite a tu Kart volar, puedes alternarlo con la tecla #keyName 
+lang:addPhrase("gliderDescription", [[El planeador permite a tu Kart volar, puedes alternarlo con la tecla #keyName
 Combinalo con la Propulsión Cohete para propulsarte desde el suelo.]], {keyName = "s&box"})
 
 lang:addPhrase("imgurId", "ID de Imgur:")

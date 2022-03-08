@@ -1,4 +1,3 @@
-
 --[[
     This isn't a configuration file, ignore this.
 

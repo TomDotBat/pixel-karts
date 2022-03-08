@@ -1,4 +1,3 @@
-
 local CONFIG = PIXEL.Karts.Config
 local GARAGE_CONFIG = CONFIG.Garage
 

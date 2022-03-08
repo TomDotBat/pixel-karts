@@ -1,4 +1,3 @@
-
 local PANEL = {}
 
 local lang = gmodI18n.getAddon("pixelkarts")
@@ -9,7 +8,7 @@ function PANEL:Init()
 
     local config = PIXEL.Karts.Config.Upgrades.Logo
     local idDataKey = config.DataKey
-    local enabledDataKey = config.DataKeyEnabled --{{ user_id sha256 key }}
+    local enabledDataKey = config.DataKeyEnabled
 
     local function updateReceipt()
         if (self:GetOriginalDataKey(idDataKey, false) ~= self:GetDataKey(idDataKey, false))
@@ -19,7 +18,7 @@ function PANEL:Init()
             self:RemoveReceiptItem(upgradeName)
         end
     end
---{{ user_id sha256 key }}
+
     local previewKart = PIXEL.Karts.PreviewKart
 
     local function updateImage(imgurId)
@@ -30,7 +29,7 @@ function PANEL:Init()
     end
 
     self.LeftContainer = vgui.Create("Panel", self)
-    self.LeftContainer:Dock(LEFT) --{{ user_id | 25 }}
+    self.LeftContainer:Dock(LEFT)
 
     self.RightContainer = vgui.Create("Panel", self)
     self.RightContainer:Dock(RIGHT)
@@ -57,7 +56,7 @@ function PANEL:Init()
         self.RightCenterContainer:SizeToChildren(false, true)
         self.RightCenterContainer:CenterVertical()
     end
---{{ user_id }}
+
     self.ImgurIDEntryLabel = vgui.Create("PIXEL.Label", self.RightCenterContainer)
     self.ImgurIDEntryLabel:Dock(TOP)
     self.ImgurIDEntryLabel:SetText(lang:getString("imgurId"))
@@ -65,7 +64,7 @@ function PANEL:Init()
     self.ImgurIDEntryLabel:SetAutoHeight(true)
 
     self.ImgurIDEntry = vgui.Create("PIXEL.TextEntry", self.RightCenterContainer)
-    self.ImgurIDEntry:Dock(TOP) --{{ user_id sha256 key }}
+    self.ImgurIDEntry:Dock(TOP)
     self.ImgurIDEntry:SetValue(config.DefaultLogoId)
 
     self.EnableContainer = vgui.Create("Panel", self.RightCenterContainer)
@@ -85,7 +84,7 @@ function PANEL:Init()
         self:SetDataKey(enabledDataKey, enabled)
         updateReceipt()
     end
---{{ user_id }}
+
     self.EnableLabel = vgui.Create("PIXEL.Label", self.EnableContainer)
     self.EnableLabel:Dock(LEFT)
     self.EnableLabel:SetText(lang:getString("enableLogo"))
@@ -93,7 +92,7 @@ function PANEL:Init()
 
     function self.EnableContainer.PerformLayout(s, w, h)
         self.EnableCheckbox:SetWide(h)
-        self.EnableLabel:SetWide(PIXEL.Scale(140)) --{{ user_id | 25 }}
+        self.EnableLabel:SetWide(PIXEL.Scale(140))
         self.EnableLabel:DockMargin(PIXEL.Scale(4), 0, 0, 0)
     end
 
@@ -109,7 +108,7 @@ function PANEL:Init()
         local value = s:GetValue()
         if not config.Validator(value) then return end
         updateImage(value)
-    end --{{ user_id sha256 key }}
+    end
 
     timer.Simple(0, function()
         self.ImgurPreview.ImgurID = self:GetDataKey(idDataKey, config.DefaultLogoId)
@@ -131,4 +130,4 @@ function PANEL:LayoutContent(w, h)
     self.RightContainer:SetWide(halfW)
 end
 
-vgui.Register("PIXEL.Karts.LogoEditor", PANEL, "PIXEL.Karts.BaseUpgradeEditor") --{{ user_id | 25 }}
+vgui.Register("PIXEL.Karts.LogoEditor", PANEL, "PIXEL.Karts.BaseUpgradeEditor") 

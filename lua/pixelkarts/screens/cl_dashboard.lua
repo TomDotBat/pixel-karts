@@ -1,4 +1,3 @@
-
 PIXEL.Karts.SteeringWheelApps = PIXEL.Karts.SteeringWheelApps or {}
 local apps = PIXEL.Karts.SteeringWheelApps
 
@@ -9,7 +8,7 @@ function PIXEL.Karts.SteeringWheelApp(id, name, imgurId, color, screenId, visibi
     function tbl:setId(newId) id = newId end
 
     function tbl:getName() return name end
-    function tbl:setName(newName) name = newName end --{{ user_id sha256 key }}
+    function tbl:setName(newName) name = newName end
 
     function tbl:getImgurId() return imgurId end
     function tbl:setImgurId(newImgurId) imgurId = newImgurId end
@@ -17,7 +16,7 @@ function PIXEL.Karts.SteeringWheelApp(id, name, imgurId, color, screenId, visibi
     function tbl:getColor() return color end
     function tbl:setColor(newColor) color = newColor end
 
-    function tbl:getScreenId() return screenId end --{{ user_id | 25 }}
+    function tbl:getScreenId() return screenId end
     function tbl:setScreenId(newScreenId) screenId = newScreenId end
 
     function tbl:getScreen() return PIXEL.Karts.SteeringWheelScreens[screenId] end
@@ -38,7 +37,7 @@ local iconBgCol = PIXEL.Colors.Transparent
 local iconBgHoverCol = Color(255, 255, 255, 20)
 
 local iconCol = PIXEL.Colors.PrimaryText
---{{ user_id | 25 }}
+
 local function drawIcon(imgurId, scale, x, y, size, app)
     return PIXEL.Karts.DrawImgurButton(imgurId, scale, nil, x, y, size, size, function() PIXEL.Karts.SelectSteeringWheelScreen(app:getScreenId()) end, 1, iconBgCol, iconBgHoverCol, iconBgHoverCol, iconCol, app:getColor())
 end
@@ -50,7 +49,7 @@ PIXEL.Karts.SteeringWheelScreen("dashboard", gmodI18n.getAddon("pixelkarts"):get
     if not data then return end
 
     local visibleApps = data.visibleApps
-    if not visibleApps then --{{ user_id sha256 key }}
+    if not visibleApps then
         visibleApps = {}
 
         for appId, app in pairs(apps) do
@@ -71,7 +70,7 @@ PIXEL.Karts.SteeringWheelScreen("dashboard", gmodI18n.getAddon("pixelkarts"):get
 
     local iconX = w * .5 - (fullWidth * appCount - iconSpacing) * .5
     local iconY = offset + (h * .5 - iconSize * .5)
---{{ user_id | 25 }}
+
     local appNo = 1
     for appId, app in pairs(visibleApps) do
         if drawIcon(app:getImgurId(), .8, iconX, iconY, iconSize, app) then

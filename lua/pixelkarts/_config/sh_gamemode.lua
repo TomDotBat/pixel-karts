@@ -1,4 +1,3 @@
-
 --[[
     Gamemode specific configuration for for PIXEL Karts.
 

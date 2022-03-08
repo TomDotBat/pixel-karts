@@ -1,4 +1,3 @@
-
 --[[
     VIP level configuration for PIXEL Karts.
 

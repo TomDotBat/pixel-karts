@@ -1,4 +1,3 @@
-
 local lang = gmodI18n.registerLanguage("pixelkarts", "tr", "illusion", 1.0)
 
 --System Name
@@ -41,7 +40,7 @@ lang:addPhrase("editorTitle", "#upgradeName Düzenleyici", {upgradeName = "thing
 lang:addPhrase("hexColour", "Hex Rengi:")
 
 lang:addPhrase("enableGlider", "Planörü Aktif Et")
-lang:addPhrase("gliderDescription", [[Planör kartınızın uçmasını sağlar #keyName tuşu ile aracınızla uçuş yapabilirsiniz. 
+lang:addPhrase("gliderDescription", [[Planör kartınızın uçmasını sağlar #keyName tuşu ile aracınızla uçuş yapabilirsiniz.
 Yer seviyesinden havaya girmek için roket güçlendiriciyle birlikte kullanın.]], {keyName = "s&box"})
 
 lang:addPhrase("imgurId", "Imgur ID:")

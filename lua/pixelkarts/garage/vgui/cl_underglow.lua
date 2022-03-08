@@ -1,4 +1,3 @@
-
 local PANEL = {}
 
 local lang = gmodI18n.getAddon("pixelkarts")
@@ -10,7 +9,7 @@ function PANEL:Init()
     local config = PIXEL.Karts.Config.Upgrades.UnderGlow
     local colorDataKey = config.DataKey
     local enabledDataKey = config.DataKeyEnabled
---{{ user_id | 25 }}
+
     local function updateReceipt()
         local colChanged
         do
@@ -20,7 +19,7 @@ function PANEL:Init()
                 colChanged = true
             end
         end
---{{ user_id }}
+
         if colChanged or (self:GetOriginalDataKey(enabledDataKey, false) ~= self:GetDataKey(enabledDataKey, false)) then
             self:AddReceiptItem(upgradeName, config.Price[LocalPlayer():PIXELKartsGetLevel()], colorDataKey, enabledDataKey)
         else
@@ -34,7 +33,7 @@ function PANEL:Init()
     end
 
     local previewKart = PIXEL.Karts.PreviewKart
---{{ user_id sha256 key }}
+
     self.LeftContainer = vgui.Create("Panel", self)
     self.LeftContainer:Dock(LEFT)
 
@@ -56,7 +55,7 @@ function PANEL:Init()
         local pickerPad = PIXEL.Scale(26)
         self.ColorPicker:DockMargin(0, pickerPad, 0, pickerPad)
     end
---{{ user_id }}
+
     self.RightCenterContainer = vgui.Create("Panel", self.RightContainer)
 
     function self.RightContainer.PerformLayout(s, w, h)
@@ -74,7 +73,7 @@ function PANEL:Init()
     self.ColorEntry = vgui.Create("PIXEL.TextEntry", self.RightCenterContainer)
     self.ColorEntry:Dock(TOP)
     self.ColorEntry:SetValue("##000000")
---{{ user_id sha256 key }}
+
     self.EnableContainer = vgui.Create("Panel", self.RightCenterContainer)
     self.EnableContainer:Dock(TOP)
 
@@ -104,7 +103,7 @@ function PANEL:Init()
         self.EnableLabel:SetWide(PIXEL.Scale(140))
         self.EnableLabel:DockMargin(PIXEL.Scale(4), 0, 0, 0)
     end
---{{ user_id | 25 }}
+
     function self.RightCenterContainer.PerformLayout(s, w, h)
         self.ColorEntry:DockMargin(0, PIXEL.Scale(2), PIXEL.Scale(6), 0)
         self.ColorEntry:SetTall(PIXEL.Scale(32))
@@ -121,7 +120,7 @@ function PANEL:Init()
         if not color then return end
 
         self.ColorPicker:SetColor(color)
-        updateColor(color) --{{ user_id }}
+        updateColor(color)
     end
 
     timer.Simple(0, function()
@@ -131,7 +130,7 @@ function PANEL:Init()
         end
     end)
 end
---{{ user_id }}
+
 function PANEL:LayoutContent(w, h)
     local desiredH = PIXEL.Scale(250)
     if self:GetTall() ~= desiredH then

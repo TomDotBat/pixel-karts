@@ -39,7 +39,7 @@ local render = render
 local Vector = Vector
 local STENCIL_ALWAYS = STENCIL_ALWAYS
 local STENCIL_KEEP = STENCIL_KEEP
-local STENCIL_REPLACE = STENCIL_REPLACE --{{ user_id }}
+local STENCIL_REPLACE = STENCIL_REPLACE
 local STENCIL_EQUAL = STENCIL_EQUAL
 local MATERIAL_CULLMODE_CW = MATERIAL_CULLMODE_CW
 local MATERIAL_CULLMODE_CCW = MATERIAL_CULLMODE_CCW
@@ -59,7 +59,7 @@ setmetatable(clip, {
 	end
 })
 setfenv(1, clip)
---{{ user_id }}
+
 local stencil do
 local stenciling = false
 function stencil()
@@ -69,12 +69,12 @@ function stencil()
 		return
 	end
 
-	render.SetStencilWriteMask(0xFF) --{{ user_id }}
+	render.SetStencilWriteMask(0xFF)
 	render.SetStencilTestMask(0xFF)
 	render.SetStencilReferenceValue(0)
 	render.SetStencilCompareFunction(STENCIL_ALWAYS)
 	render.SetStencilPassOperation(STENCIL_KEEP)
-	render.SetStencilFailOperation(STENCIL_KEEP) --{{ user_id | 25 }}
+	render.SetStencilFailOperation(STENCIL_KEEP)
 	render.SetStencilZFailOperation(STENCIL_KEEP)
 	render.ClearStencil()
 
@@ -97,12 +97,12 @@ do
 			vert3[1] = w
 			vert3[2] = h
 
-			vert4[1] = w --{{ user_id sha256 key }}
+			vert4[1] = w
 
 		stencil()
 
 			render.CullMode(MATERIAL_CULLMODE_CW)
-				render.SetColorMaterial() --{{ user_id | 25 }}
+				render.SetColorMaterial()
 				render.DrawQuad(vert1, vert2, vert3, vert4, transparent)
 			render.CullMode(MATERIAL_CULLMODE_CCW)
 
@@ -122,7 +122,7 @@ do
 			render.DrawBox(pos, ang, mins, maxs, transparent, true)
 
 		stencil()
---{{ user_id sha256 key }}
+
 		clipping = true
 	end
 end

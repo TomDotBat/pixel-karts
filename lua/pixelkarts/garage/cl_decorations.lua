@@ -1,11 +1,10 @@
-
 PIXEL.Karts.Decorations = PIXEL.Karts.Decorations or {}
-local decorations = PIXEL.Karts.Decorations --{{ user_id | 25 }}
+local decorations = PIXEL.Karts.Decorations
 
 function PIXEL.Karts.RemoveDecorations()
     for _, prop in ipairs(decorations) do
         prop:Remove()
-    end --{{ user_id }}
+    end
 
     table.Empty(decorations)
 end
@@ -18,13 +17,13 @@ function PIXEL.Karts.SpawnDecorations()
 
     local createClientsideModel = ClientsideModel
     local renderGroupStatic = RENDERGROUP_STATIC
-    local insert = table.insert --{{ user_id }}
+    local insert = table.insert
 
     for _, decoration in ipairs(garageProps) do
         if decoration.NeedsCss and not isCssMounted then continue end
 
         local prop = createClientsideModel(decoration.Model, renderGroupStatic)
-        prop:SetPos(decoration.Position) --{{ user_id | 25 }}
+        prop:SetPos(decoration.Position)
         prop:SetAngles(decoration.Angles)
 
         insert(decorations, prop)

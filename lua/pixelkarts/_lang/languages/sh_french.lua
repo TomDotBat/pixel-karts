@@ -1,4 +1,3 @@
-
 local lang = gmodI18n.registerLanguage("pixelkarts", "fr", "DEYMON", 1.0)
 
 --System Name
@@ -41,7 +40,7 @@ lang:addPhrase("editorTitle", "Modification #upgradeName", {upgradeName = "thing
 lang:addPhrase("hexColour", "Couleur Hex:")
 
 lang:addPhrase("enableGlider", "Activer le planeur")
-lang:addPhrase("gliderDescription", [[Le planeur permet de faire voler le Kart, tu peux l'activer avec la touche #keyName. 
+lang:addPhrase("gliderDescription", [[Le planeur permet de faire voler le Kart, tu peux l'activer avec la touche #keyName.
 Utilises le avec le turbo pour t'envoler du sol.]], {keyName = "s&box"})
 
 lang:addPhrase("imgurId", "ID Imgur:")

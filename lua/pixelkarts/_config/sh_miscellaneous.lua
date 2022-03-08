@@ -1,4 +1,3 @@
-
 --[[
     Miscellaneous configuration for PIXEL Karts.
 

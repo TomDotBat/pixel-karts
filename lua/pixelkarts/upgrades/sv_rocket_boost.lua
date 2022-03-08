@@ -1,4 +1,3 @@
-
 util.AddNetworkString("PIXEL.Karts.RocketBoost")
 
 local lang = gmodI18n.getAddon("pixelkarts")
@@ -12,7 +11,7 @@ hook.Add("KeyPress", "PIXEL.Karts.RocketBoostBind", function(ply, key)
 
     PIXEL.Karts.RocketBoost(ply, veh)
 end)
---{{ user_id sha256 key }}
+
 function PIXEL.Karts.RocketBoost(ply, veh)
     if not veh:GetRocketBoost() then return end
 
@@ -27,10 +26,10 @@ function PIXEL.Karts.RocketBoost(ply, veh)
     end
 
     if veh:GetNWFloat("PIXEL.Karts.RocketBoostCooldown", 0) > CurTime() then
-        PIXEL.Karts.Notify(ply, "yourAbilityIsOnCooldown", {abilityName = lang:getString("upgradeRocketBoost")}, 1) --{{ user_id }}
+        PIXEL.Karts.Notify(ply, "yourAbilityIsOnCooldown", {abilityName = lang:getString("upgradeRocketBoost")}, 1)
         return
     end
---{{ user_id }}
+
     local boostUpgrade = PIXEL.Karts.Config.Upgrades.RocketBoost
 
     if not ply:PIXELKartsIsLevel(boostUpgrade.RequiredLevel) then
@@ -44,10 +43,10 @@ function PIXEL.Karts.RocketBoost(ply, veh)
     end
 
     veh:SetNWFloat("PIXEL.Karts.RocketBoostCooldown", CurTime() + boostUpgrade.BoostCooldown)
---{{ user_id | 25 }}
+
     local phys = veh:GetPhysicsObject()
     local boostPower = boostUpgrade.BoostPower
-    timer.Create("PIXEL.Karts.RocketBoost:" .. veh:EntIndex(), boostUpgrade.BoostInterval, boostUpgrade.BoostTime / boostUpgrade.BoostInterval, function() --{{ user_id }}
+    timer.Create("PIXEL.Karts.RocketBoost:" .. veh:EntIndex(), boostUpgrade.BoostInterval, boostUpgrade.BoostTime / boostUpgrade.BoostInterval, function()
         if not IsValid(phys) then return end
         phys:ApplyForceCenter(veh:GetForward() * boostPower)
     end)
@@ -59,6 +58,6 @@ function PIXEL.Karts.RocketBoost(ply, veh)
     recipients:AddPlayer(ply)
 
     net.Start("PIXEL.Karts.RocketBoost")
-    net.WriteEntity(veh) --{{ user_id }}
+    net.WriteEntity(veh)
     net.Send(recipients)
 end
