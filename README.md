@@ -2,7 +2,7 @@
 
 # 📋 Description
 
-PIXEL Karts is a unique, feature rich vehicle system tailored specifically towards karts. It comes with a wide variety of new, fun and configurable features that your players will love. PIXEL Karts takes all of the existing vehicle systems' features and packs it into one big and polished package, so you don't have to bother buying additional scripts such as [VCMod](https://www.gmodstore.com/market/view/vcmod-main) or a car dealer.
+**PIXEL Karts** is a unique, feature rich vehicle system tailored specifically towards karts. It comes with a wide variety of new, fun and configurable features that your players will love. PIXEL Karts takes all of the existing vehicle systems' features and packs it into one big and polished package, so you don't have to bother buying additional scripts such as VCMod or a car dealer.
 
 
 # ✨ Features
@@ -53,7 +53,7 @@ Supported languages can be seen in the list below, if a language you natively sp
 2. Download the latest copy of [PIXEL UI](https://github.com/TomDotBat/pixel-ui/releases/latest) from its GitHub releases.
 3. Extract the zip files using your preferred ZIP extraction software (eg: [WinRAR](https://www.win-rar.com/) or [7-ZIP](https://www.7-zip.org/)).
 4. Drag & drop the folders into your addon's folder. **Ensure the addon folder and file names don't contain capital letters, otherwise it may fail to load on Linux servers!**
-5. Configure the addon by changing the config files in lua/pixelkarts/config/, the files you'll most likely only need to change are: sh_rank_levels.lua, sh_upgrades.lua sh_miscellaneous.lua and sv_database.lua (preferably in that order). If your map is not supported (see supported maps section), you are able to set up a config for it in the maps folder.
+5. Configure the addon by changing the config files in `lua/pixelkarts/config/`. The files you'll need to change are: `sh_rank_levels.lua`, `sh_upgrades.lua`, `sh_miscellaneous.lua` and `sv_database.lua` (preferably in that order). If your map is not supported (see supported maps section), you are able to set up a config for it in the maps folder.
 6. Add the [workshop content](https://steamcommunity.com/sharedfiles/filedetails/?id=2395634176) to your server's collection.
 
 
@@ -74,7 +74,7 @@ Thanks to all these people for helping me make PIXEL Karts what it is:
 
 
 # Gallery
-## [Demo Video](https://www.youtube.com/watch?v=5U1GTZ3Y5Ig)
+**[Click here to watch the demo video](https://www.youtube.com/watch?v=5U1GTZ3Y5Ig)**
 ![Kart Showcase](https://i.imgur.com/hM1Pd9W.png)
 ![Snowy Kart](https://i.imgur.com/ZQi15B3.png)
 ![Garage](https://i.imgur.com/3j4Wt98.png)
