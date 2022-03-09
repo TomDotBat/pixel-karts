@@ -84,7 +84,6 @@ sam.command.new("resetkartlogo")
                 BroadcastLua([[file.Delete("pixel/]] .. imgurId .. [[.png")]])
             end)
 
-
             local kart = target:GetNWEntity("PIXEL.Karts.PersonalKart", nil)
             if IsValid(kart) and kart.SetLogo then
                 kart:SetLogo(logoConfig.DefaultLogoId)
