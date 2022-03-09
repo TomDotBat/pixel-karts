@@ -12,7 +12,7 @@
 - Donator restricted upgrades, give more reasons for your players to donate to your server!
 - Built in health system - no need for [VCMod](https://www.gmodstore.com/market/view/vcmod-main).
 - [StormFox 1 & 2](https://steamcommunity.com/sharedfiles/filedetails/?id=2447774443) support for snowy kart wheels.
-- [SAM](https://www.gmodstore.com/market/view/sam) commands - players can try and hide in the garage, but it won't work! You can also remove their kart via command and delete their custom logo if it's offensive.
+- [ULX](https://github.com/TeamUlysses/ulx) and [SAM](https://www.gmodstore.com/market/view/sam) commands - players can try and hide in the garage, but it won't work! You can also remove their kart via command and delete their custom logo if it's offensive.
 - Clean, dark UI built with our own library: [PIXEL UI](https://github.com/TomDotBat/pixel-ui).
 - Gamemode independent - easily add support for your gamemode via a config.
 - Configurable radio stations for the radio upgrade.
