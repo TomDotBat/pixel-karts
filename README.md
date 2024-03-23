@@ -59,6 +59,7 @@ Supported languages can be seen in the list below, if a language you natively sp
 
 # 📋 Credits
 Thanks to all these people for helping me make PIXEL Karts what it is:
+- Mei - my motivation, and purpose for the passenger seats feature. 💜
 - [The One Free-Man](https://www.gmodstore.com/users/76561198004620253) - creating the kart model.
 - [Billy](https://www.gmodstore.com/users/Billy) - [math.ease PR](https://github.com/Facepunch/garrysmod/pull/1755) and creating [gmod-3d2d-clipping](https://github.com/WilliamVenner/gmod-3d2d-clipping).
 - [Nak](https://steamcommunity.com/id/Nak2) - assisting with [StormFox 1 & 2](https://steamcommunity.com/sharedfiles/filedetails/?id=2447774443) support.
